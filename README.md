@@ -1,4 +1,4 @@
-# 🤖 ✨ GitHub Copilot Certification Exam Preparation
+# 🤖 ✨ GitHub Copilot Certification Exam Preparation (Remove Later, Tim)
 
 ![GitHub Copilot Certification](images/copilot-cover-image.png)
 
