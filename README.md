@@ -1,10 +1,14 @@
 # 🤖 ✨ GitHub Copilot Certification Exam Preparation
 
-![GitHub Copilot Certification](images/copilot-cover-image.png)
+[![Website](https://img.shields.io/badge/Website-TechTrainerTim-blue)](https://techtrainertim.com)
+[![GitHub](https://img.shields.io/badge/GitHub-timothywarner-blue?logo=github)](https://github.com/timothywarner)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-timothywarner-blue?logo=linkedin)](https://linkedin.com/in/timothywarner)
+[![GitHub Org](https://img.shields.io/badge/Org-timothywarner--org-blue?logo=github)](https://github.com/timothywarner-org)
+[![Short Link](https://img.shields.io/badge/Go%20Link-go.techtrainertim.com%2Fcopilotcert-blue)](https://go.techtrainertim.com/copilotcert)
 
-[![Website](https://img.shields.io/badge/Website-TechTrainerTim-blue)](https://techtrainertim.com) [![GitHub](https://img.shields.io/badge/GitHub-timothywarner-blue?logo=github)](https://github.com/timothywarner)
+![GitHub Copilot Certification](docs/images/copilot-cover-image.png)
 
-Short link: [timw.info/copilotcert](https://github.com/timothywarner/copilot-cert-prep/)
+Short link: [go.techtrainertim.com/copilotcert](https://go.techtrainertim.com/copilotcert)
 
 Welcome to the official preparation course for the GitHub Copilot Certification Exam. This training program is designed to help you master GitHub Copilot and achieve certification. 🎯
 
