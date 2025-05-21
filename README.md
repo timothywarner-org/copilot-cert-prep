@@ -1,5 +1,8 @@
 # 🤖 ✨ GitHub Copilot Certification Exam Preparation
 
+[Helpful resources here!](https://gist.github.com/timothywarner/f823d1b1f317201c241e765e90e3d2b3)
+
+
 [![Website](https://img.shields.io/badge/Website-TechTrainerTim-blue)](https://techtrainertim.com)
 [![GitHub](https://img.shields.io/badge/GitHub-timothywarner-blue?logo=github)](https://github.com/timothywarner)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-timothywarner-blue?logo=linkedin)](https://linkedin.com/in/timothywarner)
