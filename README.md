@@ -6,7 +6,7 @@
 [![GitHub Org](https://img.shields.io/badge/Org-timothywarner--org-blue?logo=github)](https://github.com/timothywarner-org)
 [![Short Link](https://img.shields.io/badge/Go%20Link-go.techtrainertim.com%2Fcopilotcert-blue)](https://go.techtrainertim.com/copilotcert)
 
-![GitHub Copilot Certification](docs/images/copilot-cover-image.png)
+![GitHub Copilot Certification](/images/copilot-cover-image.png)
 
 Short link: [go.techtrainertim.com/copilotcert](https://go.techtrainertim.com/copilotcert)
 

@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"github.copilot.chat.enabled": true
+		"github.copilot.chat.enabled": true,
+		"sarif-viewer.connectToGithubCodeScanning": "on"
 	}
 }
