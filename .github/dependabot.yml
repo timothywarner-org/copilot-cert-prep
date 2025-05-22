@@ -1,0 +1,44 @@
+# Dependabot configuration for copilot-cert-prep-5
+
+# See https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Keep npm dependencies up to date for all Node.js projects
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - "dependencies"
+      - "auto-merge"
+    reviewers:
+      - "jane-dev"
+      - "sam-coder"
+    assignees:
+      - "jane-dev"
+    allow:
+      - dependency-type: "direct"
+    ignore:
+      - dependency-name: "jest"
+        versions: ["<29.0.0"]
+
+  # Keep Python dependencies up to date for all FastAPI/data projects
+  - package-ecosystem: "pip"
+    directory: "/demos/11/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - "dependencies"
+    reviewers:
+      - "sam-coder"
+    assignees:
+      - "sam-coder"
+    allow:
+      - dependency-type: "all"

@@ -76,3 +76,27 @@ By completing this course, you will:
 ## 💬 License
 
 This course material is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🔄 Automated Dependency Updates with Dependabot
+
+This repo uses [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/about-dependabot-version-updates) to keep dependencies secure and up to date.
+
+### How it works
+- **Node.js (npm):** Checks for updates in the root `package.json` every week.
+- **Python (pip):** Checks for updates in `/demos/11/requirements.txt` every week.
+- Pull requests are auto-labeled (`dependencies`, `auto-merge`) and assigned to active contributors for review.
+- Only direct dependencies are updated for Node.js, and all dependencies for Python.
+- Example reviewers/assignees: `jane-dev`, `sam-coder` (see `copilot-metrics.json` for top contributors).
+- Some dependencies (like `jest` < v29) are ignored to avoid breaking changes during upgrades.
+
+### Why use Dependabot?
+- **Security:** Automated PRs for vulnerable packages.
+- **Productivity:** Less manual work for your team.
+- **Best Practice:** Keeps your project healthy and audit-ready.
+
+### Example config
+See `.github/dependabot.yml` for a real-world, enterprise-ready config tailored to this repo's Node.js and Python projects.
+
+---
