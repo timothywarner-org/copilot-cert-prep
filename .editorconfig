@@ -1,0 +1,49 @@
+# .editorconfig
+
+# Top-level config
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Markdown files: don't strip trailing whitespace (breaks line breaks)
+[*.md]
+trim_trailing_whitespace = false
+indent_size = 2
+
+# YAML (e.g. GitHub Actions)
+[*.yml]
+indent_size = 2
+
+# JSON and JSONC
+[*.{json,jsonc}]
+indent_size = 2
+insert_final_newline = true
+
+# Shell scripts
+[*.sh]
+indent_style = space
+indent_size = 4
+
+# Makefiles: tabs only
+[Makefile]
+indent_style = tab
+
+# XML, HTML
+[*.{xml,html}]
+indent_size = 2
+
+# TypeScript / JavaScript
+[*.{ts,tsx,js,jsx}]
+indent_size = 2
+
+# Python
+[*.py]
+indent_style = space
+indent_size = 4
