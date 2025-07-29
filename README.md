@@ -1,4 +1,4 @@
-# 🤖 ✨ GitHub Copilot Certification Exam Preparation
+# 🤖 ✨ GitHub Copilot Certification Exam Preparation (GH-300)
 
 [Helpful resources here!](https://gist.github.com/timothywarner/f823d1b1f317201c241e765e90e3d2b3)
 
@@ -13,40 +13,55 @@
 
 Short link: [go.techtrainertim.com/copilotcert](https://go.techtrainertim.com/copilotcert)
 
-Welcome to the official preparation course for the GitHub Copilot Certification Exam. This training program is designed to help you master GitHub Copilot and achieve certification. 🎯
+Welcome to the official preparation course for the GitHub Copilot Certification Exam (GH-300). This comprehensive training program is designed to help you master GitHub Copilot and achieve certification. 🎯
+
+**📅 Next Course:** August 2025 | **⏱️ Duration:** 15 hours | **🎯 Passing Score:** 70%
 
 ## 🎓 Course Overview
 
-This course provides hands-on experience and in-depth knowledge of AI-assisted development using GitHub Copilot.
+This course provides hands-on experience and in-depth knowledge of AI-assisted development using GitHub Copilot. The curriculum follows a pedagogically optimized 5-segment structure designed to maximize retention and practical application.
 
-## 🎯 Certification Exam Domains
+### 📋 Course Structure
+1. **Foundations & Getting Started** - Plans, setup, and responsible AI
+2. **Core Features & Effective Usage** - Prompt engineering and how Copilot works
+3. **Testing, Security & Enterprise** - Advanced features and business use cases
+4. **Privacy, Exclusions & Configuration** - Administrative controls and settings
+5. **Exam Preparation & Future Trends** - Comprehensive review and emerging features
 
-1. **Responsible AI (7%)**
-2. **GitHub Copilot Plans and Features (31%)**
-3. **How GitHub Copilot Works and Handles Data (15%)**
-4. **Prompt Crafting and Prompt Engineering (9%)**
-5. **Developer Use Cases for AI (14%)**
-6. **Testing with GitHub Copilot (9%)**
-7. **Privacy Fundamentals and Context Exclusions (15%)**
+## 🎯 Certification Exam Domains (Updated May 2025)
+
+| Domain | Weight | Key Topics |
+|--------|--------|------------|
+| **1. Responsible AI** | 7% | AI risks, ethical usage, bias mitigation, output validation |
+| **2. GitHub Copilot Plans and Features** | 31% | Individual/Business/Enterprise plans, IDE integration, Chat, CLI |
+| **3. How GitHub Copilot Works and Handles Data** | 15% | Data pipeline, context gathering, LLM processing, limitations |
+| **4. Prompt Crafting and Prompt Engineering** | 9% | Zero-shot/few-shot prompting, best practices, context optimization |
+| **5. Developer Use Cases for AI** | 14% | Productivity, refactoring, documentation, debugging, SDLC integration |
+| **6. Testing with GitHub Copilot** | 9% | Unit/integration test generation, edge cases, assertions |
+| **7. Privacy Fundamentals and Context Exclusions** | 15% | Content exclusions, security, duplication detection, troubleshooting |
 
 ## 🎯 Learning Objectives
 
 By completing this course, you will:
-- 🚀 Integrate GitHub Copilot into your workflow
-- 💻 Craft smarter prompts
-- 🔍 Set up and use Copilot in CI/CD pipelines
-- ✅ Navigate AI-assisted development challenges
-- 🛠️ Master responsible AI practices
-- 📝 Gain hands-on experience with real-world scenarios
+- 🚀 Master all GitHub Copilot SKUs (Individual, Business, Enterprise)
+- 💻 Craft effective prompts using prompt engineering best practices
+- 🔍 Configure enterprise features including Knowledge Bases and custom models
+- ✅ Generate comprehensive test suites and identify edge cases
+- 🛠️ Implement responsible AI practices and security measures
+- 📝 Configure privacy controls and content exclusions
+- 🏆 Be fully prepared to pass the GH-300 certification exam
 
 ## 📚 Official Learning Resources
+
+### Certification Resources
+- [GitHub Copilot Certification - Microsoft Learn](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/)
+- [Official Study Guide for GH-300](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300)
+- [Schedule Exam through Pearson VUE](https://learn.microsoft.com/en-us/credentials/certifications/schedule-through-pearson-vue?examUid=exam.GH-300)
+- [Exam Replay Program](https://www.mindhub.com/microsoft-exam-replay-mcp-exam-plus-retake/)
 
 ### Microsoft Learn Paths
 - [GitHub Copilot Fundamentals](https://learn.microsoft.com/en-us/training/paths/copilot-fundamentals/)
 - [Accelerate App Development by Using GitHub Copilot](https://learn.microsoft.com/en-us/training/paths/copilot-accelerate-dev/)
-
-### LinkedIn Learning
-- GitHub Copilot Certification Learning Path (Coming Soon)
 
 ### GitHub Documentation
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
@@ -60,10 +75,29 @@ By completing this course, you will:
 
 ## 📋 Prerequisites
 
-- 💻 Basic understanding of coding
+- 💻 Basic understanding of coding in at least one programming language
 - 🌐 Experience using GitHub, Visual Studio Code, or Visual Studio
 - 🤖 Familiarity with version control, debugging, and code refactoring
 - 📝 Basic understanding of DevOps concepts
+- 🔑 GitHub account with access to Copilot (trial or subscription)
+
+## 🚀 Latest GitHub Copilot Features (July 2025)
+
+### New Capabilities
+- **Agentic Coding Agent** - Now GA for Copilot Business users
+- **MCP (Model Context Protocol)** - Enhanced context handling in IDEs
+- **.instructions.md Support** - Custom instructions for your repositories
+- **Rich Chat Attachments** - Image support and file uploads in Chat
+- **Copilot Spark** - Natural language to app pipeline (Pro+ plans)
+
+## 📁 Repository Structure
+
+- `/demos/` - Hands-on lab exercises organized by lesson
+- `/new-resources/` - Latest exam objectives and course materials
+- `/copilot/` - Best practices and reference documentation
+- `/exam-metadata/` - Certification exam study materials
+- `COURSE-PLAN-AUG-2025.md` - Detailed 5-segment course structure
+- `CLAUDE.md` - AI assistant configuration for this repository
 
 ## 👨‍🏫 Instructor Contact
 

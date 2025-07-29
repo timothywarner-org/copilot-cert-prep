@@ -1,0 +1,31 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "autobuild",
+    "automations",
+    "codebases",
+    "CODEOWNERS",
+    "Codespace",
+    "Codespaces",
+    "devcontainer",
+    "Innersource",
+    "InnerSource",
+    "Kanban",
+    "octo",
+    "octocat",
+    "OIDC",
+    "preconfigured",
+    "qlcli",
+    "ratelimit",
+    "roadmaps",
+    "SARIF",
+    "sarifs",
+    "GHAS",
+    "SCIM",
+    "Keycloak",
+    "Entra",
+    "passwordless",
+    "TOTP"
+  ]
+}
