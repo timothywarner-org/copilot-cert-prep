@@ -15,8 +15,6 @@ Short link: [go.techtrainertim.com/copilotcert](https://go.techtrainertim.com/co
 
 Welcome to the official preparation course for the GitHub Copilot Certification Exam (GH-300). This comprehensive training program is designed to help you master GitHub Copilot and achieve certification. 🎯
 
-**📅 Next Course:** August 2025 | **⏱️ Duration:** 15 hours | **🎯 Passing Score:** 70%
-
 ## 🎓 Course Overview
 
 This course provides hands-on experience and in-depth knowledge of AI-assisted development using GitHub Copilot. The curriculum follows a pedagogically optimized 5-segment structure designed to maximize retention and practical application.
