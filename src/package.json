@@ -1,0 +1,30 @@
+{
+  "name": "copilot-tips-app",
+  "version": "1.0.0",
+  "description": "GitHub Copilot Tips of the Day - Teaching example for debugging and testing",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "github-copilot",
+    "tips",
+    "teaching",
+    "console-app"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "dependencies": {
+    "boxen": "^8.0.1",
+    "chalk": "^5.6.0",
+    "cli-width": "^4.1.0",
+    "inquirer": "^12.9.4",
+    "ora": "^8.2.0"
+  }
+}

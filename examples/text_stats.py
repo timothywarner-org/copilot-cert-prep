@@ -15,15 +15,16 @@ import string
 
 # TODO: Ask Copilot to fetch stopwords list automatically
 
+
 def load_text(filepath: str) -> str:
     """Read and return content of a text file."""
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         return f.read()
 
 
 def clean_words(text: str) -> list[str]:
     """Convert text to lowercase, strip punctuation, and split into words."""
-    translator = str.maketrans('', '', string.punctuation)
+    translator = str.maketrans("", "", string.punctuation)
     cleaned = text.lower().translate(translator)
     words = cleaned.split()
     return [w for w in words if w.isalpha()]
