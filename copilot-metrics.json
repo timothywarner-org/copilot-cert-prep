@@ -1,0 +1,17 @@
+{
+  "copilot_metrics": {
+    "active_users": 37, // Number of developers actively using Copilot—shows adoption and engagement.
+    "suggestion_acceptance_rate": 71, // Percentage of Copilot suggestions accepted—indicates value and trust in Copilot's output.
+    "time_saved_per_month_hours": 126, // Estimated hours saved from Copilot-assisted coding—useful for ROI calculations.
+    "coverage_by_language": {
+      "nodejs": 65, // Percentage of Node.js code written with Copilot's help.
+      "python": 74, // Percentage of Python code written with Copilot's help.
+      "bash": 56 // Percentage of Bash scripts generated or improved by Copilot.
+    },
+    "test_code_generated": 42, // Number of unit/integration test cases Copilot helped author—shows quality improvements.
+    "documentation_suggestions": 28, // Number of docstrings or Markdown docs Copilot suggested—highlights improved documentation.
+    "pull_requests_touched": 52, // Number of PRs with Copilot-generated code—shows workflow impact.
+    "copilot_feedback_positive": 89, // Positive feedback instances—shows user satisfaction.
+    "copilot_feedback_negative": 7 // Negative feedback instances—helps identify improvement areas.
+  }
+}

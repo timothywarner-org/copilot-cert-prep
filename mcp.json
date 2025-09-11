@@ -1,0 +1,11 @@
+{
+  // MCP server configuration file for copilot-cert-prep repo
+  "project": "copilot-cert-prep",
+  "owner": "timothywarner-org",
+  "description": "Configuration for MCP server integration, security, and automation workflows.",
+  "settings": {
+    "alerts": true,
+    "workflows": [],
+    "integrations": []
+  }
+}

@@ -299,6 +299,24 @@
       "title": "Natural Language Git",
       "content": "Use '/git' commands with natural language like '/git create a feature branch for user authentication' for complex Git operations.",
       "category": "AI Features"
+    },
+    {
+      "id": 51,
+      "title": "Copilot Labs Experiments",
+      "content": "Try Copilot Labs for experimental features like code translation, test generation, and code explanation. Enable it in VS Code extensions for extra AI tools.",
+      "category": "AI Features"
+    },
+    {
+      "id": 52,
+      "title": "Security Vulnerability Alerts",
+      "content": "Copilot and Dependabot work together: when Copilot suggests code using a vulnerable package, Dependabot will alert and auto-update to a secure version.",
+      "category": "Security"
+    },
+    {
+      "id": 53,
+      "title": "Copilot for Pull Requests",
+      "content": "Enable Copilot PR suggestions to get AI-generated code review comments and explanations directly in your GitHub pull requests.",
+      "category": "Collaboration"
     }
   ]
 }
