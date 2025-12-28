@@ -1,5 +1,7 @@
 # GitHub Copilot Certification Prep Repository
 
+> **Updated December 2025**: Includes guidance for Agent Mode, multi-model selection, and 50+ new features from November 2025.
+
 ## 🎯 Project Overview
 
 This is a **teaching repository** for O'Reilly Live Learning GitHub Copilot certification (GH-300) preparation. The codebase demonstrates enterprise-ready patterns across Node.js, Python, and testing frameworks while showcasing Copilot's capabilities.
@@ -113,6 +115,38 @@ When generating examples, use enterprise contexts:
 # 5. Always include "Next Steps" for learners
 ```
 
+## 🆕 December 2025 Feature Highlights
+
+### Multi-Model Selection
+
+Students should understand when to use each model:
+- **Raptor Mini**: Fast inline completions
+- **GPT-5.1-Codex**: Code-focused tasks
+- **Claude Opus 4.5**: Nuanced refactoring
+- **Gemini 3 Pro**: Multimodal (images + code)
+
+### Agent Mode vs Coding Agent
+
+This distinction is critical for the exam:
+- **Agent Mode**: IDE-based, multi-file edits, runs locally
+- **Coding Agent**: GitHub Actions, assign issues, creates PRs automatically
+- **Cloud Agent**: Visual Studio preview, delegates to GitHub cloud
+
+### New Slash Commands
+
+When demonstrating Chat, include:
+- `/plan` - Preview changes before execution
+- `/agent` - Multi-file task execution
+- `/review` - Code review with linter integration
+
+### Enterprise Governance
+
+For Business/Enterprise demos:
+- BYOK (Bring Your Own Key)
+- Budget tracking and per-team limits
+- Private MCP Registry
+- Organization-wide custom instructions
+
 ## 💡 Copilot Best Practices for This Repo
 
 - **Teaching context**: Always explain code for learners preparing for certification
@@ -120,6 +154,8 @@ When generating examples, use enterprise contexts:
 - **Multi-stack support**: Handle Node.js, Python, Bash, and GitHub CLI seamlessly
 - **Exam preparation**: Reference specific GH-300 domains and weightings
 - **Practical application**: Focus on hands-on, job-ready skills over theory
+- **Model awareness**: Demonstrate when to switch models for different tasks
+- **Agent Mode familiarity**: Show Plan Mode for reviewing changes before execution
 
 ## 📋 Next Steps Template
 

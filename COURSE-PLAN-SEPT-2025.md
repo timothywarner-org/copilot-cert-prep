@@ -1,4 +1,6 @@
-# GitHub Copilot Certification Course Plan - August 2025
+# GitHub Copilot Certification Course Plan - December 2025
+
+> **Updated December 2025**: Includes Agent Mode, multi-model selection, Mission Control, and 50+ new features from Nov 2025.
 
 ## Course Structure Overview
 
@@ -312,14 +314,37 @@ This course plan is optimized for maximum retention and practical application, r
 - Hands-on: Use prompt files and custom instructions in mock scenarios
 - Demo: MCP and chat participants for exam simulations
 
-#### 5.3 Emerging Features & Trends (30 min)
+#### 5.3 Emerging Features & Trends (45 min) – EXPANDED
 
-- Agentic AI capabilities
-- Enhanced Knowledge Bases
-- Competitive landscape (Cursor, Windsurf, OpenAI)
+**November 2025 was transformational. Cover these thoroughly:**
+
+##### Multi-Model Architecture (15 min)
+- GPT-5.1, GPT-5.1-Codex, GPT-5.1-Codex-Max
+- Claude Opus 4.5 (nuanced refactoring)
+- Gemini 3 Pro (multimodal, data transformation)
+- Raptor Mini (ultra-low latency)
+- **Demo**: Compare outputs from different models on same problem
+
+##### Agent Mode Deep Dive (15 min)
+- Agent Mode (IDE) vs Coding Agent (GitHub Actions)
+- Mission Control dashboard
+- Plan Mode for preview before execution
+- Agent-specific instructions
+- Session pause/resume
+- Mobile agent sessions (GitHub Mobile)
+- **Demo**: Multi-file refactoring with Plan Mode
+
+##### Enterprise Governance (10 min)
+- BYOK (Bring Your Own Key) for Azure/AWS/GCP
+- Budget tracking and per-team limits
+- Private MCP Registry
+- Delegated AI controls
+- **Demo**: Budget dashboard and policy configuration
+
+##### Competitive Landscape
+- Cursor, Windsurf, OpenAI Codex, Amazon CodeWhisperer
+- What differentiates Copilot: agent ecosystem, enterprise governance
 - Future certification paths
-- Explore new Copilot features: chat variables, multi-user chat, agentic workflows
-- Demo: Using MCP and API for future-proofing skills
 
 #### 5.4 Final Q&A and Resources (45 min)
 
