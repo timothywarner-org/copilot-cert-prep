@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> **Updated December 2025**: Includes Agent Mode, multi-model selection, and 50+ new features.
+
 ## Repository Overview
 
 This is a teaching repository for O'Reilly Live Learning classes on GitHub Copilot certification preparation. The repository contains course materials, demo applications, and examples for students preparing for the GitHub Copilot certification exam.
@@ -100,18 +102,30 @@ python app.py
 
 ## Course-Specific Context
 
-This repository supports a 5-segment course flow covering:
-1. Getting Started, Responsible AI, IDE Essentials
-2. Copilot Chat, Slash Commands, CLI & Extensions
-3. Agentic AI, Knowledge Bases, GHAS Integration
-4. Emerging Features, Trends, Competitive Analysis
-5. Certification Exam Guidance & Study Strategies
+This repository supports a 5-segment course flow (see `COURSE-PLAN-DEC-2025.md`):
 
-The exam domains covered include:
-- Responsible AI (7%)
-- GitHub Copilot Plans and Features (31%)
-- How GitHub Copilot Works and Handles Data (15%)
-- Prompt Crafting and Prompt Engineering (9%)
-- Developer Use Cases for AI (14%)
-- Testing with GitHub Copilot (9%)
-- Privacy Fundamentals and Context Exclusions (15%)
+1. **Foundations & The New Copilot** - Multi-model setup, Agent Mode intro, Responsible AI
+2. **Core Features & Agent Workflows** - Prompt engineering, Chat mastery, Agent Mode deep dive
+3. **Testing, Security & Enterprise** - Testing, BYOK, Governance, Coding Agent
+4. **Privacy, Configuration & Troubleshooting** - Exclusions, Agent permissions, Integration
+5. **Exam Prep & What's Next** - Domain review, Practice exam, Competitive landscape
+
+### Key December 2025 Features
+
+- **Multi-Model Selection**: GPT-5.1, Claude Opus 4.5, Gemini 3 Pro, Raptor Mini
+- **Agent Mode vs Coding Agent**: Critical distinction for the exam
+- **Mission Control**: Agent task dashboard
+- **Plan Mode**: Preview changes before execution
+- **BYOK**: Bring Your Own Key (Azure, AWS, GCP)
+
+### Exam Domains (GH-300)
+
+| Domain | Weight |
+|--------|--------|
+| Responsible AI | 7% |
+| Plans and Features | 31% |
+| Data Handling | 15% |
+| Prompt Engineering | 9% |
+| Developer Use Cases | 14% |
+| Testing | 9% |
+| Privacy & Exclusions | 15% |

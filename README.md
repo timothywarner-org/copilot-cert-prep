@@ -1,6 +1,4 @@
-# 🤖 ✨ GitHub Copilot Certification Exam Preparation (GH-300)
-
-[Helpful resources here!](https://gist.github.com/timothywarner/f823d1b1f317201c241e765e90e3d2b3)
+# GitHub Copilot Certification Exam Preparation (GH-300)
 
 [![Website](https://img.shields.io/badge/Website-TechTrainerTim-blue)](https://techtrainertim.com)
 [![GitHub](https://img.shields.io/badge/GitHub-timothywarner-blue?logo=github)](https://github.com/timothywarner)
@@ -10,113 +8,225 @@
 
 ![GitHub Copilot Certification](/images/copilot-cover-image.png)
 
-Short link: [go.techtrainertim.com/copilotcert](https://go.techtrainertim.com/copilotcert)
+**Short link**: [go.techtrainertim.com/copilotcert](https://go.techtrainertim.com/copilotcert)
 
 ---
 
-## 🚀 Welcome
+## Welcome
 
-This is the official prep course for the **GitHub Copilot Certification Exam (GH-300)**. Get hands-on, real-world Copilot skills for Node.js, Python, Bash, GitHub CLI, and more. Everything here is built for enterprise teams and practical business value.
+This is the official prep course for the **GitHub Copilot Certification Exam (GH-300)**. Updated for **December 2025** with Agent Mode, multi-model selection, and 50+ new features from November 2025.
 
----
-
-## 🎓 Course Overview
-
-- **5 Segments:**
-  1. Foundations & Getting Started
-  2. Core Features & Effective Usage
-  3. Testing, Security & Enterprise
-  4. Privacy, Exclusions & Configuration
-  5. Exam Preparation & Future Trends
-- **Each segment:**
-  - Covers exam objectives
-  - Adds current-day Copilot features (prompt files, `.instructions.md`, MCP, chat variables, toolsets)
-  - Includes hands-on labs and business scenarios
+> **The Big Shift**: Copilot evolved from "AI autocomplete" to an **agentic development platform**. This course teaches you to master the new paradigm.
 
 ---
 
-## 🏆 Exam Domains (2025)
+## What's New in December 2025
+
+| Feature | What It Does | Plan Availability |
+|---------|--------------|-------------------|
+| **Multi-Model Selection** | Choose GPT-5.1, Claude Opus 4.5, Gemini 3 Pro, or Raptor Mini | All |
+| **Agent Mode** | Multi-file editing in your IDE | All |
+| **Coding Agent** | Assign issues to Copilot, auto-generates PRs | Business/Enterprise |
+| **Mission Control** | Dashboard for managing agent sessions | All |
+| **Plan Mode** | Preview changes before execution | All |
+| **BYOK** | Bring Your Own Key (Azure, AWS, GCP) | Business/Enterprise |
+| **Linter Integration** | Code review with ESLint/Pylint/Rubocop | All |
+| **Copilot Spaces** | Organize context for conversations | All |
+
+---
+
+## Course Structure
+
+| Segment | Duration | Focus |
+|---------|----------|-------|
+| **1. Foundations** | 3 hours | Multi-model setup, Agent Mode intro, Responsible AI |
+| **2. Core Features** | 3 hours | Prompt engineering, Chat mastery, Agent workflows |
+| **3. Enterprise** | 3 hours | Testing, Security, BYOK, Governance |
+| **4. Privacy & Config** | 3 hours | Exclusions, Troubleshooting, Integration |
+| **5. Exam Prep** | 3 hours | Domain review, Practice exam, Competitive landscape |
+
+See [COURSE-PLAN-DEC-2025.md](COURSE-PLAN-DEC-2025.md) for detailed curriculum.
+
+---
+
+## Exam Domains (GH-300)
 
 | Domain | Weight | Key Topics |
 |--------|--------|------------|
-| **1. Responsible AI** | 7% | AI risks, ethical usage, bias mitigation, output validation |
-| **2. Copilot Plans & Features** | 31% | Individual/Business/Enterprise plans, IDE integration, Chat, CLI |
-| **3. How Copilot Works & Handles Data** | 15% | Data pipeline, context gathering, LLM processing, limitations |
-| **4. Prompt Crafting & Engineering** | 9% | Zero-shot/few-shot prompting, best practices, context optimization |
-| **5. Developer Use Cases for AI** | 14% | Productivity, refactoring, documentation, debugging, SDLC integration |
-| **6. Testing with Copilot** | 9% | Unit/integration test generation, edge cases, assertions |
-| **7. Privacy & Exclusions** | 15% | Content exclusions, security, duplication detection, troubleshooting |
+| 1. Responsible AI | 7% | Ethics, validation, bias mitigation |
+| 2. Plans & Features | **31%** | Multi-model, Agent Mode, Mission Control, BYOK |
+| 3. Data Handling | 15% | Pipeline, MCP, context gathering |
+| 4. Prompt Engineering | 9% | Model-specific prompting, best practices |
+| 5. Developer Use Cases | 14% | Agent workflows, productivity, SDLC |
+| 6. Testing | 9% | Agent-driven test generation, edge cases |
+| 7. Privacy & Exclusions | 15% | Agent permissions, content exclusions |
 
 ---
 
-## 💡 What You'll Master
+## Quick Start
 
-- All Copilot SKUs (Individual, Business, Enterprise)
-- Prompt engineering and prompt files
-- Custom instructions (`.instructions.md`)
-- MCP (Model Context Protocol) for context handling
-- Copilot toolsets: VS Code, CLI, Chat, API
-- Chat participants and chat variables
-- Knowledge Bases and custom models
-- Security, privacy, and exclusions
-- Real-world business automation and reporting
+1. **Clone this repo**
+
+   ```bash
+   git clone https://github.com/timothywarner-org/copilot-cert-prep.git
+   cd copilot-cert-prep
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run tests**
+
+   ```bash
+   npm test
+   ```
+
+4. **Review the quick reference**
+
+   Open [QUICK-REFERENCE.md](QUICK-REFERENCE.md) for a printable cheat sheet.
 
 ---
 
-## 📚 Official Resources
+## Repository Structure
 
-- [GitHub Copilot Certification - Microsoft Learn](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/)
+```text
+copilot-cert-prep/
+├── demos/                    # Hands-on labs by lesson (02-14)
+│   ├── 02/                   # Copilot Individual features
+│   ├── 03/                   # Copilot Business features
+│   ├── 04/                   # Copilot Enterprise features
+│   ├── 05/                   # Copilot Chat mastery
+│   └── ...
+├── copilot/                  # Best practices and reference docs
+│   ├── BEST_PRACTICES.md     # Updated for Agent Mode
+│   └── CHAT_EXAMPLES.md      # Chat command examples
+├── exam-metadata/            # Certification study materials
+│   └── github-copilot-cert-exam-objectives.md
+├── new-resources/            # Latest feature updates
+│   ├── github_feature_update_dec2025.md   # December 2025 features
+│   └── github_feature_update_july2025.md  # July 2025 features
+├── .github/
+│   ├── copilot-instructions.md  # Repo-level Copilot behavior
+│   └── prompts/                 # Reusable prompt templates
+├── COURSE-PLAN-DEC-2025.md   # Detailed curriculum
+├── QUICK-REFERENCE.md        # Student cheat sheet
+└── CLAUDE.md                 # AI assistant config
+```
+
+---
+
+## Key Resources
+
+### Official Documentation
+
+- [GitHub Copilot What's New](https://github.com/features/copilot/whats-new)
+- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
+- [Agent Mode Guide](https://docs.github.com/en/copilot/using-github-copilot/using-agent-mode)
+- [MCP Integration](https://docs.github.com/en/copilot/mcp)
+
+### Certification Resources
+
+- [GH-300 Certification Overview](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/)
 - [GH-300 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300)
-- [Copilot Fundamentals](https://learn.microsoft.com/en-us/training/paths/copilot-fundamentals/)
-- [Copilot for Business](https://resources.github.com/copilot-for-business/)
-- [Copilot Chat Docs](https://docs.github.com/en/copilot/github-copilot-chat)
-- [AI Pair Programming Best Practices](https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/)
+- [Copilot Fundamentals Learning Path](https://learn.microsoft.com/en-us/training/paths/copilot-fundamentals/)
+
+### Community
+
+- [November 2025 Copilot Roundup](https://github.com/orgs/community/discussions/180828)
+- [December Enterprise Roundup](https://resources.github.com/enterprise-content-roundup/december/)
 
 ---
 
-## 🛠️ Latest Copilot Features (2025)
+## The Agent Mode Distinction (Exam Critical)
 
-- **Agentic Coding Agent** (Business/Enterprise)
-- **MCP (Model Context Protocol)**
-- **.instructions.md** support
-- **Rich Chat Attachments** (images, files)
-- **Copilot Spark** (natural language to app pipeline)
+This is the most commonly misunderstood topic:
 
----
-
-## 📁 Repo Structure
-
-- `/demos/` – Hands-on labs by lesson
-- `/new-resources/` – Latest exam objectives and course materials
-- `/copilot/` – Best practices and reference docs
-- `/exam-metadata/` – Certification study materials
-- `COURSE-PLAN-AUG-2025.md` – Detailed course structure
-- `CLAUDE.md` – AI assistant config
+| Feature | Where It Runs | What It Does | Plans |
+|---------|---------------|--------------|-------|
+| **Agent Mode** | Your IDE (local) | Multi-file edits, terminal access | All |
+| **Coding Agent** | GitHub Actions (cloud) | Assign issues, auto-generates PRs | Business/Enterprise |
+| **Cloud Agent** | GitHub Cloud (VS only) | Delegate from Visual Studio | Business/Enterprise |
 
 ---
 
-## 👨‍🏫 Instructor
+## Model Selection Guide
 
-- **Tim Warner**
-  - [techtrainertim.com](https://techtrainertim.com)
-  - [@timothywarner](https://github.com/timothywarner)
-  - [LinkedIn](https://linkedin.com/in/timothywarner)
-  - [Email](mailto:tim@techtrainertim.com)
-
----
-
-## 📝 License
-
-MIT License. See [LICENSE](LICENSE).
+| Model | Best For | Speed |
+|-------|----------|-------|
+| **Raptor Mini** | Inline completions | Ultra-fast |
+| **GPT-5.1** | Complex reasoning | Medium |
+| **GPT-5.1-Codex** | Code generation | Medium |
+| **Claude Opus 4.5** | Nuanced refactoring | Medium |
+| **Gemini 3 Pro** | Multimodal (images + code) | Medium |
 
 ---
 
-## 🔄 Automated Dependency Updates
+## Running the Demos
 
-- Node.js: Weekly updates for root `package.json`
-- Python: Weekly updates for `/demos/11/requirements.txt`
-- Auto-labeled PRs (`dependencies`, `auto-merge`)
-- Example reviewers: `jane-dev`, `sam-coder`
-- See `.github/dependabot.yml` for config
+### Node.js/Express Demo (demos/12)
+
+```bash
+cd demos/12/node-express-azure
+npm install
+npm start
+npm test
+```
+
+### Python FastAPI Demo (demos/11)
+
+```bash
+cd demos/11
+pip install -r requirements.txt
+python app.py
+```
+
+### GitHub Stats Dashboard (demos/14)
+
+```bash
+cd demos/14
+npm install
+npm run dev
+```
 
 ---
+
+## Instructor
+
+**Tim Warner**
+
+- Website: [techtrainertim.com](https://techtrainertim.com)
+- GitHub: [@timothywarner](https://github.com/timothywarner)
+- LinkedIn: [linkedin.com/in/timothywarner](https://linkedin.com/in/timothywarner)
+- Email: [tim@techtrainertim.com](mailto:tim@techtrainertim.com)
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## Automated Dependency Updates
+
+- **Node.js**: Weekly updates for root `package.json`
+- **Python**: Weekly updates for `/demos/11/requirements.txt`
+- Auto-labeled PRs: `dependencies`, `auto-merge`
+- See `.github/dependabot.yml` for configuration
+
+---
+
+*Last updated: December 2025*
