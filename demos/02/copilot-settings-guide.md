@@ -1,5 +1,7 @@
 # GitHub Copilot Individual Settings Guide
 
+> **Updated December 2025**: Includes new settings for multi-model selection, Agent Mode, Mission Control, and Next Edit Suggestions.
+
 This guide demonstrates how to configure GitHub Copilot for individual developers, covering all major settings and customization options.
 
 ## IDE Integration Settings
@@ -47,6 +49,99 @@ GitHub Copilot is available in multiple IDEs. Here's how to configure it in the 
 3. **Completion Settings**:
    - Configure auto-completion behavior
    - Set suggestion delay time
+
+## New Features Configuration (December 2025)
+
+### Multi-Model Selection
+
+Copilot now supports multiple AI models. Configure your preferred model for different contexts:
+
+**VS Code Settings:**
+```json
+{
+    "github.copilot.chat.model": "gpt-5.1-codex",
+    "github.copilot.inlineSuggest.model": "raptor-mini",
+    "github.copilot.agent.model": "claude-opus-4.5"
+}
+```
+
+**Available Models:**
+| Model | Best For | Speed |
+|-------|----------|-------|
+| `raptor-mini` | Quick inline completions | Ultra-fast |
+| `gpt-5.1` | General reasoning | Medium |
+| `gpt-5.1-codex` | Code-specific tasks | Medium |
+| `claude-opus-4.5` | Nuanced refactoring | Medium |
+| `gemini-3-pro` | Multimodal (images + code) | Medium |
+
+### Agent Mode Settings
+
+Configure Agent Mode behavior for multi-file editing:
+
+```json
+{
+    "github.copilot.agent.enabled": true,
+    "github.copilot.agent.planMode": true,
+    "github.copilot.agent.autoApprove": false,
+    "github.copilot.agent.terminalAccess": true
+}
+```
+
+**Plan Mode**: When enabled, Agent shows you the plan before executing changes.
+
+**Auto Approve**: If true, Agent executes without confirmation (not recommended for beginners).
+
+### Mission Control
+
+Access the Agent session dashboard:
+
+- **Shortcut**: `Ctrl+Shift+M` (Windows/Linux) or `Cmd+Shift+M` (Mac)
+- **Command Palette**: `GitHub Copilot: Open Mission Control`
+
+Settings:
+```json
+{
+    "github.copilot.missionControl.showProgress": true,
+    "github.copilot.missionControl.notifications": true
+}
+```
+
+### Next Edit Suggestions
+
+Enable predictive editing that anticipates your next change:
+
+```json
+{
+    "github.copilot.nextEditSuggestions": true,
+    "github.copilot.nextEditSuggestions.syntaxHighlighting": true
+}
+```
+
+### Linter Integration (Code Review)
+
+Connect Copilot to your linting tools for smarter code review:
+
+```json
+{
+    "github.copilot.codeReview.linterIntegration": true,
+    "github.copilot.codeReview.showConfidenceScores": true,
+    "github.copilot.codeReview.showRationale": true
+}
+```
+
+### Image Input Support
+
+Enable visual debugging with screenshots:
+
+```json
+{
+    "github.copilot.chat.imageInput": true
+}
+```
+
+Use case: Attach error screenshots, UI mockups, or architecture diagrams to Chat.
+
+---
 
 ## Advanced Configuration Options
 

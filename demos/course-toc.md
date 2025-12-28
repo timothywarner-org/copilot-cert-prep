@@ -125,10 +125,34 @@
 - 18.2 Work through sample exam questions
 - 18.3 Learn test-taking strategies and tips for success
 
-## Lesson 19: Explore the Future of AI-Powered Development (15 minutes)
+## Lesson 19: Explore the Future of AI-Powered Development (30 minutes) – EXPANDED
 
-- 19.1 Learn the upcoming trends in AI-assisted development
-- 19.2 Identify new features and future updates expected in GitHub Copilot
-- 19.3 Understand the importance of continued learning and skill development in AI-driven software engineering
+> **December 2025 Update**: This lesson now covers the 50+ features released in November 2025.
+
+### 19.1 Multi-Model Architecture (10 min)
+- GPT-5.1, GPT-5.1-Codex, GPT-5.1-Codex-Max
+- Claude Opus 4.5 for nuanced refactoring
+- Gemini 3 Pro for multimodal (images + code)
+- Raptor Mini for ultra-low latency
+- When to use which model (decision framework)
+
+### 19.2 Agent Mode Ecosystem (10 min)
+- Agent Mode (IDE) vs Coding Agent (GitHub Actions) vs Cloud Agent (Visual Studio)
+- Mission Control dashboard
+- Plan Mode for preview before execution
+- Agent-specific instructions
+- Session pause/resume
+- Mobile agent sessions (GitHub Mobile)
+
+### 19.3 Enterprise Governance (5 min)
+- BYOK (Bring Your Own Key) for Azure/AWS/GCP
+- Budget tracking and per-team limits
+- Private MCP Registry
+- Delegated AI controls
+
+### 19.4 Competitive Landscape & Future (5 min)
+- Cursor, Windsurf, OpenAI Codex, Amazon CodeWhisperer
+- What differentiates Copilot: agent ecosystem, enterprise governance, GitHub integration
+- Future certification paths and continued learning
 
 ## Summary 

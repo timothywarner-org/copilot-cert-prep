@@ -420,6 +420,79 @@ function uploadUserAvatar(req, res) {
 /clear
 ```
 
+## Agent Mode Commands (New in 2025)
+
+These commands work with Copilot's Agent Mode for multi-file operations:
+
+### `/agent`
+
+**Purpose**: Invoke agent mode for complex, multi-file tasks.
+
+**Use cases**:
+- Implementing features across multiple files
+- Refactoring entire modules
+- Creating new project structures
+
+**Examples**:
+
+```
+/agent Create a user authentication system with login, registration, and password reset
+```
+
+```
+/agent Refactor this monolithic service into microservices
+```
+
+**Best practices**:
+- Be specific about the scope of the task
+- Review the generated plan before approving
+- Use with Plan Mode enabled for visibility
+
+### `/plan`
+
+**Purpose**: Generate an execution plan without making changes.
+
+**Use cases**:
+- Understanding the scope of a change before executing
+- Reviewing proposed file modifications
+- Teaching others about implementation approaches
+
+**Examples**:
+
+```
+/plan How would you implement rate limiting for this API?
+```
+
+```
+/plan Show me the steps to add dark mode to this React app
+```
+
+### `/review`
+
+**Purpose**: Perform an AI-powered code review with linter integration.
+
+**Use cases**:
+- Pre-commit code review
+- Identifying security vulnerabilities
+- Checking code quality and style
+
+**Examples**:
+
+```
+/review Check this PR for security issues and best practices
+```
+
+```
+/review Analyze this function for performance problems
+```
+
+**New Features (Nov 2025)**:
+- Linter integration (ESLint, Pylint, Rubocop)
+- Confidence scores for each suggestion
+- Rationale explaining *why* issues matter
+
+---
+
 ## IDE-Specific Commands
 
 Different IDEs may have additional specialized commands:
@@ -429,12 +502,20 @@ Different IDEs may have additional specialized commands:
 - `/workspace` - Analyze your entire workspace
 - `/compare` - Compare two code snippets
 - `/references` - Find references to a symbol
+- `/missionControl` - Open the agent task dashboard (new)
+- `/branch` - Create a threaded conversation (new)
+
+### Visual Studio 2026
+
+- `/cloudAgent` - Delegate task to GitHub cloud agent (new)
+- `/intent` - Search with intent detection (new)
 
 ### JetBrains IDEs
 
 - `/generate` - Generate code based on context
 - `/refactor` - Suggest refactoring options
 - `/analyze` - Analyze code quality
+- `/subagent` - Create an isolated subagent (new)
 
 ## Best Practices for Using Slash Commands
 

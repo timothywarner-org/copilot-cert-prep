@@ -31,6 +31,8 @@ The GitHub Copilot certification exam covers seven domains, with the following p
 
 ### Domain 2: GitHub Copilot Plans and Features (31%)
 
+> **December 2025 Update**: This domain now includes Agent Mode, multi-model selection, and Mission Control. Expect exam questions on these new capabilities.
+
 #### General Plans and Features
 - Identify the different GitHub Copilot plans
 - Understand the differences between Copilot Individual, Copilot Business, Copilot Enterprise, and Copilot Business for non-GHE
@@ -38,6 +40,10 @@ The GitHub Copilot certification exam covers seven domains, with the following p
 - Define GitHub Copilot in the IDE
 - Define GitHub Copilot Chat in the IDE
 - Describe the different ways to trigger GitHub Copilot (chat, inline chat, suggestions, multiple suggestions, exception handling, CLI)
+- **NEW**: Understand multi-model selection (GPT-5.1, Claude Opus 4.5, Gemini 3 Pro, Raptor Mini)
+- **NEW**: Differentiate between Agent Mode (IDE) and Coding Agent (GitHub Actions)
+- **NEW**: Describe Mission Control for managing agent sessions
+- **NEW**: Explain Plan Mode for reviewing proposed changes before execution
 
 #### Copilot Individual
 - Identify the main features with GitHub Copilot Individual
@@ -62,6 +68,17 @@ The GitHub Copilot certification exam covers seven domains, with the following p
 - Identify the common best practices for using GitHub Copilot Chat
 - Identify the available slash commands when using GitHub Copilot Chat
 
+#### Copilot Business
+- Identify the main features of GitHub Copilot Business
+- Demonstrate how to exclude specific files from GitHub Copilot
+- Demonstrate how to establish organization-wide policy management
+- Describe the purpose of organization audit logs for GitHub Copilot Business
+- Explain how to search audit log events for GitHub Copilot Business
+- Explain how to manage GitHub Copilot Business subscriptions via the REST API
+- **NEW**: Explain Coding Agent capabilities for automated PR generation
+- **NEW**: Describe budget tracking and per-team usage limits
+- **NEW**: Understand BYOK (Bring Your Own Key) for enterprise model providers
+
 #### Copilot Enterprise
 - Identify the main features with GitHub Copilot Enterprise
 - Explain the benefits of using GitHub Copilot Chat on GitHub.com
@@ -71,11 +88,18 @@ The GitHub Copilot certification exam covers seven domains, with the following p
 - Explain the benefits of using Knowledge Bases for code completion and review
 - Describe instructions for creating, managing, and searching Knowledge Bases
 - Explain the benefits of using custom models
+- **NEW**: Describe the Private MCP Registry for internal tools
+- **NEW**: Explain organization-wide custom instructions
+- **NEW**: Understand delegated AI controls management
 
 #### CLI Integration
 - Discuss the steps for installing GitHub Copilot in the CLI
 - Identify the common commands when using GitHub Copilot in the CLI
 - Identify the multiple settings you can configure within GitHub Copilot in the CLI
+- **NEW**: Explain how CLI now supports agentic coding (local editing, debugging)
+- **NEW**: Describe MCP integration for CLI context enhancement
+- **NEW**: Understand image input support for visual debugging
+- **NEW**: Explain semantic codebase search capabilities
 
 ### Domain 3: How GitHub Copilot Works and Handles Data (15%)
 
@@ -119,5 +143,24 @@ Two comprehensive learning paths are available:
 
 A comprehensive video-based learning path is coming soon, which will cover all aspects of GitHub Copilot and prepare you for certification.
 
-*(Learning path coming soon)*
+### New Feature Resources (December 2025)
+
+- [GitHub Copilot What's New](https://github.com/features/copilot/whats-new) - Official feature announcements
+- [November 2025 Copilot Roundup](https://github.com/orgs/community/discussions/180828) - 50+ updates overview
+- [Agent Mode Documentation](https://docs.github.com/en/copilot/using-github-copilot/using-agent-mode) - Multi-file editing guide
+- [MCP Integration Guide](https://docs.github.com/en/copilot/mcp) - Model Context Protocol setup
+- [Enterprise Governance](https://resources.github.com/enterprise-content-roundup/december/) - December enterprise updates
+
+### Study Focus Areas for 2025
+
+Based on recent feature releases, prioritize understanding:
+
+1. **Multi-Model Architecture** - When to use GPT-5.1 vs Claude Opus 4.5 vs Gemini 3 Pro
+2. **Agent Mode vs Coding Agent** - This distinction is critical and likely to appear on exams
+3. **Plan Mode** - How to preview changes before execution
+4. **Mission Control** - Managing multiple agent sessions
+5. **MCP (Model Context Protocol)** - Enhanced context gathering
+6. **BYOK (Bring Your Own Key)** - Enterprise model provider integration
+7. **Copilot Spaces** - Organizing context for conversations
+8. **Linter Integration** - Code review with ESLint/Pylint/Rubocop
 
