@@ -14,13 +14,13 @@
 
 ## Welcome
 
-This is the official prep course for the **GitHub Copilot Certification Exam (GH-300)**. Updated for **December 2025** with Agent Mode, multi-model selection, and 50+ new features from November 2025.
+This is the official prep course for the **GitHub Copilot Certification Exam (GH-300)**. Updated for **January 2026** with Agent Mode, multi-model selection, and 50+ new features from November 2025.
 
 > **The Big Shift**: Copilot evolved from "AI autocomplete" to an **agentic development platform**. This course teaches you to master the new paradigm.
 
 ---
 
-## What's New in December 2025
+## What's New in January 2026
 
 | Feature | What It Does | Plan Availability |
 |---------|--------------|-------------------|
@@ -106,7 +106,7 @@ copilot-cert-prep/
 ├── exam-metadata/            # Certification study materials
 │   └── github-copilot-cert-exam-objectives.md
 ├── new-resources/            # Latest feature updates
-│   ├── github_feature_update_dec2025.md   # December 2025 features
+│   ├── github_feature_update_dec2025.md   # January 2026 features
 │   └── github_feature_update_july2025.md  # July 2025 features
 ├── .github/
 │   ├── copilot-instructions.md  # Repo-level Copilot behavior
@@ -229,4 +229,4 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Last updated: December 2025*
+*Last updated: January 2026*

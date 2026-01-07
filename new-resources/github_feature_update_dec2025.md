@@ -1,4 +1,4 @@
-# GitHub Copilot Feature Update Summary – November/December 2025
+# GitHub Copilot Feature Update Summary – November/January 2026
 
 > **For Instructors**: This document captures the most significant GitHub Copilot updates from Nov-Dec 2025. November alone shipped 50+ updates. Use this as your authoritative reference for teaching current-state Copilot.
 
@@ -264,4 +264,4 @@ Recommend students understand the *why* behind each feature, not just the *what*
 
 ---
 
-*Last updated: December 2025*
+*Last updated: January 2026*

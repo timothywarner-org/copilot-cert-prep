@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-> **Updated December 2025**: Includes Agent Mode, multi-model selection, and 50+ new features.
+> **Updated January 2026**: Includes Agent Mode, multi-model selection, and 50+ new features.
 
 ## Repository Overview
 
@@ -110,7 +110,7 @@ This repository supports a 5-segment course flow (see `COURSE-PLAN-DEC-2025.md`)
 4. **Privacy, Configuration & Troubleshooting** - Exclusions, Agent permissions, Integration
 5. **Exam Prep & What's Next** - Domain review, Practice exam, Competitive landscape
 
-### Key December 2025 Features
+### Key January 2026 Features
 
 - **Multi-Model Selection**: GPT-5.1, Claude Opus 4.5, Gemini 3 Pro, Raptor Mini
 - **Agent Mode vs Coding Agent**: Critical distinction for the exam

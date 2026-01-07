@@ -1,4 +1,4 @@
-# GitHub Copilot Quick Reference (December 2025)
+# GitHub Copilot Quick Reference (January 2026)
 
 > **For Students**: Print this. Keep it next to your keyboard. Use it during labs.
 
@@ -146,4 +146,4 @@
 
 ---
 
-*Last updated: December 2025 | Course: GitHub Copilot Certification Prep*
+*Last updated: January 2026 | Course: GitHub Copilot Certification Prep*

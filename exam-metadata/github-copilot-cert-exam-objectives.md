@@ -31,7 +31,7 @@ The GitHub Copilot certification exam covers seven domains, with the following p
 
 ### Domain 2: GitHub Copilot Plans and Features (31%)
 
-> **December 2025 Update**: This domain now includes Agent Mode, multi-model selection, and Mission Control. Expect exam questions on these new capabilities.
+> **January 2026 Update**: This domain now includes Agent Mode, multi-model selection, and Mission Control. Expect exam questions on these new capabilities.
 
 #### General Plans and Features
 - Identify the different GitHub Copilot plans
@@ -143,7 +143,7 @@ Two comprehensive learning paths are available:
 
 A comprehensive video-based learning path is coming soon, which will cover all aspects of GitHub Copilot and prepare you for certification.
 
-### New Feature Resources (December 2025)
+### New Feature Resources (January 2026)
 
 - [GitHub Copilot What's New](https://github.com/features/copilot/whats-new) - Official feature announcements
 - [November 2025 Copilot Roundup](https://github.com/orgs/community/discussions/180828) - 50+ updates overview

@@ -1,6 +1,6 @@
-# GitHub Copilot Certification Course Plan - December 2025
+# GitHub Copilot Certification Course Plan - January 2026
 
-> **Fully Refactored for December 2025**: Agent Mode, multi-model selection, and Mission Control are now woven throughout all segments, not just at the end.
+> **Fully Refactored for January 2026**: Agent Mode, multi-model selection, and Mission Control are now woven throughout all segments, not just at the end.
 
 ## Course Philosophy
 
@@ -191,7 +191,7 @@ Before diving in, students need to understand the paradigm shift:
 
 ### 3.3 Enterprise Features (45 min)
 
-**Updated for December 2025:**
+**Updated for January 2026:**
 
 | Feature | Business | Enterprise |
 |---------|----------|------------|
@@ -399,4 +399,4 @@ Before diving in, students need to understand the paradigm shift:
 
 ---
 
-*Last updated: December 2025*
+*Last updated: January 2026*

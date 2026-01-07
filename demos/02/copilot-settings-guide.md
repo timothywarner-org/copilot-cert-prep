@@ -1,6 +1,6 @@
 # GitHub Copilot Individual Settings Guide
 
-> **Updated December 2025**: Includes new settings for multi-model selection, Agent Mode, Mission Control, and Next Edit Suggestions.
+> **Updated January 2026**: Includes new settings for multi-model selection, Agent Mode, Mission Control, and Next Edit Suggestions.
 
 This guide demonstrates how to configure GitHub Copilot for individual developers, covering all major settings and customization options.
 
@@ -50,7 +50,7 @@ GitHub Copilot is available in multiple IDEs. Here's how to configure it in the 
    - Configure auto-completion behavior
    - Set suggestion delay time
 
-## New Features Configuration (December 2025)
+## New Features Configuration (January 2026)
 
 ### Multi-Model Selection
 

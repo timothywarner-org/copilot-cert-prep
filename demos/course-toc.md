@@ -127,7 +127,7 @@
 
 ## Lesson 19: Explore the Future of AI-Powered Development (30 minutes) – EXPANDED
 
-> **December 2025 Update**: This lesson now covers the 50+ features released in November 2025.
+> **January 2026 Update**: This lesson now covers the 50+ features released in November 2025.
 
 ### 19.1 Multi-Model Architecture (10 min)
 - GPT-5.1, GPT-5.1-Codex, GPT-5.1-Codex-Max

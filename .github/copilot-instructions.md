@@ -1,6 +1,6 @@
 # GitHub Copilot Certification Prep Repository
 
-> **Updated December 2025**: Includes guidance for Agent Mode, multi-model selection, and 50+ new features from November 2025.
+> **Updated January 2026**: Includes guidance for Agent Mode, multi-model selection, and 50+ new features from November 2025.
 
 ## 🎯 Project Overview
 
@@ -115,7 +115,7 @@ When generating examples, use enterprise contexts:
 # 5. Always include "Next Steps" for learners
 ```
 
-## 🆕 December 2025 Feature Highlights
+## 🆕 January 2026 Feature Highlights
 
 ### Multi-Model Selection
 
