@@ -102,7 +102,7 @@ python app.py
 
 ## Course-Specific Context
 
-This repository supports a 5-segment course flow (see `COURSE-PLAN-DEC-2025.md`):
+This repository supports a 5-segment course flow (see `COURSE-PLAN-APRIL-2026.md`):
 
 1. **Foundations & The New Copilot** - Multi-model setup, Agent Mode intro, Responsible AI
 2. **Core Features & Agent Workflows** - Prompt engineering, Chat mastery, Agent Mode deep dive

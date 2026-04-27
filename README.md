@@ -45,7 +45,7 @@ This is the official prep course for the **GitHub Copilot Certification Exam (GH
 | **4. Privacy & Config** | 3 hours | Exclusions, Troubleshooting, Integration |
 | **5. Exam Prep** | 3 hours | Domain review, Practice exam, Competitive landscape |
 
-See [COURSE-PLAN-DEC-2025.md](COURSE-PLAN-DEC-2025.md) for detailed curriculum.
+See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curriculum.
 
 ---
 
@@ -111,7 +111,7 @@ copilot-cert-prep/
 ├── .github/
 │   ├── copilot-instructions.md  # Repo-level Copilot behavior
 │   └── prompts/                 # Reusable prompt templates
-├── COURSE-PLAN-DEC-2025.md   # Detailed curriculum
+├── COURSE-PLAN-APRIL-2026.md # Detailed curriculum
 ├── QUICK-REFERENCE.md        # Student cheat sheet
 └── CLAUDE.md                 # AI assistant config
 ```
