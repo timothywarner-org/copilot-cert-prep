@@ -1,473 +1,274 @@
 # GitHub Copilot Certification Course Plan - April 2026
 
-> **Aligned to the official January 2026 GH-300 blueprint** ([MS Learn](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300)). The exam was significantly restructured: **7 domains collapsed into 6 functional groups**, Responsible AI grew from 7% to **15–20%**, and a new "Use GitHub Copilot features" group (25–30%) explicitly covers **CLI, Agent Mode, Edit Mode, MCP, Sub-Agents, Spaces, Spark, and org-wide policy management**. Testing is now folded into the productivity group.
+> Aligned to the official January 2026 GH-300 blueprint, with current-state Copilot/GHEC features added for due diligence where the blueprint has fallen behind.
 
-## Course Philosophy
+## Format
 
-This course follows Feynman's principle: *If you can't explain it simply, you don't understand it well enough.* Every complex feature is broken down into digestible mental models with hands-on reinforcement.
+- Five instructional segments
+- 50 minutes each (S3 may flex to 60 if delivery window permits)
+- Total instructional time: 250 minutes
+- Delivery note: in a 5-hour block, use short breaks and transition buffers outside these 250 minutes
 
----
+## Pedagogical Sequence (Not Blueprint Order)
 
-## January 2026 Blueprint at a Glance
+**Start → Use → Think → Govern → Ship.** Habits before tools, tools before internals, internals before policy, policy before integrative practice. Coverage targets 100% of January 2026 GH-300 objectives plus essential post-blueprint features.
 
-| # | Functional Group | Weight | Where It Lives in This Course |
-|---|---|---|---|
-| 1 | Use GitHub Copilot **responsibly** | **15–20%** | Segment 1 + threaded into every segment |
-| 2 | Use GitHub Copilot **features** (IDE, CLI, Agent/Edit/MCP, org policy) | **25–30%** | Segments 2 & 3 |
-| 3 | Understand GitHub Copilot **data and architecture** | 10–15% | Segment 2 |
-| 4 | Apply **prompt engineering** and context crafting | 10–15% | Segment 2 |
-| 5 | Improve **developer productivity** (incl. testing & security) | 10–15% | Segment 3 |
-| 6 | Configure **privacy, content exclusions, and safeguards** | 10–15% | Segment 4 |
-
-**Pass score:** 700/1000 · **Validity:** 2 years · **Sandbox:** https://aka.ms/GHExamDemo-enu
-
-See [`exam-metadata/GH-300-Study-Guide-April-2026.md`](exam-metadata/GH-300-Study-Guide-April-2026.md) for the full objective list.
+Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = current Copilot/GitHub Enterprise Cloud feature not yet on GH-300 but operationally required.
 
 ---
 
-## The Big Picture: What Changed in 2025–2026?
+## Segment 1 (50 min): Start — Responsible Operation
 
-Before diving in, students need to understand the paradigm shift:
+### Outcomes
 
-| Era | Copilot Was | Copilot Is Now |
-|-----|-------------|----------------|
-| 2023-2024 | AI autocomplete | **Agentic development platform** |
-| Model | Single LLM | **Multi-model selection** |
-| Scope | Single file | **Multi-file agent operations** |
-| Control | Suggestions only | **Plan Mode + Mission Control** |
-| Enterprise | Basic policies | **BYOK + Budget tracking + MCP Registry** |
-| Surfaces | IDE only | **IDE + CLI + Coding Agent + Spaces + Spark** |
+- Explain responsible AI risks, limitations, harms, and mitigations
+- Apply a validation-first workflow for Copilot output
+- Recognize the four primary trigger surfaces (preview only)
 
----
+### Agenda
 
-## Segment 1: Foundations & The New Copilot (3 hours)
+1. Why GH-300 changed in January 2026 and what shifted in weights (5 min)
+2. Responsible AI principles and concrete safeguards (15 min)
+3. Validation workflow with two worked examples: a hallucinated API and an insecure suggestion (20 min)
+4. Trigger-surface preview: inline, chat, CLI, Plan Mode (5 min, deferred deep dive to S2)
+5. Lab: identify a risk in a generated snippet, produce a safer revision with rationale (5 min)
 
-### Learning Objectives
+### Features to explain and demo
 
-- Understand the evolution from autocomplete to agentic AI
-- Set up Copilot with optimal model selection
-- Master responsible AI principles
-
-### 1.1 Welcome & The 2025 Paradigm Shift (30 min)
-
-- Course overview and certification structure
-- **The mental model**: Copilot as an agentic platform, not just autocomplete
-- Three ways to use Copilot:
-  1. **Inline suggestions** (traditional)
-  2. **Chat conversations** (interactive)
-  3. **Agent Mode** (autonomous multi-file)
-
-### 1.2 Plans & Multi-Model Architecture (45 min)
-
-**This is new and exam-critical:**
-
-| Plan | Models Available | Agent Features |
-|------|------------------|----------------|
-| Individual | Raptor Mini, GPT-5.1, Claude Opus 4.5, Gemini 3 Pro | Agent Mode (IDE) |
-| Business | All above + GPT-5.1-Codex-Max | + Coding Agent, BYOK |
-| Enterprise | All above + Custom models | + Private MCP Registry |
-
-**Demo**: Switch between models, observe output differences
-
-- When to use Raptor Mini (speed) vs Claude Opus 4.5 (nuance)
-- IP indemnity and legal protections
-- **Hands-on**: Configure model preferences in VS Code
-
-### 1.3 IDE Setup with Agent Mode (45 min)
-
-- Installing Copilot extensions
-- **New UI elements**:
-  - Mission Control dashboard (`Ctrl+Shift+M`)
-  - Plan Mode toggle
-  - Model selector
-  - Next Edit Suggestions
-- Ghost text vs inline chat vs agent mode
-- **Hands-on**: Enable Plan Mode, try Agent on a simple multi-file task
-
-### 1.4 Responsible AI & Validation (60 min) — **expanded**
-
-> **Group 1 coverage (15–20%, up from 7%).** This is now one of the heaviest-weighted areas — give it real time.
-
-- **Risks and limitations** of generative AI tools (depth of source data, bias, hallucination)
-- **Ethical and responsible AI usage** principles
-- **Potential harms** and **mitigation strategies** (bias, insecure code, fairness, privacy, transparency)
-- **Why validation matters more with Agent Mode** — autonomous edits amplify any miss
-- **How to operate Copilot responsibly** in a team context (review gates, instructions files, audit logs)
-- **Hands-on**: Review and validate agent-generated code; identify a hallucination and a license-risk suggestion
-
-### 1.5 CLI: Now a First-Class Surface (30 min) — **expanded**
-
-> **Group 2 sub-area (CLI is explicitly called out in the blueprint).**
-
-- What Copilot CLI is and **how it benefits developers**
-- **Installing** Copilot CLI (steps you should be able to recite)
-- **Key features and commands**
-- Using CLI **interactively** vs **in sessions**
-- **Generating scripts** and **managing files** with CLI
-- Image input for visual debugging
-- MCP integration out of the box
-- **Hands-on**: Install CLI, run an interactive session, generate a shell script
-
-### Lab Exercise (Segment 1)
-
-1. Configure model selection (Raptor Mini inline, GPT-5.1-Codex for chat)
-2. Open Mission Control and explore the UI
-3. Run a simple agent task with Plan Mode enabled
-4. Validate the output and identify potential issues
-5. Try CLI with an image attachment
+- **[GH-300]** Responsible AI principles for Copilot
+- **[GH-300]** Risks, limitations, harms, mitigations
+- **[GH-300]** Validation gates: review, test, security scan before merge
+- **[GH-300]** Operate-responsibly checklist
+- **[GH-300]** Trigger-surface inventory: inline, chat, CLI, Plan Mode (preview)
+- **[Beyond]** Copilot Trust Center commitments and what GitHub does *not* do with your code
+- **[Beyond]** Public-code matching as a responsibility lever (preview, deep dive in S4)
+- **[Beyond]** Hallucination patterns specific to code: phantom APIs, wrong package names, deprecated syntax
 
 ---
 
-## Segment 2: Data, Prompts & Agent Workflows (3 hours)
+## Segment 2 (50 min): Use — Hands on the Wheel
 
-> **Maps to:** Group 3 — Data and Architecture (10–15%), Group 4 — Prompt Engineering (10–15%), and the Agent/Edit/MCP portion of Group 2 (25–30%).
+### Outcomes
 
-### Learning Objectives
+- Enable Copilot across IDE surfaces and configure it correctly
+- Drive inline, Chat, and CLI workflows with confidence
+- Recognize when each surface is the right tool
 
-- Visualize the **code suggestion lifecycle** end to end
-- Master prompt engineering for both chat and agent mode
-- Understand how context flows to different models
-- Build effective agent workflows with Plan Mode and Sub-Agents
+### Agenda
 
-### 2.1 How Copilot Works: Data & Architecture (45 min) — **Group 3**
+1. IDE enablement, settings, and per-language toggles (10 min)
+2. Inline suggestions: accepting, partial-accepting, multi-suggestion cycling (5 min)
+3. Copilot Chat: limits, options, slash commands, context variables, prompt files for reuse (15 min)
+4. Copilot CLI: install, interactive mode, sessions, script generation, file management (15 min)
+5. Lab: complete one Chat task and one CLI task on the same problem, compare outputs (5 min)
 
-- **Data usage, flow, and sharing**
-- **Input processing and prompt building**
-- **Proxy filtering and post-processing**
-- **Code suggestion lifecycle** — be able to draw it on a whiteboard
-- **Limitations of LLMs and Copilot**
-- Multi-model routing and how context shifts per model
-- **Demo**: Compare outputs from 3 models on same task
+### Features to explain and demo
 
-### 2.2 Prompt Engineering & Context Crafting (60 min) — **Group 4**
-
-- **Prompt structure and context** — what Copilot actually sees
-- **How context is determined** (open files, selection, workspace, MCP)
-- **Zero-shot vs few-shot** prompting — when to reach for each
-- **Best practices for prompt crafting**
-- **Prompt engineering principles** for performance
-- **Prompt process flow** and **chat history usage**
-- Using `.instructions.md` for consistent behavior
-- **Prompt files** for reusable templates (explicitly called out in the blueprint)
-- **Hands-on**: Build a prompt file and an instructions file; A/B test across models
-
-### 2.3 Chat Mastery with New Commands (45 min)
-
-**Updated slash commands:**
-
-| Command | Purpose | New in 2025? |
-|---------|---------|--------------|
-| `/explain` | Understand code | No |
-| `/fix` | Debug errors | No |
-| `/tests` | Generate tests | No |
-| `/plan` | Preview changes before execution | **Yes** |
-| `/agent` | Multi-file task | **Yes** |
-| `/review` | Code review with linter integration | **Yes** |
-
-- Threaded conversations (branching without losing context)
-- Image attachments for visual debugging
-- Linter integration with confidence scores
-- **Demo**: Use `/plan` before `/agent` for controlled refactoring
-
-### 2.4 Agent Mode, Edit Mode, Sub-Agents & MCP (45 min) — **Group 2 core**
-
-**Three exam-critical distinctions:**
-
-| Surface | Where it runs | Trigger | Output | Review gate |
-|---|---|---|---|---|
-| **Agent Mode** | IDE (local) | Chat command | Direct file edits | **Plan Mode** |
-| **Edit Mode** | IDE (local) | Scoped multi-file targets | Direct file edits | Inline diff |
-| **Coding Agent** | GitHub Actions (cloud) | Assign issue to Copilot | Pull request | PR review |
-
-- **Agent Sessions** and how to manage them
-- **Sub-Agents** — delegating tasks to optimize context usage (explicit in the blueprint)
-- **MCP** (Model Context Protocol) — connecting external tools/data
-- **Mission Control** for tracking sessions
-- Session pause/resume
-- Agent-specific instructions files
-- **Spaces** (curated team context) vs **Spark** (AI-driven app/prototype builder)
-- **PR summaries** and **customizable review standards via instructions files**
-- **Demo**: Multi-file refactoring with Plan Mode approval, then delegate a sub-task to a Sub-Agent
-
-### Lab Exercise (Segment 2)
-
-1. Create a `.github/copilot-agent-instructions.md` file
-2. Use `/plan` to preview a refactoring operation
-3. Execute with Agent Mode and review changes
-4. Compare outputs from different models
-5. Practice threaded conversations
+- **[GH-300]** Enable Copilot in the IDE (VS Code primary, JetBrains/Visual Studio noted)
+- **[GH-300]** Inline suggestions trigger and behavior
+- **[GH-300]** Copilot Chat limits, options, feedback, commands
+- **[GH-300]** Prompt file reuse for consistent responses
+- **[GH-300]** Copilot CLI: definition, benefits, install, key commands
+- **[GH-300]** CLI interactive use and session-based use
+- **[GH-300]** CLI script generation and file management
+- **[Beyond]** `@workspace`, `@vscode`, `@terminal`, `@github` chat participants
+- **[Beyond]** Slash commands: `/explain`, `/fix`, `/tests`, `/doc`, `/new`, `/review`
+- **[Beyond]** Context variables: `#file`, `#selection`, `#codebase`, `#fetch`, `#problems`, `#changes`
+- **[Beyond]** Multi-model picker in Chat (GPT, Claude, Gemini families) — selection criteria, not model trivia
+- **[Beyond]** Copilot in the terminal vs Copilot CLI (different products, common confusion)
+- **[Beyond]** Custom instructions at user, repo, and org scope (`.github/copilot-instructions.md`, `.instructions.md` files)
 
 ---
 
-## Segment 3: Productivity, Testing, Security & Org Policy (3 hours)
+## Segment 3 (60 min, flex from 50): Think — How Copilot Reasons
 
-> **Maps to:** Group 5 — Improve developer productivity (10–15%, **now includes testing & security**) and the **org-policy sub-area of Group 2** (audit logs, REST API for subscriptions, Code Review policies).
+### Outcomes
 
-### Learning Objectives
+- Distinguish Agent Mode, Edit Mode, Coding Agent, and Cloud Agent without prompting
+- Trace data through Copilot's suggestion lifecycle
+- Construct prompts that exploit context determination rules
 
-- Use Copilot for **code generation, refactoring, documentation, sample data, legacy modernization**
-- Generate **unit and integration tests**, identify **edge cases**, write **assertions**
-- Suggest **security improvements** and **performance optimizations**
-- Configure **organization-wide policies** and **audit log** workflows
+### Agenda
 
-### 3.1 Productivity & Code Quality (45 min) — **Group 5A**
+1. Agent Mode and Edit Mode: when each fits, Plan Mode preview gate (10 min)
+2. MCP, Agent Sessions, Sub-Agents, Spaces, Spark, PR summaries, instructions files (15 min)
+3. Data usage, flow, sharing; input processing, proxy filtering, post-processing (10 min)
+4. Suggestion lifecycle visualization and LLM/Copilot limitations (5 min)
+5. Prompt structure, context determination, zero-shot vs few-shot, chat history boundaries (10 min)
+6. Lab: rewrite a weak prompt into a high-context prompt, compare across two models (10 min)
 
-- Code **generation, refactoring, and documentation**
-- **Accelerating learning** and **reducing context switching**
-- **Generating sample data** and **modernizing legacy code**
-- **Demo**: Refactor a legacy module and generate docs in one session
+### Features to explain and demo
 
-### 3.2 Testing & Security with Copilot (45 min) — **Group 5B**
-
-- **Unit and integration test** generation
-- **Edge case identification** and **assertion writing**
-- **Security improvements** (vulnerable patterns, input validation)
-- **Performance optimizations** suggested by Copilot
-- TDD workflow with Plan Mode
-- **Demo**: Generate a test suite, then run `/review` for security findings
-
-### 3.3 Code Review with Instructions Files (30 min)
-
-**New code review capabilities (and how to standardize them):**
-
-- Linter integration (ESLint, Pylint, Rubocop)
-- Confidence scores for each suggestion
-- Rationale explaining *why* issues matter
-- Incremental PR reviews (only new commits)
-- **Customizable review standards via instructions files** (explicit in the blueprint)
-- **Hands-on**: Author an instructions file that codifies your team's review rubric, then run `/review`
-
-### 3.4 Enterprise Features (30 min)
-
-**Updated for January 2026:**
-
-| Feature | Business | Enterprise |
-|---------|----------|------------|
-| Coding Agent | Yes | Yes |
-| Cloud Agent (VS) | Preview | Preview |
-| Knowledge Bases | No | Yes |
-| Custom Models | No | Yes |
-| BYOK | Yes | Yes |
-| Private MCP Registry | No | Yes |
-| Budget Tracking | Yes | Yes |
-
-- Organization-wide custom instructions
-- Delegated AI controls management
-- PR summaries with agent awareness
-- **Demo**: Configure Knowledge Base with MCP context
-
-### 3.5 Org-Wide Policy, Audit & REST API (30 min) — **Group 2D**
-
-> Explicitly listed in the Jan 2026 blueprint — give it real time even though it's "admin-flavored."
-
-- **Organization-wide policy management** (enable/disable features per org/IDE/github.com)
-- **Copilot Code Review policies**
-- Managing **feature availability across IDEs and github.com**
-- **Audit log events** — what's logged, how to query
-- **Manage subscriptions using the REST API** (seat assignment, billing exports)
-- Budget tracking per team/repository
-- BYOK (Bring Your Own Key) for Azure/AWS/GCP
-- MCP Registry allowlist
-- **Demo**: Walk through the audit log + a `gh api` REST call against the Copilot subscription endpoints
-
-### Lab Exercise (Segment 3)
-
-1. Generate a test suite using Agent Mode
-2. Run code review with a custom instructions file
-3. Configure BYOK (simulated)
-4. Inspect Copilot audit log events
-5. List org seats with the REST API (`gh api /orgs/{org}/copilot/billing/seats`)
+- **[GH-300]** Agent Mode (IDE-local, multi-file, Plan Mode review)
+- **[GH-300]** Edit Mode (scoped multi-file edits with explicit targets)
+- **[GH-300]** MCP (Model Context Protocol) for external tools/data
+- **[GH-300]** Agent Sessions
+- **[GH-300]** Sub-Agents for context optimization
+- **[GH-300]** Spaces (curated team context bundles)
+- **[GH-300]** Spark (AI app/prototype builder)
+- **[GH-300]** PR summaries
+- **[GH-300]** Instructions files for review/coding standards
+- **[GH-300]** Data flow, input processing, prompt building
+- **[GH-300]** Proxy filtering and post-processing
+- **[GH-300]** Suggestion lifecycle
+- **[GH-300]** LLM and Copilot limitations
+- **[GH-300]** Prompt structure, context, zero/few-shot, best practices
+- **[GH-300]** Prompt process flow and chat history usage
+- **[Beyond]** Mission Control dashboard for agent task management
+- **[Beyond]** Coding Agent (cloud, GitHub Actions, issue-assigned) — introduced here, drilled in S5
+- **[Beyond]** Cloud Agent in Visual Studio (preview, Business/Enterprise)
+- **[Beyond]** MCP Registry and connecting MCP servers (`.vscode/mcp.json`)
+- **[Beyond]** Private MCP Registry for org-curated tools
+- **[Beyond]** Bring Your Own Key (BYOK) for Azure OpenAI, AWS Bedrock, Google Vertex
+- **[Beyond]** Linter integration in Copilot Code Review (ESLint, Pylint, Rubocop)
+- **[Beyond]** Context window differences across models and what gets evicted first
 
 ---
 
-## Segment 4: Privacy, Exclusions, Safeguards & Troubleshooting (3 hours)
+## Segment 4 (50 min): Govern — Privacy, Policy, and Audit
 
-> **Maps to:** Group 6 — Configure privacy, content exclusions, and safeguards (10–15%).
+### Outcomes
 
-### Learning Objectives
+- Configure privacy settings and content exclusions correctly at file, repo, and org scope
+- Apply org-wide policy management for feature availability and code review
+- Interpret audit log events and manage subscriptions programmatically
 
-- Configure **content exclusions** and editor settings
-- Describe **ownership and limitations** of Copilot outputs
-- Enable **duplication detection** and **security warnings**
-- **Resolve issues** with suggestions and exclusions
+### Agenda
 
-### 4.1 Privacy, Exclusions & Output Ownership (60 min) — **Group 6A**
+1. Privacy settings, content exclusions, ownership and limitations of outputs (15 min)
+2. Duplication detection and security warnings, troubleshoot exclusion issues (10 min)
+3. Org-wide policy management and feature availability across IDE and github.com (10 min)
+4. Copilot Code Review policies and review standards via instructions files (5 min)
+5. Audit log events and subscription management via REST API (5 min)
+6. Lab: configure a policy + exclusion scenario, validate via audit event check (5 min)
 
-- **Content exclusions** and editor settings (file, repo, org scope)
-- **Ownership and limitations** of outputs (IP indemnity, who owns the suggestion)
-- Data handling with multi-model routing
-- Repository-level vs organization-level controls
-- Agent permissions and scope limiting
-- **Key insight**: Agents can access more files — exclusions matter more
-- **Hands-on**: Configure exclusions for sensitive directories; verify they're enforced
+### Features to explain and demo
 
-### 4.1b Safeguards: Duplication Detection & Security Warnings (30 min) — **Group 6B**
-
-- Enable **duplication detection** (block suggestions matching public code)
-- **Security warnings** for known vulnerable patterns
-- **Resolve issues** with suggestions and exclusions
-- **Hands-on**: Trigger a duplication-detection block and walk through the resolution path
-
-### 4.2 Advanced Configuration (45 min)
-
-**New settings for 2025:**
-
-```json
-{
-  "github.copilot.chat.model": "gpt-5.1-codex",
-  "github.copilot.inlineSuggest.model": "raptor-mini",
-  "github.copilot.agent.planMode": true,
-  "github.copilot.agent.autoApprove": false,
-  "github.copilot.nextEditSuggestions": true,
-  "github.copilot.codeReview.linterIntegration": true
-}
-```
-
-- Workspace-level model selection
-- Plan Mode defaults
-- Next Edit Suggestions tuning
-- MCP server configuration
-
-### 4.3 Troubleshooting Workshop (45 min)
-
-**Common issues with new features:**
-
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| Agent not finding files | Exclusion too broad | Review `.copilotignore` |
-| Wrong model responses | Model mismatch | Check model config |
-| Mission Control empty | Agent not enabled | Enable in settings |
-| Slow suggestions | Wrong model for task | Use Raptor Mini for inline |
-
-- Support resources and community
-- **Hands-on**: Debug common scenarios
-
-### 4.4 Integration Patterns (30 min)
-
-- SDLC integration with Coding Agent
-- CI/CD workflows with agent-generated PRs
-- Team collaboration with Copilot Spaces
-- Productivity metrics via API
-- **Demo**: Assign an issue to Copilot, watch it create a PR
-
-### Lab Exercise (Segment 4)
-
-1. Configure privacy exclusions for agents
-2. Set up workspace-level model preferences
-3. Troubleshoot a "missing suggestions" scenario
-4. Integrate Coding Agent with a sample issue
-5. Review productivity metrics
+- **[GH-300]** Content exclusions at repo and org scope
+- **[GH-300]** Editor settings for privacy
+- **[GH-300]** Ownership and limitations of Copilot outputs
+- **[GH-300]** Duplication detection (public-code matching)
+- **[GH-300]** Security warnings on suggestions
+- **[GH-300]** Troubleshooting exclusion and suggestion issues
+- **[GH-300]** Organization-wide policy management
+- **[GH-300]** Copilot Code Review policies
+- **[GH-300]** Feature availability across IDEs and github.com
+- **[GH-300]** Audit log events for Copilot
+- **[GH-300]** Subscription management via REST API
+- **[Beyond]** `.copilotignore` file behavior and precedence vs org exclusions
+- **[Beyond]** Per-team Copilot budgets and seat allocation
+- **[Beyond]** Copilot metrics API and adoption dashboards
+- **[Beyond]** SAML/SSO and enterprise managed users (EMU) implications for Copilot access
+- **[Beyond]** Data residency considerations for Enterprise customers
+- **[Beyond]** Coding Agent permissions: branch protections, allowed tools, network egress controls
+- **[Beyond]** Pre-commit hooks and Copilot — what runs where, what gets logged
 
 ---
 
-## Segment 5: Exam Prep & What's Next (3 hours)
+## Segment 5 (50 min): Ship — Productivity, Distinctions, Exam Transfer
 
-### Learning Objectives
+### Outcomes
 
-- Review all domains with focus on new features
-- Practice exam-style questions
-- Understand the competitive landscape
+- Use Copilot end-to-end for generation, refactor, docs, tests, security, and performance
+- Pass the most-tested distinction drills cold
+- Transfer skills into exam-style scenario reasoning
 
-### 5.1 Functional-Group Review — January 2026 Blueprint (60 min)
+### Agenda
 
-| # | Functional Group | Weight | 2026 Focus Areas |
-|---|---|---|---|
-| 1 | Use GitHub Copilot **responsibly** | **15–20%** | Validation, harms & mitigation, ethical AI |
-| 2 | Use GitHub Copilot **features** | **25–30%** | IDE triggers, **CLI**, Agent/Edit Mode, **Sub-Agents**, MCP, Spaces, Spark, **org policy + audit + REST API** |
-| 3 | Understand **data and architecture** | 10–15% | Data flow, prompt building, proxy filtering, **suggestion lifecycle**, LLM limits |
-| 4 | **Prompt engineering** & context | 10–15% | Zero/few-shot, prompt files, chat history, context determination |
-| 5 | Improve **developer productivity** | 10–15% | Refactor/docs, sample data, legacy modernization, **unit & integration tests, edge cases, security & perf** |
-| 6 | **Privacy, exclusions, safeguards** | 10–15% | Content exclusions, output ownership, **duplication detection**, security warnings, troubleshooting |
+1. Generation, refactor, docs, sample data, legacy modernization (10 min)
+2. Unit + integration tests, edge cases, assertions — dedicated lab subsection (15 min)
+3. Security improvements and performance optimizations (5 min)
+4. Distinction drills: Agent Mode vs Coding Agent, Edit vs Agent, exclusions vs duplication detection, prompt files vs instructions files, Spaces vs Spark (10 min)
+5. Mini mock and debrief, then "what to study tonight" (10 min)
 
-**Common exam pitfalls:**
+### Features to explain and demo
 
-- Confusing **Agent Mode** (IDE) with **Coding Agent** (Actions/cloud)
-- Forgetting **Edit Mode** as a distinct surface
-- Missing the **Sub-Agents** concept (delegation for context optimization)
-- Not knowing subscriptions are managed via **REST API**
-- Treating **prompt files** and **instructions files** as the same thing
-
-### 5.2 Practice Exam (45 min)
-
-- 30 sample questions covering new features
-- Time management strategies
-- Question analysis techniques
-- **Hands-on**: Mock exam with immediate review
-
-### 5.3 Competitive Landscape (30 min)
-
-| Tool | Strengths | Copilot Advantage |
-|------|-----------|-------------------|
-| Cursor | Fast, lightweight | GitHub integration, enterprise governance |
-| Windsurf | IDE-native | Multi-model, Coding Agent |
-| Amazon CodeWhisperer | AWS integration | Model choice, Mission Control |
-| OpenAI Codex | Raw power | Plan Mode, agent ecosystem |
-
-- What makes Copilot different: ecosystem + governance
-- Future certification paths
-
-### 5.4 Resources & Next Steps (45 min)
-
-**Official resources:**
-
-- [GitHub Copilot What's New](https://github.com/features/copilot/whats-new)
-- [Agent Mode Documentation](https://docs.github.com/en/copilot/using-github-copilot/using-agent-mode)
-- [MCP Integration Guide](https://docs.github.com/en/copilot/mcp)
-- [Enterprise Governance](https://resources.github.com/copilot-for-business/)
-
-**Post-course action items:**
-
-1. Schedule exam within 2 weeks
-2. Practice Agent Mode on a real project
-3. Configure multi-model selection for your workflow
-4. Join the GitHub Copilot community
-5. Share learnings with your team
-
-### Lab Exercise (Segment 5)
-
-1. Complete 30-question mock exam
-2. Create personal study plan
-3. Build a multi-file project using Agent Mode
-4. Document your optimal model configuration
-5. Prepare for certification
+- **[GH-300]** Code generation across languages
+- **[GH-300]** Refactoring suggestions
+- **[GH-300]** Documentation generation
+- **[GH-300]** Sample data generation
+- **[GH-300]** Legacy code modernization
+- **[GH-300]** Reduce context switching workflow
+- **[GH-300]** Unit and integration test generation
+- **[GH-300]** Edge case identification
+- **[GH-300]** Assertion writing
+- **[GH-300]** Security improvement suggestions
+- **[GH-300]** Performance optimization suggestions
+- **[GH-300]** Accelerated learning workflow
+- **[Beyond]** Copilot Code Review on PRs end-to-end (request review, address comments, re-request)
+- **[Beyond]** Coding Agent task assignment from issues, monitoring via Mission Control
+- **[Beyond]** Copilot Workspace for issue-to-PR planning (where available)
+- **[Beyond]** Test-first prompting patterns: writing the test, then asking Copilot for the implementation
+- **[Beyond]** Eval-and-iterate loops: generate, run tests, feed failures back to Chat
+- **[Beyond]** Copilot's role in incident response: reproducing bugs, generating regression tests
+- **[Beyond]** When to *not* use Copilot: cryptography, license-sensitive code, regulated outputs
 
 ---
 
-## Time Allocation Summary
+## GH-300 Objective Coverage Matrix (100%)
 
-| Segment | Duration | Primary Functional Groups (Jan 2026) | Key Features |
-|---------|----------|---|------------------|
-| 1: Foundations | 3 hours | **Group 1 (15–20%)**, Group 2 intro (CLI, IDE triggers) | Responsible AI deep-dive, multi-model, CLI install |
-| 2: Data, Prompts & Agents | 3 hours | **Group 3 (10–15%)**, **Group 4 (10–15%)**, Group 2 (Agent/Edit/MCP/Sub-Agents) | Suggestion lifecycle, prompt files, Agent Mode, Plan Mode |
-| 3: Productivity & Org Policy | 3 hours | **Group 5 (10–15%)**, Group 2 (org policy, audit, REST API) | Tests, security, instructions files, audit log, REST API |
-| 4: Privacy & Safeguards | 3 hours | **Group 6 (10–15%)** | Exclusions, output ownership, duplication detection, security warnings |
-| 5: Exam Prep | 3 hours | All groups | Review + 30-question mock exam |
+| GH-300 Study Guide Objective                                  | Covered In           |
+| ------------------------------------------------------------- | -------------------- |
+| D1: Risks and limitations of generative AI                    | S1                   |
+| D1: Ethical and responsible AI usage                          | S1                   |
+| D1: Potential harms and mitigation strategies                 | S1                   |
+| D1: Need to validate AI output                                | S1, S5               |
+| D1: Operate GitHub Copilot responsibly                        | S1, S4               |
+| D2A: Enable Copilot in IDE                                    | S2                   |
+| D2A: Trigger via inline suggestions                           | S1, S2               |
+| D2A: Trigger via chat                                         | S1, S2               |
+| D2A: Trigger via CLI                                          | S1, S2               |
+| D2A: Trigger via Plan Mode                                    | S1, S3               |
+| D2A: Exclude specific files/repositories                      | S4                   |
+| D2B: Define Copilot CLI and benefits                          | S2                   |
+| D2B: CLI install steps                                        | S2                   |
+| D2B: CLI features and commands                                | S2                   |
+| D2B: CLI interactive and sessions                             | S2                   |
+| D2B: Script generation and file management                    | S2                   |
+| D2C: Agent Mode, Edit Mode, MCP usage                         | S3                   |
+| D2C: Agent Sessions and Sub-Agents                            | S3                   |
+| D2C: Code review and coding assistance                        | S3, S5               |
+| D2C: Spaces, Spark, PR summaries, instructions files          | S3, S4               |
+| D2C: Chat limits/options/commands and prompt file reuse       | S2                   |
+| D2D: Organization-wide policy management                      | S4                   |
+| D2D: Enable Copilot Code Review policies                      | S4                   |
+| D2D: Manage feature availability across IDE/github.com        | S4                   |
+| D2D: Utilize audit log events                                 | S4                   |
+| D2D: Manage subscriptions via REST API                        | S4                   |
+| D3: Data usage, flow, and sharing                             | S3                   |
+| D3: Input processing and prompt building                      | S3                   |
+| D3: Proxy filtering and post-processing                       | S3                   |
+| D3: Visualize suggestion lifecycle                            | S3                   |
+| D3: Describe LLM/Copilot limitations                          | S3                   |
+| D4: Prompt structure and context                              | S3                   |
+| D4: How context is determined                                 | S3                   |
+| D4: Zero-shot and few-shot prompting                          | S3                   |
+| D4: Prompt crafting best practices                            | S3                   |
+| D4: Prompt engineering principles                             | S3                   |
+| D4: Prompt process flow and chat history usage                | S3                   |
+| D5: Code generation, refactoring, documentation               | S5                   |
+| D5: Accelerate learning and reduce context switching          | S5                   |
+| D5: Generate sample data and modernize legacy code            | S5                   |
+| D5: Generate unit and integration tests                       | S5                   |
+| D5: Identify edge cases and write assertions                  | S5                   |
+| D5: Security improvements and performance optimizations       | S5                   |
+| D6: Configure content exclusions and editor settings          | S4                   |
+| D6: Ownership and limitations of outputs                      | S4                   |
+| D6: Enable duplication detection and security warnings        | S4                   |
+| D6: Resolve suggestion and exclusion issues                   | S4                   |
+
+Coverage status: 100% of January 2026 GH-300 objectives are mapped, plus 30+ post-blueprint features added for operational completeness.
 
 ---
 
-## Pre-Course Requirements
+## Quick Instructor Notes
 
-1. Active GitHub account
-2. VS Code with Copilot extension installed
-3. Basic programming knowledge (any language)
-4. GitHub Copilot subscription (trial or paid)
-5. Willingness to experiment with Agent Mode
-
----
-
-## Key Takeaways for Instructors
-
-1. **Responsible AI is now ~2.5× heavier** (15–20% vs 7%) — give it a full hour, not a token segment
-2. **Lead with the paradigm shift**: Don't bury Agent Mode at the end
-3. **Model selection is now a skill**: Teach when to use which model
-4. **Plan Mode builds trust**: Always demo it before Agent Mode
-5. **The distinctions matter**: Agent Mode ≠ Edit Mode ≠ Coding Agent; prompt files ≠ instructions files
-6. **CLI is first-class** in the new blueprint — install steps and session usage are testable
-7. **Org policy + audit log + REST API** are explicitly called out — don't skip the admin surface
-8. **Testing is no longer its own domain** — it lives inside "Improve developer productivity"
+1. S1 is heavier on validation than before — Responsible AI grew from 7% to 15-20% and a single lab is no longer enough.
+2. S2 stays operational and narrow: IDE + Chat + CLI only. Agent Mode is deliberately deferred.
+3. S3 absorbs the vocabulary load (Agent/Edit/MCP/Sub-Agents/Spaces/Spark) alongside data flow and prompts. Flex to 60 min if the room can absorb it.
+4. S4 leads with learner-relevant privacy before admin-relevant policy. The order matters for retention.
+5. S5 distinction drills run *before* the mini-mock so the most-tested confusions are in working memory at the gate.
 
 ---
 
-*Aligned to the official January 2026 GH-300 blueprint. See [`exam-metadata/GH-300-Study-Guide-April-2026.md`](exam-metadata/GH-300-Study-Guide-April-2026.md) for the full objective list.*
-
-*Last updated: April 2026*
+Last updated: April 2026

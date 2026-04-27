@@ -97,7 +97,7 @@ When generating examples, use enterprise contexts:
 - `copilot/workspace-config.json` - Copilot feature toggles and security settings
 - `examples/jest.config.js` - Testing standards with detailed JSDoc
 - `.github/dependabot.yml` - Automated dependency management
-- `COURSE-PLAN-SEPT-2025.md` - Complete curriculum structure
+- `COURSE-PLAN-APRIL-2026.md` - Complete curriculum structure
 
 ### Custom Instructions Pattern
 
@@ -120,6 +120,7 @@ When generating examples, use enterprise contexts:
 ### Multi-Model Selection
 
 Students should understand when to use each model:
+
 - **Raptor Mini**: Fast inline completions
 - **GPT-5.1-Codex**: Code-focused tasks
 - **Claude Opus 4.5**: Nuanced refactoring
@@ -128,6 +129,7 @@ Students should understand when to use each model:
 ### Agent Mode vs Coding Agent
 
 This distinction is critical for the exam:
+
 - **Agent Mode**: IDE-based, multi-file edits, runs locally
 - **Coding Agent**: GitHub Actions, assign issues, creates PRs automatically
 - **Cloud Agent**: Visual Studio preview, delegates to GitHub cloud
@@ -135,6 +137,7 @@ This distinction is critical for the exam:
 ### New Slash Commands
 
 When demonstrating Chat, include:
+
 - `/plan` - Preview changes before execution
 - `/agent` - Multi-file task execution
 - `/review` - Code review with linter integration
@@ -142,6 +145,7 @@ When demonstrating Chat, include:
 ### Enterprise Governance
 
 For Business/Enterprise demos:
+
 - BYOK (Bring Your Own Key)
 - Budget tracking and per-team limits
 - Private MCP Registry
@@ -164,3 +168,33 @@ When providing assistance, always end with actionable items:
 1. **Practice item** specific to the current topic
 2. **Deep dive** suggestion for advanced learning
 3. **Real-world application** for immediate value
+
+## 🤖 Workspace Agents and Skills
+
+This repository includes a **GH-300 Cert Buddy Agent** that generates exam-realistic practice material. Copilot should be aware of this infrastructure and can direct learners to it.
+
+### Agent Definition
+
+- `.github/agents/gh300-cert-buddy-agent.agent.md` — The workspace agent. Learners invoke it with `@gh300-cert-buddy-agent` in Copilot Chat.
+
+### Skills (in `.github/skills/`)
+
+| Skill                 | Purpose                                                                        |
+| --------------------- | ------------------------------------------------------------------------------ |
+| `gh300-item-creator`  | Generates exam-realistic multiple-choice questions grounded in Microsoft Learn |
+| `gh300-lab-creator`   | Creates 10–20 minute hands-on exercises with validation steps                  |
+| `gh300-study-planner` | Builds personalized study plans based on learner confidence levels             |
+
+Each skill folder contains a `SKILL.md` that defines the skill's behavior, constraints, and output format.
+
+### Prompt Templates (in `.github/prompts/`)
+
+Pre-built prompt files that learners invoke as slash commands:
+
+- `/gh300-practice-questions` — Generate practice exam items
+- `/gh300-practice-lab` — Create a hands-on exercise
+- `/gh300-study-planner` — Build a study plan
+
+### MCP Configuration
+
+The agent uses a Microsoft Learn MCP server (configured in `.vscode/mcp.json`) to ground generated content in official documentation. When helping learners, reference this tool for up-to-date Microsoft Learn content.

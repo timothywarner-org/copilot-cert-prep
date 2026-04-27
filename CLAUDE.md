@@ -2,130 +2,97 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-> **Updated January 2026**: Includes Agent Mode, multi-model selection, and 50+ new features.
-
 ## Repository Overview
 
-This is a teaching repository for O'Reilly Live Learning classes on GitHub Copilot certification preparation. The repository contains course materials, demo applications, and examples for students preparing for the GitHub Copilot certification exam.
+This is the teaching repository for Tim Warner's O'Reilly Live Learning class **"GitHub Copilot Certification (GH-300) Prep"** delivered April 2026 against the **January 2026 GH-300 blueprint**. The repo has been significantly slimmed: prior `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, and `exam-metadata/` directories were removed. The remaining content centers on (1) a single Node.js terminal demo app, (2) the course plan, and (3) a Copilot-powered "GH-300 Cert Buddy" agent built from skills, prompts, and instruction files.
 
-## Common Development Commands
+## Common Commands
 
-### Root Project (Jest Testing)
+### Root (Jest)
+
 ```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage report
-npm run test:coverage
+npm test                # all tests
+npm run test:watch      # watch mode
+npm run test:coverage   # coverage report (no enforced threshold at root)
 ```
 
-### Node.js Express Demo (demos/12/node-express-azure)
+There is currently one test at `tests/sample.test.js`. Run a single test with:
+
 ```bash
-# Install dependencies
+npx jest tests/sample.test.js
+npx jest -t "<test name pattern>"
+```
+
+### Terminal Demo App (`src/`)
+
+`src/` is a self-contained Node.js console app ("GitHub Copilot Tips of the Day") used as live-demo material for debugging, testing, and Copilot prompting. It has its own `package.json` and dependencies (boxen, chalk, inquirer, ora).
+
+```bash
+cd src
 npm install
-
-# Run the application
-npm start
-
-# Run tests (using Mocha)
-npm test
+npm start               # runs node app.js
+npm test                # jest (uses src-local jest)
+node test-app.js        # ad-hoc test harness
 ```
 
-### GitHub Stats Dashboard (demos/14)
-```bash
-# Install dependencies
-npm install
+There is no lint script and no build step — this is a plain Node app.
 
-# Run production server
-npm start
+## Architecture
 
-# Run development server with auto-reload
-npm run dev
-```
+### Layout that matters
 
-### Python FastAPI Demo (demos/11)
-```bash
-# Install dependencies
-pip install -r requirements.txt
+- `src/` — interactive console app. `app.js` reads from `tips.json` (the tip database). Treat `tips.json` as data, not config; the app validates and gracefully degrades when it is missing or malformed. This is the only "code" in the repo and is the canonical example surface for live demos.
+- `tests/sample.test.js` — root-level Jest sample. Root `package.json` defines only `jest` as a dev dep; the project does **not** enforce the 80% coverage thresholds the old `jest.config.js` used to set (that config file is gone).
+- `docs/` — student-facing reference: `GH-300-Study-Guide-April-2026.md`, `QUICK-REFERENCE.md`, `exam-notes-and-links.md`, `github-copilot-cert-exam-objectives.md`, plus the official Microsoft study guide PDF. These are deliverables, not code.
+- `references/` — load-bearing inputs for the Cert Buddy agent. Do not treat these as throwaway notes:
+  - `gh300-objectives.md` — the January 2026 skills-measured list with weighted ranges (see below).
+  - `style-guide.md` — Microsoft Writing Style Guide rules the agent must follow when authoring exam items.
+  - `fictional-companies.md` — randomization pool for scenario stems (avoid Contoso defaulting).
+- `scripts/` — one-off PowerShell helpers (e.g., `create-tworg-api-key.ps1`).
+- `COURSE-PLAN-APRIL-2026.md` — the canonical course outline. The pedagogical sequence is **Start → Use → Think → Govern → Ship** (5 × 50-min segments, 250 min total). This sequence is *intentionally not* in blueprint order — do not reorder it to match domain numbering.
 
-# Run the application
-python app.py
-```
+### The Cert Buddy Agent System
 
-## High-Level Architecture
+This is the architecturally significant piece. Three layers compose a Copilot Chat workspace agent that generates exam-prep material grounded in Microsoft Learn:
 
-### Repository Structure
-- **Root**: Contains main course materials, Jest configuration for testing examples
-- **demos/**: Individual lesson demos organized by number (02-14)
-  - Each demo folder contains self-contained applications with their own dependencies
-  - Most demos include README.md files with specific instructions
-- **copilot/**: Best practices and reference documentation for GitHub Copilot usage
-- **exam-metadata/**: Certification exam objectives and study materials
-- **docs/**: Additional documentation and examples
+1. **Agent definition** — `.github/agents/gh300-cert-buddy-agent.agent.md` declares the agent (`@gh300-cert-buddy-agent` in Copilot Chat), its tools, and routing rules between skills.
+2. **Skills** — `.github/skills/<skill>/SKILL.md`, auto-discovered by Copilot:
+   - `gh300-item-creator` — exam-realistic multiple-choice items.
+   - `gh300-lab-creator` — 10–20 minute hands-on exercises with validation + rollback steps.
+   - `gh300-study-planner` — confidence-rated personalized study plans.
+3. **Prompt templates** — `.github/prompts/*.prompt.md` expose skills as slash commands: `/gh300-practice-questions`, `/gh300-practice-lab`, `/gh300-study-planner`.
 
-### Key Technology Stacks
-1. **Node.js/Express**: Primary stack for web application demos
-2. **Python/FastAPI**: Used for API and data processing examples
-3. **Jest**: Testing framework for JavaScript examples
-4. **Mocha/Chai**: Testing framework for the Express application
+Grounding flows through the **Microsoft Learn MCP server** declared in `.vscode/mcp.json` under the server name `gh300buddy-mslearn` (HTTP transport, `https://learn.microsoft.com/api/mcp`). The agent is required to call `microsoft_docs_search` first, `microsoft_docs_fetch` for full-page detail, and `microsoft_code_sample_search` to verify command/settings syntax. Every generated item must cite Microsoft Learn URLs.
 
-### Important Configuration Files
-- **jest.config.js**: Configures Jest with 80% coverage thresholds
-- **.github/dependabot.yml**: Automated dependency updates for Node.js and Python projects
-- **copilot-metrics.json**: Contains contributor data for the repository
+When asked to generate, edit, or critique cert-prep content, follow the rules in `references/style-guide.md` (Microsoft sentence-style capitalization, bold UI labels, Oxford commas, no contractions, no "all/none of the above", 2-sentence rationales) and pull scenario companies from `references/fictional-companies.md` rather than defaulting to Contoso.
 
-## Development Guidelines
+### Repository-level Copilot configuration
 
-### Testing Requirements
-- Maintain 80% code coverage (configured in jest.config.js)
-- Test files should match patterns: `**/test/**/*.js` or `**/?(*.)+(spec|test).js`
-- For Express apps, use Mocha tests in the `test/` directory
+- `.github/copilot-instructions.md` — repo-wide Copilot Chat instructions. Frames the project as enterprise-focused and references the agent/skills system above.
+- `.github/instructions/gh300-teaching-content.instructions.md` — applies to all paths (`applyTo: "**"`); demands learner-clarity, enterprise scenarios, modern Copilot features (Agent Mode, Plan Mode, multi-model), and a "Next Steps" tail (Practice / Deep-dive / Real-world) on teaching outputs.
+- `.copilotignore` — files Copilot should not ingest as context.
 
-### Dependency Management
-- Dependabot is configured to check weekly for updates
-- Node.js: Only direct dependencies are updated
-- Python: All dependencies are updated
-- Jest is pinned to v29+ to avoid breaking changes
+## Course Domain Weights (GH-300, January 2026)
 
-### GitHub Copilot Integration
-- Custom instructions are defined in `.github/copilot-instructions.md`
-- Focus on enterprise scenarios and real-world business use cases
-- Emphasize Git best practices, conventional commits, and PR workflows
+Weights are **ranges**, not point values — this changed from prior blueprints. Source of truth: `references/gh300-objectives.md`.
 
-### Markdown Formatting (from Cursor Rules)
-- Always add blank lines between headings and content
-- Always add blank lines between lists and content
-- Always add blank lines between code blocks and content
+| Domain                                     | Weight  |
+| ------------------------------------------ | ------- |
+| Use GitHub Copilot responsibly             | 15–20%  |
+| Use GitHub Copilot features                | 25–30%  |
+| Understand Copilot data and architecture   | 10–15%  |
+| Apply prompt engineering and context       | 10–15%  |
+| Improve developer productivity             | 10–15%  |
+| Configure privacy, exclusions, safeguards  | 10–15%  |
 
-## Course-Specific Context
+Older fixed-percentage tables (7% / 31% / 15% / 9% / 14% / 9% / 15%) are obsolete — do not reintroduce them.
 
-This repository supports a 5-segment course flow (see `COURSE-PLAN-APRIL-2026.md`):
+## Markdown conventions
 
-1. **Foundations & The New Copilot** - Multi-model setup, Agent Mode intro, Responsible AI
-2. **Core Features & Agent Workflows** - Prompt engineering, Chat mastery, Agent Mode deep dive
-3. **Testing, Security & Enterprise** - Testing, BYOK, Governance, Coding Agent
-4. **Privacy, Configuration & Troubleshooting** - Exclusions, Agent permissions, Integration
-5. **Exam Prep & What's Next** - Domain review, Practice exam, Competitive landscape
+Per the prior Cursor-rules carryover: blank line between every heading and its content, between every list and surrounding content, and between every code block and surrounding content. Authored markdown should pass these rules without hand-fixing.
 
-### Key January 2026 Features
+## What not to do
 
-- **Multi-Model Selection**: GPT-5.1, Claude Opus 4.5, Gemini 3 Pro, Raptor Mini
-- **Agent Mode vs Coding Agent**: Critical distinction for the exam
-- **Mission Control**: Agent task dashboard
-- **Plan Mode**: Preview changes before execution
-- **BYOK**: Bring Your Own Key (Azure, AWS, GCP)
-
-### Exam Domains (GH-300)
-
-| Domain | Weight |
-|--------|--------|
-| Responsible AI | 7% |
-| Plans and Features | 31% |
-| Data Handling | 15% |
-| Prompt Engineering | 9% |
-| Developer Use Cases | 14% |
-| Testing | 9% |
-| Privacy & Exclusions | 15% |
+- Do not recreate the deleted `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` directories — they were removed deliberately for the April 2026 delivery. Content that survived moved to `docs/` or `references/`.
+- Do not paraphrase real GH-300 exam questions or reference braindumps when working through the Cert Buddy skills — the agent definition prohibits it.
+- Do not assume the root project enforces 80% coverage — `jest.config.js` is gone. If coverage gates are needed for a new demo, add them locally to that demo, not at the root.

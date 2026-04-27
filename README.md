@@ -22,28 +22,28 @@ This is the official prep course for the **GitHub Copilot Certification Exam (GH
 
 ## What's New in January 2026
 
-| Feature | What It Does | Plan Availability |
-|---------|--------------|-------------------|
-| **Multi-Model Selection** | Choose GPT-5.1, Claude Opus 4.5, Gemini 3 Pro, or Raptor Mini | All |
-| **Agent Mode** | Multi-file editing in your IDE | All |
-| **Coding Agent** | Assign issues to Copilot, auto-generates PRs | Business/Enterprise |
-| **Mission Control** | Dashboard for managing agent sessions | All |
-| **Plan Mode** | Preview changes before execution | All |
-| **BYOK** | Bring Your Own Key (Azure, AWS, GCP) | Business/Enterprise |
-| **Linter Integration** | Code review with ESLint/Pylint/Rubocop | All |
-| **Copilot Spaces** | Organize context for conversations | All |
+| Feature                   | What It Does                                                  | Plan Availability   |
+| ------------------------- | ------------------------------------------------------------- | ------------------- |
+| **Multi-Model Selection** | Choose GPT-5.1, Claude Opus 4.5, Gemini 3 Pro, or Raptor Mini | All                 |
+| **Agent Mode**            | Multi-file editing in your IDE                                | All                 |
+| **Coding Agent**          | Assign issues to Copilot, auto-generates PRs                  | Business/Enterprise |
+| **Mission Control**       | Dashboard for managing agent sessions                         | All                 |
+| **Plan Mode**             | Preview changes before execution                              | All                 |
+| **BYOK**                  | Bring Your Own Key (Azure, AWS, GCP)                          | Business/Enterprise |
+| **Linter Integration**    | Code review with ESLint/Pylint/Rubocop                        | All                 |
+| **Copilot Spaces**        | Organize context for conversations                            | All                 |
 
 ---
 
 ## Course Structure
 
-| Segment | Duration | Focus |
-|---------|----------|-------|
-| **1. Foundations** | 3 hours | Multi-model setup, Agent Mode intro, Responsible AI |
-| **2. Core Features** | 3 hours | Prompt engineering, Chat mastery, Agent workflows |
-| **3. Enterprise** | 3 hours | Testing, Security, BYOK, Governance |
-| **4. Privacy & Config** | 3 hours | Exclusions, Troubleshooting, Integration |
-| **5. Exam Prep** | 3 hours | Domain review, Practice exam, Competitive landscape |
+| Segment                 | Duration | Focus                                               |
+| ----------------------- | -------- | --------------------------------------------------- |
+| **1. Foundations**      | 3 hours  | Multi-model setup, Agent Mode intro, Responsible AI |
+| **2. Core Features**    | 3 hours  | Prompt engineering, Chat mastery, Agent workflows   |
+| **3. Enterprise**       | 3 hours  | Testing, Security, BYOK, Governance                 |
+| **4. Privacy & Config** | 3 hours  | Exclusions, Troubleshooting, Integration            |
+| **5. Exam Prep**        | 3 hours  | Domain review, Practice exam, Competitive landscape |
 
 See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curriculum.
 
@@ -51,15 +51,15 @@ See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curricul
 
 ## Exam Domains (GH-300)
 
-| Domain | Weight | Key Topics |
-|--------|--------|------------|
-| 1. Responsible AI | 7% | Ethics, validation, bias mitigation |
-| 2. Plans & Features | **31%** | Multi-model, Agent Mode, Mission Control, BYOK |
-| 3. Data Handling | 15% | Pipeline, MCP, context gathering |
-| 4. Prompt Engineering | 9% | Model-specific prompting, best practices |
-| 5. Developer Use Cases | 14% | Agent workflows, productivity, SDLC |
-| 6. Testing | 9% | Agent-driven test generation, edge cases |
-| 7. Privacy & Exclusions | 15% | Agent permissions, content exclusions |
+| Domain                  | Weight  | Key Topics                                     |
+| ----------------------- | ------- | ---------------------------------------------- |
+| 1. Responsible AI       | 7%      | Ethics, validation, bias mitigation            |
+| 2. Plans & Features     | **31%** | Multi-model, Agent Mode, Mission Control, BYOK |
+| 3. Data Handling        | 15%     | Pipeline, MCP, context gathering               |
+| 4. Prompt Engineering   | 9%      | Model-specific prompting, best practices       |
+| 5. Developer Use Cases  | 14%     | Agent workflows, productivity, SDLC            |
+| 6. Testing              | 9%      | Agent-driven test generation, edge cases       |
+| 7. Privacy & Exclusions | 15%     | Agent permissions, content exclusions          |
 
 ---
 
@@ -90,6 +90,50 @@ See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curricul
 
 ---
 
+## Using the GH-300 Cert Buddy
+
+This repository includes a **purpose-built AI study partner** that generates exam-realistic practice questions, hands-on exercises, and personalized study plans — all grounded in official Microsoft Learn content.
+
+> **Why does this exist?** The best way to prepare for a certification exam is active recall and spaced practice. The Cert Buddy automates this: you ask, it generates fresh, exam-style material on demand.
+
+### The Workspace Agent
+
+The agent definition lives at [`.github/agents/gh300-cert-buddy-agent.agent.md`](.github/agents/gh300-cert-buddy-agent.agent.md). It orchestrates three specialized skills:
+
+| Skill                   | What It Does                                              | Prompt Template             |
+| ----------------------- | --------------------------------------------------------- | --------------------------- |
+| **gh300-item-creator**  | Generates exam-realistic multiple-choice questions        | `/gh300-practice-questions` |
+| **gh300-lab-creator**   | Creates 10–20 minute hands-on exercises with validation   | `/gh300-practice-lab`       |
+| **gh300-study-planner** | Builds a personalized study plan based on your confidence | `/gh300-study-planner`      |
+
+Skill definitions: [`.github/skills/`](.github/skills/)
+
+### How to Use It
+
+**In VS Code Copilot Chat**, invoke the agent directly:
+
+```text
+@gh300-cert-buddy-agent Quiz me on Agent Mode
+@gh300-cert-buddy-agent Create a lab on content exclusions
+@gh300-cert-buddy-agent Plan my study schedule — I'm weak on privacy
+```
+
+**Or use the prompt templates** (slash commands):
+
+```text
+/gh300-practice-questions
+/gh300-practice-lab
+/gh300-study-planner
+```
+
+Prompt templates: [`.github/prompts/`](.github/prompts/)
+
+### MCP Server Configuration
+
+The agent uses a Microsoft Learn MCP server for grounding answers in official documentation. Configuration is in [`.vscode/mcp.json`](.vscode/mcp.json).
+
+---
+
 ## Repository Structure
 
 ```text
@@ -109,8 +153,20 @@ copilot-cert-prep/
 │   ├── github_feature_update_dec2025.md   # January 2026 features
 │   └── github_feature_update_july2025.md  # July 2025 features
 ├── .github/
+│   ├── agents/                  # Workspace agents
+│   │   └── gh300-cert-buddy-agent.agent.md  # AI study partner
+│   ├── skills/                  # Agent skill definitions
+│   │   ├── gh300-item-creator/  # Practice question generator
+│   │   ├── gh300-lab-creator/   # Hands-on exercise builder
+│   │   └── gh300-study-planner/ # Personalized study plans
+│   ├── prompts/                 # Reusable prompt templates
+│   │   ├── gh300-practice-questions.prompt.md
+│   │   ├── gh300-practice-lab.prompt.md
+│   │   └── gh300-study-planner.prompt.md
 │   ├── copilot-instructions.md  # Repo-level Copilot behavior
-│   └── prompts/                 # Reusable prompt templates
+│   └── instructions/            # Scoped instruction files
+├── .vscode/
+│   └── mcp.json                 # MCP server configuration
 ├── COURSE-PLAN-APRIL-2026.md # Detailed curriculum
 ├── QUICK-REFERENCE.md        # Student cheat sheet
 └── CLAUDE.md                 # AI assistant config
@@ -144,23 +200,23 @@ copilot-cert-prep/
 
 This is the most commonly misunderstood topic:
 
-| Feature | Where It Runs | What It Does | Plans |
-|---------|---------------|--------------|-------|
-| **Agent Mode** | Your IDE (local) | Multi-file edits, terminal access | All |
+| Feature          | Where It Runs          | What It Does                      | Plans               |
+| ---------------- | ---------------------- | --------------------------------- | ------------------- |
+| **Agent Mode**   | Your IDE (local)       | Multi-file edits, terminal access | All                 |
 | **Coding Agent** | GitHub Actions (cloud) | Assign issues, auto-generates PRs | Business/Enterprise |
-| **Cloud Agent** | GitHub Cloud (VS only) | Delegate from Visual Studio | Business/Enterprise |
+| **Cloud Agent**  | GitHub Cloud (VS only) | Delegate from Visual Studio       | Business/Enterprise |
 
 ---
 
 ## Model Selection Guide
 
-| Model | Best For | Speed |
-|-------|----------|-------|
-| **Raptor Mini** | Inline completions | Ultra-fast |
-| **GPT-5.1** | Complex reasoning | Medium |
-| **GPT-5.1-Codex** | Code generation | Medium |
-| **Claude Opus 4.5** | Nuanced refactoring | Medium |
-| **Gemini 3 Pro** | Multimodal (images + code) | Medium |
+| Model               | Best For                   | Speed      |
+| ------------------- | -------------------------- | ---------- |
+| **Raptor Mini**     | Inline completions         | Ultra-fast |
+| **GPT-5.1**         | Complex reasoning          | Medium     |
+| **GPT-5.1-Codex**   | Code generation            | Medium     |
+| **Claude Opus 4.5** | Nuanced refactoring        | Medium     |
+| **Gemini 3 Pro**    | Multimodal (images + code) | Medium     |
 
 ---
 
@@ -229,4 +285,4 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Last updated: January 2026*
+_Last updated: January 2026_
