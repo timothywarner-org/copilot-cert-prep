@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "node scripts/hooks/prevent-destructive-commands.js",
+        "timeout": 10
+      }
+    ],
+    "PostToolUse": [
+      {
+        "type": "command",
+        "command": "node scripts/hooks/validate-gh300-content.js",
+        "timeout": 20
+      }
+    ]
+  }
+}

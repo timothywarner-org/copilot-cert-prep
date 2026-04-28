@@ -26,6 +26,15 @@ description: Generate GH-300 practice questions that feel like the real exam wit
 - Follow Microsoft sentence-style capitalization and UI-label rules.
 - See `references/style-guide.md` for detailed writing rules.
 
+## Bundled assets
+
+Use the skill-local bundle so this skill is reproducible and teachable as a package, not only a prompt.
+
+- `resources/source-pack.md`
+- `resources/microsoft-voice-principles.md`
+- `resources/item-quality-checklist.md`
+- `scripts/validate-output.js`
+
 ## Guardrails
 
 **Exam integrity:**
@@ -65,7 +74,8 @@ Use fictional company names from `references/fictional-companies.md` for scenari
 6. Run a mutual exclusivity check on answer choices.
 7. Run a terminology check.
 8. Run a clarity check.
-9. Prepare rationale internally but **do not deliver it yet**.
+9. Run the checks in `resources/item-quality-checklist.md` and use `scripts/validate-output.js` logic as a final structure gate.
+10. Prepare rationale internally but **do not deliver it yet**.
 
 ## Delivery rules (non-negotiable)
 

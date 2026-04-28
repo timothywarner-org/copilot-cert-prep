@@ -14,6 +14,15 @@ description: Generates a personalized GH-300 study plan based on the user's self
 - `references/gh300-objectives.md` (GH-300 skills measured, January 2026)
 - Microsoft Learn (access via the **Microsoft Learn MCP server** using `microsoft_docs_search` for current links)
 
+## Bundled assets
+
+Use the skill-local bundle for consistent plan quality.
+
+- `resources/source-pack.md`
+- `resources/microsoft-voice-principles.md`
+- `resources/study-plan-quality-checklist.md`
+- `scripts/validate-output.js`
+
 ## Workflow
 
 1. **Present skill areas with weights.** Show the six GH-300 skill areas and exam weight percentages:
@@ -39,6 +48,7 @@ description: Generates a personalized GH-300 study plan based on the user's self
    - Include a total estimated hours range.
 
 4. **Offer to start practicing.** Ask whether the learner wants practice questions or a hands-on exercise on the first recommended topic.
+5. **Run quality gate.** Apply `resources/study-plan-quality-checklist.md` and `scripts/validate-output.js` rules before delivering the final plan.
 
 ## Guardrails
 

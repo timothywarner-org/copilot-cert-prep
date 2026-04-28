@@ -22,6 +22,15 @@ description: Create short GH-300 practice exercises (10-20 minutes) that are exe
 - Always include rollback or cleanup steps.
 - Always use current terminology.
 
+## Bundled assets
+
+Use the skill-local bundle to keep outputs consistent and auditable.
+
+- `resources/source-pack.md`
+- `resources/microsoft-voice-principles.md`
+- `resources/lab-quality-checklist.md`
+- `scripts/validate-output.js`
+
 ## Fictional company randomization (non-negotiable)
 
 Use fictional company names from `references/fictional-companies.md` for any scenario context. Randomize the company selection.
@@ -38,6 +47,7 @@ An exercise should contain no more than 12 steps total across all tasks. If cont
 4. Verify command syntax if commands are included.
 5. Add validation gates after each major step.
 6. Add rollback that exactly reverses the changes.
+7. Run the checks in `resources/lab-quality-checklist.md` and apply `scripts/validate-output.js` rules before final delivery.
 
 ## Output format
 

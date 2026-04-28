@@ -37,13 +37,13 @@ This is the official prep course for the **GitHub Copilot Certification Exam (GH
 
 ## Course Structure
 
-| Segment                 | Duration | Focus                                               |
-| ----------------------- | -------- | --------------------------------------------------- |
-| **1. Foundations**      | 3 hours  | Multi-model setup, Agent Mode intro, Responsible AI |
-| **2. Core Features**    | 3 hours  | Prompt engineering, Chat mastery, Agent workflows   |
-| **3. Enterprise**       | 3 hours  | Testing, Security, BYOK, Governance                 |
-| **4. Privacy & Config** | 3 hours  | Exclusions, Troubleshooting, Integration            |
-| **5. Exam Prep**        | 3 hours  | Domain review, Practice exam, Competitive landscape |
+| Segment                 | Duration   | Focus                                               |
+| ----------------------- | ---------- | --------------------------------------------------- |
+| **1. Foundations**      | 50 minutes | Multi-model setup, Agent Mode intro, Responsible AI |
+| **2. Core Features**    | 50 minutes | Prompt engineering, Chat mastery, Agent workflows   |
+| **3. Enterprise**       | 60 minutes | Testing, Security, BYOK, Governance                 |
+| **4. Privacy & Config** | 50 minutes | Exclusions, Troubleshooting, Integration            |
+| **5. Exam Prep**        | 50 minutes | Domain review, Practice exam, Competitive landscape |
 
 See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curriculum.
 
@@ -51,15 +51,14 @@ See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curricul
 
 ## Exam Domains (GH-300)
 
-| Domain                  | Weight  | Key Topics                                     |
-| ----------------------- | ------- | ---------------------------------------------- |
-| 1. Responsible AI       | 7%      | Ethics, validation, bias mitigation            |
-| 2. Plans & Features     | **31%** | Multi-model, Agent Mode, Mission Control, BYOK |
-| 3. Data Handling        | 15%     | Pipeline, MCP, context gathering               |
-| 4. Prompt Engineering   | 9%      | Model-specific prompting, best practices       |
-| 5. Developer Use Cases  | 14%     | Agent workflows, productivity, SDLC            |
-| 6. Testing              | 9%      | Agent-driven test generation, edge cases       |
-| 7. Privacy & Exclusions | 15%     | Agent permissions, content exclusions          |
+| Domain                                       | Weight | Key Topics                                              |
+| -------------------------------------------- | ------ | ------------------------------------------------------- |
+| 1. Use GitHub Copilot responsibly            | 15–20% | Ethics, validation, bias mitigation, transparency       |
+| 2. Use GitHub Copilot features               | 25–30% | Multi-model, Agent Mode, Mission Control, BYOK          |
+| 3. Understand Copilot data and architecture  | 10–15% | Pipeline, MCP, context gathering, data handling         |
+| 4. Apply prompt engineering and context      | 10–15% | Model-specific prompting, context files, best practices |
+| 5. Improve developer productivity            | 10–15% | Agent workflows, productivity, SDLC integration         |
+| 6. Configure privacy, exclusions, safeguards | 10–15% | Agent permissions, content exclusions, org policies     |
 
 ---
 
@@ -86,7 +85,7 @@ See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curricul
 
 4. **Review the quick reference**
 
-   Open [QUICK-REFERENCE.md](QUICK-REFERENCE.md) for a printable cheat sheet.
+   Open [QUICK-REFERENCE.md](docs/QUICK-REFERENCE.md) for a printable cheat sheet.
 
 ---
 
@@ -138,38 +137,55 @@ The agent uses a Microsoft Learn MCP server for grounding answers in official do
 
 ```text
 copilot-cert-prep/
-├── demos/                    # Hands-on labs by lesson (02-14)
-│   ├── 02/                   # Copilot Individual features
-│   ├── 03/                   # Copilot Business features
-│   ├── 04/                   # Copilot Enterprise features
-│   ├── 05/                   # Copilot Chat mastery
-│   └── ...
-├── copilot/                  # Best practices and reference docs
-│   ├── BEST_PRACTICES.md     # Updated for Agent Mode
-│   └── CHAT_EXAMPLES.md      # Chat command examples
-├── exam-metadata/            # Certification study materials
-│   └── github-copilot-cert-exam-objectives.md
-├── new-resources/            # Latest feature updates
-│   ├── github_feature_update_dec2025.md   # January 2026 features
-│   └── github_feature_update_july2025.md  # July 2025 features
 ├── .github/
-│   ├── agents/                  # Workspace agents
-│   │   └── gh300-cert-buddy-agent.agent.md  # AI study partner
-│   ├── skills/                  # Agent skill definitions
-│   │   ├── gh300-item-creator/  # Practice question generator
-│   │   ├── gh300-lab-creator/   # Hands-on exercise builder
-│   │   └── gh300-study-planner/ # Personalized study plans
-│   ├── prompts/                 # Reusable prompt templates
+│   ├── agents/
+│   │   └── gh300-cert-buddy-agent.agent.md  # GH-300 AI study partner
+│   ├── hooks/
+│   │   └── gh300-guardrails.json            # Workspace hook definitions
+│   ├── instructions/
+│   │   └── gh300-teaching-content.instructions.md
+│   ├── prompts/
 │   │   ├── gh300-practice-questions.prompt.md
 │   │   ├── gh300-practice-lab.prompt.md
 │   │   └── gh300-study-planner.prompt.md
-│   ├── copilot-instructions.md  # Repo-level Copilot behavior
-│   └── instructions/            # Scoped instruction files
+│   ├── skills/
+│   │   ├── gh300-item-creator/   # Practice question generator
+│   │   │   ├── SKILL.md
+│   │   │   ├── resources/        # Bundled reference assets
+│   │   │   └── scripts/          # validate-output.js
+│   │   ├── gh300-lab-creator/    # Hands-on exercise builder
+│   │   │   ├── SKILL.md
+│   │   │   ├── resources/
+│   │   │   └── scripts/
+│   │   └── gh300-study-planner/  # Personalized study plans
+│   │       ├── SKILL.md
+│   │       ├── resources/
+│   │       └── scripts/
+│   └── copilot-instructions.md
 ├── .vscode/
-│   └── mcp.json                 # MCP server configuration
-├── COURSE-PLAN-APRIL-2026.md # Detailed curriculum
-├── QUICK-REFERENCE.md        # Student cheat sheet
-└── CLAUDE.md                 # AI assistant config
+│   └── mcp.json                  # Microsoft Learn MCP server config
+├── az104-cert-buddy/             # Reference implementation
+├── docs/
+│   ├── GH-300-Study-Guide-April-2026.md
+│   ├── QUICK-REFERENCE.md        # Student cheat sheet
+│   ├── exam-notes-and-links.md
+│   └── github-copilot-cert-exam-objectives.md
+├── references/
+│   ├── gh300-objectives.md       # Jan 2026 exam blueprint
+│   ├── fictional-companies.md    # Scenario company pool
+│   └── style-guide.md            # Microsoft Writing Style Guide rules
+├── scripts/
+│   └── hooks/
+│       ├── prevent-destructive-commands.js
+│       └── validate-gh300-content.js
+├── src/
+│   └── app.js                    # Interactive console demo app
+├── tests/
+│   └── sample.test.js
+├── CLAUDE.md
+├── COURSE-PLAN-APRIL-2026.md
+├── package.json
+└── README.md
 ```
 
 ---
@@ -220,38 +236,31 @@ This is the most commonly misunderstood topic:
 
 ---
 
-## Running the Demos
+## Running the Live Demo App
 
-### Node.js/Express Demo (demos/12)
+### GitHub Copilot Tips Console App (src/)
+
+This interactive Node.js app is the primary live-demo surface for the course.
 
 ```bash
-cd demos/12/node-express-azure
+cd src
 npm install
 npm start
+```
+
+```bash
+# Run unit tests
 npm test
-```
 
-### Python FastAPI Demo (demos/11)
-
-```bash
-cd demos/11
-pip install -r requirements.txt
-python app.py
-```
-
-### GitHub Stats Dashboard (demos/14)
-
-```bash
-cd demos/14
-npm install
-npm run dev
+# Ad-hoc test harness
+node test-app.js
 ```
 
 ---
 
 ## Instructor
 
-**Tim Warner**
+Tim Warner
 
 - Website: [techtrainertim.com](https://techtrainertim.com)
 - GitHub: [@timothywarner](https://github.com/timothywarner)
@@ -284,5 +293,3 @@ MIT License. See [LICENSE](LICENSE) for details.
 - See `.github/dependabot.yml` for configuration
 
 ---
-
-_Last updated: January 2026_

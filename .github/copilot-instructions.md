@@ -8,35 +8,32 @@ This is a **teaching repository** for O'Reilly Live Learning GitHub Copilot cert
 
 ## 🏗️ Architecture & Structure
 
-### Multi-Demo Architecture
+### Repository Architecture
 
 - **Root project** (`/`): Main course materials with Jest testing framework
-- **Individual demos** (`/demos/02-14/`): Self-contained applications by lesson number
-- **Teaching modules** (`/copilot/`, `/exam-metadata/`): Best practices and certification materials
+- **Live demo app** (`/src/`): Interactive Node.js console app used for in-class demos
+- **Cert Buddy agent** (`/.github/agents/`, `/.github/skills/`, `/.github/prompts/`): GH-300 exam prep agent system
+- **Reference material** (`/references/`, `/docs/`): Exam objectives, style guide, study materials
 
 ### Key Technology Stacks
 
 ```bash
-# Root: Jest testing environment (80% coverage requirement)
-npm test              # Run all tests with coverage thresholds
+# Root: Jest testing (no enforced coverage threshold at root)
+npm test              # Run all tests
 npm run test:watch    # Watch mode for active development
 
-# Node.js/Express demos (e.g., demos/12/node-express-azure/)
-npm test              # Mocha/Chai testing
-npm start             # Production server
-
-# Python demos (e.g., demos/11/)
-pip install -r requirements.txt
-python app.py         # FastAPI applications
+# Live demo app (src/)
+cd src && npm install
+npm start             # Interactive console app
+node test-app.js      # Ad-hoc test harness
 ```
 
 ## 🔧 Development Patterns
 
 ### Testing Standards
 
-- **Jest configuration** enforces 80% coverage across branches, functions, lines, statements
+- **Jest** at root level; no enforced coverage threshold (jest.config.js was removed in the April 2026 repo slim-down)
 - **Test patterns**: `**/test/**/*.js` and `**/?(*.)+(spec|test).js`
-- **Mocha/Chai** used in Express demos for HTTP testing
 - Generate tests focusing on enterprise scenarios: error handling, edge cases, performance
 
 ### Copilot Integration Patterns
@@ -64,12 +61,16 @@ python app.py         # FastAPI applications
 4. **Privacy & Config** (Exclusions, troubleshooting, org policies)
 5. **Exam Prep** (Practice questions, emerging features)
 
-### Certification Exam Domains (GH-300)
+### Certification Exam Domains (GH-300, January 2026)
 
-- **Plans & Features** (31% weight) - Primary focus
-- **Privacy & Exclusions** (15%) - Enterprise critical
-- **How Copilot Works** (15%) - Technical depth
-- **Other domains** (39%) - Balanced coverage
+| Domain                                    | Weight |
+| ----------------------------------------- | ------ |
+| Use GitHub Copilot responsibly            | 15–20% |
+| Use GitHub Copilot features               | 25–30% |
+| Understand Copilot data and architecture  | 10–15% |
+| Apply prompt engineering and context      | 10–15% |
+| Improve developer productivity            | 10–15% |
+| Configure privacy, exclusions, safeguards | 10–15% |
 
 ## 🚀 Enterprise Focus Areas
 
@@ -94,9 +95,12 @@ When generating examples, use enterprise contexts:
 
 ### Key Files to Reference
 
-- `copilot/workspace-config.json` - Copilot feature toggles and security settings
-- `examples/jest.config.js` - Testing standards with detailed JSDoc
-- `.github/dependabot.yml` - Automated dependency management
+- `.github/agents/gh300-cert-buddy-agent.agent.md` - GH-300 exam prep agent
+- `.github/skills/` - Three skill definitions (item-creator, lab-creator, study-planner)
+- `.github/prompts/` - Slash-command prompt templates
+- `.github/hooks/gh300-guardrails.json` - Workspace hook definitions
+- `.vscode/mcp.json` - Microsoft Learn MCP server configuration
+- `references/gh300-objectives.md` - Jan 2026 exam blueprint
 - `COURSE-PLAN-APRIL-2026.md` - Complete curriculum structure
 
 ### Custom Instructions Pattern
@@ -104,15 +108,15 @@ When generating examples, use enterprise contexts:
 ```markdown
 # When working in this repo:
 
-# 1. Maintain 80% test coverage (jest.config.js)
+# 1. Use enterprise security patterns
 
-# 2. Use enterprise security patterns
+# 2. Generate teaching-appropriate examples
 
-# 3. Generate teaching-appropriate examples
+# 3. Focus on GH-300 certification exam domains (Jan 2026 blueprint)
 
-# 4. Focus on certification exam domains
+# 4. Always include "Next Steps" for learners
 
-# 5. Always include "Next Steps" for learners
+# 5. Ground all exam content in Microsoft Learn documentation
 ```
 
 ## 🆕 January 2026 Feature Highlights

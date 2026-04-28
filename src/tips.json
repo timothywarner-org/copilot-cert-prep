@@ -2,303 +2,303 @@
   "tips": [
     {
       "id": 1,
-      "title": "Neighboring Tabs",
-      "content": "GitHub Copilot looks at the files open in your editor tabs for context. Keep relevant files open to improve suggestion quality.",
+      "title": "Neighboring Tabs = Better Suggestions",
+      "content": "Copilot uses your open editor tabs as implicit context. Keep related files open — your interfaces, tests, and config files all feed the model. The more relevant context visible, the sharper the completions.",
       "category": "Best Practices"
     },
     {
       "id": 2,
-      "title": "High-Level Context",
-      "content": "Start with a comment at the top of your file describing its purpose. This helps Copilot understand your intent throughout the file.",
+      "title": "High-Level Context Comment",
+      "content": "Start every new file with a comment describing its purpose, stack, and constraints. 'Express REST API for order fulfillment, Node.js 22, Zod validation' gives Copilot a blueprint for every suggestion in that file.",
       "category": "Prompt Engineering"
     },
     {
       "id": 3,
-      "title": "Examples Guide Patterns",
-      "content": "Provide 2-3 examples of the pattern you want. Copilot will recognize and continue the pattern for similar code blocks.",
+      "title": "Examples Drive Patterns",
+      "content": "Write 2–3 examples of the pattern you want before letting Copilot continue. Function signatures, data shapes, and naming styles all teach Copilot what 'good' looks like in your codebase.",
       "category": "Workflow"
     },
     {
       "id": 4,
-      "title": "Slash Commands",
-      "content": "Use /explain for code explanations, /fix to debug errors, /tests for unit tests, /doc for documentation, and /new to scaffold files.",
+      "title": "Slash Commands Cheat Sheet",
+      "content": "Essential slash commands: /explain (understand code), /fix (debug errors), /tests (generate tests), /doc (add documentation), /new (scaffold a file), /init (configure your project for AI with custom instructions). Type / in the Chat input to see the full list.",
       "category": "Chat Features"
     },
     {
       "id": 5,
-      "title": "Keyboard Shortcuts",
-      "content": "Tab to accept, Esc to dismiss, Alt+] for next suggestion, Alt+[ for previous, Ctrl+Enter to see multiple suggestions in a new tab.",
+      "title": "Keyboard Shortcuts You Need",
+      "content": "Completions: Tab=accept, Esc=dismiss, Alt+]/ Alt+[=cycle suggestions, Ctrl+Enter=open suggestion panel. Chat: Ctrl+Alt+I (Win/Linux) or Ctrl+Cmd+I (Mac)=Chat view, Ctrl+I=Inline chat, Ctrl+Shift+Alt+L=Quick Chat popup.",
       "category": "Editor Tips"
     },
     {
       "id": 6,
-      "title": "Duplication Detection",
-      "content": "Copilot includes a filter to detect and suppress suggestions matching public code. It won't suggest verbatim code from its training set.",
+      "title": "Public Code Duplication Filter",
+      "content": "Copilot's duplication filter detects and suppresses completions that match public code verbatim. This reduces the risk of inadvertently introducing GPL or MIT code you did not intend to use.",
       "category": "Security"
     },
     {
       "id": 7,
-      "title": "Test-Driven Development",
-      "content": "Write test names and descriptions first, then let Copilot generate both the test implementation and the code to make it pass.",
+      "title": "Test-Driven Development with Copilot",
+      "content": "Write the test name and its describe/it blocks first, then let Copilot generate both the test body and the implementation to make it pass. TDD turns Copilot into a spec-driven code generator.",
       "category": "Testing"
     },
     {
       "id": 8,
-      "title": "Inline Chat",
-      "content": "Use Ctrl+I (Cmd+I on Mac) to open inline chat directly in your code. Ask questions or request changes without switching context.",
+      "title": "Inline Chat for Surgical Edits",
+      "content": "Press Ctrl+I (Cmd+I on Mac) to open a chat prompt directly inside the editor. Select code first for targeted refactors. Changes appear as inline diffs you accept or reject — no context switching required.",
       "category": "Chat Features"
     },
     {
       "id": 9,
-      "title": "@workspace Context",
-      "content": "Use @workspace to ask about your entire codebase, @terminal for terminal context, and #file to reference specific files in chat.",
+      "title": "# and @ Context Variables",
+      "content": "Type # in the chat input to attach explicit context: #file (a specific file), #codebase (semantic search across all files), #terminalSelection (last terminal output), #fetch (live URL content). Use @ to invoke participants: @vscode (IDE questions), @terminal (shell help).",
       "category": "Chat Features"
     },
     {
       "id": 10,
-      "title": "Fix with Terminal",
-      "content": "Click 'Fix with Copilot' in VS Code terminal when errors occur. Copilot will analyze the error and suggest corrections.",
+      "title": "Fix Errors Directly from the Terminal",
+      "content": "When a command fails in the VS Code integrated terminal, click the sparkle icon or 'Fix with Copilot' button that appears in the terminal toolbar. Copilot reads the error output and proposes a corrective action.",
       "category": "Debugging"
     },
     {
       "id": 11,
-      "title": "Meaningful Names",
-      "content": "Use descriptive variable and function names. 'calculateMonthlyPayment' yields better suggestions than 'calcMP'.",
+      "title": "Meaningful Names = Better Completions",
+      "content": "Descriptive names are free tokens. 'calculateCompoundInterestMonthly' tells Copilot the algorithm, domain, and time unit. Abbreviations like 'calcCI' force the model to guess — and it sometimes guesses wrong.",
       "category": "Best Practices"
     },
     {
       "id": 12,
-      "title": "GitHub CLI Integration",
-      "content": "Install with 'gh extension install github/gh-copilot'. Use 'gh copilot suggest' for commands and 'gh copilot explain' for explanations.",
+      "title": "Copilot in the Terminal (gh CLI)",
+      "content": "Run 'gh extension install github/gh-copilot' to bring Copilot into your shell. Use 'gh copilot suggest \"create a docker network\"' to get runnable shell commands, and 'gh copilot explain \"git rebase -i HEAD~3\"' to demystify any command.",
       "category": "CLI"
     },
     {
       "id": 13,
-      "title": "Code Review Comments",
-      "content": "Copilot can generate PR descriptions and review comments. Use it to explain complex changes and suggest improvements.",
+      "title": "AI-Generated PR Descriptions",
+      "content": "In VS Code with the GitHub Pull Requests extension, use the Copilot sparkle button in the PR description field to auto-generate a clear, structured summary of your changes — saves minutes on every PR.",
       "category": "Collaboration"
     },
     {
       "id": 14,
-      "title": "Regular Expressions",
-      "content": "Describe regex patterns in plain English comments. Copilot excels at generating complex regex from natural language descriptions.",
+      "title": "Regex from Plain English",
+      "content": "Describe your pattern in a comment: '// match ISO 8601 dates with optional time zone offset'. Copilot's regex generation is one of its strongest skills — far faster than trial-and-error on regex101.com.",
       "category": "Prompt Engineering"
     },
     {
       "id": 15,
-      "title": "SQL Query Generation",
-      "content": "Write a comment describing the data you need. Copilot can generate complex SQL queries including joins and aggregations.",
+      "title": "Complex SQL from Natural Language",
+      "content": "Comment the shape of the result you need: '// monthly revenue by region, last 12 months, exclude test accounts'. Copilot handles window functions, CTEs, and multi-table joins reliably when you describe the output.",
       "category": "Database"
     },
     {
       "id": 16,
-      "title": "Refactoring Assistant",
-      "content": "Select code and use '/optimize' in chat to get performance improvements, or describe the refactoring goal for specific suggestions.",
-      "category": "Code Quality"
+      "title": "Agent Mode: Your Autonomous Dev Partner",
+      "content": "Agent mode (VS Code 1.99+) lets Copilot plan, edit multiple files, run terminal commands, and self-correct — all in one session. Open Chat (Ctrl+Alt+I), select 'Agent' from the agent picker, and describe a full feature. The agent loop handles the rest.",
+      "category": "Agent Mode"
     },
     {
       "id": 17,
       "title": "Documentation Generation",
-      "content": "Use '/doc' command or type '/**' above functions to generate JSDoc/docstring documentation automatically.",
+      "content": "Type '/**' above any function to trigger JSDoc/docstring generation, or use /doc in chat after selecting a function. Copilot infers parameter types, return values, and edge cases from the implementation — not just the signature.",
       "category": "Documentation"
     },
     {
       "id": 18,
-      "title": "Error Message Context",
-      "content": "Copy error messages into comments before the problematic code. Copilot uses error context to suggest targeted fixes.",
+      "title": "Paste Error Messages as Context",
+      "content": "Copy a stack trace or compiler error into the chat prompt before describing your question. Copilot uses the exact error text to pinpoint root cause. More specific error context = fewer back-and-forth turns.",
       "category": "Debugging"
     },
     {
       "id": 19,
-      "title": "Multi-File Edits",
-      "content": "In VS Code, Copilot Edits can suggest changes across multiple files. Review each file change carefully before accepting.",
+      "title": "Multi-File Edits with Agent Mode",
+      "content": "In agent mode, Copilot edits files across your entire project autonomously. It reads relevant files, applies coordinated changes, and presents inline diffs for each file. Use 'Keep' or 'Undo' per file, or roll back via chat checkpoints.",
       "category": "Editor Tips"
     },
     {
       "id": 20,
-      "title": "Privacy Controls",
-      "content": "Use .copilotignore files to exclude sensitive files. Format is similar to .gitignore. Prevents Copilot from reading specified files.",
+      "title": ".copilotignore for Sensitive Files",
+      "content": "Create a .copilotignore file (gitignore syntax) to prevent Copilot from reading secrets, PII datasets, or proprietary configs. Place it in the repo root. Enterprise admins can also enforce exclusions at the org level via policy settings on GitHub.com.",
       "category": "Security"
     },
     {
       "id": 21,
-      "title": "Language Translation",
-      "content": "Copilot can translate code between languages. Paste code and comment: 'Convert this to [target language]' for quick translations.",
+      "title": "Cross-Language Code Translation",
+      "content": "Paste a function and write: 'Translate this Python to TypeScript, preserving the same error handling approach.' Copilot handles idiomatic conversion — not just syntax mapping — including framework-equivalent patterns.",
       "category": "Code Conversion"
     },
     {
       "id": 22,
-      "title": "Commit Message Generation",
-      "content": "Stage changes and use Copilot's commit message sparkle icon in VS Code's Source Control panel for auto-generated commit messages.",
+      "title": "AI Commit Messages",
+      "content": "Stage your changes in VS Code's Source Control panel and click the sparkle (✨) icon in the commit message box. Copilot reads the diff and writes a Conventional Commits-formatted message in seconds.",
       "category": "Git"
     },
     {
       "id": 23,
-      "title": "API Client Generation",
-      "content": "Paste API documentation or OpenAPI specs in comments. Copilot can generate complete client code with proper types and error handling.",
+      "title": "API Client from OpenAPI Specs",
+      "content": "Paste an OpenAPI/Swagger spec or endpoint documentation block into chat and ask Copilot to generate a typed API client. It produces proper types, error handling, and retry logic — not just raw fetch calls.",
       "category": "API Development"
     },
     {
       "id": 24,
-      "title": "Mock Data Creation",
-      "content": "Comment 'Generate mock data for [description]' and Copilot will create realistic test data with appropriate formats and values.",
+      "title": "Realistic Mock Data on Demand",
+      "content": "Describe the shape you need in a comment: '// 20 employee records with realistic names, departments, hire dates, and salaries'. Copilot generates seeded test data that matches your schema — perfect for tests and demos.",
       "category": "Testing"
     },
     {
       "id": 25,
-      "title": "Code Completion Filtering",
-      "content": "GitHub Copilot filters out suggestions that match public code verbatim to reduce risk of copying licensed code.",
+      "title": "Public Code Filter = License Safety",
+      "content": "Copilot's public code filter detects verbatim matches against its training set and suppresses them. For extra protection, enable 'block suggestions matching public code' in GitHub Copilot settings on GitHub.com.",
       "category": "Compliance"
     },
     {
       "id": 26,
-      "title": "Voice Commands",
-      "content": "Use 'Hey GitHub' voice extension in VS Code for hands-free coding. Say 'Hey GitHub, write a function to...' for voice-driven development.",
-      "category": "Accessibility"
+      "title": "Next Edit Suggestions (NES)",
+      "content": "Next Edit Suggestions predicts your next logical edit based on what you just changed. When NES has a suggestion, a gray arrow appears in the gutter — press Tab to jump to and accept the next predicted change. Great for rename cascades and repetitive edits.",
+      "category": "Editor Tips"
     },
     {
       "id": 27,
-      "title": "Knowledge Bases",
-      "content": "Enterprise users can attach knowledge bases for organization-specific context. Copilot will use internal docs for better suggestions.",
+      "title": "Knowledge Bases for Enterprise Context",
+      "content": "Copilot Enterprise users can attach knowledge bases built from internal wikis, architecture docs, or runbooks. When attached, Copilot answers questions using your organization's own documentation — not just public knowledge.",
       "category": "Enterprise"
     },
     {
       "id": 28,
-      "title": "Fine-Tuning Models",
-      "content": "Enterprise customers can fine-tune Copilot models on their codebase for organization-specific patterns and conventions.",
-      "category": "Enterprise"
+      "title": "Auto Model Selection",
+      "content": "Select 'Auto' from the model picker in the Chat view and VS Code automatically routes each request to the best available model (currently chooses among Claude Sonnet 4, GPT-5, GPT-5 mini). Reduces rate-limit headaches on heavy days.",
+      "category": "AI Features"
     },
     {
       "id": 29,
-      "title": "Workspace Agents",
-      "content": "Create custom agents with @workspace/new-agent. Define specific tasks and behaviors for automated development workflows.",
-      "category": "Automation"
+      "title": "Build Custom Agents",
+      "content": "Create a custom agent by adding an .agent.md file to .github/agents/. Define the agent's persona, tools, and instructions. Your agent appears in the Chat agent picker alongside the built-in Agent, Plan, and Ask agents.",
+      "category": "Customization"
     },
     {
       "id": 30,
-      "title": "Responsible AI",
-      "content": "Always review generated code for bias, security issues, and correctness. Copilot is a tool to augment, not replace, developer judgment.",
+      "title": "Responsible AI: You Are the Reviewer",
+      "content": "Copilot is a probability engine, not an oracle. Always review generated code for logic errors, security vulnerabilities, and license issues before committing. OWASP Top 10 still applies to AI-generated code.",
       "category": "Ethics"
     },
     {
       "id": 31,
-      "title": "Partial Acceptance",
-      "content": "Use Ctrl+Right Arrow (Cmd+Right on Mac) to accept suggestions word by word instead of the entire line.",
+      "title": "Word-by-Word Acceptance",
+      "content": "Press Ctrl+Right Arrow (Cmd+Right on Mac) to accept a completion one word at a time. Useful when a suggestion is mostly right but ends with something you want to rephrase.",
       "category": "Editor Tips"
     },
     {
       "id": 32,
-      "title": "Context Exclusion",
-      "content": "Enterprise admins can exclude specific repositories or paths from being used as context in suggestions for privacy compliance.",
+      "title": "Enterprise Content Exclusions",
+      "content": "Copilot Business/Enterprise admins can exclude specific repositories, file paths, or file types from being used as context in completions. Configured via the Copilot policy settings on GitHub.com — no client config required.",
       "category": "Enterprise"
     },
     {
       "id": 33,
-      "title": "Completion Confidence",
-      "content": "Copilot shows suggestions with varying confidence levels. Bolder text indicates higher confidence in the suggestion.",
-      "category": "Editor Tips"
+      "title": "Configurable Thinking Effort",
+      "content": "Reasoning models (Claude Sonnet, o3, etc.) let you set thinking effort. In the model picker, click the '>' arrow next to a reasoning model to choose Low, Medium, or High. Use High for complex architecture decisions; Low for quick boilerplate generation.",
+      "category": "AI Features"
     },
     {
       "id": 34,
-      "title": "Test Coverage",
-      "content": "Ask Copilot to generate tests for edge cases, error conditions, and boundary values to improve code coverage.",
+      "title": "Edge Case Test Generation",
+      "content": "Ask Copilot: 'Generate tests for null inputs, empty arrays, max integer values, and concurrent calls.' Specifying edge case categories explicitly produces far better coverage than 'write tests for this function'.",
       "category": "Testing"
     },
     {
       "id": 35,
-      "title": "Semantic Search",
-      "content": "Use natural language in @workspace queries like 'Where is user authentication handled?' for semantic code search.",
+      "title": "#codebase Semantic Search",
+      "content": "Use #codebase in a chat prompt to trigger semantic search across your entire project: 'Where is JWT validation handled? #codebase'. Copilot reads and synthesizes across files — no grep required.",
       "category": "Chat Features"
     },
     {
       "id": 36,
-      "title": "MCP Server Integration",
-      "content": "Use Model Context Protocol (MCP) servers to connect external data sources like databases, file systems, or APIs directly to Copilot.",
+      "title": "MCP Servers Extend Copilot's Reach",
+      "content": "Model Context Protocol (MCP) servers give Copilot access to live data. Configure them in .vscode/mcp.json. Popular MCP servers cover GitHub, Postgres, Jira, file systems, and REST APIs. Copilot agents can then call these tools mid-task.",
       "category": "MCP"
     },
     {
       "id": 37,
-      "title": "Prompt Files (.prompt)",
-      "content": "Create .prompt files in your project root to define reusable prompts for common tasks like code reviews, testing, or documentation.",
-      "category": "AI Features"
+      "title": "Reusable Prompt Files",
+      "content": "Create .prompt.md files in .github/prompts/ to define reusable slash commands for your team. Add a YAML frontmatter 'description' field and invoke with /your-prompt-name in chat. Great for code review checklists, PR templates, and release scripts.",
+      "category": "Customization"
     },
     {
       "id": 38,
-      "title": "Instructions Files",
-      "content": "Add .instructions or .copilot-instructions.md files to provide project-specific context and coding standards to Copilot.",
-      "category": "AI Features"
+      "title": "Custom Instructions for Your Project",
+      "content": "Create .github/copilot-instructions.md to define project-wide coding standards, naming conventions, and preferred libraries. Copilot applies these instructions automatically to every chat request in that workspace — no need to repeat yourself in every prompt.",
+      "category": "Customization"
     },
     {
       "id": 39,
-      "title": "Toolsets Configuration",
-      "content": "Configure custom toolsets in your IDE to give Copilot access to specialized commands, linters, or build tools for better suggestions.",
-      "category": "AI Features"
+      "title": "Agent Toolsets",
+      "content": "Configure toolsets in VS Code settings (chat.toolsets) to give agents access to specific terminal commands, build scripts, and linters. Toolsets are reusable across sessions and let you control exactly what an agent can run.",
+      "category": "Agent Mode"
     },
     {
       "id": 40,
-      "title": "AI-Assisted Debugging",
-      "content": "Use '/debug' command to get step-by-step debugging help. Copilot can analyze stack traces and suggest debugging strategies.",
-      "category": "AI Features"
+      "title": "Manage Multiple Agent Sessions",
+      "content": "Open the Sessions view in the Chat panel to run parallel agent sessions — one refactoring a module, another writing tests, a third updating docs. Each session is independent with its own history, file changes, and checkpoints.",
+      "category": "Agent Mode"
     },
     {
       "id": 41,
-      "title": "Copilot Workspaces",
-      "content": "Use GitHub Copilot Workspaces (web-based) for full-stack development with integrated terminals, file browser, and AI assistance.",
-      "category": "AI Features"
+      "title": "Plan Agent: Think Before You Build",
+      "content": "Select 'Plan' from the agent picker to create a structured implementation plan before any code is written. The Plan agent analyzes your codebase, asks clarifying questions, and produces a step-by-step spec. Hand it off to Agent mode to execute when ready.",
+      "category": "Agent Mode"
     },
     {
       "id": 42,
-      "title": "Spark Integration",
-      "content": "Use Copilot Spark to rapidly prototype applications with natural language. Great for creating demos and proof-of-concepts quickly.",
-      "category": "AI Features"
+      "title": "Chat Checkpoints and Rollback",
+      "content": "VS Code automatically creates checkpoints at key points in an agent session. If a change goes sideways, open the session history, find a prior checkpoint, and restore to that state — like undo but for entire multi-file edits.",
+      "category": "Agent Mode"
     },
     {
       "id": 43,
-      "title": "Multi-Model Support",
-      "content": "Switch between different AI models (Claude, GPT-4, etc.) in Copilot Chat using model selection in settings for different use cases.",
+      "title": "Multi-Model Selection",
+      "content": "Use the model picker in the Chat input to choose the right model for the job: fast models (GPT-4.1, Claude Haiku) for quick edits and Q&A; reasoning models (o3, Claude Sonnet 4.6) for complex refactoring or architecture. Premium requests have a cost multiplier shown in the picker.",
       "category": "AI Features"
     },
     {
       "id": 44,
-      "title": "Context Providers",
-      "content": "Configure custom context providers to give Copilot access to documentation, internal wikis, or domain-specific knowledge bases.",
-      "category": "MCP"
+      "title": "#fetch Live Web Content",
+      "content": "Use #fetch in a chat prompt to pull live content from a URL into your conversation: 'Summarize the breaking changes in this release notes page: #fetch https://example.com/changelog'. Copilot reads the page and responds with full context.",
+      "category": "Chat Features"
     },
     {
       "id": 45,
-      "title": "Agentic Workflows",
-      "content": "Chain multiple AI agents together for complex tasks like 'write tests, run them, fix failures, update docs' using agent orchestration.",
-      "category": "AI Features"
+      "title": "Agent Handoff Between Environments",
+      "content": "Start a task with a local agent for interactive exploration, then hand it off: switch to Copilot CLI for background execution, or to a Cloud agent to create a pull request. The full conversation history carries over across all agent types.",
+      "category": "Agent Mode"
     },
     {
       "id": 46,
-      "title": "Code Actions AI",
-      "content": "Right-click on code and use 'Copilot: Generate' for context-aware suggestions like refactoring, optimization, or adding features.",
-      "category": "AI Features"
+      "title": "Smart Code Actions",
+      "content": "Right-click any selection and look for Copilot options in the context menu: 'Explain', 'Fix', 'Generate Tests', and 'Review and Comment'. These smart actions send targeted prompts without opening the full Chat view.",
+      "category": "Editor Tips"
     },
     {
       "id": 47,
-      "title": "Jupyter AI Extension",
-      "content": "In Jupyter notebooks, use %%ai magic commands to generate code cells, analyze data, or create visualizations with natural language.",
-      "category": "AI Features"
+      "title": "Autopilot Permission Level",
+      "content": "Set the permission level in the Chat view to 'Autopilot (Preview)' to let the agent auto-approve all tool calls, auto-respond to questions, and run until the task is fully complete. Use 'Default Approvals' when you want to review each tool call.",
+      "category": "Agent Mode"
     },
     {
       "id": 48,
-      "title": "Live Code Review",
-      "content": "Enable real-time code review suggestions as you type. Copilot can suggest improvements, catch bugs, and enforce patterns automatically.",
-      "category": "AI Features"
+      "title": "Vision: Attach Images as Context",
+      "content": "Drag and drop a screenshot, UI mockup, or architecture diagram directly into the Chat input. Copilot reads the image and uses it as context — great for 'implement this UI from the mockup' or 'explain what this diagram shows'.",
+      "category": "Chat Features"
     },
     {
       "id": 49,
-      "title": "Copilot Extensions",
-      "content": "Browse and install Copilot Extensions marketplace for specialized tools like Docker, AWS, Terraform integration, or language-specific helpers.",
+      "title": "Copilot Extensions Marketplace",
+      "content": "Install Copilot Extensions from the VS Code Marketplace to add domain-specific agents: Docker, Azure, Terraform, GitHub Actions, and more. Extensions register as @ participants so you can invoke them directly in chat (e.g., @docker).",
       "category": "AI Features"
     },
     {
       "id": 50,
-      "title": "Natural Language Git",
-      "content": "Use '/git' commands with natural language like '/git create a feature branch for user authentication' for complex Git operations.",
-      "category": "AI Features"
+      "title": "Cloud Agent Creates Pull Requests",
+      "content": "Assign a GitHub issue to Copilot on GitHub.com (or via the GitHub Pull Requests extension in VS Code) and the Cloud agent creates a branch, implements the changes, and opens a PR for your team to review — fully autonomous background work.",
+      "category": "Agent Mode"
     }
   ]
 }
