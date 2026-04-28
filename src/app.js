@@ -185,7 +185,9 @@ class CopilotTipsApp {
     const categoryColor = categoryColors[tip.category] || colors.gray;
 
     console.log('\n┌' + '─'.repeat(62) + '┐');
-    console.log(`│${colors.bright}  💡 TIP #${tip.id}: ${tip.title.padEnd(48)}${colors.reset}│`);
+    const idPart = `  💡 TIP #${tip.id}: `;
+    const titleWidth = 62 - idPart.length;
+    console.log(`│${colors.bright}${idPart}${tip.title.substring(0, titleWidth).padEnd(titleWidth)}${colors.reset}│`);
     console.log('├' + '─'.repeat(62) + '┤');
     
     // Wrap content to fit in box
@@ -286,7 +288,7 @@ class CopilotTipsApp {
 
   async displayInteractiveMenu() {
     console.log(`\n${colors.cyan}╔════════════════════════════════╗${colors.reset}`);
-    console.log(`${colors.cyan}║${colors.reset}     ${colors.bright}🎯 MAIN MENU${colors.reset}              ${colors.cyan}║${colors.reset}`);
+    console.log(`${colors.cyan}║${colors.reset}     ${colors.bright}🎯 MAIN MENU${colors.reset}               ${colors.cyan}║${colors.reset}`);
     console.log(`${colors.cyan}╚════════════════════════════════╝${colors.reset}\n`);
 
     this.menuOptions.forEach(option => {
