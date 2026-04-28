@@ -179,7 +179,10 @@ class CopilotTipsApp {
       'Enterprise': colors.blue,
       'Debugging': colors.red,
       'AI Features': colors.cyan,
-      'MCP': colors.magenta
+      'MCP': colors.magenta,
+      'Azure': colors.blue,
+      'FinOps': colors.green,
+      'IaC': colors.magenta
     };
 
     const categoryColor = categoryColors[tip.category] || colors.gray;
@@ -343,7 +346,10 @@ class CopilotTipsApp {
       'Documentation': '📖',
       'Automation': '⚙️',
       'Code Quality': '✨',
-      'Workflow': '🔄'
+      'Workflow': '🔄',
+      'Azure': '☁️',
+      'FinOps': '💰',
+      'IaC': '🏗️'
     };
     return emojis[category] || '📌';
   }
