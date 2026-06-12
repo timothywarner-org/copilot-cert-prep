@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GH-300 Exam Simulator — GitHub Copilot Certification</title>
+<style>
+  /* ── Reset & base ──────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:        #0d1117;
+    --surface:   #161b22;
+    --surface2:  #21262d;
+    --border:    #30363d;
+    --text:      #e6edf3;
+    --muted:     #8b949e;
+    --accent:    #238636;
+    --accent-h:  #2ea043;
+    --blue:      #1f6feb;
+    --blue-h:    #388bfd;
+    --red:       #da3633;
+    --yellow:    #d29922;
+    --purple:    #8957e5;
+    --radius:    8px;
+    --font:      'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Layout ───────────────────────────────────────────────── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  header .logo { font-size: 22px; }
+  header h1 { font-size: 16px; font-weight: 600; flex: 1; }
+  #timer-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px 14px;
+    font-size: 15px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    min-width: 80px;
+    text-align: center;
+  }
+  #timer-box.warning { color: var(--yellow); border-color: var(--yellow); }
+  #timer-box.danger  { color: var(--red);    border-color: var(--red);    }
+
+  main { flex: 1; max-width: 900px; margin: 0 auto; padding: 32px 24px; width: 100%; }
+
+  /* ── Screens ──────────────────────────────────────────────── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── Start screen ─────────────────────────────────────────── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+  .card h2 { font-size: 22px; margin-bottom: 8px; }
+  .card p  { color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .meta-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .meta-item .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .meta-item .value { font-size: 18px; font-weight: 700; margin-top: 4px; }
+
+  .domain-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+  .domain-list li {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .domain-badge {
+    background: var(--blue);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 20px;
+    border: none; border-radius: var(--radius);
+    font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: filter .15s;
+  }
+  .btn:hover { filter: brightness(1.1); }
+  .btn-primary  { background: var(--accent);  color: #fff; }
+  .btn-blue     { background: var(--blue);    color: #fff; }
+  .btn-surface  { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .btn-danger   { background: var(--red);     color: #fff; }
+  .btn-lg { padding: 14px 32px; font-size: 16px; }
+
+  /* ── Options ─────────────────────────────────────────────── */
+  .config-row {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .config-row label { color: var(--muted); font-size: 14px; min-width: 140px; }
+  select, input[type=range] {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  select:focus { outline: 2px solid var(--blue); }
+
+  /* ── Exam screen ─────────────────────────────────────────── */
+  #progress-bar-wrap {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    height: 6px; overflow: hidden; margin-bottom: 24px;
+  }
+  #progress-bar {
+    background: linear-gradient(90deg, var(--blue), var(--accent));
+    height: 100%;
+    transition: width .3s;
+    border-radius: 100px;
+  }
+
+  #question-header {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 24px;
+  }
+  #question-num-badge {
+    background: var(--blue);
+    color: #fff;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  #domain-tag {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 2px 12px;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  #question-text {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  #multi-hint {
+    font-size: 12px;
+    color: var(--yellow);
+    background: rgba(210,153,34,.1);
+    border: 1px solid rgba(210,153,34,.3);
+    border-radius: var(--radius);
+    padding: 6px 14px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  #multi-hint.show { display: block; }
+
+  #options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex; align-items: flex-start; gap: 14px;
+    transition: border-color .15s, background .15s;
+    font-size: 14px; line-height: 1.5;
+    user-select: none;
+  }
+  .opt:hover:not(.answered) { border-color: var(--blue-h); background: rgba(31,111,235,.08); }
+  .opt.selected { border-color: var(--blue); background: rgba(31,111,235,.12); }
+  .opt.correct  { border-color: var(--accent); background: rgba(35,134,54,.12); }
+  .opt.wrong    { border-color: var(--red);    background: rgba(218,54,51,.1); }
+  .opt.show-correct { border-color: var(--accent); background: rgba(35,134,54,.08); }
+
+  .opt-letter {
+    min-width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+    transition: background .15s, color .15s;
+  }
+  .opt.selected .opt-letter { background: var(--blue); color: #fff; }
+  .opt.correct  .opt-letter { background: var(--accent); color: #fff; }
+  .opt.wrong    .opt-letter { background: var(--red);    color: #fff; }
+  .opt.show-correct .opt-letter { background: var(--accent); color: #fff; }
+
+  #feedback-box {
+    margin-top: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: none;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  #feedback-box.show { display: block; }
+  #feedback-box .fb-title { font-weight: 700; margin-bottom: 6px; }
+  #feedback-box .fb-correct { color: var(--accent); }
+  #feedback-box .fb-wrong   { color: var(--red);    }
+  #feedback-box .fb-ref { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+  #exam-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 28px; flex-wrap: wrap; gap: 12px;
+  }
+  #flag-btn { gap: 6px; }
+  #flag-btn.flagged { color: var(--yellow); border-color: var(--yellow); }
+
+  /* ── Question map ─────────────────────────────────────────── */
+  #qmap-toggle {
+    background: none; border: none; color: var(--muted);
+    font-size: 13px; cursor: pointer; text-decoration: underline;
+    margin-top: 20px; display: block;
+  }
+  #question-map {
+    display: none;
+    margin-top: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  #question-map.show { display: block; }
+  #qmap-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .qmap-dot {
+    width: 30px; height: 30px;
+    border-radius: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    font-size: 11px; font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+  }
+  .qmap-dot.answered  { background: rgba(31,111,235,.3);   border-color: var(--blue);   }
+  .qmap-dot.flagged   { background: rgba(210,153,34,.3);   border-color: var(--yellow); }
+  .qmap-dot.current   { outline: 2px solid var(--blue-h);  outline-offset: 2px; }
+
+  /* ── Results screen ───────────────────────────────────────── */
+  #result-hero {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  #result-score-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; font-weight: 800;
+    border: 6px solid;
+  }
+  #result-score-circle.pass { border-color: var(--accent); color: var(--accent); }
+  #result-score-circle.fail { border-color: var(--red);    color: var(--red);    }
+  #result-verdict { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  #result-sub     { color: var(--muted); font-size: 14px; }
+
+  .domain-score-list { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+  .domain-score-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 120px;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+  }
+  .ds-label { font-size: 13px; }
+  .ds-pct   { font-size: 14px; font-weight: 700; text-align: right; }
+  .ds-bar-wrap { background: var(--surface2); border-radius: 100px; height: 8px; overflow: hidden; }
+  .ds-bar { height: 100%; border-radius: 100px; transition: width .6s; }
+  .ds-bar.good { background: var(--accent); }
+  .ds-bar.bad  { background: var(--red); }
+
+  .review-list { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+  .review-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 13px;
+  }
+  .review-item .ri-q { font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+  .review-item .ri-row { display: flex; gap: 8px; margin-bottom: 4px; align-items: flex-start; }
+  .ri-label { font-size: 11px; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+  .ri-label.your   { background: rgba(218,54,51,.2);  color: var(--red);    }
+  .ri-label.answer { background: rgba(35,134,54,.2);  color: var(--accent); }
+  .ri-label.ok     { background: rgba(35,134,54,.2);  color: var(--accent); }
+  .ri-expl { color: var(--muted); margin-top: 6px; font-size: 12px; line-height: 1.55; }
+
+  /* ── Scrollbar ─────────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 13px; }
+    main { padding: 20px 14px; }
+    .domain-score-row { grid-template-columns: 1fr 60px; }
+    .ds-bar-wrap { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">🎓</span>
+  <h1>GH-300 — GitHub Copilot Certification Simulator</h1>
+  <div id="timer-box">90:00</div>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════ START SCREEN ═══════════════════════ -->
+  <div id="screen-start" class="screen active">
+    <div class="card">
+      <h2>GitHub Copilot Certification (GH-300)</h2>
+      <p>Simulador basado en el blueprint de <strong>enero 2026</strong>. Todas las preguntas se derivan de la documentación oficial del curso (study guide, objectives, quick reference). Puntaje mínimo aprobatorio: <strong>700/1000</strong>.</p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="label">Duración</div>
+          <div class="value">90 min</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Banco de preguntas</div>
+          <div class="value" id="total-q-display">—</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Para aprobar</div>
+          <div class="value">700 / 1000</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Tipos</div>
+          <div class="value" style="font-size:13px">MC / Multi</div>
+        </div>
+      </div>
+
+      <ul class="domain-list">
+        <li><span class="domain-badge">15–20%</span> Dominio 1 — Use GitHub Copilot responsibly</li>
+        <li><span class="domain-badge">25–30%</span> Dominio 2 — Use GitHub Copilot features</li>
+        <li><span class="domain-badge">10–15%</span> Dominio 3 — Understand Copilot data and architecture</li>
+        <li><span class="domain-badge">10–15%</span> Dominio 4 — Apply prompt engineering and context crafting</li>
+        <li><span class="domain-badge">10–15%</span> Dominio 5 — Improve developer productivity</li>
+        <li><span class="domain-badge">10–15%</span> Dominio 6 — Configure privacy, exclusions, and safeguards</li>
+      </ul>
+
+      <div class="config-row">
+        <label>Número de preguntas</label>
+        <select id="cfg-count">
+          <option value="20">20 — Práctica rápida</option>
+          <option value="40">40 — Medio</option>
+          <option value="60" selected>60 — Examen completo</option>
+          <option value="all">Todas (banco completo)</option>
+        </select>
+      </div>
+      <div class="config-row">
+        <label>Mostrar retroalimentación</label>
+        <select id="cfg-feedback">
+          <option value="immediate">Inmediata (tras cada respuesta)</option>
+          <option value="end">Al final del examen</option>
+        </select>
+      </div>
+      <div class="config-row">
+        <label>Modo</label>
+        <select id="cfg-mode">
+          <option value="random">Aleatorio (mezclar)</option>
+          <option value="order">En orden</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary btn-lg" onclick="startExam()">▶ Iniciar Examen</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ EXAM SCREEN ════════════════════════ -->
+  <div id="screen-exam" class="screen">
+    <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+
+    <div id="question-header">
+      <span id="question-num-badge">Q1 / 60</span>
+      <span id="domain-tag">Dominio —</span>
+    </div>
+
+    <div id="question-text"></div>
+    <div id="multi-hint">⚠ Selecciona TODAS las respuestas correctas antes de confirmar.</div>
+    <ul id="options-list"></ul>
+
+    <div id="feedback-box">
+      <div class="fb-title" id="fb-title"></div>
+      <div id="fb-body"></div>
+      <div class="fb-ref" id="fb-ref"></div>
+    </div>
+
+    <div id="exam-nav">
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-surface" onclick="navPrev()">◀ Anterior</button>
+        <button class="btn btn-surface" id="flag-btn" onclick="toggleFlag()">🚩 Marcar</button>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-blue" id="confirm-btn" onclick="confirmAnswer()" style="display:none">Confirmar</button>
+        <button class="btn btn-surface" onclick="navNext()">Siguiente ▶</button>
+        <button class="btn btn-danger" onclick="finishExam()">Finalizar examen</button>
+      </div>
+    </div>
+
+    <button id="qmap-toggle" onclick="toggleMap()">Ver mapa de preguntas</button>
+    <div id="question-map">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Mapa de preguntas</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">
+        <span style="background:rgba(31,111,235,.3);border:1px solid var(--blue);border-radius:3px;padding:1px 6px;">Respondida</span>
+        &nbsp;<span style="background:rgba(210,153,34,.3);border:1px solid var(--yellow);border-radius:3px;padding:1px 6px;">Marcada</span>
+      </div>
+      <div id="qmap-grid"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ RESULTS SCREEN ═════════════════════ -->
+  <div id="screen-results" class="screen">
+    <div id="result-hero">
+      <div id="result-score-circle"></div>
+      <div id="result-verdict"></div>
+      <div id="result-sub"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:24px;">
+      <h2 style="margin-bottom:16px;">Resultados por dominio</h2>
+      <div class="domain-score-list" id="domain-scores"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:24px;">
+      <h2 style="margin-bottom:4px;">Revisión de respuestas</h2>
+      <p>Las preguntas respondidas incorrectamente (o no respondidas) se destacan abajo.</p>
+      <div class="review-list" id="review-list"></div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn btn-primary btn-lg" onclick="location.reload()">🔄 Nuevo examen</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  QUESTION BANK — derived exclusively from course documentation
+//  Sources: GH-300-Study-Guide-April-2026.md, gh300-objectives.md,
+//           github-copilot-cert-exam-objectives.md, QUICK-REFERENCE.md,
+//           exam-notes-and-links.md
+// ═══════════════════════════════════════════════════════════════════
+
+const DOMAINS = [
+  'D1 — Use GitHub Copilot responsibly',
+  'D2 — Use GitHub Copilot features',
+  'D3 — Copilot data and architecture',
+  'D4 — Prompt engineering and context',
+  'D5 — Improve developer productivity',
+  'D6 — Privacy, exclusions, and safeguards',
+];
+
+// Each question:
+// { d: domain index (0-5), q: question text, t: 'single'|'multi',
+//   opts: ['A…','B…','C…','D…'], correct: [0] or [0,2],
+//   expl: rationale, ref: source document }
+
+const BANK = [
+
+// ─── DOMAIN 1 — Responsible AI ───────────────────────────────────
+
+{d:0,q:"A developer at Innowave Solutions asks why they must review GitHub Copilot suggestions before merging them into production. Which statement best explains the need to validate AI output?",
+ t:'single',
+ opts:[
+  "Copilot suggestions are always syntactically correct and simply need a style review.",
+  "AI-generated code can contain errors, bias, or insecure patterns and must be verified before use.",
+  "Validating output is required only when using Copilot Individual, not Business or Enterprise.",
+  "Copilot's proxy service automatically rejects any insecure suggestions before they reach the IDE.",
+ ],
+ correct:[1],
+ expl:"The GH-300 study guide explicitly states that explaining the need to validate AI output is a core objective of Domain 1. AI tools, including Copilot, can produce plausible-looking but incorrect, insecure, or biased code. Human review before merging is a foundational responsible-AI practice.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 1"},
+
+{d:0,q:"Which of the following are identified as potential harms of generative AI tools that a responsible developer should consider? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Bias in generated code or content",
+  "Privacy exposure through leaked training data",
+  "Automatically passing all unit tests",
+  "Fairness issues in AI-powered decisions",
+ ],
+ correct:[0,1,3],
+ expl:"The exam objectives list bias, secure code concerns, fairness, privacy, and transparency as potential harms of generative AI. 'Automatically passing all unit tests' is not a harm — it is not mentioned in the documentation.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 1"},
+
+{d:0,q:"According to the GH-300 blueprint, what is the primary goal of ethical AI principles as they apply to GitHub Copilot usage?",
+ t:'single',
+ opts:[
+  "To maximize code output speed regardless of quality.",
+  "To ensure AI is used in ways that are fair, transparent, and accountable.",
+  "To limit Copilot features exclusively to Enterprise plan customers.",
+  "To allow organizations to disable responsible-use policies for efficiency.",
+ ],
+ correct:[1],
+ expl:"Domain 1 of the GH-300 blueprint requires candidates to 'describe ethical and responsible AI usage.' Ethical AI centers on fairness, transparency, and accountability — not on maximizing speed or restricting features.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 1"},
+
+{d:0,q:"A team lead at Brightforge Labs notices that GitHub Copilot occasionally suggests code similar to open-source libraries. Which limitation of generative AI tools does this behavior illustrate?",
+ t:'single',
+ opts:[
+  "Copilot's inability to generate suggestions longer than 50 lines.",
+  "The effect of 'most seen examples' in training data influencing generated output.",
+  "A misconfiguration in the organization's content exclusion policy.",
+  "A bug in the proxy service that bypasses post-processing filters.",
+ ],
+ correct:[1],
+ expl:"The GH-300 objectives (Domain 3, Limitations) explicitly call out 'the effect of most seen examples on the source data' as a known limitation. Highly represented code patterns in training data will appear more frequently in suggestions.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3 Limitations"},
+
+{d:0,q:"Which mitigation strategy does the GH-300 blueprint recommend to reduce the occurrence of potential harms from AI-generated code?",
+ t:'single',
+ opts:[
+  "Disable all code review steps to speed up delivery.",
+  "Operate GitHub Copilot responsibly by reviewing and validating suggestions before use.",
+  "Use only Copilot Individual to avoid enterprise data sharing.",
+  "Rely on Copilot's inline suggestions exclusively, avoiding Copilot Chat.",
+ ],
+ correct:[1],
+ expl:"Domain 1 objectives include 'explain how to mitigate the occurrence of potential harms' and 'identify how to operate GitHub Copilot responsibly.' The primary mitigation is human oversight: reviewing and validating AI output before it is merged or deployed.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 1 / gh300-objectives.md"},
+
+{d:0,q:"The GH-300 exam passes at a score of 700 out of 1000 points. What is the approximate percentage required to pass?",
+ t:'single',
+ opts:["60%","70%","75%","80%"],
+ correct:[1],
+ expl:"The study guide states the passing score is 700/1000. 700 ÷ 1000 = 70%. The exam-notes file also confirms '70%' as the passing benchmark.",
+ ref:"GH-300-Study-Guide-April-2026.md — At a Glance / exam-notes-and-links.md"},
+
+// ─── DOMAIN 2 — Use GitHub Copilot features ───────────────────────
+
+{d:1,q:"A developer at Crystalwave Corp wants to run autonomous multi-file editing tasks directly from their IDE without leaving the editor. Which GitHub Copilot feature should they use?",
+ t:'single',
+ opts:[
+  "Coding Agent",
+  "Agent Mode",
+  "Copilot Spaces",
+  "Copilot Spark",
+ ],
+ correct:[1],
+ expl:"According to both the study guide and Quick Reference, Agent Mode runs in the IDE (local), is triggered by chat commands, and performs direct file edits. Coding Agent runs in GitHub Actions (cloud) and opens a PR. Agent Mode is the correct answer for in-IDE autonomous tasks.",
+ ref:"QUICK-REFERENCE.md — The Big Distinction / GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:1,q:"Which GitHub Copilot feature runs in GitHub Actions, is triggered by assigning an issue to Copilot, and produces a pull request as output?",
+ t:'single',
+ opts:[
+  "Agent Mode",
+  "Plan Mode",
+  "Coding Agent",
+  "Edit Mode",
+ ],
+ correct:[2],
+ expl:"The Quick Reference table explicitly states: Coding Agent — Where: GitHub Actions (cloud), Trigger: Assign issue to Copilot, Output: Creates a PR, Plans: Business and Enterprise only.",
+ ref:"QUICK-REFERENCE.md — The Big Distinction"},
+
+{d:1,q:"An engineering manager at Solaris Systems wants to let developers preview proposed changes before Copilot executes them in Agent Mode. Which feature provides this preview-and-approve gate?",
+ t:'single',
+ opts:[
+  "Mission Control",
+  "Copilot Spaces",
+  "Plan Mode",
+  "Edit Mode",
+ ],
+ correct:[2],
+ expl:"The study guide states: 'Plan Mode is a feature, not a product. It's the preview/approve gate inside Agent Mode.' The Quick Reference also lists Plan Mode among new features in November 2025 as 'Preview before execution.'",
+ ref:"GH-300-Study-Guide-April-2026.md — Tim's Test-Taking Tips / QUICK-REFERENCE.md"},
+
+{d:1,q:"Which GitHub Copilot plan is required to use the Coding Agent feature?",
+ t:'single',
+ opts:[
+  "Copilot Individual only",
+  "Copilot Business or Enterprise",
+  "Any plan, including Individual",
+  "Copilot Enterprise only",
+ ],
+ correct:[1],
+ expl:"The Quick Reference plan comparison table shows Coding Agent: Individual ❌, Business ✅, Enterprise ✅. Coding Agent is not available on the Individual plan.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+{d:1,q:"A developer needs to open GitHub Copilot Chat in VS Code. Which keyboard shortcut should they use?",
+ t:'single',
+ opts:["Alt+\\","Ctrl+Shift+M","Ctrl+Shift+I","Ctrl+Alt+C"],
+ correct:[2],
+ expl:"The Quick Reference keyboard shortcut table lists 'Open Chat: Ctrl+Shift+I'. Alt+\\ triggers inline suggestions, and Ctrl+Shift+M opens Mission Control.",
+ ref:"QUICK-REFERENCE.md — Essential Keyboard Shortcuts"},
+
+{d:1,q:"Which keyboard shortcut opens Mission Control in VS Code?",
+ t:'single',
+ opts:["Ctrl+Shift+I","Alt+]","Ctrl+Shift+M","Alt+\\"],
+ correct:[2],
+ expl:"According to the Quick Reference, 'Open Mission Control: Ctrl+Shift+M'. Ctrl+Shift+I opens Chat, Alt+] cycles to the next suggestion, and Alt+\\ triggers inline suggestions.",
+ ref:"QUICK-REFERENCE.md — Essential Keyboard Shortcuts"},
+
+{d:1,q:"A developer accepts a Copilot inline suggestion. Which key performs this action in VS Code?",
+ t:'single',
+ opts:["Enter","Ctrl+Enter","Tab","Space"],
+ correct:[2],
+ expl:"The Quick Reference keyboard table states 'Accept suggestion: Tab'. This is a standard Copilot behavior in VS Code.",
+ ref:"QUICK-REFERENCE.md — Essential Keyboard Shortcuts"},
+
+{d:1,q:"Which slash command would a developer use to generate Jest unit tests for a selected function in Copilot Chat?",
+ t:'single',
+ opts:["/docs","/fix","/tests","/optimize"],
+ correct:[2],
+ expl:"The Quick Reference slash commands table shows '/tests — Generate tests — /tests Write Jest tests for this function'. /docs generates documentation, /fix debugs errors, and /optimize improves performance.",
+ ref:"QUICK-REFERENCE.md — Slash Commands Quick Reference"},
+
+{d:1,q:"Which slash command in Copilot Chat should a developer use to preview how Copilot would approach adding authentication to an application?",
+ t:'single',
+ opts:["/agent","/review","/plan","/explain"],
+ correct:[2],
+ expl:"The Quick Reference lists '/plan — Preview changes — /plan How would you add auth?' Plan is the command for previewing proposed changes before execution.",
+ ref:"QUICK-REFERENCE.md — Slash Commands Quick Reference"},
+
+{d:1,q:"A DevOps engineer at Novalith Technologies needs to configure GitHub Copilot to exclude a sensitive configuration file from all Copilot context. Which configuration file should they modify?",
+ t:'single',
+ opts:[
+  ".github/copilot-instructions.md",
+  ".github/prompts/",
+  ".copilotignore",
+  ".github/copilot-agent-instructions.md",
+ ],
+ correct:[2],
+ expl:"The Quick Reference repository configuration table lists '.copilotignore — Files to exclude from Copilot'. This file functions similarly to .gitignore but for Copilot context.",
+ ref:"QUICK-REFERENCE.md — Repository Configuration Files"},
+
+{d:1,q:"Which configuration file controls repo-level Copilot behavior and custom instructions for the entire repository?",
+ t:'single',
+ opts:[
+  ".copilotignore",
+  ".github/copilot-instructions.md",
+  ".github/prompts/*.prompt.md",
+  "src/.copilot.json",
+ ],
+ correct:[1],
+ expl:"The Quick Reference lists '.github/copilot-instructions.md — Repo-level Copilot behavior'. This is the primary file for repository-wide Copilot custom instructions.",
+ ref:"QUICK-REFERENCE.md — Repository Configuration Files"},
+
+{d:1,q:"What does Copilot 'Edit Mode' do, and how does it differ from Agent Mode?",
+ t:'single',
+ opts:[
+  "Edit Mode runs autonomously in GitHub Actions; Agent Mode runs in the IDE.",
+  "Edit Mode performs scoped multi-file edits with explicit file targets; Agent Mode executes tasks autonomously with sub-agents and MCP tools.",
+  "Edit Mode and Agent Mode are identical; the names are interchangeable.",
+  "Edit Mode is exclusive to Copilot Enterprise; Agent Mode is available on all plans.",
+ ],
+ correct:[1],
+ expl:"The study guide states: 'Edit Mode = scoped multi-file edits with explicit file targets. Agent Mode = autonomous task execution with sub-agents and MCP tools.' These are distinct modes with different scopes and trigger mechanisms.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:1,q:"What are 'Sub-Agents' in the context of GitHub Copilot Agent Mode?",
+ t:'single',
+ opts:[
+  "Separate GitHub accounts used for automated PR creation.",
+  "Delegated tasks within an Agent Session that optimize context usage by isolating concerns.",
+  "Third-party plugins installed in the IDE to extend Copilot.",
+  "Cloud-based virtual machines that execute Copilot commands remotely.",
+ ],
+ correct:[1],
+ expl:"The study guide Memorize-These Distinctions table states: 'Sub-Agents — Delegated tasks within an Agent Session that optimize context usage by isolating concerns.'",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:1,q:"What is MCP (Model Context Protocol) in the context of GitHub Copilot?",
+ t:'single',
+ opts:[
+  "A proprietary GitHub format for defining custom prompt templates.",
+  "The protocol that governs how Copilot plans are billed monthly.",
+  "The mechanism by which Copilot connects to external tools, data, and services.",
+  "A keyboard shortcut set for accessing Copilot from multiple IDEs.",
+ ],
+ correct:[2],
+ expl:"The study guide states: 'MCP — Model Context Protocol — how Copilot connects to external tools, data, and services.' MCP is an architecture concept tested in both Domain 2 and Domain 3.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:1,q:"Copilot Spaces and Copilot Spark serve distinct purposes. Which statement correctly differentiates them?",
+ t:'single',
+ opts:[
+  "Spaces = AI-driven app/prototype builder. Spark = curated context bundles for teams.",
+  "Spaces = curated context bundles for teams. Spark = AI-driven app/prototype builder.",
+  "Spaces and Spark are both names for the same Mission Control dashboard feature.",
+  "Spaces = model selection interface. Spark = code review automation.",
+ ],
+ correct:[1],
+ expl:"The study guide Memorize-These Distinctions table reads: 'Spaces = curated context bundles for teams. Spark = AI-driven app/prototype builder.' Swapping them is a common exam distractor.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:1,q:"An organization administrator at Helix Dynamics wants to manage GitHub Copilot seat assignments programmatically. Which approach does the GH-300 blueprint specify?",
+ t:'single',
+ opts:[
+  "Use the GitHub Desktop GUI to add or remove seats.",
+  "Manage subscriptions using the GitHub Copilot REST API.",
+  "Edit the organization's billing XML file directly.",
+  "Submit a support ticket to GitHub for each seat change.",
+ ],
+ correct:[1],
+ expl:"Domain 2D of the study guide explicitly states: 'Manage subscriptions using the REST API.' Tim's Test-Taking Tips also note: 'REST API for subscription management is explicitly called out — know that org admins manage seats programmatically.'",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 2D / Tim's Test-Taking Tips"},
+
+{d:1,q:"Which GitHub Copilot plan feature comparison is correct based on the January 2026 Quick Reference?",
+ t:'single',
+ opts:[
+  "Knowledge Bases: Individual ✅, Business ✅, Enterprise ✅",
+  "Agent Mode: Individual ✅, Business ✅, Enterprise ✅",
+  "Coding Agent: Individual ✅, Business ✅, Enterprise ✅",
+  "Budget Tracking: Individual ✅, Business ❌, Enterprise ✅",
+ ],
+ correct:[1],
+ expl:"The Quick Reference Plan Comparison Chart shows Agent Mode is available on all three plans (✅✅✅). Knowledge Bases are Enterprise-only. Coding Agent is Business and Enterprise only. Budget Tracking is Business and Enterprise only.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+{d:1,q:"Which two plans include Budget Tracking for GitHub Copilot usage? (Select all that apply)",
+ t:'multi',
+ opts:["Individual","Business","Enterprise","Developer (legacy)"],
+ correct:[1,2],
+ expl:"The Quick Reference plan comparison shows Budget Tracking: Individual ❌, Business ✅, Enterprise ✅. This feature is available on Business and Enterprise plans only.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+{d:1,q:"A security-conscious enterprise at Vortex Engineering wants to use their own encryption keys with a third-party model provider in GitHub Copilot. Which feature enables this?",
+ t:'single',
+ opts:[
+  "Private MCP Registry",
+  "Knowledge Bases",
+  "BYOK (Bring Your Own Key)",
+  "Delegated AI controls management",
+ ],
+ correct:[2],
+ expl:"The exam objectives document explicitly lists 'BYOK (Bring Your Own Key) — Enterprise model provider integration' and the Quick Reference lists BYOK as available on Business and Enterprise plans. The study guide also identifies BYOK as a key new feature to know.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2 / QUICK-REFERENCE.md"},
+
+{d:1,q:"Which GitHub Copilot feature allows an enterprise to store and search internal coding standards, design patterns, and best practices to ground Copilot's responses?",
+ t:'single',
+ opts:[
+  "Copilot Spaces",
+  "Knowledge Bases",
+  "Prompt files",
+  "Instructions files",
+ ],
+ correct:[1],
+ expl:"The exam objectives specify for Copilot Enterprise: 'Explain how to configure and use Knowledge Bases' and 'Describe the different types of knowledge that can be stored in a Knowledge Base (code snippets, best practices, design patterns).' Knowledge Bases are an Enterprise-only feature.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2, Copilot Enterprise"},
+
+{d:1,q:"What is the difference between Prompt files and Instructions files in GitHub Copilot?",
+ t:'single',
+ opts:[
+  "Prompt files are stored in .copilotignore; Instructions files are stored in .github/.",
+  "Prompt files = reusable prompts. Instructions files = persistent review and coding standards.",
+  "Prompt files = persistent review standards. Instructions files = reusable prompt templates.",
+  "Both serve the same purpose; the distinction is only about file location.",
+ ],
+ correct:[1],
+ expl:"The study guide Memorize-These Distinctions table states: 'Prompt files = reusable prompts. Instructions files = persistent review/coding standards.' These are distinct concepts that each appear in Domain 2 objectives.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:1,q:"Which GitHub Copilot CLI command type would a developer use to generate a shell script directly from natural language?",
+ t:'single',
+ opts:[
+  "gh copilot suggest",
+  "gh copilot chat",
+  "gh copilot review",
+  "gh copilot plan",
+ ],
+ correct:[0],
+ expl:"The GH-300 objectives include 'Generate scripts and manage files via Copilot CLI.' The standard CLI command for generating scripts and shell commands from natural language is 'gh copilot suggest'. The CLI section of the objectives explicitly covers this use case.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 2B / exam-notes-and-links.md"},
+
+{d:1,q:"A platform team at Obsidian Corp needs Copilot code review to flag style issues against ESLint rules organization-wide. Which feature should they enable?",
+ t:'single',
+ opts:[
+  "Copilot Spark",
+  "Linter Integration (ESLint/Pylint/Rubocop) in Copilot Code Review",
+  "Mission Control budget policies",
+  "Private MCP Registry",
+ ],
+ correct:[1],
+ expl:"The study guide 'Study Focus Areas for 2025' section lists 'Linter Integration — Code review with ESLint/Pylint/Rubocop' as a new feature added in the January 2026 update. The Quick Reference also lists 'Linter Integration — ESLint/Pylint in code review' as a November 2025 addition.",
+ ref:"github-copilot-cert-exam-objectives.md — Study Focus Areas / QUICK-REFERENCE.md — New in November 2025"},
+
+{d:1,q:"Which model would a developer select in GitHub Copilot when they need the fastest inline completions while typing?",
+ t:'single',
+ opts:["GPT-5.1","Claude Opus 4.5","Gemini 3 Pro","Raptor Mini"],
+ correct:[3],
+ expl:"The Quick Reference Model Selection Cheat Sheet states: 'Raptor Mini — Inline completions — Default for typing fast.' It is the optimal model for real-time inline suggestions.",
+ ref:"QUICK-REFERENCE.md — Model Selection Cheat Sheet"},
+
+{d:1,q:"A developer at Luminary Labs is performing a complex refactoring task that requires understanding nuanced code relationships. Which Copilot model is recommended for this use case?",
+ t:'single',
+ opts:["Raptor Mini","GPT-5.1","GPT-5.1-Codex","Claude Opus 4.5"],
+ correct:[3],
+ expl:"The Quick Reference Model Selection Cheat Sheet lists: 'Claude Opus 4.5 — Refactoring — Nuanced code changes.' For complex refactoring requiring deep comprehension, Claude Opus 4.5 is the recommended choice.",
+ ref:"QUICK-REFERENCE.md — Model Selection Cheat Sheet"},
+
+{d:1,q:"Which GitHub Copilot VS Code setting enables Agent Mode's Plan Mode (preview gate)?",
+ t:'single',
+ opts:[
+  '"github.copilot.chat.model": "gpt-5.1-codex"',
+  '"github.copilot.nextEditSuggestions": true',
+  '"github.copilot.agent.planMode": true',
+  '"github.copilot.enable": { "*": true }',
+ ],
+ correct:[2],
+ expl:"The Quick Reference VS Code settings block shows '\"github.copilot.agent.planMode\": true' as the setting to enable Plan Mode within Agent Mode. This is the specific setting for the preview-before-execution gate.",
+ ref:"QUICK-REFERENCE.md — Quick Settings (VS Code)"},
+
+{d:1,q:"What was retired from GitHub Copilot on December 31, 2025, according to the Quick Reference?",
+ t:'single',
+ opts:["Claude Sonnet 3.5","Mission Control","CSV Reports","Knowledge Bases"],
+ correct:[2],
+ expl:"The Quick Reference 'What's Being Retired' table lists: 'CSV Reports — December 31, 2025.' Claude Sonnet 3.5 was retired on January 31, 2026.",
+ ref:"QUICK-REFERENCE.md — What's Being Retired"},
+
+{d:1,q:"Which of the following are listed as NEW features in the November 2025 GitHub Copilot release? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Multi-model selection",
+  "Mission Control",
+  "Knowledge Bases",
+  "Next Edit Suggestions",
+ ],
+ correct:[0,1,3],
+ expl:"The Quick Reference 'New in November 2025' section lists: Multi-model selection, Mission Control, Plan Mode, Linter Integration, Image Input, BYOK, Copilot Spaces, Threaded Conversations, Next Edit Suggestions, Mobile Agent Sessions. Knowledge Bases were an existing Copilot Enterprise feature, not a November 2025 addition.",
+ ref:"QUICK-REFERENCE.md — New in November 2025"},
+
+{d:1,q:"An administrator at Meridian Software enables audit log tracking for GitHub Copilot Business. What type of activity does the GH-300 blueprint indicate these audit log events capture?",
+ t:'single',
+ opts:[
+  "Only billing and seat-count changes",
+  "Organization-wide Copilot policy changes and usage events",
+  "Individual developer keystroke logs within the IDE",
+  "GitHub Actions workflow execution details for Coding Agent",
+ ],
+ correct:[1],
+ expl:"Domain 2D of the study guide requires candidates to 'utilize audit log events' in the context of organization-wide policy management. The exam objectives describe audit logs as capturing Copilot-related events at the organization level, not individual keystroke data.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 2D / github-copilot-cert-exam-objectives.md"},
+
+// ─── DOMAIN 3 — Data and architecture ────────────────────────────
+
+{d:2,q:"In the GitHub Copilot suggestion lifecycle, what happens immediately AFTER the IDE captures the developer's code context?",
+ t:'single',
+ opts:[
+  "The suggestion is displayed inline to the developer.",
+  "A prompt is built and sent through the proxy service for filtering.",
+  "The proxy service applies duplication detection to the raw context.",
+  "The large language model directly receives the raw file content.",
+ ],
+ correct:[1],
+ expl:"The GH-300 objectives describe the lifecycle as: gather context → build a prompt → send through proxy for filtering → LLM produces response → post-processing through proxy. Building the prompt and proxy filtering precede the LLM response.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3, Data Pipeline and Processing"},
+
+{d:2,q:"What is the role of the GitHub Copilot proxy service in the suggestion lifecycle?",
+ t:'single',
+ opts:[
+  "To display inline suggestions directly in the IDE.",
+  "To store developer code permanently for model training.",
+  "To filter prompts before they reach the LLM and post-process responses before they reach the IDE.",
+  "To manage billing and subscription seat assignments.",
+ ],
+ correct:[2],
+ expl:"Domain 3 of the GH-300 objectives specifies: 'Describe the proxy service and the filters each prompt goes through' and 'Explain the post-processing of GitHub Copilot's responses through the proxy server.' The proxy sits between the IDE and the LLM in both directions.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3 / GH-300-Study-Guide-April-2026.md — Domain 3"},
+
+{d:2,q:"Which of the following are described as limitations of GitHub Copilot (and LLMs in general) in the GH-300 objectives? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Limited context windows",
+  "Inability to generate code in any language other than Python",
+  "Age of code suggestions (training data may be outdated)",
+  "Potential for reasoning errors rather than precise calculations",
+ ],
+ correct:[0,2,3],
+ expl:"The GH-300 objectives list these LLM limitations: limited context windows, the effect of most-seen examples, age of code suggestions, and the nature of Copilot 'providing reasoning and context from a prompt vs calculations.' Copilot supports many languages, not just Python.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3, Limitations"},
+
+{d:2,q:"A developer notices that GitHub Copilot frequently suggests an outdated API that was deprecated two years ago. Which LLM limitation best explains this behavior?",
+ t:'single',
+ opts:[
+  "Limited context windows preventing Copilot from seeing the full file.",
+  "The age of code suggestions and training data that may not reflect recent deprecations.",
+  "A misconfigured content exclusion blocking updated library files.",
+  "Duplication detection filtering out the newer API calls.",
+ ],
+ correct:[1],
+ expl:"The GH-300 objectives explicitly list 'Describe the age of code suggestions (how old and relevant the data is)' as a limitation. Training data has a cutoff date, so recently deprecated or updated APIs may not be reflected in Copilot's suggestions.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3, Limitations"},
+
+{d:2,q:"What does GitHub Copilot include when building a prompt to send to the large language model?",
+ t:'single',
+ opts:[
+  "Only the current line of code the developer is typing.",
+  "The complete Git history of the repository.",
+  "Relevant context gathered from the file, open tabs, and other sources.",
+  "The organization's billing plan information.",
+ ],
+ correct:[2],
+ expl:"Domain 3 of the GH-300 objectives requires candidates to 'Explain how GitHub Copilot gathers context' and 'Explain how GitHub Copilot builds a prompt.' Context includes the current file, related open tabs, and other adjacent signals — not just the current line.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 3 / github-copilot-cert-exam-objectives.md"},
+
+{d:2,q:"How does GitHub Copilot Individual differ from GitHub Copilot Business regarding data usage and sharing?",
+ t:'single',
+ opts:[
+  "Individual data is never used for model training; Business data always is.",
+  "Business provides stronger data exclusion controls and IP indemnity; Individual has fewer enterprise safeguards.",
+  "Individual and Business plans have identical data handling policies.",
+  "Business plan data is shared with third-party analytics providers by default.",
+ ],
+ correct:[1],
+ expl:"The exam objectives state: 'Explain the difference between GitHub Copilot Individual and GitHub Copilot Business (data exclusions, IP indemnity, billing, etc.).' Business offers enterprise-grade data controls, IP indemnity, and organizational policy management that Individual does not.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2, Copilot Individual"},
+
+// ─── DOMAIN 4 — Prompt engineering ───────────────────────────────
+
+{d:3,q:"A developer at Pinnacle Code wants to prime Copilot Chat with two example input/output pairs before asking it to generate a new function. Which prompting technique are they applying?",
+ t:'single',
+ opts:[
+  "Zero-shot prompting",
+  "Few-shot prompting",
+  "Chain-of-thought prompting",
+  "Plan Mode prompting",
+ ],
+ correct:[1],
+ expl:"The GH-300 blueprint (Domain 4) requires candidates to 'Use zero-shot and few-shot prompting.' Few-shot prompting provides example pairs to guide the model. Zero-shot provides no examples. The documentation explicitly names both techniques.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 4 / gh300-objectives.md — Domain 4"},
+
+{d:3,q:"What is zero-shot prompting in the context of GitHub Copilot Chat?",
+ t:'single',
+ opts:[
+  "Sending a prompt with zero characters (empty input).",
+  "Providing examples to guide the model before asking the actual question.",
+  "Asking the model a question or giving a task without providing any examples.",
+  "Using the /plan command to preview changes with no prior context.",
+ ],
+ correct:[2],
+ expl:"Zero-shot prompting means asking the model to perform a task without providing examples. This is contrasted with few-shot prompting (with examples) in the GH-300 Domain 4 objectives.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 4"},
+
+{d:3,q:"According to the GH-300 objectives, what should a developer include in a well-structured Copilot prompt to maximize the quality of the response?",
+ t:'single',
+ opts:[
+  "Only the function signature with no additional context.",
+  "Clear context describing the goal, constraints, and relevant details.",
+  "The entire codebase pasted directly into the chat.",
+  "Exclusively slash commands without any natural language.",
+ ],
+ correct:[1],
+ expl:"Domain 4 of the GH-300 blueprint requires candidates to 'Describe prompt structure and context' and 'Apply best practices for prompt crafting.' Best practice is to provide clear, specific context about the goal and constraints — not to omit context or paste entire codebases.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 4"},
+
+{d:3,q:"A developer at Nexus Labs iteratively refines a Copilot prompt after receiving an unsatisfactory response, adjusting the wording and adding constraints. Which Domain 4 skill does this demonstrate?",
+ t:'single',
+ opts:[
+  "Zero-shot prompting",
+  "Sub-agent delegation",
+  "Use of chat history and context boundaries",
+  "Iterative prompt refinement",
+ ],
+ correct:[3],
+ expl:"The gh300-objectives.md explicitly lists 'Use iterative prompt refinement' as a Domain 4 skill. Iterative refinement means successively improving a prompt based on model output until the desired result is achieved.",
+ ref:"gh300-objectives.md — Domain 4"},
+
+{d:3,q:"Why is chat history important in GitHub Copilot Chat sessions, according to the GH-300 prompt engineering objectives?",
+ t:'single',
+ opts:[
+  "Chat history is stored permanently in the repository for compliance auditing.",
+  "It allows Copilot to maintain context across multiple turns, improving the relevance of subsequent responses.",
+  "Chat history is irrelevant because each message is processed independently.",
+  "It is used by the proxy service to filter duplicate suggestions.",
+ ],
+ correct:[1],
+ expl:"Domain 4 objectives include 'Describe prompt process flow and chat history usage.' Chat history enables Copilot to maintain multi-turn context, making follow-up questions and iterative refinement more effective.",
+ ref:"gh300-objectives.md — Domain 4 / GH-300-Study-Guide-April-2026.md — Domain 4"},
+
+// ─── DOMAIN 5 — Developer productivity ───────────────────────────
+
+{d:4,q:"A developer at Quantum Ridge Software uses GitHub Copilot to automatically create JSDoc comments for a class they just wrote. Which productivity use case does this represent?",
+ t:'single',
+ opts:[
+  "Code generation",
+  "Refactoring",
+  "Documentation generation",
+  "Test generation",
+ ],
+ correct:[2],
+ expl:"Domain 5 of the GH-300 blueprint lists 'code generation, refactoring, and documentation' as core productivity use cases. Generating JSDoc comments is documentation generation, not code generation or refactoring.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5 / gh300-objectives.md — Domain 5"},
+
+{d:4,q:"A team at Horizon Digital is modernizing a large Java 8 codebase to Java 17. Which GitHub Copilot productivity use case directly supports this scenario?",
+ t:'single',
+ opts:[
+  "Accelerate learning",
+  "Generate sample data",
+  "Modernize legacy code",
+  "Reduce context switching",
+ ],
+ correct:[2],
+ expl:"Domain 5 of the study guide lists 'modernize legacy code' as an explicit productivity use case. Migrating a Java 8 codebase to Java 17 is a canonical legacy modernization scenario.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5"},
+
+{d:4,q:"A developer wants Copilot to suggest unit tests that include edge cases and boundary conditions for a payment-processing function. Which Domain 5 objective does this align with?",
+ t:'single',
+ opts:[
+  "Accelerate learning and reduce context switching",
+  "Identify edge cases and write assertions",
+  "Suggest security improvements and performance optimizations",
+  "Generate sample data",
+ ],
+ correct:[1],
+ expl:"Domain 5 explicitly lists 'Identify edge cases and write assertions' as a testing-related productivity skill. Edge cases and boundary conditions are central to thorough test coverage.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5 / gh300-objectives.md — Domain 5"},
+
+{d:4,q:"How does GitHub Copilot help reduce context switching for developers, according to the GH-300 productivity objectives?",
+ t:'single',
+ opts:[
+  "By disabling notifications from other applications during coding sessions.",
+  "By providing relevant answers, code, and documentation directly in the IDE without requiring the developer to leave their workflow.",
+  "By automatically merging pull requests to reduce the number of browser tabs open.",
+  "By blocking internet access during coding to prevent distractions.",
+ ],
+ correct:[1],
+ expl:"Domain 5 of the GH-300 blueprint lists 'reduce context switching' as a productivity goal. Copilot reduces context switching by surfacing explanations, code, tests, and documentation within the IDE, so developers do not need to switch to browser searches or documentation sites.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5 / gh300-objectives.md — Domain 5"},
+
+{d:4,q:"Which of the following are listed as productivity use cases for GitHub Copilot in Domain 5 of the GH-300 blueprint? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Generate unit and integration tests",
+  "Manage GitHub Copilot subscription seats via REST API",
+  "Generate sample data",
+  "Suggest security improvements",
+ ],
+ correct:[0,2,3],
+ expl:"Domain 5 of the study guide and objectives lists: generate tests, generate sample data, suggest security improvements and performance optimizations, modernize legacy code, refactoring, documentation, and learning acceleration. Subscription seat management via REST API is a Domain 2D organizational management topic, not a developer productivity use case.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5"},
+
+// ─── DOMAIN 6 — Privacy, exclusions, safeguards ──────────────────
+
+{d:5,q:"An organization at Stormlight Solutions wants to prevent GitHub Copilot from reading or suggesting code from a specific internal repository containing trade secrets. Which feature should the organization administrator configure?",
+ t:'single',
+ opts:[
+  "Duplication detection",
+  "Content exclusions",
+  "BYOK (Bring Your Own Key)",
+  "Private MCP Registry",
+ ],
+ correct:[1],
+ expl:"Domain 6 of the GH-300 blueprint requires candidates to 'Configure content exclusions.' The study guide also notes: 'Exclusions block files/repos from being sent.' Content exclusions prevent specified files or repositories from being included in Copilot context.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / Memorize-These Distinctions"},
+
+{d:5,q:"What is the purpose of duplication detection in GitHub Copilot, and how does it differ from content exclusions?",
+ t:'single',
+ opts:[
+  "Duplication detection prevents the same file from being opened twice. Content exclusions rename duplicate files.",
+  "Duplication detection blocks suggestions that match public code. Content exclusions block files or repos from being sent as context.",
+  "Duplication detection is an Enterprise-only feature. Content exclusions are available on all plans.",
+  "They serve the same purpose; the names are interchangeable.",
+ ],
+ correct:[1],
+ expl:"The study guide Memorize-These Distinctions table states: 'Exclusions block files/repos from being sent. Duplication detection blocks suggestions that match public code.' These are two distinct safeguard mechanisms with different purposes.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:5,q:"A developer at Crestwood Technologies notices that Copilot is still suggesting code from a file they added to content exclusions. Which Domain 6 skill should they apply?",
+ t:'single',
+ opts:[
+  "Enable BYOK to encrypt the excluded file.",
+  "Troubleshoot exclusions and suggestion behavior.",
+  "Upgrade to Copilot Enterprise for stronger exclusion enforcement.",
+  "Disable duplication detection to prevent conflicts.",
+ ],
+ correct:[1],
+ expl:"Domain 6 of the GH-300 blueprint explicitly includes 'Troubleshoot exclusions and suggestion behavior.' When content exclusions do not appear to be working, the skill is to diagnose and resolve the issue.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / gh300-objectives.md — Domain 6"},
+
+{d:5,q:"According to the GH-300 privacy objectives, who owns the output (generated code) that GitHub Copilot produces?",
+ t:'single',
+ opts:[
+  "GitHub owns all AI-generated code as the service provider.",
+  "The generated code is in the public domain with no owner.",
+  "Output ownership and policy boundaries are defined by organizational policy; developers should understand these limitations.",
+  "The developer who accepts the suggestion automatically receives a GitHub patent.",
+ ],
+ correct:[2],
+ expl:"Domain 6 of the GH-300 objectives requires candidates to 'Describe ownership and limitations of outputs.' The correct framing is that output ownership is governed by organizational and legal policy — not automatically held by GitHub or the developer — and candidates must understand these boundaries.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / gh300-objectives.md — Domain 6"},
+
+{d:5,q:"Which GitHub Copilot safeguard alerts developers when a suggested code snippet closely matches publicly available open-source code?",
+ t:'single',
+ opts:[
+  "Content exclusions",
+  "Security warnings",
+  "Duplication detection",
+  "Proxy filtering",
+ ],
+ correct:[2],
+ expl:"Domain 6 objectives list 'Use duplication detection and security warnings' as distinct safeguards. Duplication detection specifically flags suggestions that match public code, while security warnings flag potentially insecure code patterns.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / gh300-objectives.md — Domain 6"},
+
+{d:5,q:"A GitHub Copilot Business administrator at Ironclad Systems wants to enable a safeguard that warns developers when Copilot suggests code with potential security vulnerabilities. Which feature should they enable?",
+ t:'single',
+ opts:[
+  "Duplication detection",
+  "Content exclusions",
+  "Security warnings",
+  "Audit log review",
+ ],
+ correct:[2],
+ expl:"Domain 6 explicitly lists 'Enable duplication detection and security warnings' as a safeguard objective. Security warnings specifically alert developers to potentially insecure code patterns in Copilot suggestions.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / gh300-objectives.md — Domain 6"},
+
+// ─── MIXED — Exam meta and distinguishing concepts ────────────────
+
+{d:1,q:"According to the GH-300 study guide, what is the heaviest-weighted domain in the January 2026 blueprint?",
+ t:'single',
+ opts:[
+  "Use GitHub Copilot responsibly (15–20%)",
+  "Use GitHub Copilot features (25–30%)",
+  "Configure privacy, content exclusions, and safeguards (10–15%)",
+  "Understand GitHub Copilot data and architecture (10–15%)",
+ ],
+ correct:[1],
+ expl:"The GH-300 study guide table explicitly marks Domain 2 'Use GitHub Copilot features' as the heaviest-weighted group at 25–30%, stating 'This is the heaviest-weighted group. Expect scenario-based questions across four sub-areas.'",
+ ref:"GH-300-Study-Guide-April-2026.md — Skills Measured"},
+
+{d:0,q:"Compared to the prior GH-300 blueprint, how did the weight of 'Responsible AI' change in the January 2026 update?",
+ t:'single',
+ opts:[
+  "It decreased from 15–20% to 7%.",
+  "It remained unchanged at 15–20%.",
+  "It grew from 7% to 15–20%.",
+  "It was merged into the 'Use GitHub Copilot features' domain.",
+ ],
+ correct:[2],
+ expl:"The study guide 'What changed from the prior blueprint?' section states: 'Responsible AI grew from 7% to 15–20%.' This is a significant weight increase candidates must recognize.",
+ ref:"GH-300-Study-Guide-April-2026.md — Skills Measured — What changed"},
+
+{d:1,q:"A developer is asked: 'Which trigger surface should I use for autonomous tasks in the cloud that produce a pull request?' What is the correct answer?",
+ t:'single',
+ opts:[
+  "Agent Mode — because it supports autonomous tasks",
+  "Coding Agent — because it runs in GitHub Actions and creates a PR",
+  "Plan Mode — because it previews changes before execution",
+  "Edit Mode — because it performs multi-file edits",
+ ],
+ correct:[1],
+ expl:"Tim's Test-Taking Tips state: 'Many questions hinge on whether the scenario is IDE-local (Agent Mode) vs cloud (Coding Agent) vs CLI.' Cloud + PR creation = Coding Agent (GitHub Actions). Agent Mode = IDE-local.",
+ ref:"GH-300-Study-Guide-April-2026.md — Tim's Test-Taking Tips / Memorize-These Distinctions"},
+
+{d:1,q:"How long is the GitHub Copilot certification (GH-300) valid after passing?",
+ t:'single',
+ opts:["1 year","2 years","3 years","Indefinitely"],
+ correct:[1],
+ expl:"The study guide 'At a Glance' table states 'Validity: 2 years from achievement date.' Renewal is via a free online assessment on Microsoft Learn.",
+ ref:"GH-300-Study-Guide-April-2026.md — At a Glance"},
+
+{d:1,q:"The GH-300 exam is offered in which languages? (Select all that apply)",
+ t:'multi',
+ opts:["English","Japanese","Korean","German"],
+ correct:[0,1,2],
+ expl:"The GH-300 study guide 'At a Glance' table lists: 'Languages: English, Japanese, Korean, Portuguese (Brazil), Spanish.' German is not listed as a supported language.",
+ ref:"GH-300-Study-Guide-April-2026.md — At a Glance"},
+
+{d:1,q:"Which GitHub Copilot feature is described as a 'Mission Control' dashboard in the January 2026 blueprint?",
+ t:'single',
+ opts:[
+  "The VS Code Copilot settings panel",
+  "A feature for managing and monitoring agent sessions",
+  "The GitHub organization audit log interface",
+  "The Knowledge Base search interface in Copilot Enterprise",
+ ],
+ correct:[1],
+ expl:"The exam objectives list 'Mission Control — Managing multiple agent sessions' as a new capability. The Quick Reference also defines Mission Control as an 'Agent task dashboard' with keyboard shortcut Ctrl+Shift+M.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2 / QUICK-REFERENCE.md"},
+
+{d:2,q:"According to the GH-300 architecture objectives, what does 'post-processing' refer to in the GitHub Copilot suggestion lifecycle?",
+ t:'single',
+ opts:[
+  "The step where the developer reviews and accepts or rejects a suggestion.",
+  "The proxy service filtering the model's raw response before delivering it to the IDE.",
+  "The training process GitHub uses to improve the underlying language model.",
+  "The step where the IDE syntax-highlights the accepted code.",
+ ],
+ correct:[1],
+ expl:"Domain 3 objectives specify 'Explain the post-processing of GitHub Copilot's responses through the proxy server.' Post-processing is the proxy-level filtering applied to the LLM's raw output before it reaches the developer's IDE.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3"},
+
+{d:4,q:"A developer asks Copilot to generate realistic-looking user records with names, emails, and addresses for a database seeding script. Which Domain 5 use case does this represent?",
+ t:'single',
+ opts:[
+  "Refactoring",
+  "Modernize legacy code",
+  "Generate sample data",
+  "Reduce context switching",
+ ],
+ correct:[2],
+ expl:"Domain 5 of the GH-300 objectives lists 'Generate sample data' explicitly as a productivity use case. Generating test or seed data is a canonical example of this use case.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5 / gh300-objectives.md — Domain 5"},
+
+{d:3,q:"A Copilot suggestion is returned from the LLM but then blocked before it reaches the developer's IDE because it exactly matches a block of public open-source code. Which mechanism in the Copilot architecture is responsible for this?",
+ t:'single',
+ opts:[
+  "Content exclusions configured by the organization administrator",
+  "Duplication detection applied during post-processing by the proxy service",
+  "The IDE extension rejecting the suggestion locally",
+  "Mission Control's budget policy blocking the response",
+ ],
+ correct:[1],
+ expl:"The study guide Memorize-These Distinctions states: 'Duplication detection blocks suggestions that match public code.' This check occurs in the proxy post-processing phase, not in the IDE or through content exclusions.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions"},
+
+{d:5,q:"Which GitHub Copilot feature would help a developer at Vanguard Code quickly understand an unfamiliar regex pattern in a legacy codebase without leaving the IDE?",
+ t:'single',
+ opts:[
+  "/tests",
+  "/explain",
+  "/optimize",
+  "/plan",
+ ],
+ correct:[1],
+ expl:"The Quick Reference lists '/explain — Understand code — /explain What does this regex do?' This slash command is the primary tool for understanding unfamiliar code patterns within Copilot Chat.",
+ ref:"QUICK-REFERENCE.md — Slash Commands Quick Reference"},
+
+{d:1,q:"Which GitHub Copilot feature would a Copilot Enterprise organization use to host and expose internal tool integrations securely to their developers?",
+ t:'single',
+ opts:[
+  "BYOK (Bring Your Own Key)",
+  "Private MCP Registry",
+  "Copilot Spaces",
+  "Budget Tracking",
+ ],
+ correct:[1],
+ expl:"The exam objectives list 'Private MCP Registry for internal tools' as a new Copilot Enterprise feature. It allows enterprises to host and expose internal MCP-compatible tools to developers through a private, organization-controlled registry.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2, Copilot Enterprise"},
+
+{d:4,q:"A developer at Stratos Digital creates a .github/prompts/code-review.prompt.md file that standardizes how teammates ask Copilot to review pull requests. Which Domain 4 concept does this file implement?",
+ t:'single',
+ opts:[
+  "Zero-shot prompting",
+  "Iterative prompt refinement",
+  "Prompt file reuse for consistent responses",
+  "Few-shot prompting",
+ ],
+ correct:[2],
+ expl:"Domain 2C of the study guide mentions 'prompt file reuse for consistent responses' as a feature. The repository configuration table also lists '.github/prompts/*.prompt.md — Reusable prompt templates.' Creating a shared prompt file enables consistent, team-wide Copilot interactions.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 2C / QUICK-REFERENCE.md — Repository Configuration Files"},
+
+{d:1,q:"A team at Cascade Systems needs to configure Copilot to apply specific coding standards to all code reviews across their entire organization. Which configuration file type should they use?",
+ t:'single',
+ opts:[
+  ".copilotignore",
+  ".github/prompts/*.prompt.md (Prompt files)",
+  ".github/copilot-instructions.md (Instructions file)",
+  "A custom GitHub Actions workflow",
+ ],
+ correct:[2],
+ expl:"The study guide states: 'Instructions files = persistent review/coding standards.' Domain 2C also lists 'customizable review standards via instructions files.' The .github/copilot-instructions.md file provides repo-level persistent behavior and coding standards.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions / Domain 2C"},
+
+{d:0,q:"The GH-300 study guide identifies 'validate AI output' as a recurring exam theme. When a developer is in doubt about whether to merge a Copilot-generated change, what does the responsible AI principle recommend?",
+ t:'single',
+ opts:[
+  "Merge immediately to maintain development velocity.",
+  "Ask a sub-agent to validate the change automatically.",
+  "Review the suggestion before merging.",
+  "Disable Copilot until the uncertainty is resolved.",
+ ],
+ correct:[2],
+ expl:"Tim's Test-Taking Tips explicitly state: 'Validate AI output is a recurring theme — when in doubt, the responsible answer is review before merge.' This is the canonical responsible-AI answer for any scenario involving uncertain AI-generated content.",
+ ref:"GH-300-Study-Guide-April-2026.md — Tim's Test-Taking Tips"},
+
+];
+
+// ══════════════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════════════
+let questions = [];
+let current = 0;
+let answers  = {};   // index → Set of selected option indices
+let flags    = new Set();
+let timerInterval = null;
+let secondsLeft = 90 * 60;
+let feedbackMode = 'immediate';
+let confirmedQ   = new Set();
+
+// ══════════════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════════════
+document.getElementById('total-q-display').textContent = BANK.length;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function startExam() {
+  const countSel = document.getElementById('cfg-count').value;
+  feedbackMode   = document.getElementById('cfg-feedback').value;
+  const modeSel  = document.getElementById('cfg-mode').value;
+
+  let pool = [...BANK];
+  if (modeSel === 'random') shuffle(pool);
+  if (countSel !== 'all') {
+    const n = parseInt(countSel);
+    pool = pool.slice(0, Math.min(n, pool.length));
+  }
+  questions = pool;
+  current = 0;
+  answers  = {};
+  flags    = new Set();
+  confirmedQ = new Set();
+  secondsLeft = 90 * 60;
+
+  showScreen('exam');
+  renderQuestion();
+  startTimer();
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  TIMER
+// ══════════════════════════════════════════════════════════════════
+function startTimer() {
+  clearInterval(timerInterval);
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    updateTimerDisplay();
+    if (secondsLeft <= 0) { clearInterval(timerInterval); finishExam(); }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  const box = document.getElementById('timer-box');
+  box.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  box.className = secondsLeft < 300 ? 'danger' : secondsLeft < 900 ? 'warning' : '';
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  RENDER QUESTION
+// ══════════════════════════════════════════════════════════════════
+function renderQuestion() {
+  const q = questions[current];
+  const total = questions.length;
+  const sel = answers[current] ?? new Set();
+
+  // Progress
+  document.getElementById('progress-bar').style.width = `${((current + 1) / total) * 100}%`;
+
+  // Header
+  document.getElementById('question-num-badge').textContent = `Q${current + 1} / ${total}`;
+  document.getElementById('domain-tag').textContent = DOMAINS[q.d];
+
+  // Text
+  document.getElementById('question-text').textContent = q.q;
+
+  // Multi-hint
+  const hint = document.getElementById('multi-hint');
+  hint.className = q.t === 'multi' ? 'show' : '';
+
+  // Options
+  const list = document.getElementById('options-list');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+  const isConfirmed = confirmedQ.has(current);
+
+  q.opts.forEach((opt, i) => {
+    const li = document.createElement('li');
+    li.className = 'opt';
+
+    if (isConfirmed) {
+      const isCorrect = q.correct.includes(i);
+      const wasSelected = sel.has(i);
+      if (isCorrect && wasSelected) li.className += ' correct';
+      else if (!isCorrect && wasSelected) li.className += ' wrong';
+      else if (isCorrect && !wasSelected) li.className += ' show-correct';
+    } else {
+      if (sel.has(i)) li.className += ' selected';
+    }
+
+    li.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${opt}</span>`;
+
+    if (!isConfirmed) {
+      li.addEventListener('click', () => toggleOption(i));
+    }
+    list.appendChild(li);
+  });
+
+  // Confirm button
+  const confirmBtn = document.getElementById('confirm-btn');
+  if (feedbackMode === 'immediate' && !isConfirmed) {
+    confirmBtn.style.display = '';
+  } else {
+    confirmBtn.style.display = 'none';
+  }
+
+  // Feedback box
+  const fb = document.getElementById('feedback-box');
+  if (isConfirmed && feedbackMode === 'immediate') {
+    showFeedback(q, sel);
+  } else {
+    fb.className = 'feedback-box';
+    fb.style.display = 'none';
+  }
+
+  // Flag button
+  const flagBtn = document.getElementById('flag-btn');
+  flagBtn.className = 'btn btn-surface' + (flags.has(current) ? ' flagged' : '');
+  flagBtn.textContent = flags.has(current) ? '🚩 Marcada' : '🚩 Marcar';
+
+  updateMap();
+}
+
+function toggleOption(i) {
+  if (confirmedQ.has(current)) return;
+  const q = questions[current];
+  if (!answers[current]) answers[current] = new Set();
+  const sel = answers[current];
+
+  if (q.t === 'single') {
+    sel.clear();
+    sel.add(i);
+  } else {
+    if (sel.has(i)) sel.delete(i);
+    else sel.add(i);
+  }
+  renderQuestion();
+}
+
+function confirmAnswer() {
+  if (!answers[current] || answers[current].size === 0) {
+    alert('Selecciona al menos una opción antes de confirmar.');
+    return;
+  }
+  confirmedQ.add(current);
+  renderQuestion();
+}
+
+function showFeedback(q, sel) {
+  const fb = document.getElementById('feedback-box');
+  fb.style.display = '';
+
+  const selArr = [...sel];
+  const correctArr = q.correct;
+  const isRight = selArr.length === correctArr.length &&
+                  correctArr.every(c => sel.has(c));
+
+  const title = document.getElementById('fb-title');
+  title.className = 'fb-title ' + (isRight ? 'fb-correct' : 'fb-wrong');
+  title.textContent = isRight ? '✓ Correcto' : '✗ Incorrecto';
+
+  document.getElementById('fb-body').textContent = q.expl;
+  document.getElementById('fb-ref').textContent  = '📄 Fuente: ' + q.ref;
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════════════════════════════
+function navNext() {
+  if (current < questions.length - 1) { current++; renderQuestion(); }
+}
+function navPrev() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+function toggleFlag() {
+  if (flags.has(current)) flags.delete(current);
+  else flags.add(current);
+  renderQuestion();
+}
+
+function toggleMap() {
+  const map = document.getElementById('question-map');
+  const btn = document.getElementById('qmap-toggle');
+  if (map.classList.contains('show')) {
+    map.classList.remove('show');
+    btn.textContent = 'Ver mapa de preguntas';
+  } else {
+    map.classList.add('show');
+    btn.textContent = 'Ocultar mapa de preguntas';
+  }
+}
+
+function updateMap() {
+  const grid = document.getElementById('qmap-grid');
+  grid.innerHTML = '';
+  questions.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'qmap-dot';
+    dot.textContent = i + 1;
+    if (answers[i] && answers[i].size > 0) dot.classList.add('answered');
+    if (flags.has(i)) dot.classList.add('flagged');
+    if (i === current) dot.classList.add('current');
+    dot.addEventListener('click', () => { current = i; renderQuestion(); });
+    grid.appendChild(dot);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  FINISH
+// ══════════════════════════════════════════════════════════════════
+function finishExam() {
+  const unanswered = questions.length - Object.keys(answers).filter(k => answers[k].size > 0).length;
+  if (unanswered > 0) {
+    if (!confirm(`Tienes ${unanswered} pregunta(s) sin responder. ¿Deseas finalizar de todas formas?`)) return;
+  }
+  clearInterval(timerInterval);
+  computeResults();
+}
+
+function computeResults() {
+  let correct = 0;
+  const domainStats = Array(6).fill(null).map(() => ({ correct: 0, total: 0 }));
+  const wrongOnes = [];
+
+  questions.forEach((q, i) => {
+    const sel = answers[i] ?? new Set();
+    const selArr = [...sel].sort();
+    const corrArr = [...q.correct].sort();
+    const isRight = selArr.length === corrArr.length &&
+                    corrArr.every((c, idx) => c === selArr[idx]);
+
+    domainStats[q.d].total++;
+    if (isRight) {
+      correct++;
+      domainStats[q.d].correct++;
+    } else {
+      wrongOnes.push({ q, i, sel, isRight });
+    }
+  });
+
+  const rawPct = correct / questions.length;
+  const score  = Math.round(rawPct * 1000);
+  const passed = score >= 700;
+
+  showScreen('results');
+
+  // Score circle
+  const circle = document.getElementById('result-score-circle');
+  circle.textContent = score;
+  circle.className = 'pass-circle ' + (passed ? 'pass' : 'fail');
+  circle.id = 'result-score-circle';
+  circle.className = passed ? 'pass' : 'fail';
+  // reapply styles via inline
+  circle.style.cssText = `
+    width:140px;height:140px;border-radius:50%;margin:0 auto 20px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:36px;font-weight:800;border:6px solid;
+    border-color:${passed ? 'var(--accent)' : 'var(--red)'};
+    color:${passed ? 'var(--accent)' : 'var(--red)'};
+  `;
+
+  document.getElementById('result-verdict').textContent = passed ? '✅ APROBADO' : '❌ NO APROBADO';
+  document.getElementById('result-sub').textContent =
+    `${score}/1000 — ${correct} de ${questions.length} preguntas correctas (${Math.round(rawPct*100)}%) — Mínimo: 700`;
+
+  // Domain scores
+  const dsList = document.getElementById('domain-scores');
+  dsList.innerHTML = '';
+  domainStats.forEach((ds, idx) => {
+    if (ds.total === 0) return;
+    const pct = Math.round((ds.correct / ds.total) * 100);
+    const good = pct >= 70;
+    const row = document.createElement('div');
+    row.className = 'domain-score-row';
+    row.innerHTML = `
+      <div class="ds-label">${DOMAINS[idx]}</div>
+      <div class="ds-pct" style="color:${good ? 'var(--accent)' : 'var(--red)'}">${pct}%</div>
+      <div class="ds-bar-wrap">
+        <div class="ds-bar ${good ? 'good' : 'bad'}" style="width:${pct}%"></div>
+      </div>
+    `;
+    dsList.appendChild(row);
+  });
+
+  // Wrong answers review
+  const rl = document.getElementById('review-list');
+  rl.innerHTML = '';
+  if (wrongOnes.length === 0) {
+    rl.innerHTML = '<p style="color:var(--accent);font-weight:600;">¡Perfecto! Todas las respuestas son correctas.</p>';
+    return;
+  }
+  const letters = ['A','B','C','D','E'];
+  wrongOnes.forEach(({ q, i, sel }) => {
+    const selText = [...sel].map(x => letters[x]).join(', ') || '(sin respuesta)';
+    const corrText = q.correct.map(x => letters[x]).join(', ');
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `
+      <div class="ri-q">Q${i+1}. ${q.q}</div>
+      <div class="ri-row"><span class="ri-label your">Tu respuesta</span><span>${selText} — ${[...sel].map(x => q.opts[x]).join(' / ') || '(sin respuesta)'}</span></div>
+      <div class="ri-row"><span class="ri-label answer">Correcta</span><span>${corrText} — ${q.correct.map(x => q.opts[x]).join(' / ')}</span></div>
+      <div class="ri-expl">${q.expl}</div>
+      <div class="ri-expl" style="margin-top:4px;font-size:11px;">📄 ${q.ref}</div>
+    `;
+    rl.appendChild(div);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  SCREEN MANAGER
+// ══════════════════════════════════════════════════════════════════
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+}
+</script>
+</body>
+</html>
