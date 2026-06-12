@@ -1315,6 +1315,579 @@ const BANK = [
  expl:"Tim's Test-Taking Tips explicitly state: 'Validate AI output is a recurring theme — when in doubt, the responsible answer is review before merge.' This is the canonical responsible-AI answer for any scenario involving uncertain AI-generated content.",
  ref:"GH-300-Study-Guide-April-2026.md — Tim's Test-Taking Tips"},
 
+,
+
+// ═══════════════════════════════════════════════════════════════════
+//  EXTENDED BANK — Domain 2 focus + weak-area reinforcement
+//  All questions derived from: QUICK-REFERENCE.md,
+//  GH-300-Study-Guide-April-2026.md, gh300-objectives.md,
+//  github-copilot-cert-exam-objectives.md
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Domain 2 — Agent Mode vs Coding Agent (repeated weakness) ───
+
+{d:1,q:"A developer at Thornfield Labs opens VS Code, types a chat message asking Copilot to add authentication to three files, and Copilot starts editing those files directly. Which Copilot feature is the developer using?",
+ t:'single',
+ opts:[
+  "Coding Agent",
+  "Agent Mode",
+  "Plan Mode",
+  "Edit Mode",
+ ],
+ correct:[1],
+ expl:"Agent Mode runs in the IDE (local), is triggered via chat commands, and performs direct file edits. The developer never left VS Code and did not assign an issue — those are the signals for Agent Mode, not Coding Agent (which runs in GitHub Actions and produces a PR).",
+ ref:"QUICK-REFERENCE.md — The Big Distinction"},
+
+{d:1,q:"An engineering lead at Prism Systems assigns a GitHub issue titled 'Add OAuth support' directly to Copilot. A few minutes later a pull request appears in the repository. Which Copilot feature produced that PR?",
+ t:'single',
+ opts:[
+  "Agent Mode",
+  "Edit Mode",
+  "Coding Agent",
+  "Plan Mode",
+ ],
+ correct:[2],
+ expl:"Coding Agent is triggered by assigning a GitHub issue to Copilot. It runs in GitHub Actions (cloud) and its output is a pull request. Agent Mode runs locally in the IDE and does not produce PRs.",
+ ref:"QUICK-REFERENCE.md — The Big Distinction"},
+
+{d:1,q:"Which statement about Agent Mode and Coding Agent is CORRECT according to the January 2026 Quick Reference?",
+ t:'single',
+ opts:[
+  "Both run inside the IDE and produce direct file edits.",
+  "Agent Mode runs in GitHub Actions; Coding Agent runs in the IDE.",
+  "Agent Mode runs in the IDE; Coding Agent runs in GitHub Actions.",
+  "Both require Copilot Enterprise and produce a pull request as output.",
+ ],
+ correct:[2],
+ expl:"Quick Reference table: Agent Mode — Where: Your IDE (local). Coding Agent — Where: GitHub Actions (cloud). This is the core distinction the GH-300 study guide flags as a recurring exam theme.",
+ ref:"QUICK-REFERENCE.md — The Big Distinction"},
+
+{d:1,q:"A developer at Glacier Code wants to run Agent Mode from their smartphone using the GitHub Mobile app. Which November 2025 feature makes this possible?",
+ t:'single',
+ opts:[
+  "Threaded Conversations",
+  "Mission Control",
+  "Mobile Agent Sessions",
+  "Next Edit Suggestions",
+ ],
+ correct:[2],
+ expl:"The Quick Reference 'New in November 2025' list item 10 states: 'Mobile Agent Sessions — GitHub Mobile app.' This feature extends Agent Mode sessions to mobile devices.",
+ ref:"QUICK-REFERENCE.md — New in November 2025"},
+
+{d:1,q:"Which of the following correctly describes the TRIGGER and OUTPUT of Coding Agent? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Trigger: Assign a GitHub issue to Copilot",
+  "Trigger: Type a chat command in VS Code",
+  "Output: Creates a pull request",
+  "Output: Edits files directly in the IDE",
+ ],
+ correct:[0,2],
+ expl:"Quick Reference: Coding Agent — Trigger: Assign issue to Copilot, Output: Creates a PR. The chat-command trigger and direct-file-edit output describe Agent Mode, not Coding Agent.",
+ ref:"QUICK-REFERENCE.md — The Big Distinction"},
+
+{d:1,q:"Plan Mode is described in the GH-300 study guide as 'a feature, not a product.' Inside which other Copilot feature does Plan Mode operate as a gate?",
+ t:'single',
+ opts:[
+  "Coding Agent",
+  "Edit Mode",
+  "Agent Mode",
+  "Copilot Spaces",
+ ],
+ correct:[2],
+ expl:"The GH-300 study guide Tim's Test-Taking Tips state explicitly: 'Plan Mode is a feature, not a product. It's the preview/approve gate inside Agent Mode.' Plan Mode does not operate inside Coding Agent or Edit Mode.",
+ ref:"GH-300-Study-Guide-April-2026.md — Tim's Test-Taking Tips"},
+
+// ─── Domain 2 — Plan comparison (weak area) ──────────────────────
+
+{d:1,q:"Which GitHub Copilot features are available EXCLUSIVELY on the Enterprise plan, and NOT on Individual or Business? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Knowledge Bases",
+  "BYOK (Bring Your Own Key)",
+  "Custom Models",
+  "Private MCP Registry",
+ ],
+ correct:[0,2,3],
+ expl:"Quick Reference Plan Comparison: Knowledge Bases: Individual ❌, Business ❌, Enterprise ✅. Custom Models: Individual ❌, Business ❌, Enterprise ✅. Private MCP Registry: Individual ❌, Business ❌, Enterprise ✅. BYOK is available on Business AND Enterprise (❌✅✅), so it is not Enterprise-exclusive.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+{d:1,q:"A company currently on Copilot Business wants to add Knowledge Bases. What must they do?",
+ t:'single',
+ opts:[
+  "Enable the feature in organization settings — it is included in Business.",
+  "Upgrade to Copilot Enterprise, as Knowledge Bases are not available on Business.",
+  "Purchase an add-on module called Copilot Knowledge.",
+  "Configure a Private MCP Registry to simulate Knowledge Base functionality.",
+ ],
+ correct:[1],
+ expl:"Quick Reference Plan Comparison Chart shows Knowledge Bases: Individual ❌, Business ❌, Enterprise ✅. Knowledge Bases are an Enterprise-only feature and require upgrading from Business.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+{d:1,q:"Which plans include Cloud Agent capability? (Select all that apply)",
+ t:'multi',
+ opts:["Individual","Business","Enterprise","Developer (legacy)"],
+ correct:[1,2],
+ expl:"Quick Reference Plan Comparison: Cloud Agent — Individual ❌, Business ✅, Enterprise ✅. Cloud Agent is not available on Individual plan.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+{d:1,q:"An administrator at Starfield Corp evaluates whether Copilot Individual meets their enterprise needs. Which of the following features are MISSING from the Individual plan? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Inline suggestions",
+  "Coding Agent",
+  "Knowledge Bases",
+  "Budget Tracking",
+ ],
+ correct:[1,2,3],
+ expl:"Quick Reference Plan Comparison: Inline suggestions ✅ on Individual. Coding Agent ❌ on Individual. Knowledge Bases ❌ on Individual. Budget Tracking ❌ on Individual. Individual lacks all enterprise governance and advanced agent features.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+{d:1,q:"BYOK (Bring Your Own Key) is listed in the Quick Reference as available on which plans?",
+ t:'single',
+ opts:[
+  "Enterprise only",
+  "Individual and Business",
+  "Business and Enterprise",
+  "All plans including Individual",
+ ],
+ correct:[2],
+ expl:"Quick Reference Plan Comparison Chart: BYOK — Individual ❌, Business ✅, Enterprise ✅. BYOK is a Business and Enterprise feature, not Enterprise-exclusive and not available on Individual.",
+ ref:"QUICK-REFERENCE.md — Plan Comparison Chart"},
+
+// ─── Domain 2 — Enterprise features (Knowledge Bases vs Private MCP Registry vs BYOK) ───
+
+{d:1,q:"A developer at Cobalt Systems asks: 'We need Copilot to search our internal design patterns and coding standards when generating code.' Which Enterprise feature answers this need?",
+ t:'single',
+ opts:[
+  "Private MCP Registry",
+  "BYOK (Bring Your Own Key)",
+  "Knowledge Bases",
+  "Copilot Spaces",
+ ],
+ correct:[2],
+ expl:"The exam objectives for Copilot Enterprise state: 'Explain how to configure and use Knowledge Bases' and describe them as storing 'code snippets, best practices, design patterns.' Knowledge Bases ground Copilot responses with internal organizational knowledge.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2, Copilot Enterprise"},
+
+{d:1,q:"An enterprise at Nexlify wants to expose their internal ticketing system and CI/CD tools to Copilot via MCP, but only within their organization. Which feature supports this?",
+ t:'single',
+ opts:[
+  "Knowledge Bases",
+  "BYOK",
+  "Copilot Spaces",
+  "Private MCP Registry",
+ ],
+ correct:[3],
+ expl:"The exam objectives list 'Private MCP Registry for internal tools' as an Enterprise feature. It allows organizations to host and expose internal MCP-compatible tools privately, so only their developers can access them through Copilot.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2, Copilot Enterprise"},
+
+{d:1,q:"Which Enterprise feature allows organizations to use their own encryption keys when integrating external model providers with GitHub Copilot?",
+ t:'single',
+ opts:[
+  "Private MCP Registry",
+  "Delegated AI controls management",
+  "BYOK (Bring Your Own Key)",
+  "Knowledge Bases",
+ ],
+ correct:[2],
+ expl:"BYOK (Bring Your Own Key) is explicitly listed in both the exam objectives ('Understand BYOK for enterprise model providers') and the Quick Reference as a November 2025 feature that supports Azure, AWS, and GCP key providers.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2 / QUICK-REFERENCE.md — New in November 2025"},
+
+{d:1,q:"A Copilot Enterprise organization wants to let individual teams manage their own AI tool permissions without requiring global admin approval. Which Enterprise governance feature enables this?",
+ t:'single',
+ opts:[
+  "Budget Tracking",
+  "Audit log events",
+  "Delegated AI controls management",
+  "Organization-wide custom instructions",
+ ],
+ correct:[2],
+ expl:"The exam objectives list 'Delegated AI controls management' as a new Copilot Enterprise governance feature. It allows enterprises to delegate AI policy decisions to team-level administrators rather than requiring central admin control for every change.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 2, Copilot Enterprise"},
+
+// ─── Domain 2 — Mission Control, models, CLI ─────────────────────
+
+{d:1,q:"A developer is simultaneously running three Agent Mode tasks in VS Code and needs a single dashboard to monitor and manage all of them. Which feature provides this?",
+ t:'single',
+ opts:[
+  "Plan Mode",
+  "Copilot Spaces",
+  "Mission Control",
+  "Edit Mode",
+ ],
+ correct:[2],
+ expl:"The Quick Reference defines Mission Control as an 'Agent task dashboard' (keyboard shortcut Ctrl+Shift+M). The exam objectives describe it as 'Managing multiple agent sessions.' It is the centralized view for monitoring concurrent Agent Mode tasks.",
+ ref:"QUICK-REFERENCE.md — Keyboard Shortcuts / github-copilot-cert-exam-objectives.md — Domain 2"},
+
+{d:1,q:"A developer needs to write a complex multi-step algorithm with branching logic. Which Copilot model does the Quick Reference recommend for this use case?",
+ t:'single',
+ opts:[
+  "Raptor Mini",
+  "GPT-5.1",
+  "Claude Opus 4.5",
+  "Gemini 3 Pro",
+ ],
+ correct:[1],
+ expl:"Quick Reference Model Selection: 'GPT-5.1 — Complex logic — Multi-step reasoning.' Raptor Mini is for inline completions, Claude Opus 4.5 is for refactoring, and Gemini 3 Pro is for multimodal/data+image problems.",
+ ref:"QUICK-REFERENCE.md — Model Selection Cheat Sheet"},
+
+{d:1,q:"A developer needs to write a brand-new utility function from scratch. Which Copilot model does the Quick Reference recommend?",
+ t:'single',
+ opts:[
+  "Raptor Mini",
+  "Claude Opus 4.5",
+  "GPT-5.1-Codex",
+  "Gemini 3 Pro",
+ ],
+ correct:[2],
+ expl:"Quick Reference Model Selection: 'GPT-5.1-Codex — Code generation — Writing new functions.' It is distinct from GPT-5.1 (complex logic) and Raptor Mini (inline completions).",
+ ref:"QUICK-REFERENCE.md — Model Selection Cheat Sheet"},
+
+{d:1,q:"A developer attaches a screenshot of an error message to Copilot Chat to get debugging help. Which November 2025 feature enables image input in Copilot Chat?",
+ t:'single',
+ opts:[
+  "Next Edit Suggestions",
+  "Image Input",
+  "Threaded Conversations",
+  "Mobile Agent Sessions",
+ ],
+ correct:[1],
+ expl:"Quick Reference 'New in November 2025' item 5: 'Image Input — Attach screenshots to Chat.' This feature allows developers to include visual context such as error screenshots when prompting Copilot Chat.",
+ ref:"QUICK-REFERENCE.md — New in November 2025"},
+
+{d:1,q:"When using 'gh copilot suggest' in the CLI, what is the developer primarily asking Copilot to do?",
+ t:'single',
+ opts:[
+  "Open an interactive chat session in the terminal.",
+  "Review the current git diff for security issues.",
+  "Generate a shell command or script from natural language.",
+  "Summarize the current pull request.",
+ ],
+ correct:[2],
+ expl:"The GH-300 objectives for CLI include 'Generate scripts and manage files with CLI assistance.' The 'gh copilot suggest' command generates shell commands and scripts from natural language input — it is the primary generation command in Copilot CLI.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 2B / gh300-objectives.md"},
+
+{d:1,q:"A developer wants Copilot to predict and pre-fill the NEXT edit they are likely to make, before they start typing. Which November 2025 feature provides this capability?",
+ t:'single',
+ opts:[
+  "Threaded Conversations",
+  "Plan Mode",
+  "Next Edit Suggestions",
+  "Mission Control",
+ ],
+ correct:[2],
+ expl:"Quick Reference 'New in November 2025' item 9: 'Next Edit Suggestions — Predictive editing.' This feature anticipates the developer's next change and pre-suggests it, going beyond reactive inline completions.",
+ ref:"QUICK-REFERENCE.md — New in November 2025"},
+
+{d:1,q:"Which VS Code setting enables inline suggestions globally across all file types in GitHub Copilot?",
+ t:'single',
+ opts:[
+  '"github.copilot.inlineSuggest.model": "raptor-mini"',
+  '"github.copilot.enable": { "*": true }',
+  '"github.copilot.agent.planMode": true',
+  '"github.copilot.nextEditSuggestions": true',
+ ],
+ correct:[1],
+ expl:"Quick Reference VS Code settings: '\"github.copilot.enable\": { \"*\": true }' enables Copilot for all file types (the * wildcard). The other settings control specific sub-features like inline model selection, Plan Mode, and Next Edit Suggestions.",
+ ref:"QUICK-REFERENCE.md — Quick Settings (VS Code)"},
+
+{d:1,q:"Which configuration file provides agent-specific guidance that is separate from the general repository Copilot instructions?",
+ t:'single',
+ opts:[
+  ".github/copilot-instructions.md",
+  ".copilotignore",
+  ".github/copilot-agent-instructions.md",
+  ".github/prompts/*.prompt.md",
+ ],
+ correct:[2],
+ expl:"Quick Reference Repository Configuration Files table lists '.github/copilot-agent-instructions.md — Agent-specific guidance' as a distinct file from '.github/copilot-instructions.md — Repo-level Copilot behavior'. They serve different scopes.",
+ ref:"QUICK-REFERENCE.md — Repository Configuration Files"},
+
+{d:1,q:"A developer wants to dismiss a Copilot inline suggestion without accepting it. Which keyboard shortcut should they press in VS Code?",
+ t:'single',
+ opts:["Tab","Alt+[","Esc","Alt+\\"],
+ correct:[2],
+ expl:"Quick Reference keyboard shortcuts: 'Dismiss suggestion: Esc'. Tab accepts, Alt+[ goes to the previous suggestion, and Alt+\\ triggers a new inline suggestion.",
+ ref:"QUICK-REFERENCE.md — Essential Keyboard Shortcuts"},
+
+{d:1,q:"A developer wants to cycle to the PREVIOUS inline suggestion in VS Code. Which shortcut does this?",
+ t:'single',
+ opts:["Alt+]","Alt+[","Ctrl+Shift+I","Esc"],
+ correct:[1],
+ expl:"Quick Reference keyboard shortcuts: 'Previous suggestion: Alt+['. Alt+] goes to the NEXT suggestion. Ctrl+Shift+I opens Chat. Esc dismisses the suggestion.",
+ ref:"QUICK-REFERENCE.md — Essential Keyboard Shortcuts"},
+
+{d:1,q:"Which slash command would a developer use to ask Copilot to improve the performance of a slow function?",
+ t:'single',
+ opts:["/fix","/docs","/optimize","/review"],
+ correct:[2],
+ expl:"Quick Reference slash commands: '/optimize — Improve performance — /optimize This function is slow'. /fix is for debugging errors, /docs generates documentation, and /review performs code review.",
+ ref:"QUICK-REFERENCE.md — Slash Commands Quick Reference"},
+
+{d:1,q:"A developer uses the /agent slash command in Copilot Chat. What type of task does this command initiate?",
+ t:'single',
+ opts:[
+  "A single-file documentation task",
+  "A code review of the current diff",
+  "A multi-file autonomous task",
+  "A search of the organization's Knowledge Base",
+ ],
+ correct:[2],
+ expl:"Quick Reference slash commands: '/agent — Multi-file task — /agent Create a REST API for users'. The /agent command delegates complex, multi-file work to Agent Mode.",
+ ref:"QUICK-REFERENCE.md — Slash Commands Quick Reference"},
+
+{d:1,q:"Claude Sonnet 3.5 was retired from GitHub Copilot on which date, according to the Quick Reference?",
+ t:'single',
+ opts:[
+  "December 31, 2025",
+  "January 31, 2026",
+  "March 1, 2026",
+  "February 28, 2026",
+ ],
+ correct:[1],
+ expl:"Quick Reference 'What's Being Retired' table: 'Claude Sonnet 3.5 — January 31, 2026.' CSV Reports were retired on December 31, 2025. These are two distinct retirement dates for two different items.",
+ ref:"QUICK-REFERENCE.md — What's Being Retired"},
+
+{d:1,q:"Which of the following are listed as NEW features in the November 2025 GitHub Copilot release? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Linter Integration (ESLint/Pylint in code review)",
+  "Copilot Spaces",
+  "Threaded Conversations",
+  "Custom Models",
+ ],
+ correct:[0,1,2],
+ expl:"Quick Reference 'New in November 2025' lists: Linter Integration (#4), Copilot Spaces (#7), Threaded Conversations (#8), among others. Custom Models is an existing Enterprise plan feature, not a November 2025 addition.",
+ ref:"QUICK-REFERENCE.md — New in November 2025"},
+
+{d:1,q:"A Copilot Enterprise organization wants to define coding standards that Copilot applies automatically to every code review in the repository. Which file type implements this?",
+ t:'single',
+ opts:[
+  "Prompt files (.github/prompts/*.prompt.md)",
+  "Instructions files (.github/copilot-instructions.md)",
+  ".copilotignore",
+  "Agent instructions (.github/copilot-agent-instructions.md)",
+ ],
+ correct:[1],
+ expl:"The study guide Memorize-These Distinctions states: 'Instructions files = persistent review/coding standards.' Domain 2C also lists 'customizable review standards via instructions files.' Prompt files are for reusable prompts, not persistent standards.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions / Domain 2C"},
+
+{d:1,q:"Which Copilot feature allows teams to organize and bundle related context (files, docs, conversations) so Copilot has better-focused information for a specific project or topic?",
+ t:'single',
+ opts:[
+  "Knowledge Bases",
+  "Copilot Spaces",
+  "Mission Control",
+  "Private MCP Registry",
+ ],
+ correct:[1],
+ expl:"The study guide Memorize-These Distinctions states: 'Spaces = curated context bundles for teams.' The Quick Reference also lists 'Copilot Spaces — Organize context for conversations' as a November 2025 feature. Knowledge Bases store organizational knowledge; Spaces curate context for conversations.",
+ ref:"GH-300-Study-Guide-April-2026.md — Memorize-These Distinctions / QUICK-REFERENCE.md"},
+
+{d:1,q:"A developer using Copilot Chat wants to branch off into a separate conversation thread to explore an alternative implementation approach without losing the main conversation. Which November 2025 feature enables this?",
+ t:'single',
+ opts:[
+  "Next Edit Suggestions",
+  "Copilot Spaces",
+  "Threaded Conversations",
+  "Mobile Agent Sessions",
+ ],
+ correct:[2],
+ expl:"Quick Reference 'New in November 2025' item 8: 'Threaded Conversations — Branch chats.' This feature allows developers to split a Copilot Chat session into branches to explore different directions without losing context.",
+ ref:"QUICK-REFERENCE.md — New in November 2025"},
+
+// ─── Domain 2 — Org-wide policy (sub-area 2D) ────────────────────
+
+{d:1,q:"An org admin at Irongate Tech configures which IDEs developers are allowed to use with Copilot, and which features are available on github.com. Which Domain 2D responsibility does this represent?",
+ t:'single',
+ opts:[
+  "Manage subscriptions via REST API",
+  "Configure Copilot code review policies",
+  "Manage feature availability across IDEs and github.com",
+  "Interpret audit log events",
+ ],
+ correct:[2],
+ expl:"Domain 2D of the GH-300 study guide lists 'Manage feature availability across IDEs and github.com' as an organization-wide settings objective. This is distinct from REST API subscription management and audit log review.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 2D"},
+
+{d:1,q:"A compliance officer at Vertex Corp needs to determine which developers accessed Copilot and what policy changes were made last month. Which Domain 2D feature should they use?",
+ t:'single',
+ opts:[
+  "REST API subscription endpoint",
+  "Copilot Spaces",
+  "Audit log events",
+  "Budget Tracking",
+ ],
+ correct:[2],
+ expl:"Domain 2D of the study guide lists 'Utilize audit log events' for organization-wide governance. Audit logs capture Copilot-related policy changes and usage events at the organization level.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 2D"},
+
+// ─── Domain 3 — Architecture reinforcement ───────────────────────
+
+{d:2,q:"In the Copilot suggestion lifecycle, in what order do the following steps occur?",
+ t:'single',
+ opts:[
+  "LLM generates response → proxy filters prompt → IDE sends context → developer accepts",
+  "IDE sends context → proxy filters prompt → LLM generates response → post-processing → IDE displays suggestion",
+  "Proxy filters prompt → IDE sends context → developer accepts → LLM generates response",
+  "Developer accepts suggestion → IDE sends context → proxy filters → LLM responds",
+ ],
+ correct:[1],
+ expl:"Domain 3 objectives describe the lifecycle: gather context (IDE sends context) → build prompt → proxy filtering → LLM generates response → post-processing through proxy → suggestion displayed in IDE. This sequential order is an explicit exam objective.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3, Data Pipeline"},
+
+{d:2,q:"A developer working on a large monorepo notices Copilot suggestions seem to miss context from files in distant directories. Which LLM limitation best explains this?",
+ t:'single',
+ opts:[
+  "Age of training data",
+  "Limited context windows",
+  "Proxy filtering blocking those files",
+  "Content exclusions on the remote directories",
+ ],
+ correct:[1],
+ expl:"Domain 3 limitations include 'Describe limited context windows.' LLMs can only process a finite amount of text at once. In large codebases, files far from the current editing context may fall outside the context window and not influence suggestions.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3, Limitations"},
+
+{d:2,q:"GitHub Copilot generates a plausible-looking but mathematically incorrect calculation. Which fundamental LLM limitation does this illustrate?",
+ t:'single',
+ opts:[
+  "Age of training data",
+  "Limited context windows",
+  "The nature of LLMs providing reasoning and context rather than precise calculations",
+  "Proxy filtering removing correct numerical outputs",
+ ],
+ correct:[2],
+ expl:"Domain 3 objectives explicitly state: 'Describe the nature of GitHub Copilot providing reasoning and context from a prompt vs calculations.' LLMs are probabilistic language models, not calculators — they can produce plausible but numerically wrong results.",
+ ref:"github-copilot-cert-exam-objectives.md — Domain 3, Limitations"},
+
+// ─── Domain 4 — Prompt engineering reinforcement ─────────────────
+
+{d:3,q:"A developer writes a Copilot prompt that includes the current function signature, a description of the expected behavior, and an example input/output pair. Which prompt engineering best practice does this demonstrate?",
+ t:'single',
+ opts:[
+  "Zero-shot prompting with no examples",
+  "Few-shot prompting with clear context and an example",
+  "Chain-of-thought prompting using sub-agents",
+  "Iterative refinement by submitting multiple empty prompts",
+ ],
+ correct:[1],
+ expl:"Domain 4 objectives include 'Apply zero-shot and few-shot prompt strategies' and 'Build effective prompt structure with clear context.' Providing context (signature + expected behavior) plus one example input/output pair is a classic few-shot prompt pattern.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 4 / gh300-objectives.md — Domain 4"},
+
+{d:3,q:"According to the GH-300 prompt engineering objectives, what is the benefit of using chat history effectively in a Copilot Chat session?",
+ t:'single',
+ opts:[
+  "It allows the proxy to skip filtering on follow-up messages.",
+  "It reduces the cost of Copilot API calls.",
+  "It helps Copilot maintain context across turns, improving relevance of responses.",
+  "It permanently stores prompts in the repository for team reuse.",
+ ],
+ correct:[2],
+ expl:"Domain 4 objectives include 'Use chat history and context boundaries effectively.' Chat history enables multi-turn context continuity, so follow-up questions and iterative refinements produce more relevant responses without repeating full context each time.",
+ ref:"gh300-objectives.md — Domain 4"},
+
+// ─── Domain 5 — Productivity reinforcement ───────────────────────
+
+{d:4,q:"A developer at Sapphire Code asks Copilot to add JSDoc comments to every public method in their TypeScript service class. Which Domain 5 productivity use case is this?",
+ t:'single',
+ opts:[
+  "Generate unit tests",
+  "Refactoring",
+  "Documentation generation",
+  "Modernize legacy code",
+ ],
+ correct:[2],
+ expl:"Domain 5 lists 'use Copilot for generation, refactoring, and documentation' as core use cases. Adding JSDoc comments is documentation generation — distinct from refactoring (restructuring code logic) or test generation.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5 / gh300-objectives.md — Domain 5"},
+
+{d:4,q:"A QA engineer asks Copilot to generate a set of assertions that test boundary values for a sorting function (e.g., empty array, single element, already sorted). Which Domain 5 skill does this represent?",
+ t:'single',
+ opts:[
+  "Generate sample data",
+  "Reduce context switching",
+  "Identify edge cases and write assertions",
+  "Modernize legacy code",
+ ],
+ correct:[2],
+ expl:"Domain 5 explicitly lists 'Identify edge cases, assertions, and quality checks' (gh300-objectives.md) and 'Identify edge cases and write assertions' (study guide). Boundary value testing (empty array, single element) is a canonical edge-case identification task.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 5 / gh300-objectives.md — Domain 5"},
+
+{d:4,q:"A developer uses Copilot to generate a list of fake customer records (names, emails, phone numbers) for populating a test database. Which Domain 5 use case does this represent?",
+ t:'single',
+ opts:[
+  "Refactoring",
+  "Generate sample data",
+  "Modernize legacy code",
+  "Reduce context switching",
+ ],
+ correct:[1],
+ expl:"Domain 5 objectives explicitly include 'Generate tests, sample data, and migration helpers' (gh300-objectives.md) and 'Generate sample data' (study guide). Generating fake customer records for a test database is a direct example of sample data generation.",
+ ref:"gh300-objectives.md — Domain 5 / GH-300-Study-Guide-April-2026.md — Domain 5"},
+
+// ─── Domain 6 — Privacy & exclusions reinforcement ───────────────
+
+{d:5,q:"An organization at Ashford Digital enables duplication detection for all developers. What happens when Copilot generates a suggestion that closely matches a block of public open-source code?",
+ t:'single',
+ opts:[
+  "The suggestion is accepted automatically and flagged in the audit log.",
+  "The suggestion is blocked or shown with a warning before the developer can accept it.",
+  "The matched code is automatically refactored to avoid duplication.",
+  "Copilot requests permission from the original open-source license holder.",
+ ],
+ correct:[1],
+ expl:"Domain 6 objectives include 'Use duplication detection and security warnings.' The study guide states: 'Duplication detection blocks suggestions that match public code.' The behavior is to block or warn — not auto-accept, auto-refactor, or contact license holders.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / Memorize-These Distinctions"},
+
+{d:5,q:"A developer at Redstone Labs adds a file path to content exclusions, but Copilot still appears to use that file's content in suggestions. What should the developer do, according to Domain 6 objectives?",
+ t:'single',
+ opts:[
+  "Upgrade to Enterprise for stronger exclusion enforcement.",
+  "Disable duplication detection to reduce conflicts with content exclusions.",
+  "Troubleshoot exclusions and suggestion behavior to identify the root cause.",
+  "Delete the file so Copilot cannot access it.",
+ ],
+ correct:[2],
+ expl:"Domain 6 explicitly includes 'Troubleshoot exclusions and suggestion behavior' as an objective. When exclusions do not appear to work as expected, the correct response is to diagnose and troubleshoot the configuration, not to upgrade plans or delete files.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / gh300-objectives.md — Domain 6"},
+
+{d:5,q:"Which of the following are Domain 6 safeguards that an organization administrator can enable in GitHub Copilot? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Duplication detection",
+  "Security warnings",
+  "Agent Mode",
+  "Content exclusions",
+ ],
+ correct:[0,1,3],
+ expl:"Domain 6 objectives list: 'Configure content exclusions and editor settings' and 'Use duplication detection and security warnings.' Agent Mode is a Domain 2 feature (IDE-based task execution), not a Domain 6 privacy safeguard.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 6 / gh300-objectives.md — Domain 6"},
+
+// ─── Domain 1 — Responsible AI reinforcement ─────────────────────
+
+{d:0,q:"A developer at Clearpath Software asks Copilot to generate a function that processes user data. Copilot produces a function that appears correct but contains a subtle SQL injection vulnerability. What responsible AI principle applies here?",
+ t:'single',
+ opts:[
+  "Bias in training data caused the error and cannot be prevented.",
+  "Copilot's proxy service should have caught this; no developer action is needed.",
+  "The developer must validate AI output before use — AI-generated code can contain security flaws.",
+  "This only happens with Copilot Individual; Business and Enterprise are immune.",
+ ],
+ correct:[2],
+ expl:"Domain 1 of the GH-300 blueprint requires candidates to 'Explain why AI output must be validated' and 'Identify potential harms and mitigation approaches.' Security vulnerabilities in generated code are a canonical harm; the mitigation is human review before merging.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 1 / gh300-objectives.md — Domain 1"},
+
+{d:0,q:"According to the GH-300 responsible AI objectives, which of the following are risks associated with using generative AI tools like GitHub Copilot? (Select all that apply)",
+ t:'multi',
+ opts:[
+  "Generating code with security vulnerabilities",
+  "Producing biased output based on training data",
+  "Automatically deploying untested code to production",
+  "Providing plausible-sounding but incorrect explanations",
+ ],
+ correct:[0,1,3],
+ expl:"Domain 1 objectives list risks including bias, secure code concerns, and the nature of AI providing reasoning vs facts (plausible but incorrect). 'Automatically deploying untested code to production' is not a Copilot risk — Copilot does not have deployment authority; that would require a separate CI/CD action.",
+ ref:"GH-300-Study-Guide-April-2026.md — Domain 1 / github-copilot-cert-exam-objectives.md — Domain 1"},
+
 ];
 
 // ══════════════════════════════════════════════════════════════════
