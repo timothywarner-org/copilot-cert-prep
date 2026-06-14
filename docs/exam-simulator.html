@@ -1903,7 +1903,9 @@ let confirmedQ   = new Set();
 // ══════════════════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════════════════
-document.getElementById('total-q-display').textContent = BANK.length;
+// Strip any undefined/null entries that could crash the exam
+const CLEAN_BANK = BANK.filter(q => q && Array.isArray(q.correct) && q.q && q.opts);
+document.getElementById('total-q-display').textContent = CLEAN_BANK.length;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -1918,7 +1920,7 @@ function startExam() {
   feedbackMode   = document.getElementById('cfg-feedback').value;
   const modeSel  = document.getElementById('cfg-mode').value;
 
-  let pool = [...BANK];
+  let pool = [...CLEAN_BANK];
   if (modeSel === 'random') shuffle(pool);
   if (countSel !== 'all') {
     const n = parseInt(countSel);
@@ -2078,10 +2080,18 @@ function showFeedback(q, sel) {
 //  NAVIGATION
 // ══════════════════════════════════════════════════════════════════
 function navNext() {
-  if (current < questions.length - 1) { current++; renderQuestion(); }
+  if (current < questions.length - 1) {
+    current++;
+    if (!questions[current]) { current--; return; }
+    renderQuestion();
+  }
 }
 function navPrev() {
-  if (current > 0) { current--; renderQuestion(); }
+  if (current > 0) {
+    current--;
+    if (!questions[current]) { current++; return; }
+    renderQuestion();
+  }
 }
 
 function toggleFlag() {
@@ -2135,6 +2145,7 @@ function computeResults() {
   const wrongOnes = [];
 
   questions.forEach((q, i) => {
+    if (!q || !q.correct) return;
     const sel = answers[i] ?? new Set();
     const selArr = [...sel].sort();
     const corrArr = [...q.correct].sort();
