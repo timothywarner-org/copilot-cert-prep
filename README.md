@@ -45,7 +45,7 @@ This is the official prep course for the **GitHub Copilot Certification Exam (GH
 | **4. Privacy & Config** | 50 minutes | Exclusions, Troubleshooting, Integration            |
 | **5. Exam Prep**        | 50 minutes | Domain review, Practice exam, Competitive landscape |
 
-See [COURSE-PLAN-APRIL-2026.md](COURSE-PLAN-APRIL-2026.md) for detailed curriculum.
+See [COURSE-PLAN-JUNE-2026.md](COURSE-PLAN-JUNE-2026.md) for detailed curriculum.
 
 ---
 
@@ -166,7 +166,7 @@ copilot-cert-prep/
 │   └── mcp.json                  # Microsoft Learn MCP server config
 ├── az104-cert-buddy/             # Reference implementation
 ├── docs/
-│   ├── GH-300-Study-Guide-April-2026.md
+│   ├── GH-300-Study-Guide-June-2026.md
 │   ├── QUICK-REFERENCE.md        # Student cheat sheet
 │   ├── exam-notes-and-links.md
 │   └── github-copilot-cert-exam-objectives.md
@@ -183,7 +183,7 @@ copilot-cert-prep/
 ├── tests/
 │   └── sample.test.js
 ├── CLAUDE.md
-├── COURSE-PLAN-APRIL-2026.md
+├── COURSE-PLAN-JUNE-2026.md
 ├── package.json
 └── README.md
 ```

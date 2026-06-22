@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is the teaching repository for Tim Warner's O'Reilly Live Learning class **"GitHub Copilot Certification (GH-300) Prep"** delivered April 2026 against the **January 2026 GH-300 blueprint**. The repo has been significantly slimmed: prior `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, and `exam-metadata/` directories were removed. The remaining content centers on (1) a single Node.js terminal demo app, (2) the course plan, and (3) a Copilot-powered "GH-300 Cert Buddy" agent built from skills, prompts, and instruction files.
+This is the teaching repository for Tim Warner's O'Reilly Live Learning class **"GitHub Copilot Certification (GH-300) Prep"** (live delivery **June 23, 2026**, 9:00 AM–2:00 PM CT) against the **January 2026 GH-300 blueprint**. The repo has been significantly slimmed: prior `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, and `exam-metadata/` directories were removed. The remaining content centers on (1) a single Node.js terminal demo app, (2) the course plan, and (3) a Copilot-powered "GH-300 Cert Buddy" agent built from skills, prompts, and instruction files.
 
 ## Common Commands
 
@@ -43,13 +43,13 @@ There is no lint script and no build step — this is a plain Node app.
 
 - `src/` — interactive console app. `app.js` reads from `tips.json` (the tip database). Treat `tips.json` as data, not config; the app validates and gracefully degrades when it is missing or malformed. This is the only "code" in the repo and is the canonical example surface for live demos.
 - `tests/sample.test.js` — root-level Jest sample. Root `package.json` defines only `jest` as a dev dep; the project does **not** enforce the 80% coverage thresholds the old `jest.config.js` used to set (that config file is gone).
-- `docs/` — student-facing reference: `GH-300-Study-Guide-April-2026.md`, `QUICK-REFERENCE.md`, `exam-notes-and-links.md`, `github-copilot-cert-exam-objectives.md`, plus the official Microsoft study guide PDF. These are deliverables, not code.
+- `docs/` — student-facing reference: `GH-300-Study-Guide-June-2026.md`, `QUICK-REFERENCE.md`, `exam-notes-and-links.md`, `github-copilot-cert-exam-objectives.md`, plus the official Microsoft study guide PDF. These are deliverables, not code.
 - `references/` — load-bearing inputs for the Cert Buddy agent. Do not treat these as throwaway notes:
   - `gh300-objectives.md` — the January 2026 skills-measured list with weighted ranges (see below).
   - `style-guide.md` — Microsoft Writing Style Guide rules the agent must follow when authoring exam items.
   - `fictional-companies.md` — randomization pool for scenario stems (avoid Contoso defaulting).
 - `scripts/` — one-off PowerShell helpers (e.g., `create-tworg-api-key.ps1`).
-- `COURSE-PLAN-APRIL-2026.md` — the canonical course outline. The pedagogical sequence is **Start → Use → Think → Govern → Ship** (5 × 50-min segments, 250 min total). This sequence is *intentionally not* in blueprint order — do not reorder it to match domain numbering.
+- `COURSE-PLAN-JUNE-2026.md` — the canonical course outline. The pedagogical sequence is **Start → Use → Think → Govern → Ship** (5 × 50-min segments, 250 min total). This sequence is *intentionally not* in blueprint order — do not reorder it to match domain numbering.
 
 ### The Cert Buddy Agent System
 
@@ -93,6 +93,6 @@ Per the prior Cursor-rules carryover: blank line between every heading and its c
 
 ## What not to do
 
-- Do not recreate the deleted `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` directories — they were removed deliberately for the April 2026 delivery. Content that survived moved to `docs/` or `references/`.
+- Do not recreate the deleted `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` directories — they were removed deliberately during the repo slim-down. Content that survived moved to `docs/` or `references/`.
 - Do not paraphrase real GH-300 exam questions or reference braindumps when working through the Cert Buddy skills — the agent definition prohibits it.
 - Do not assume the root project enforces 80% coverage — `jest.config.js` is gone. If coverage gates are needed for a new demo, add them locally to that demo, not at the root.

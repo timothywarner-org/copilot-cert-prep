@@ -103,13 +103,14 @@
 
 | Domain | Weight | Focus |
 |--------|--------|-------|
-| 1. Responsible AI | 7% | Ethics, limitations, validation |
-| 2. Plans & Features | **31%** | Plans, Agent Mode, models |
-| 3. Data Handling | 15% | Pipeline, context, LLM processing |
-| 4. Prompt Engineering | 9% | Crafting effective prompts |
-| 5. Developer Use Cases | 14% | Productivity, SDLC integration |
-| 6. Testing | 9% | Test generation, edge cases |
-| 7. Privacy & Exclusions | 15% | Content exclusions, policies |
+| 1. Use GitHub Copilot responsibly | 15–20% | Ethics, limitations, validation |
+| 2. Use GitHub Copilot features | **25–30%** | IDE, CLI, Agent Mode, MCP, org policy |
+| 3. Understand Copilot data and architecture | 10–15% | Pipeline, context, proxy, LLM limits |
+| 4. Apply prompt engineering and context crafting | 10–15% | Crafting effective prompts |
+| 5. Improve developer productivity | 10–15% | Productivity, testing, security, SDLC |
+| 6. Configure privacy, exclusions, and safeguards | 10–15% | Content exclusions, duplication detection, policies |
+
+> Weights are **ranges** (January 2026 blueprint). Testing now lives inside Domain 5; there is no standalone Testing domain.
 
 ---
 

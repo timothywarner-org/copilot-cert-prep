@@ -9,7 +9,9 @@ lerna-debug.log*
 
 # Tim stuff
 # azd-scaffold-examples.sh
-~$warner-github-aio.pptx
+
+# Microsoft Office lock/temp files (Word, PowerPoint, Excel), e.g. ~$deck.pptx
+~$*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -132,5 +134,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-~$warner-github-cert-prep.pptx

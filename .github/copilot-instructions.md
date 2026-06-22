@@ -32,7 +32,7 @@ node test-app.js      # Ad-hoc test harness
 
 ### Testing Standards
 
-- **Jest** at root level; no enforced coverage threshold (jest.config.js was removed in the April 2026 repo slim-down)
+- **Jest** at root level; no enforced coverage threshold (jest.config.js was removed during the repo slim-down)
 - **Test patterns**: `**/test/**/*.js` and `**/?(*.)+(spec|test).js`
 - Generate tests focusing on enterprise scenarios: error handling, edge cases, performance
 
@@ -101,7 +101,7 @@ When generating examples, use enterprise contexts:
 - `.github/hooks/gh300-guardrails.json` - Workspace hook definitions
 - `.vscode/mcp.json` - Microsoft Learn MCP server configuration
 - `references/gh300-objectives.md` - Jan 2026 exam blueprint
-- `COURSE-PLAN-APRIL-2026.md` - Complete curriculum structure
+- `COURSE-PLAN-JUNE-2026.md` - Complete curriculum structure
 
 ### Custom Instructions Pattern
 

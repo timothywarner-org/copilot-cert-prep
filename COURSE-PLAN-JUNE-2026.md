@@ -1,4 +1,4 @@
-# GitHub Copilot Certification Course Plan - April 2026
+# GitHub Copilot Certification Course Plan - June 2026
 
 > Aligned to the official January 2026 GH-300 blueprint, with current-state Copilot/GHEC features added for due diligence where the blueprint has fallen behind.
 
@@ -271,4 +271,4 @@ Coverage status: 100% of January 2026 GH-300 objectives are mapped, plus 30+ pos
 
 ---
 
-Last updated: April 2026
+Last updated: June 2026

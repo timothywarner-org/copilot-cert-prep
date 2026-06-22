@@ -1,15 +1,16 @@
 # GitHub Copilot Certification Exam Notes and (Difficult to Find) Links
 
 ## 🎯 Certification Overview
-- **Exam Code:** Not assigned (This is GitHub's first certification)
+- **Exam Code:** GH-300 (GitHub Copilot)
+- **Credential home:** [Microsoft Learn — GH-300](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/)
 - **Exam Provider:** PSI (https://www.psionline.com)
 - **Format:** Online proctored
-- **Duration:** 90 minutes
+- **Duration:** ~90 minutes
 - **Question Types:** Multiple choice and multiple response
-- **Passing Score:** 70%
-- **Price:** $99 USD
-- **Languages:** English only (as of 2024)
-- **Validity:** 2 years
+- **Passing Score:** 700 (on a 100–1000 scaled score)
+- **Price:** $99 USD (confirm current pricing at registration)
+- **Languages:** English (additional localizations may follow)
+- **Skills measured as of:** January 2026
 
 ## 📚 Official Resources
 
@@ -52,45 +53,38 @@
 - IDE familiarity (VS Code, Visual Studio, JetBrains, or Neovim)
 - Understanding of software development lifecycle
 
-### Key Study Areas
-1. **Responsible AI (7%)**
-   - Ethics in AI
-   - Bias recognition
-   - Fair use principles
+### Key Study Areas (January 2026 blueprint — six domains, weight ranges)
 
-2. **GitHub Copilot Plans and Features (31%)**
-   - Licensing models
-   - IDE integration
-   - Feature comparison
-   - Configuration options
+1. **Use GitHub Copilot responsibly (15–20%)**
+   - Ethics and responsible AI principles
+   - Risks, bias, and limitations of generative AI
+   - Validating AI output
 
-3. **How GitHub Copilot Works (15%)**
-   - LLM basics
-   - Context handling
-   - Suggestion generation
-   - Model training
+2. **Use GitHub Copilot features (25–30%)**
+   - IDE usage, inline suggestions, Chat, Plan Mode
+   - Copilot CLI setup, commands, and sessions
+   - Agent Mode, Edit Mode, MCP, Sub-Agents, Spaces, Spark, PR summaries
+   - Organization policy management, audit logs, REST API
 
-4. **Prompt Engineering (9%)**
-   - Effective prompting
-   - Context optimization
-   - Command syntax
+3. **Understand GitHub Copilot data and architecture (10–15%)**
+   - Data usage, flow, and sharing
+   - Prompt building, proxy filtering, post-processing
+   - Suggestion lifecycle and LLM limitations
 
-5. **Developer Use Cases (14%)**
-   - Code generation
-   - Testing
-   - Documentation
-   - Debugging
+4. **Apply prompt engineering and context crafting (10–15%)**
+   - Prompt structure and context
+   - Zero-shot and few-shot prompting
+   - Iterative refinement and chat history
 
-6. **Testing with Copilot (9%)**
-   - Test generation
-   - TDD practices
-   - Test frameworks
+5. **Improve developer productivity with GitHub Copilot (10–15%)**
+   - Generation, refactoring, documentation
+   - Reducing context switching, modernizing legacy code
+   - Testing, edge cases, and security improvements (Testing lives here now)
 
-7. **Privacy and Security (15%)**
-   - Data handling
-   - Security features
-   - Compliance
-   - Exclusions
+6. **Configure privacy, content exclusions, and safeguards (10–15%)**
+   - Content exclusions and editor settings
+   - Output ownership and policy boundaries
+   - Duplication detection, security warnings, troubleshooting
 
 ## 🔍 Exam Day Requirements
 
