@@ -59,6 +59,8 @@ Follow all rules in `references/style-guide.md` for Microsoft Writing Style Guid
 - Exactly 2 sentences per rationale entry (why correct/incorrect + context).
 - No "all of the above" or "none of the above."
 - Distractors must reference real Copilot features, settings, policies, or workflows (never invented ones).
+- Answer choices must be grammatically parallel and comparable in specificity.
+- Keep option lengths balanced so no single option is an obvious tell.
 
 ## Answer choice randomization (non-negotiable)
 
