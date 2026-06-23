@@ -1,0 +1,25 @@
+{
+  // GH-300 Cert Prep — debug config for the "Copilot Tips of the Day" console app.
+  // Shared with learners: commit this file so everyone gets one-click debugging.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Launches the interactive tips app under the Node debugger.
+      "name": "Debug: Copilot Tips App",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/app.js",
+      // Run from src/ so __dirname resolves tips.json correctly.
+      "cwd": "${workspaceFolder}/src",
+      // integratedTerminal is REQUIRED: the app uses readline prompts, and the
+      // internal Debug Console cannot accept keyboard input. This routes I/O to
+      // the VS Code terminal (your default PowerShell 7 profile).
+      "console": "integratedTerminal",
+      // Skip stepping into Node internals so F11 lands on YOUR code, not libuv.
+      "skipFiles": ["<node_internals>/**"],
+      // Stop on the first line of app.js so class demos start from a clean state.
+      // Flip to false if you only want to stop at your own breakpoints.
+      "stopOnEntry": false
+    }
+  ]
+}

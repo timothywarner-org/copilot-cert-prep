@@ -1,0 +1,25 @@
+{
+  "name": "copilot-metrics-tour",
+  "version": "1.0.0",
+  "description": "Guided console tour of the GitHub Copilot Metrics API for GH-300 exam prep",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "demo": "node index.js --demo",
+    "tour": "node index.js timothywarner-org",
+    "tour:roi": "node index.js --demo --seats 300 --minutes-per-line 0.1 --hourly-rate 75 --seat-cost 19"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "github-copilot",
+    "metrics-api",
+    "gh-300",
+    "adoption",
+    "roi",
+    "teaching"
+  ],
+  "author": "Tim Warner",
+  "license": "MIT"
+}

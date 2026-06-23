@@ -77,6 +77,44 @@ Use fictional company names from `references/fictional-companies.md` for scenari
 9. Run the checks in `resources/item-quality-checklist.md` and use `scripts/validate-output.js` logic as a final structure gate.
 10. Prepare rationale internally but **do not deliver it yet**.
 
+## Recipe: responsible AI principle items
+
+Use this recipe when the user asks for **responsible AI**, **RAI**, **ethical AI**, **responsible usage**, **risks and limitations**, or **harms and mitigation** questions. These map to the **Use GitHub Copilot responsibly (15-20%)** domain, specifically the **Understand responsible AI principles** and **Validate and operate AI tools** sub-groups.
+
+### Grounding (do this first, do not skip)
+
+Ground every RAI item in the GitHub-Copilot-specific responsible AI content, not generic Azure AI or Copilot Studio responsible AI pages:
+
+- Primary module: **Responsible AI with GitHub Copilot** (`https://learn.microsoft.com/training/modules/responsible-ai-with-github-copilot/`).
+- The **six principles** unit: `https://learn.microsoft.com/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai`.
+- The **mitigate AI risks** unit: `https://learn.microsoft.com/training/modules/responsible-ai-with-github-copilot/2-manage-ai-risks`.
+
+Use `microsoft_docs_fetch` on these URLs before writing, then cite the matching unit URL in Phase 2 references.
+
+### The six principles (the canonical set to test)
+
+Microsoft and GitHub frame responsible AI around six principles. Test recognition AND application of each:
+
+1. **Fairness** -- treat all groups equitably; watch for biased suggestions.
+2. **Reliability and safety** -- perform consistently and safely; validate output before use.
+3. **Privacy and security** -- protect data; respect content exclusions and data handling.
+4. **Inclusiveness** -- work for people of all abilities and backgrounds.
+5. **Transparency** -- make capabilities and limitations understandable.
+6. **Accountability** -- humans remain responsible for AI-assisted outcomes.
+
+### RAI-specific distractor traps (use these to build plausible wrong answers)
+
+- Confusing a principle with a similar-sounding one (for example, framing a bias scenario as **transparency** when it is **fairness**).
+- Attributing a Copilot Studio or Azure AI Foundry control (content filters, RAI dashboard, Azure AI Content Safety) to GitHub Copilot. These are real features of OTHER products, which makes them strong distractors, but they are the wrong answer for GH-300.
+- Treating Copilot output as authoritative and skipping human validation (violates **reliability and safety** plus **accountability**).
+- Assuming Copilot removes the developer's responsibility for the code (violates **accountability**).
+
+### RAI item requirements
+
+- The stem must present a workplace scenario where a responsible AI principle is at stake, then ask which principle applies OR which action upholds responsible use.
+- At least one distractor must be a real responsible-AI control from a DIFFERENT Microsoft product (the wrong-exam trap above), so the item rewards knowing the GH-300 boundary.
+- Rationale must name the specific principle and tie it back to a developer action with GitHub Copilot, not abstract ethics.
+
 ## Delivery rules (non-negotiable)
 
 When presenting a question to the user:

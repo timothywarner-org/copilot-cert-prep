@@ -196,6 +196,7 @@ Each skill folder contains a `SKILL.md` that defines the skill's behavior, const
 Pre-built prompt files that learners invoke as slash commands:
 
 - `/gh300-practice-questions` — Generate practice exam items
+- `/gh300-rai-questions` — Generate responsible AI principle items
 - `/gh300-practice-lab` — Create a hands-on exercise
 - `/gh300-study-planner` — Build a study plan
 

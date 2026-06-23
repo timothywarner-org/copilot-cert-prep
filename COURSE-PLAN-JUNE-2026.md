@@ -17,7 +17,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 
 ---
 
-## Segment 1 (50 min): Start — Responsible Operation
+## Segment 1 (50 min): Start - Responsible Operation
 
 ### Outcomes
 
@@ -46,7 +46,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 
 ---
 
-## Segment 2 (50 min): Use — Hands on the Wheel
+## Segment 2 (50 min): Use - Hands on the Wheel
 
 ### Outcomes
 
@@ -74,13 +74,13 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 - **[Beyond]** `@workspace`, `@vscode`, `@terminal`, `@github` chat participants
 - **[Beyond]** Slash commands: `/explain`, `/fix`, `/tests`, `/doc`, `/new`, `/review`
 - **[Beyond]** Context variables: `#file`, `#selection`, `#codebase`, `#fetch`, `#problems`, `#changes`
-- **[Beyond]** Multi-model picker in Chat (GPT, Claude, Gemini families) — selection criteria, not model trivia
+- **[Beyond]** Multi-model picker in Chat (GPT, Claude, Gemini families), selection criteria, not model trivia
 - **[Beyond]** Copilot in the terminal vs Copilot CLI (different products, common confusion)
 - **[Beyond]** Custom instructions at user, repo, and org scope (`.github/copilot-instructions.md`, `.instructions.md` files)
 
 ---
 
-## Segment 3 (60 min, flex from 50): Think — How Copilot Reasons
+## Segment 3 (60 min, flex from 50): Think - How Copilot Reasons
 
 ### Outcomes
 
@@ -115,7 +115,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 - **[GH-300]** Prompt structure, context, zero/few-shot, best practices
 - **[GH-300]** Prompt process flow and chat history usage
 - **[Beyond]** Mission Control dashboard for agent task management
-- **[Beyond]** Coding Agent (cloud, GitHub Actions, issue-assigned) — introduced here, drilled in S5
+- **[Beyond]** Coding Agent (cloud, GitHub Actions, issue-assigned), introduced here, drilled in S5
 - **[Beyond]** Cloud Agent in Visual Studio (preview, Business/Enterprise)
 - **[Beyond]** MCP Registry and connecting MCP servers (`.vscode/mcp.json`)
 - **[Beyond]** Private MCP Registry for org-curated tools
@@ -125,7 +125,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 
 ---
 
-## Segment 4 (50 min): Govern — Privacy, Policy, and Audit
+## Segment 4 (50 min): Govern - Privacy, Policy, and Audit
 
 ### Outcomes
 
@@ -161,11 +161,11 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 - **[Beyond]** SAML/SSO and enterprise managed users (EMU) implications for Copilot access
 - **[Beyond]** Data residency considerations for Enterprise customers
 - **[Beyond]** Coding Agent permissions: branch protections, allowed tools, network egress controls
-- **[Beyond]** Pre-commit hooks and Copilot — what runs where, what gets logged
+- **[Beyond]** Pre-commit hooks and Copilot, what runs where, what gets logged
 
 ---
 
-## Segment 5 (50 min): Ship — Productivity, Distinctions, Exam Transfer
+## Segment 5 (50 min): Ship - Productivity, Distinctions, Exam Transfer
 
 ### Outcomes
 
@@ -176,7 +176,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 ### Agenda
 
 1. Generation, refactor, docs, sample data, legacy modernization (10 min)
-2. Unit + integration tests, edge cases, assertions — dedicated lab subsection (15 min)
+2. Unit + integration tests, edge cases, assertions, dedicated lab subsection (15 min)
 3. Security improvements and performance optimizations (5 min)
 4. Distinction drills: Agent Mode vs Coding Agent, Edit vs Agent, exclusions vs duplication detection, prompt files vs instructions files, Spaces vs Spark (10 min)
 5. Mini mock and debrief, then "what to study tonight" (10 min)
@@ -263,7 +263,7 @@ Coverage status: 100% of January 2026 GH-300 objectives are mapped, plus 30+ pos
 
 ## Quick Instructor Notes
 
-1. S1 is heavier on validation than before — Responsible AI grew from 7% to 15-20% and a single lab is no longer enough.
+1. S1 is heavier on validation than before. Responsible AI grew from 7% to 15-20%, and a single lab is no longer enough.
 2. S2 stays operational and narrow: IDE + Chat + CLI only. Agent Mode is deliberately deferred.
 3. S3 absorbs the vocabulary load (Agent/Edit/MCP/Sub-Agents/Spaces/Spark) alongside data flow and prompts. Flex to 60 min if the room can absorb it.
 4. S4 leads with learner-relevant privacy before admin-relevant policy. The order matters for retention.

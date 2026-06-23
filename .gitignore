@@ -134,3 +134,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Share the VS Code debug launch config with learners (overrides global ~/.gitignore_global .vscode/ rule)
+!.vscode/
+!.vscode/launch.json

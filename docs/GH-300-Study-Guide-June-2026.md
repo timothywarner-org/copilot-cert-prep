@@ -1,8 +1,8 @@
 # GH-300 Study Guide: GitHub Copilot Certification
 
 > **Blueprint version:** Skills measured as of **January 2026**
-> **Source:** [Microsoft Learn — Study guide for Exam GH-300](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300)
-> **Change log note:** This exam changed significantly in January 2026 — new objectives were added, some were removed, existing objectives moved between functional groups, and all were reworded.
+> **Source:** [Microsoft Learn - Study guide for Exam GH-300](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300)
+> **Change log note:** This exam changed significantly in January 2026. New objectives were added, some were removed, existing objectives moved between functional groups, and all were reworded.
 
 ---
 
@@ -27,9 +27,9 @@ Candidates should have expertise in using GitHub Copilot to improve software dev
 
 ---
 
-## Skills Measured — January 2026 Blueprint
+## Skills Measured: January 2026 Blueprint
 
-The official MS Learn page renders **six** functional groups (one of which is shown twice in the page header — a known display quirk). The substantive blueprint is:
+The official MS Learn page renders **six** functional groups (one of which is shown twice in the page header, a known display quirk). The substantive blueprint is:
 
 | # | Functional Group | Weight |
 |---|---|---|
@@ -40,11 +40,11 @@ The official MS Learn page renders **six** functional groups (one of which is sh
 | 5 | Improve developer productivity with GitHub Copilot | **10–15%** |
 | 6 | Configure privacy, content exclusions, and safeguards | **10–15%** |
 
-> **What changed from the prior blueprint?** Responsible AI grew from 7% to 15–20%. Plans-and-features content was merged into a broader "Use GitHub Copilot features" group (25–30%) that now explicitly covers **Copilot CLI, Agent Mode, Edit Mode, MCP, Sub-Agents, Spaces, Spark, and org-wide policy management**. Testing is no longer its own domain — it sits inside "Improve developer productivity."
+> **What changed from the prior blueprint?** Responsible AI grew from 7% to 15–20%. Plans-and-features content was merged into a broader "Use GitHub Copilot features" group (25–30%) that now explicitly covers **Copilot CLI, Agent Mode, Edit Mode, MCP, Sub-Agents, Spaces, Spark, and org-wide policy management**. Testing is no longer its own domain. It sits inside "Improve developer productivity."
 
 ---
 
-## Domain 1 — Use GitHub Copilot responsibly (15–20%)
+## Domain 1: Use GitHub Copilot responsibly (15–20%)
 
 ### Understand responsible AI principles
 
@@ -64,7 +64,7 @@ The official MS Learn page renders **six** functional groups (one of which is sh
 
 ---
 
-## Domain 2 — Use GitHub Copilot features (25–30%)
+## Domain 2: Use GitHub Copilot features (25–30%)
 
 This is the heaviest-weighted group. Expect scenario-based questions across **four sub-areas**.
 
@@ -110,7 +110,7 @@ This is the heaviest-weighted group. Expect scenario-based questions across **fo
 
 ---
 
-## Domain 3 — Understand GitHub Copilot data and architecture (10–15%)
+## Domain 3: Understand GitHub Copilot data and architecture (10–15%)
 
 ### Describe data handling and flow
 
@@ -125,11 +125,11 @@ This is the heaviest-weighted group. Expect scenario-based questions across **fo
 
 ### Study anchors
 
-- [How GitHub Copilot works and handles data — Trust Center](https://github.com/trust-center)
+- [How GitHub Copilot works and handles data - Trust Center](https://github.com/trust-center)
 
 ---
 
-## Domain 4 — Apply prompt engineering and context crafting (10–15%)
+## Domain 4: Apply prompt engineering and context crafting (10–15%)
 
 ### Craft effective prompts
 
@@ -149,7 +149,7 @@ This is the heaviest-weighted group. Expect scenario-based questions across **fo
 
 ---
 
-## Domain 5 — Improve developer productivity with GitHub Copilot (10–15%)
+## Domain 5: Improve developer productivity with GitHub Copilot (10–15%)
 
 ### Enhance productivity and code quality
 
@@ -170,7 +170,7 @@ This is the heaviest-weighted group. Expect scenario-based questions across **fo
 
 ---
 
-## Domain 6 — Configure privacy, content exclusions, and safeguards (10–15%)
+## Domain 6: Configure privacy, content exclusions, and safeguards (10–15%)
 
 ### Manage privacy settings and exclusions
 
@@ -195,9 +195,9 @@ This is the heaviest-weighted group. Expect scenario-based questions across **fo
 | **Agent Mode** vs **Coding Agent** | Agent Mode runs **in your IDE** (local, chat-triggered, direct file edits, Plan Mode review). Coding Agent runs **in GitHub Actions** (cloud, issue-assigned, opens a PR for review). |
 | **Edit Mode** vs **Agent Mode** | Edit Mode = scoped multi-file edits with explicit file targets. Agent Mode = autonomous task execution with sub-agents and MCP tools. |
 | **Sub-Agents** | Delegated tasks within an Agent Session that **optimize context usage** by isolating concerns. |
-| **MCP** | Model Context Protocol — how Copilot connects to external tools, data, and services. |
+| **MCP** | Model Context Protocol, how Copilot connects to external tools, data, and services. |
 | **Spaces** vs **Spark** | Spaces = curated context bundles for teams. Spark = AI-driven app/prototype builder. |
-| **Inline suggestions** vs **Chat** vs **CLI** vs **Plan Mode** | The four primary trigger surfaces — know each one's input style and output behavior. |
+| **Inline suggestions** vs **Chat** vs **CLI** vs **Plan Mode** | The four primary trigger surfaces. Know each one's input style and output behavior. |
 | **Content exclusions** vs **Duplication detection** | Exclusions block files/repos from being sent. Duplication detection blocks suggestions that match public code. |
 | **Prompt files** vs **Instructions files** | Prompt files = reusable prompts. Instructions files = persistent review/coding standards. |
 
@@ -207,9 +207,9 @@ This is the heaviest-weighted group. Expect scenario-based questions across **fo
 
 1. **Read for the trigger surface.** Many questions hinge on whether the scenario is IDE-local (Agent Mode) vs cloud (Coding Agent) vs CLI.
 2. **Plan Mode is a feature, not a product.** It's the preview/approve gate inside Agent Mode.
-3. **REST API for subscription management** is explicitly called out — know that org admins manage seats programmatically.
-4. **Audit log events** appear in the org-policy sub-area — review what Copilot events are logged.
-5. **Validate AI output** is a recurring theme — when in doubt, the responsible answer is "review before merge."
+3. **REST API for subscription management** is explicitly called out, so know that org admins manage seats programmatically.
+4. **Audit log events** appear in the org-policy sub-area, so review what Copilot events are logged.
+5. **Validate AI output** is a recurring theme. When in doubt, the responsible answer is "review before merge."
 6. **Most questions target GA features**, but commonly used Preview features (Spark, Cloud Agent in VS) can show up.
 7. **700 to pass.** No partial credit per item; budget your time and flag-and-return.
 
@@ -222,8 +222,8 @@ This is the heaviest-weighted group. Expect scenario-based questions across **fo
 | Official study guide | https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300 |
 | Certification page | https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/ |
 | Instructor-led course (GH-300T00-A) | https://learn.microsoft.com/training/courses/gh-300t00 |
-| GitHub Copilot Fundamentals — Part 1 | https://learn.microsoft.com/en-us/training/paths/copilot/ |
-| GitHub Copilot Fundamentals — Part 2 | https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/ |
+| GitHub Copilot Fundamentals - Part 1 | https://learn.microsoft.com/en-us/training/paths/copilot/ |
+| GitHub Copilot Fundamentals - Part 2 | https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/ |
 | Copilot product docs | https://docs.github.com/copilot |
 | Trust Center | https://github.com/trust-center |
 | Exam sandbox | https://aka.ms/GHExamDemo-enu |

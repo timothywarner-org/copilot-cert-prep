@@ -50,7 +50,7 @@ The exam covers **six domains**. Weights are published as **ranges**, not fixed 
 - Use the CLI interactively and in sessions
 - Generate scripts and manage files with the CLI
 
-**Use advanced Copilot features and capabilities**
+**Use GitHub Copilot features and capabilities**
 
 - Use Agent Mode, Edit Mode, and MCP for enhanced development and workflows
 - Manage Agent Sessions and delegate tasks to Sub-Agents for optimized context usage
