@@ -4,20 +4,31 @@
 
 ## Format
 
-- Five instructional segments
-- 50 minutes each (S3 may flex to 60 if delivery window permits)
-- Total instructional time: 250 minutes
-- Delivery note: in a 5-hour block, use short breaks and transition buffers outside these 250 minutes
+- Five instructional segments across a 9:00 am to 2:00 pm CT delivery window
+- 50 minutes each, except Segment 3 which runs 60 minutes
+- Total instructional time: 260 minutes
+- Delivery note: use short breaks and transition buffers between segment hours
+
+## Delivery Schedule
+
+| Time     | Segment                          |
+| -------- | -------------------------------- |
+| 09:00 am | Segment 1: Foundations           |
+| 10:00 am | Segment 2: Core Features         |
+| 11:00 am | Segment 3: Enterprise Features   |
+| 12:00 pm | Segment 4: Privacy & Config      |
+| 01:00 pm | Segment 5: Exam Prep             |
+| 02:00 pm | Finish                           |
 
 ## Pedagogical Sequence (Not Blueprint Order)
 
-**Start → Use → Think → Govern → Ship.** Habits before tools, tools before internals, internals before policy, policy before integrative practice. Coverage targets 100% of January 2026 GH-300 objectives plus essential post-blueprint features.
+The teaching arc is **habits before tools, tools before internals, internals before policy, policy before integrative practice**. This sequence is intentionally not in blueprint domain order. Coverage targets 100% of January 2026 GH-300 objectives plus essential post-blueprint features.
 
 Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = current Copilot/GitHub Enterprise Cloud feature not yet on GH-300 but operationally required.
 
 ---
 
-## Segment 1 (50 min): Start - Responsible Operation
+## Segment 1 (09:00 am, 50 min): Foundations - Responsible Operation
 
 ### Outcomes
 
@@ -46,7 +57,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 
 ---
 
-## Segment 2 (50 min): Use - Hands on the Wheel
+## Segment 2 (10:00 am, 50 min): Core Features - Hands on the Wheel
 
 ### Outcomes
 
@@ -80,7 +91,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 
 ---
 
-## Segment 3 (60 min, flex from 50): Think - How Copilot Reasons
+## Segment 3 (11:00 am, 60 min): Enterprise Features - How Copilot Reasons
 
 ### Outcomes
 
@@ -125,7 +136,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 
 ---
 
-## Segment 4 (50 min): Govern - Privacy, Policy, and Audit
+## Segment 4 (12:00 pm, 50 min): Privacy & Config - Privacy, Policy, and Audit
 
 ### Outcomes
 
@@ -165,7 +176,7 @@ Legend for feature lists: **[GH-300]** = on the blueprint. **[Beyond]** = curren
 
 ---
 
-## Segment 5 (50 min): Ship - Productivity, Distinctions, Exam Transfer
+## Segment 5 (01:00 pm, 50 min): Exam Prep - Productivity, Distinctions, Exam Transfer
 
 ### Outcomes
 
@@ -265,7 +276,7 @@ Coverage status: 100% of January 2026 GH-300 objectives are mapped, plus 30+ pos
 
 1. S1 is heavier on validation than before. Responsible AI grew from 7% to 15-20%, and a single lab is no longer enough.
 2. S2 stays operational and narrow: IDE + Chat + CLI only. Agent Mode is deliberately deferred.
-3. S3 absorbs the vocabulary load (Agent/Edit/MCP/Sub-Agents/Spaces/Spark) alongside data flow and prompts. Flex to 60 min if the room can absorb it.
+3. S3 absorbs the vocabulary load (Agent/Edit/MCP/Sub-Agents/Spaces/Spark) alongside data flow and prompts. This is the 60-minute segment (11:00 am to 12:00 pm).
 4. S4 leads with learner-relevant privacy before admin-relevant policy. The order matters for retention.
 5. S5 distinction drills run *before* the mini-mock so the most-tested confusions are in working memory at the gate.
 

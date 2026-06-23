@@ -37,13 +37,14 @@ This is the official prep course for the **GitHub Copilot Certification Exam (GH
 
 ## Course Structure
 
-| Segment                 | Duration   | Focus                                               |
-| ----------------------- | ---------- | --------------------------------------------------- |
-| **1. Foundations**      | 50 minutes | Multi-model setup, Agent Mode intro, Responsible AI |
-| **2. Core Features**    | 50 minutes | Prompt engineering, Chat mastery, Agent workflows   |
-| **3. Enterprise**       | 60 minutes | Testing, Security, BYOK, Governance                 |
-| **4. Privacy & Config** | 50 minutes | Exclusions, Troubleshooting, Integration            |
-| **5. Exam Prep**        | 50 minutes | Domain review, Practice exam, Competitive landscape |
+| Time     | Segment                 | Duration   | Focus                                               |
+| -------- | ----------------------- | ---------- | --------------------------------------------------- |
+| 09:00 am | **1. Foundations**      | 50 minutes | Multi-model setup, Agent Mode intro, Responsible AI |
+| 10:00 am | **2. Core Features**    | 50 minutes | Prompt engineering, Chat mastery, Agent workflows   |
+| 11:00 am | **3. Enterprise Features** | 60 minutes | Testing, Security, BYOK, Governance              |
+| 12:00 pm | **4. Privacy & Config** | 50 minutes | Exclusions, Troubleshooting, Integration            |
+| 01:00 pm | **5. Exam Prep**        | 50 minutes | Domain review, Practice exam, Competitive landscape |
+| 02:00 pm | Finish                  |            |                                                     |
 
 See [COURSE-PLAN-JUNE-2026.md](COURSE-PLAN-JUNE-2026.md) for detailed curriculum.
 

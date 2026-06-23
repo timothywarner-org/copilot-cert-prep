@@ -49,7 +49,9 @@ There is no lint script and no build step — this is a plain Node app.
   - `style-guide.md` — Microsoft Writing Style Guide rules the agent must follow when authoring exam items.
   - `fictional-companies.md` — randomization pool for scenario stems (avoid Contoso defaulting).
 - `scripts/` — one-off PowerShell helpers (e.g., `create-tworg-api-key.ps1`).
-- `COURSE-PLAN-JUNE-2026.md` — the canonical course outline. The pedagogical sequence is **Start → Use → Think → Govern → Ship** (5 × 50-min segments, 250 min total). This sequence is *intentionally not* in blueprint order — do not reorder it to match domain numbering.
+- `copilot-metrics-tour/` — a zero-dependency Node console app (`index.js`, run `node index.js --demo` or `npm run demo`) that tours the GitHub Copilot Metrics API across adoption, acceptance rate, time-saved/ROI, and governance use cases. Has an offline `--demo` mode with synthetic data so it runs without a populated Copilot Business org. Live mode resolves a token from `GITHUB_TOKEN`/`GH_TOKEN`/`GITHUB_PERSONAL_ACCESS_TOKEN`.
+- `.vscode/launch.json` — debug config for the `src/` app; runs through the integrated PowerShell terminal (required because the app uses readline prompts). It is intentionally un-ignored in `.gitignore` (overriding the global `.vscode/` ignore) so learners get it on clone.
+- `COURSE-PLAN-JUNE-2026.md` — the canonical course outline. Five segments delivered on the clock **09:00 am Foundations, 10:00 am Core Features, 11:00 am Enterprise Features (60 min), 12:00 pm Privacy & Config, 01:00 pm Exam Prep, finish 02:00 pm CT** (segment names match `README.md`). The teaching arc (habits → tools → internals → policy → integrative practice) is *intentionally not* in blueprint domain order — do not reorder it to match domain numbering. Keep segment names and clock times in sync with `README.md`.
 
 ### The Cert Buddy Agent System
 
@@ -60,7 +62,7 @@ This is the architecturally significant piece. Three layers compose a Copilot Ch
    - `gh300-item-creator` — exam-realistic multiple-choice items.
    - `gh300-lab-creator` — 10–20 minute hands-on exercises with validation + rollback steps.
    - `gh300-study-planner` — confidence-rated personalized study plans.
-3. **Prompt templates** — `.github/prompts/*.prompt.md` expose skills as slash commands: `/gh300-practice-questions`, `/gh300-practice-lab`, `/gh300-study-planner`.
+3. **Prompt templates** — `.github/prompts/*.prompt.md` expose skills as slash commands: `/gh300-practice-questions`, `/gh300-rai-questions` (responsible AI items, backed by a dedicated recipe in `gh300-item-creator/SKILL.md`), `/gh300-practice-lab`, `/gh300-study-planner`.
 
 Grounding flows through the **Microsoft Learn MCP server** declared in `.vscode/mcp.json` under the server name `gh300buddy-mslearn` (HTTP transport, `https://learn.microsoft.com/api/mcp`). The agent is required to call `microsoft_docs_search` first, `microsoft_docs_fetch` for full-page detail, and `microsoft_code_sample_search` to verify command/settings syntax. Every generated item must cite Microsoft Learn URLs.
 
@@ -85,7 +87,7 @@ Weights are **ranges**, not point values — this changed from prior blueprints.
 | Improve developer productivity             | 10–15%  |
 | Configure privacy, exclusions, safeguards  | 10–15%  |
 
-Older fixed-percentage tables (7% / 31% / 15% / 9% / 14% / 9% / 15%) are obsolete — do not reintroduce them.
+Older fixed-percentage tables (for example 7% / 31% / 9% / 14%) are obsolete — do not reintroduce them as current weights. The single retired-percentage callouts that survive in the docs (e.g. "Responsible AI grew from 7% to 15–20%") are intentional migration notes, not drift.
 
 ## Markdown conventions
 
@@ -96,3 +98,5 @@ Per the prior Cursor-rules carryover: blank line between every heading and its c
 - Do not recreate the deleted `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` directories — they were removed deliberately during the repo slim-down. Content that survived moved to `docs/` or `references/`.
 - Do not paraphrase real GH-300 exam questions or reference braindumps when working through the Cert Buddy skills — the agent definition prohibits it.
 - Do not assume the root project enforces 80% coverage — `jest.config.js` is gone. If coverage gates are needed for a new demo, add them locally to that demo, not at the root.
+- Do not let `COURSE-PLAN-JUNE-2026.md` and `README.md` drift apart on segment names, clock times, or durations — they describe the same 09:00 am–02:00 pm delivery and must agree. The README "Course Structure" table is the quick view; the course plan is the detailed build.
+- Do not use em dashes in authored docs — Tim's style rule. Use hyphens with spaces, commas, or periods.
