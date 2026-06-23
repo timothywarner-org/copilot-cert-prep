@@ -24,3 +24,4 @@ Use these sources in this order of precedence when writing GH-300 practice items
 - Do not use contractions.
 - Do not use all/none of the above patterns.
 - Keep distractors plausible and tied to real product behavior.
+- Keep answer choices parallel in grammar and length so no option is an obvious tell.
