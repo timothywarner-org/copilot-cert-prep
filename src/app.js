@@ -44,6 +44,7 @@ class CopilotTipsApp {
       { key: '4', label: '🔍 Search tips', action: 'search' },
       { key: '5', label: '📊 Statistics', action: 'stats' },
       { key: '6', label: '🎯 Random category', action: 'random_category' },
+      { key: '7', label: '📁 Search by category', action: 'search_by_category' },
       { key: 'q', label: '👋 Quit', action: 'quit' }
     ];
     this.setupErrorHandlers();
@@ -379,6 +380,43 @@ class CopilotTipsApp {
     }
   }
 
+  getTipsByCategory(categoryQuery) {
+    if (!categoryQuery || !categoryQuery.trim()) {
+      return [];
+    }
+
+    const queryLower = categoryQuery.trim().toLowerCase();
+    return this.tips.filter(tip =>
+      tip.category.toLowerCase().includes(queryLower)
+    );
+  }
+
+  async searchByCategory() {
+    const categoryQuery = await this.promptUser(`${colors.yellow}📁 Category: ${colors.reset}`);
+
+    if (!categoryQuery) {
+      console.log(`${colors.red}Search cancelled.${colors.reset}`);
+      return;
+    }
+
+    const results = this.getTipsByCategory(categoryQuery);
+
+    if (results.length === 0) {
+      console.log(`\n${colors.yellow}😔 No tips found in category "${categoryQuery}".${colors.reset}\n`);
+      return;
+    }
+
+    console.log(`\n${colors.green}✨ Found ${results.length} tip(s) in category "${categoryQuery}"${colors.reset}`);
+    console.log('─'.repeat(50) + '\n');
+
+    for (const tip of results) {
+      const emoji = this.getCategoryEmoji(tip.category);
+      console.log(`${emoji} ${colors.bright}#${tip.id} ${tip.title}${colors.reset}`);
+      console.log(`   ${colors.dim}${tip.content.substring(0, 70)}${tip.content.length > 70 ? '...' : ''}${colors.reset}`);
+      console.log();
+    }
+  }
+
   showStatistics() {
     console.log(`\n${colors.cyan}📊 Statistics${colors.reset}`);
     console.log('─'.repeat(40));
@@ -439,6 +477,7 @@ class CopilotTipsApp {
     // Check for partial matches
     if (normalizedChoice.includes('tip') || normalizedChoice === 'another') return 'another';
     if (normalizedChoice.includes('create') || normalizedChoice.includes('new')) return 'create';
+    if (normalizedChoice.includes('categ') && normalizedChoice.includes('search')) return 'search_by_category';
     if (normalizedChoice.includes('categ')) return 'categories';
     if (normalizedChoice.includes('search')) return 'search';
     if (normalizedChoice.includes('stat')) return 'stats';
@@ -502,6 +541,10 @@ class CopilotTipsApp {
             await this.showRandomCategory();
             break;
           
+          case 'search_by_category':
+            await this.searchByCategory();
+            break;
+          
           case 'quit':
             console.log(`\n${colors.green}✨ Thanks for using GitHub Copilot Tips!${colors.reset}`);
             console.log(`${colors.dim}Keep learning and happy coding! 🚀${colors.reset}\n`);
@@ -523,9 +566,13 @@ class CopilotTipsApp {
   }
 }
 
-// Initialize and run the app
-const app = new CopilotTipsApp();
-app.run().catch(error => {
-  console.error(`${colors.red}Fatal error:${colors.reset}`, error);
-  process.exit(1);
-});
+module.exports = CopilotTipsApp;
+
+// Initialize and run the app (skip when required as a module, e.g. by tests)
+if (require.main === module) {
+  const app = new CopilotTipsApp();
+  app.run().catch(error => {
+    console.error(`${colors.red}Fatal error:${colors.reset}`, error);
+    process.exit(1);
+  });
+}

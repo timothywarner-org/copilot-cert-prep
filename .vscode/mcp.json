@@ -3,6 +3,13 @@
     "gh300buddy-mslearn": {
       "type": "http",
       "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "oreilly/github-mcp-server": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${env:GITHUB_TOKEN}"
+      }
     }
   }
 }

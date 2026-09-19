@@ -1,205 +1,82 @@
 # GitHub Copilot Certification Prep Repository
 
-> **Updated January 2026**: Includes guidance for Agent Mode, multi-model selection, and 50+ new features from November 2025.
+Teaching repository for Tim Warner's O'Reilly Live Learning "GitHub Copilot Certification (GH-300) Prep" - June 23, 2026, 9:00 AM-2:00 PM CT. January 2026 GH-300 blueprint is the authoritative exam reference.
 
-## 🎯 Project Overview
+## Sub-projects (three independent Node.js apps)
 
-This is a **teaching repository** for O'Reilly Live Learning GitHub Copilot certification (GH-300) preparation. The codebase demonstrates enterprise-ready patterns across Node.js, Python, and testing frameworks while showcasing Copilot's capabilities.
+| Path | Purpose |
+|---|---|
+| `/` | Jest tests for course materials |
+| `src/` | Interactive console demo app for live class |
+| `copilot-metrics-tour/` | Console tour of GitHub Copilot Metrics API |
 
-## 🏗️ Architecture & Structure
+Each has its own `package.json`. Install and run separately. `references/` holds agent source-of-truth inputs; `COURSE-PLAN-JUNE-2026.md` and `README.md` must stay in sync on segment names and clock times.
 
-### Repository Architecture
-
-- **Root project** (`/`): Main course materials with Jest testing framework
-- **Live demo app** (`/src/`): Interactive Node.js console app used for in-class demos
-- **Cert Buddy agent** (`/.github/agents/`, `/.github/skills/`, `/.github/prompts/`): GH-300 exam prep agent system
-- **Reference material** (`/references/`, `/docs/`): Exam objectives, style guide, study materials
-
-### Key Technology Stacks
+## Commands
 
 ```bash
-# Root: Jest testing (no enforced coverage threshold at root)
-npm test              # Run all tests
-npm run test:watch    # Watch mode for active development
+# Root
+npm test                         # all tests
+npx jest tests/sample.test.js   # single file
+npx jest -t "pattern"           # by name
+npm run test:watch
 
-# Live demo app (src/)
-cd src && npm install
-npm start             # Interactive console app
-node test-app.js      # Ad-hoc test harness
+# src/ (install first: cd src && npm install)
+npm start        # node app.js - needs readline terminal; use .vscode/launch.json
+node test-app.js # ad-hoc harness
+
+# copilot-metrics-tour/ (zero deps)
+node index.js --demo            # offline synthetic data
+node index.js timothywarner-org # live (GITHUB_TOKEN / GH_TOKEN / GITHUB_PERSONAL_ACCESS_TOKEN)
+npm run tour:roi
 ```
 
-## 🔧 Development Patterns
+No coverage threshold at root - `jest.config.js` was intentionally removed. `.vscode/launch.json` is intentionally committed for learners.
 
-### Testing Standards
+## Cert Buddy Agent System
 
-- **Jest** at root level; no enforced coverage threshold (jest.config.js was removed during the repo slim-down)
-- **Test patterns**: `**/test/**/*.js` and `**/?(*.)+(spec|test).js`
-- Generate tests focusing on enterprise scenarios: error handling, edge cases, performance
+Layered Copilot Chat workspace agent grounding exam-prep content in Microsoft Learn:
 
-### Copilot Integration Patterns
+- **Agent** - `.github/agents/gh300-cert-buddy-agent.agent.md` - invoke as `@gh300-cert-buddy-agent`
+- **Skills** (auto-discovered from `.github/skills/<skill>/SKILL.md`):
+  - `gh300-item-creator` - exam-realistic multiple-choice questions
+  - `gh300-lab-creator` - 10-20 min hands-on exercises with validation and rollback
+  - `gh300-study-planner` - confidence-rated personalized study plans
+- **Prompt templates** (`/gh300-practice-questions`, `/gh300-rai-questions`, `/gh300-practice-lab`, `/gh300-study-planner`)
+- **MCP** - `.vscode/mcp.json` server `gh300buddy-mslearn` (HTTP, `https://learn.microsoft.com/api/mcp`). Agent must call `microsoft_docs_search` first and cite Microsoft Learn URLs in every output.
 
-```typescript
-// Use teaching-focused comments for better suggestions
-// @copilot context: This is for GitHub Copilot certification training
-// Stack: Node.js + Express + Jest, Python + FastAPI
-// Focus: Enterprise patterns, security, testing
-```
+## Key Conventions
 
-### Dependency Management
+**Cert-buddy content** - Follow `references/style-guide.md` (sentence-style caps, bold UI labels, Oxford commas, no contractions, no "all/none of the above", 2-sentence rationales). Pull companies from `references/fictional-companies.md` - not Contoso. No braindump paraphrasing.
 
-- **Dependabot** configured for weekly updates (Node.js direct deps, Python all deps)
-- **Jest pinned** to v29+ for stability
-- Multi-project structure requires careful dependency isolation
+**Domain weights** - Use ranges from `references/gh300-objectives.md`, not fixed percentages:
 
-## 📚 Course-Specific Context
+| Domain | Weight |
+|---|---|
+| Use GitHub Copilot features | 25-30% |
+| Use GitHub Copilot responsibly | 15-20% |
+| Understand Copilot data and architecture | 10-15% |
+| Apply prompt engineering and context | 10-15% |
+| Improve developer productivity | 10-15% |
+| Configure privacy, exclusions, safeguards | 10-15% |
 
-### 5-Segment Course Flow
+**Critical exam distinction** - Agent Mode (IDE-based, local, multi-file) vs. Coding Agent (GitHub Actions, assigns issues, creates PRs) vs. Cloud Agent (Visual Studio preview).
 
-1. **Foundations** (Responsible AI, IDE setup, plans comparison)
-2. **Core Features** (Prompt engineering, Chat, CLI integration)
-3. **Enterprise** (Testing, Knowledge Bases, security, custom models)
-4. **Privacy & Config** (Exclusions, troubleshooting, org policies)
-5. **Exam Prep** (Practice questions, emerging features)
+**Chat slash commands for demos** - `/plan` (preview changes), `/agent` (multi-file tasks), `/review` (code review with linter).
 
-### Certification Exam Domains (GH-300, January 2026)
+**Enterprise governance topics** - BYOK, budget tracking and per-team limits, Private MCP Registry, organization-wide custom instructions.
 
-| Domain                                    | Weight |
-| ----------------------------------------- | ------ |
-| Use GitHub Copilot responsibly            | 15–20% |
-| Use GitHub Copilot features               | 25–30% |
-| Understand Copilot data and architecture  | 10–15% |
-| Apply prompt engineering and context      | 10–15% |
-| Improve developer productivity            | 10–15% |
-| Configure privacy, exclusions, safeguards | 10–15% |
+**Enterprise scenario contexts** - Use inventory management APIs, employee directory tools, automated reporting pipelines, CI/CD automation, and Azure/AWS deployment patterns when generating examples.
 
-## 🚀 Enterprise Focus Areas
+**Markdown style** - No em dashes. Blank line between every heading, list, and code block and surrounding content.
 
-### Real-World Business Scenarios
+**Course segment order** - Foundations -> Core Features -> Enterprise -> Privacy & Config -> Exam Prep. Intentionally not in blueprint domain order; do not reorder.
 
-When generating examples, use enterprise contexts:
+**Deleted directories** - Do not recreate `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, `exam-metadata/`.
 
-- **Inventory management APIs** with error handling
-- **Employee directory tools** with security considerations
-- **Automated reporting pipelines** with data validation
-- **CI/CD automation** with GitHub Actions integration
-- **Azure/AWS deployment** patterns
+## Teaching Output Format
 
-### Code Quality Standards
-
-- **Conventional Commits** for all examples
-- **Branch naming**: `feature/`, `bugfix/`, `hotfix/`
-- **Business-context comments** explaining _why_, not just _what_
-- **Security-first** prompting and validation
-
-## 🔐 Configuration Files
-
-### Key Files to Reference
-
-- `.github/agents/gh300-cert-buddy-agent.agent.md` - GH-300 exam prep agent
-- `.github/skills/` - Three skill definitions (item-creator, lab-creator, study-planner)
-- `.github/prompts/` - Slash-command prompt templates
-- `.github/hooks/gh300-guardrails.json` - Workspace hook definitions
-- `.vscode/mcp.json` - Microsoft Learn MCP server configuration
-- `references/gh300-objectives.md` - Jan 2026 exam blueprint
-- `COURSE-PLAN-JUNE-2026.md` - Complete curriculum structure
-
-### Custom Instructions Pattern
-
-```markdown
-# When working in this repo:
-
-# 1. Use enterprise security patterns
-
-# 2. Generate teaching-appropriate examples
-
-# 3. Focus on GH-300 certification exam domains (Jan 2026 blueprint)
-
-# 4. Always include "Next Steps" for learners
-
-# 5. Ground all exam content in Microsoft Learn documentation
-```
-
-## 🆕 January 2026 Feature Highlights
-
-### Multi-Model Selection
-
-Students should understand when to use each model:
-
-- **Raptor Mini**: Fast inline completions
-- **GPT-5.1-Codex**: Code-focused tasks
-- **Claude Opus 4.5**: Nuanced refactoring
-- **Gemini 3 Pro**: Multimodal (images + code)
-
-### Agent Mode vs Coding Agent
-
-This distinction is critical for the exam:
-
-- **Agent Mode**: IDE-based, multi-file edits, runs locally
-- **Coding Agent**: GitHub Actions, assign issues, creates PRs automatically
-- **Cloud Agent**: Visual Studio preview, delegates to GitHub cloud
-
-### New Slash Commands
-
-When demonstrating Chat, include:
-
-- `/plan` - Preview changes before execution
-- `/agent` - Multi-file task execution
-- `/review` - Code review with linter integration
-
-### Enterprise Governance
-
-For Business/Enterprise demos:
-
-- BYOK (Bring Your Own Key)
-- Budget tracking and per-team limits
-- Private MCP Registry
-- Organization-wide custom instructions
-
-## 💡 Copilot Best Practices for This Repo
-
-- **Teaching context**: Always explain code for learners preparing for certification
-- **Enterprise patterns**: Emphasize security, testing, and scalability
-- **Multi-stack support**: Handle Node.js, Python, Bash, and GitHub CLI seamlessly
-- **Exam preparation**: Reference specific GH-300 domains and weightings
-- **Practical application**: Focus on hands-on, job-ready skills over theory
-- **Model awareness**: Demonstrate when to switch models for different tasks
-- **Agent Mode familiarity**: Show Plan Mode for reviewing changes before execution
-
-## 📋 Next Steps Template
-
-When providing assistance, always end with actionable items:
-
-1. **Practice item** specific to the current topic
-2. **Deep dive** suggestion for advanced learning
-3. **Real-world application** for immediate value
-
-## 🤖 Workspace Agents and Skills
-
-This repository includes a **GH-300 Cert Buddy Agent** that generates exam-realistic practice material. Copilot should be aware of this infrastructure and can direct learners to it.
-
-### Agent Definition
-
-- `.github/agents/gh300-cert-buddy-agent.agent.md` — The workspace agent. Learners invoke it with `@gh300-cert-buddy-agent` in Copilot Chat.
-
-### Skills (in `.github/skills/`)
-
-| Skill                 | Purpose                                                                        |
-| --------------------- | ------------------------------------------------------------------------------ |
-| `gh300-item-creator`  | Generates exam-realistic multiple-choice questions grounded in Microsoft Learn |
-| `gh300-lab-creator`   | Creates 10–20 minute hands-on exercises with validation steps                  |
-| `gh300-study-planner` | Builds personalized study plans based on learner confidence levels             |
-
-Each skill folder contains a `SKILL.md` that defines the skill's behavior, constraints, and output format.
-
-### Prompt Templates (in `.github/prompts/`)
-
-Pre-built prompt files that learners invoke as slash commands:
-
-- `/gh300-practice-questions` — Generate practice exam items
-- `/gh300-rai-questions` — Generate responsible AI principle items
-- `/gh300-practice-lab` — Create a hands-on exercise
-- `/gh300-study-planner` — Build a study plan
-
-### MCP Configuration
-
-The agent uses a Microsoft Learn MCP server (configured in `.vscode/mcp.json`) to ground generated content in official documentation. When helping learners, reference this tool for up-to-date Microsoft Learn content.
+End learner-facing responses with:
+1. Practice task
+2. Deep-dive topic
+3. Real-world application
