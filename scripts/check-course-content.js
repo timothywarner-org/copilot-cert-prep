@@ -50,6 +50,24 @@ function proseLines(text) {
   });
 }
 
+/** Remove angle markup in one pass for anchor comparison, never for HTML rendering. */
+function headingText(text) {
+  const result = [];
+  let depth = 0;
+  let quote = null;
+  for (const character of text) {
+    if (depth > 0) {
+      if (quote) {
+        if (character === quote) quote = null;
+      } else if (character === '"' || character === "'") quote = character;
+      else if (character === "<") depth++;
+      else if (character === ">") depth--;
+    } else if (character === "<") depth = 1;
+    else result.push(character);
+  }
+  return result.join("");
+}
+
 /** Match GitHub's heading IDs for the ordinary Markdown headings used in this repository. */
 function headingIds(text) {
   const ids = new Set();
@@ -60,7 +78,7 @@ function headingIds(text) {
     const setext = index + 1 < lines.length && /^ {0,3}(?:=+|-+)\s*$/.test(lines[index + 1]);
     if (atx || (setext && line.trim())) {
       const title = atx ? atx[1] : line;
-      const base = title.toLowerCase().replace(/<[^>]*>/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      const base = headingText(title).toLowerCase().replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
         .replace(/&amp;/g, "&").replace(/[\uFE0E\uFE0F]/g, "").replace(/[^\p{L}\p{N}\p{M}\s_-]/gu, "").replace(/ /g, "-");
       let id = base;
       let suffix = 0;
@@ -90,6 +108,19 @@ function inlineTarget(file, target, inventory) {
     });
   }
   return candidates.some((candidate) => publishedTarget(candidate, inventory));
+}
+
+/** Split first so ambiguous repeated path segments cannot trigger regex backtracking. */
+function isInlinePath(candidate) {
+  if (/^[a-z][a-z0-9+.-]*:|[{}<>]|^\/|^(?:node|npm|pwsh|git|npx|python|gh)\s/i.test(candidate)) return false;
+  const directory = candidate.endsWith("/");
+  const segments = candidate.split("/");
+  if (directory) segments.pop();
+  if (!segments.length || segments.some((segment) => !/^[.\w *-]+$/.test(segment))) return false;
+  if (directory) return true;
+  const filename = segments.at(-1);
+  const dot = filename.lastIndexOf(".");
+  return dot > 0 && ["md", "pdf", "pptx", "json", "js", "ts", "ps1", "sh"].includes(filename.slice(dot + 1).toLowerCase());
 }
 
 /** Return an evidence summary as well as errors so the CLI states its actual coverage. */
@@ -134,8 +165,7 @@ function auditContent() {
       for (const match of line.matchAll(/`([^`\n]+)`/g)) {
         const candidate = match[1];
         // This recognizes standalone paths, not commands, JSON, URLs, or slash commands.
-        if (/^[a-z][a-z0-9+.-]*:|[{}<>]|^\/|^(?:node|npm|pwsh|git|npx|python|gh)\s/i.test(candidate)) continue;
-        if (!/^(?:[.\w *-]+\/)*[.\w *-]+\.(?:md|pdf|pptx|json|js|ts|ps1|sh)$|^(?:\.?[\w.*-]+\/)+$/i.test(candidate)) continue;
+        if (!isInlinePath(candidate)) continue;
         summary.inlinePaths++;
         const reason = examples.get(file)?.get(candidate);
         if (reason) { skippedExamples.push({ file, path: candidate, reason }); continue; }
@@ -165,4 +195,4 @@ if (require.main === module) {
     process.exitCode = 1;
   }
 }
-module.exports = { auditContent, checkContent, headingIds, proseLines };
+module.exports = { auditContent, checkContent, headingIds, proseLines, isInlinePath };
