@@ -8,7 +8,7 @@ applyTo: "**"
 
 ## Purpose
 
-This repository supports a 5-hour O'Reilly Live Learning GitHub Copilot certification prep course. Prioritize learner clarity, exam relevance, and practical outcomes.
+This repository supports a 4-hour O'Reilly Live Learning GitHub Copilot certification prep course. Prioritize learner clarity, exam relevance, and practical outcomes.
 
 ## Always Do
 
@@ -36,3 +36,7 @@ This repository supports a 5-hour O'Reilly Live Learning GitHub Copilot certific
 - Outdated feature descriptions or deprecated workflows.
 - Certification trivia that is not tied to a practical skill.
 - Overly complex labs that cannot fit a short class segment.
+
+## Source boundary
+
+Use the August 7, 2026 GH-300 objectives for scope. Label hooks and enterprise managed settings as product enrichment. Follow COURSE-PLAN.md for the four-block schedule. Keep a no-account route and an observable success check for each core activity.

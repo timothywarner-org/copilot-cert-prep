@@ -7,7 +7,7 @@ Use these references to ensure plans are objective-driven, voice-consistent, and
 - `working-temp/converted/style-guide.from-pdf.md` (MarkItDown output from style-guide.pdf)
 - `working-temp/mwsg-rules 2.md` (voice and syntax guidance)
 - `working-temp/wwl-exam-rules.md` (exam-safe writing constraints)
-- `references/gh300-objectives.md` (January 2026 objectives and weight ranges)
+- `references/gh300-objectives.md` (August 7, 2026 objectives and weight ranges)
 
 ## Planner defaults
 

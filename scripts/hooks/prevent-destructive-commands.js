@@ -1,112 +1,41 @@
 #!/usr/bin/env node
+/**
+ * Teaching example: veto a few destructive command patterns before a tool runs.
+ * VS Code supplies one JSON event on stdin. An empty response preserves approvals.
+ * This pattern matcher is bypassable and is not an enterprise security boundary.
+ */
+"use strict";
+const fs = require("node:fs");
 
-function readStdinWithTimeout(timeoutMs = 50) {
-  return new Promise((resolve) => {
-    let data = "";
-    let done = false;
-
-    const finish = () => {
-      if (!done) {
-        done = true;
-        resolve(data);
-      }
-    };
-
-    const timer = setTimeout(finish, timeoutMs);
-
-    process.stdin.setEncoding("utf8");
-    process.stdin.on("data", (chunk) => {
-      data += chunk;
-    });
-    process.stdin.on("end", () => {
-      clearTimeout(timer);
-      finish();
-    });
-    process.stdin.on("error", () => {
-      clearTimeout(timer);
-      finish();
-    });
-
-    process.stdin.resume();
-  });
-}
-
-function parseJson(value) {
-  if (!value || !value.trim()) {
-    return {};
-  }
-
-  try {
-    return JSON.parse(value);
-  } catch {
-    return {};
-  }
-}
-
-function findToolName(payload) {
-  return (
-    payload.tool_name ||
-    payload.toolName ||
-    payload.tool?.name ||
-    payload.tool ||
-    ""
-  );
-}
-
-function findCommand(payload) {
-  const input = payload.tool_input || payload.toolInput || payload.input || {};
-  if (typeof input.command === "string") {
-    return input.command;
-  }
-  if (typeof payload.command === "string") {
-    return payload.command;
-  }
-  return "";
-}
-
-async function main() {
-  const raw = await readStdinWithTimeout();
-  const payload = parseJson(raw);
-  const toolName = findToolName(payload);
-  const command = findCommand(payload);
-
-  const appliesToTerminalTools = /run_in_terminal|send_to_terminal/i.test(
-    toolName,
-  );
-  const riskyPatterns = [
-    /git\s+reset\s+--hard/i,
-    /git\s+checkout\s+--\s+/i,
-    /rm\s+-rf\s+\//i,
-    /remove-item\s+-recurse\s+-force/i,
+/** A deny is deliberate; everything else abstains so normal client policy still applies. */
+function evaluate(payload) {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("Expected a hook event object.");
+  const command = payload.tool_input?.command;
+  if (typeof command !== "string") return {};
+  // These illustrate a veto, not a shell parser or a complete command allowlist.
+  const patterns = [
+    /\bgit\s+reset\s+--hard\b/i,
+    /\bgit\s+push\b[^\r\n]*(?:--force\b|\s-f(?:\s|$))/i,
+    /\bgit\s+checkout\s+--\s+/i,
+    /\brm\s+-(?:rf|fr)\b/i,
+    /\bRemove-Item\b(?=[^\r\n]*-Recurse\b)(?=[^\r\n]*-Force\b)/i
   ];
-
-  if (
-    appliesToTerminalTools &&
-    riskyPatterns.some((pattern) => pattern.test(command))
-  ) {
-    const response = {
-      hookSpecificOutput: {
-        hookEventName: "PreToolUse",
-        permissionDecision: "deny",
-        permissionDecisionReason:
-          "Blocked destructive command. Use safer, non-destructive alternatives or ask the user for explicit approval first.",
-      },
-      stopReason:
-        "This command is blocked by workspace guardrails because it can destroy local changes.",
-    };
-
-    process.stdout.write(`${JSON.stringify(response)}\n`);
-    process.exit(0);
-  }
-
-  process.stdout.write(
-    `${JSON.stringify({
-      hookSpecificOutput: {
-        hookEventName: "PreToolUse",
-        permissionDecision: "allow",
-      },
-    })}\n`,
-  );
+  if (!patterns.some(pattern => pattern.test(command))) return {};
+  return {
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "deny",
+      permissionDecisionReason: "The classroom hook vetoes this destructive command pattern. Review scope and use a safer operation."
+    }
+  };
 }
-
-main();
+if (require.main === module) {
+  try {
+    // Read through EOF: a timer could truncate a delayed or multi-chunk event.
+    process.stdout.write(JSON.stringify(evaluate(JSON.parse(fs.readFileSync(0, "utf8")))) + "\n");
+  } catch {
+    console.error("Invalid hook input; no command was approved.");
+    process.exitCode = 2;
+  }
+}
+module.exports = { evaluate };

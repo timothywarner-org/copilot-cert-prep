@@ -24,9 +24,10 @@ function validateItem(input, { draft = false } = {}) {
   }
   // Rationale also has A-D labels; only the question owns answer choices.
   const questionText = input.split(/^\s*(?:[-#]+\s*)?(?:\*\*)?(?:result|correct_answer|rationale|references)(?:\*\*)?\s*:/im)[0];
-  const optionPattern = /^\s*(?:[-*]\s*)?(?:\*\*)?([A-D])(?:\*\*)?[ \t]*:[ \t]*(.*)$/gim;
+  const optionPattern = /^\s*(?:[-*]\s*)?(?:\*\*)?([A-Z])(?:\*\*)?[ \t]*:[ \t]*(.*)$/gim;
   for (const match of questionText.matchAll(optionPattern)) {
     const label = match[1].toUpperCase();
+    if (!"ABCD".includes(label)) errors.push(`Unexpected answer choice ${label}; provide exactly A-D.`);
     const value = match[2].trim().replace(/^["'`]|["'`]$/g, "").trim();
     if (choices.has(label)) errors.push(`Duplicate answer choice ${label}; check one question at a time.`);
     if (!value) errors.push(`Answer choice ${label} is empty.`);
@@ -43,7 +44,7 @@ function validateItem(input, { draft = false } = {}) {
     const shortest = lengths[3].length;
     // Length is an editorial signal, not evidence that an answer is correct or wrong.
     if (longest - shortest > 40 && longest / shortest > 1.4) warnings.push("Review uneven choice lengths for a giveaway; prefer parallel grammar and comparable detail.");
-    const answer = input.match(/correct[_ ]answer(?:\s+letter)?[\s*]*(?:is|:)\s*["'`]?([A-D])\b/i)?.[1].toUpperCase();
+    const answer = input.match(/correct[_ ]answer(?:\s+letter)?[\s*]*(?:is|:)\s*["'`*]*([A-D])\b/i)?.[1].toUpperCase();
     if (draft && answer === lengths[0].label && longest - lengths[1].length >= 12) warnings.push("The correct answer is conspicuously longest; review for length bias.");
   }
   return { errors, warnings };

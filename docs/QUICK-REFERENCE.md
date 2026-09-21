@@ -1,150 +1,75 @@
-# GitHub Copilot Quick Reference (January 2026)
+# GitHub Copilot quick reference
 
-> **For Students**: Print this. Keep it next to your keyboard. Use it during labs.
+**Reviewed September 20, 2026.** Use the [GH-300 objectives](../references/gh300-objectives.md) for exam scope and current product documentation for behavior.
 
----
+## Choose the surface
 
-## 🎯 The Big Distinction: Agent Mode vs Coding Agent
+| Need | Starting point | Evidence to inspect |
+|---|---|---|
+| Continue a small code expression | Inline suggestions | Accepted code, assumptions, edge cases |
+| Understand unfamiliar code | Chat with relevant files/context | Explanation against the actual implementation |
+| Plan a change before editing | Plan workflow | Scope, dependencies, acceptance criteria |
+| Implement a bounded change across files | Agent workflow | Tool calls, diff, test results |
+| Work interactively from a terminal | Copilot CLI | Proposed commands, permissions, working directory |
+| Delegate repository work for review | Copilot cloud agent | Branch/PR changes and checks |
+| Share curated project context | Copilot Spaces | Included sources, permissions, freshness |
+| Build an application from natural language | GitHub Spark | Generated behavior, deployment/access assumptions |
+| Retrieve external documentation or tools | MCP server | Server trust, permitted tools, returned evidence |
 
-| Feature | Agent Mode | Coding Agent |
-|---------|------------|--------------|
-| **Where** | Your IDE (local) | GitHub Actions (cloud) |
-| **Trigger** | Chat commands | Assign issue to Copilot |
-| **Output** | Direct file edits | Creates a PR |
-| **Plans** | Individual, Business, Enterprise | Business, Enterprise only |
+A **session** has its own conversation and execution context. A **handoff** creates a continuation in the selected environment; inspect that session rather than expecting all activity to appear in the originating chat. A **subagent** handles delegated work with separate context and reports back. Separate sessions in the same checkout can still edit the same files; use isolation when parallel changes could conflict.
 
----
+Sources: [sessions](https://code.visualstudio.com/docs/agents/concepts/sessions), [Agents window, Preview](https://code.visualstudio.com/docs/agents/run/agents-window), [Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli).
 
-## 🧠 Model Selection Cheat Sheet
+## Customization files in this repository
 
-| Model | Use For | When to Pick It |
-|-------|---------|-----------------|
-| **Raptor Mini** | Inline completions | Default for typing fast |
-| **GPT-5.1** | Complex logic | Multi-step reasoning |
-| **GPT-5.1-Codex** | Code generation | Writing new functions |
-| **Claude Opus 4.5** | Refactoring | Nuanced code changes |
-| **Gemini 3 Pro** | Data + images | Multimodal problems |
+| File or directory | Purpose | Boundary |
+|---|---|---|
+| `.github/copilot-instructions.md` | Shared project guidance | Instructions are context, not enforced access control |
+| `.github/instructions/*.instructions.md` | Scoped guidance | Check the file's `applyTo` |
+| `.github/prompts/*.prompt.md` | Reusable task prompts | Select the prompt in Chat; naming comes from its frontmatter |
+| `.github/agents/*.agent.md` | Agent role, instructions, tool selection | Tools still need appropriate permissions |
+| `.github/skills/*/SKILL.md` | Reusable procedures with supporting files | Follow the selected skill's workflow |
+| `.vscode/mcp.json` | MCP server configuration | Connecting a server introduces a tool/data boundary |
+| `.github/hooks/*.json` | Event-driven executable hooks, Preview | Inspect scripts before trusting the workspace |
 
----
+[VS Code customization documentation](https://code.visualstudio.com/docs/agent-customization/overview) and [hooks reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference) describe current support.
 
-## ⌨️ Essential Keyboard Shortcuts (VS Code)
+## CLI essentials
 
-| Action | Shortcut |
-|--------|----------|
-| Accept suggestion | `Tab` |
-| Dismiss suggestion | `Esc` |
-| Next suggestion | `Alt+]` |
-| Previous suggestion | `Alt+[` |
-| Trigger inline | `Alt+\` |
-| Open Chat | `Ctrl+Shift+I` |
-| Open Mission Control | `Ctrl+Shift+M` |
-
----
-
-## 💬 Slash Commands Quick Reference
-
-| Command | Purpose | Example |
-|---------|---------|---------|
-| `/explain` | Understand code | `/explain What does this regex do?` |
-| `/fix` | Debug errors | `/fix TypeError: Cannot read property` |
-| `/tests` | Generate tests | `/tests Write Jest tests for this function` |
-| `/docs` | Create documentation | `/docs Generate JSDoc for this class` |
-| `/optimize` | Improve performance | `/optimize This function is slow` |
-| `/plan` | Preview changes | `/plan How would you add auth?` |
-| `/agent` | Multi-file task | `/agent Create a REST API for users` |
-| `/review` | Code review | `/review Check for security issues` |
-
----
-
-## 📋 Plan Comparison Chart
-
-| Feature | Individual | Business | Enterprise |
-|---------|------------|----------|------------|
-| Inline suggestions | ✅ | ✅ | ✅ |
-| Chat | ✅ | ✅ | ✅ |
-| Agent Mode | ✅ | ✅ | ✅ |
-| Coding Agent | ❌ | ✅ | ✅ |
-| Cloud Agent | ❌ | ✅ | ✅ |
-| Knowledge Bases | ❌ | ❌ | ✅ |
-| Custom Models | ❌ | ❌ | ✅ |
-| BYOK | ❌ | ✅ | ✅ |
-| Private MCP Registry | ❌ | ❌ | ✅ |
-| Budget Tracking | ❌ | ✅ | ✅ |
-
----
-
-## 🔧 Quick Settings (VS Code)
-
-```json
-{
-    "github.copilot.enable": { "*": true },
-    "github.copilot.inlineSuggest.enable": true,
-    "github.copilot.chat.model": "gpt-5.1-codex",
-    "github.copilot.inlineSuggest.model": "raptor-mini",
-    "github.copilot.agent.planMode": true,
-    "github.copilot.nextEditSuggestions": true
-}
+```powershell
+# npm installation uses Node.js 22 or later.
+npm install -g @github/copilot
+copilot
 ```
 
----
+Inside the CLI, use `/login` when authentication is needed, `/help` to discover commands supported by your installed version, `/plan` for planning, and `/review` for code review. Describe the task and review requested permissions. These CLI commands are not a promise that identical slash commands exist on every Copilot surface.
 
-## 📁 Repository Configuration Files
+Sources: [install](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli), [command reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference).
 
-| File | Purpose |
-|------|---------|
-| `.github/copilot-instructions.md` | Repo-level Copilot behavior |
-| `.github/copilot-agent-instructions.md` | Agent-specific guidance |
-| `.github/prompts/*.prompt.md` | Reusable prompt templates |
-| `.copilotignore` | Files to exclude from Copilot |
+## Safeguards are different controls
 
----
+| Control | What it addresses | What it does not prove |
+|---|---|---|
+| Content exclusions | Prevent configured content from participating on supported surfaces | Universal isolation across all agents/modes |
+| Suggestions matching public code setting | Controls matching suggestions on supported surfaces | Complete license clearance or vulnerability detection |
+| Workspace Trust and tool approvals | Whether workspace code/tools may execute | That trusted repository content is harmless |
+| Enterprise managed settings | Centrally managed supported client settings | Enforcement by an unsupported client or feature |
+| Tests and human review | Behavior, regressions, maintainability | Complete security assurance from passing tests alone |
 
-## 📊 Exam Domain Weights
+**Content exclusions are surface-specific.** Current GitHub documentation says IDE Edit and Agent modes do not support them. Copilot CLI documentation now describes Business/Enterprise exclusion support. Check the exact surface before answering a scenario. A `.copilotignore` file is not a documented substitute for configured policy.
 
-| Domain | Weight | Focus |
-|--------|--------|-------|
-| 1. Use GitHub Copilot responsibly | 15–20% | Ethics, limitations, validation |
-| 2. Use GitHub Copilot features | **25–30%** | IDE, CLI, Agent Mode, MCP, org policy |
-| 3. Understand Copilot data and architecture | 10–15% | Pipeline, context, proxy, LLM limits |
-| 4. Apply prompt engineering and context crafting | 10–15% | Crafting effective prompts |
-| 5. Improve developer productivity | 10–15% | Productivity, testing, security, SDLC |
-| 6. Configure privacy, exclusions, and safeguards | 10–15% | Content exclusions, duplication detection, policies |
+Sources: [exclusions](https://docs.github.com/en/copilot/concepts/context/content-exclusion), [CLI behavior](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli), [policy coverage](https://docs.github.com/en/copilot/reference/supported-surfaces-for-policies).
 
-> Weights are **ranges** (January 2026 blueprint). Testing now lives inside Domain 5; there is no standalone Testing domain.
+## Model and billing decisions
 
----
+Choose a model available to the signed-in account, test it on the same bounded task, and compare correctness, latency, and usage. Do not memorize a model roster or assume a named model is included for every learner.
 
-## 🚀 New in November 2025 (Know These!)
+GitHub's current billing documentation describes **AI credits** and token-based usage. Some existing annual subscriptions retain legacy request billing during transition. Check the account's billing model before applying a multiplier or estimating cost.
 
-1. **Multi-model selection** – Choose your LLM
-2. **Mission Control** – Agent task dashboard
-3. **Plan Mode** – Preview before execution
-4. **Linter Integration** – ESLint/Pylint in code review
-5. **Image Input** – Attach screenshots to Chat
-6. **BYOK** – Bring Your Own Key (Azure, AWS, GCP)
-7. **Copilot Spaces** – Organize context for conversations
-8. **Threaded Conversations** – Branch chats
-9. **Next Edit Suggestions** – Predictive editing
-10. **Mobile Agent Sessions** – GitHub Mobile app
+Sources: [individual billing](https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing), [billing transition](https://docs.github.com/en/copilot/reference/copilot-billing/request-based-billing-legacy/what-changed-with-billing).
 
----
+## A dependable prompt
 
-## ❌ What's Being Retired
+> In `src/app.js`, improve keyword search for WoodGrove Bank's internal learning catalog. Preserve the JSON schema and current menu. Explain the existing behavior first. Propose the smallest change. Verify case-insensitive matching and no-match behavior, and show the diff.
 
-| Item | Date |
-|------|------|
-| CSV Reports | December 31, 2025 |
-| Claude Sonnet 3.5 | January 31, 2026 |
-
----
-
-## 🔗 Quick Links
-
-- [What's New](https://github.com/features/copilot/whats-new)
-- [Documentation](https://docs.github.com/en/copilot)
-- [Agent Mode Guide](https://docs.github.com/en/copilot/using-github-copilot/using-agent-mode)
-- [MCP Specification](https://docs.github.com/en/copilot/mcp)
-
----
-
-*Last updated: January 2026 | Course: GitHub Copilot Certification Prep*
+This supplies a goal, relevant context, constraints, and observable evidence. Review the response before accepting a change.

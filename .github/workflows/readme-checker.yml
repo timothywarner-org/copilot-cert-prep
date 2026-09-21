@@ -1,33 +1,32 @@
 name: Check Markdown Links
-
 on:
   schedule:
-    - cron: '0 0 * * *'  # Run daily at midnight
+    - cron: '0 0 * * *'
   pull_request:
     paths:
-      - '*.md'
-      - 'README.md'
-  workflow_dispatch:  # Allow manual triggers
+      - '**/*.md'
+      - '.github/workflows/readme-checker.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   check-links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Link Checker
-        id: lychee
-        uses: lycheeverse/lychee-action@v1.8.0
+      - uses: actions/checkout@v7
+      # Limit the current course check to maintained entry points, not historical assets.
+      - name: Check current course links
+        uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress '*.md'
+          args: >-
+            --no-progress --max-retries 2 --timeout 30
+            README.md COURSE-PLAN.md
+            docs/CLASS-ACTIVITIES.md docs/QUICK-REFERENCE.md
+            docs/GH-300-STUDY-GUIDE.md docs/HOOKS-AND-GOVERNANCE.md
+            docs/MINI-MOCK.md docs/exam-notes-and-links.md
+            copilot-metrics-tour/README.md src/GH-Copilot-Tips-App-README.md
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Issue From File
-        if: failure()
-        uses: peter-evans/create-issue-from-file@v4
-        with:
-          title: Link Checker Report
-          content-filepath: ./lychee/out.md
-          labels: report, automated issue

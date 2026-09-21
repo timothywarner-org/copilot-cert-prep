@@ -3,7 +3,7 @@
 Use this checklist before delivering a question.
 
 - One objective only: item maps to exactly one GH-300 objective.
-- One decision only: no compound asks.
+- One decision only: no compound decisions.
 - Four options only: A-D.
 - One correct answer only.
 - Correct letter randomized across a set.
@@ -15,4 +15,4 @@ Use this checklist before delivering a question.
 - Scenario uses a randomized fictional company.
 - Terminology is current and product-accurate.
 - Phase 1 does not reveal answer or rationale.
-- Phase 2 includes per-choice rationale and Learn references.
+- Phase 2 includes per-choice rationale and primary-source references.

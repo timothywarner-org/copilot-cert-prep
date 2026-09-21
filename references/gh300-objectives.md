@@ -1,9 +1,9 @@
 # GH-300: GitHub Copilot -- Skills Measured
 
 Source: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300
-Retrieved: 2026-06-23 (live pull via Microsoft Learn MCP)
+Reviewed: 2026-09-20 against the live Microsoft Learn study guide
 
-> Note: Skills measured as of January 2026. Most questions cover features that are general availability (GA). Preview features can appear if commonly used. The exam changed significantly in January 2026: new objectives were added, some were removed, objectives moved between functional groups, and all were reworded.
+> Skills measured as of **August 7, 2026**. The August change log lists minor changes in IDE usage, features/capabilities, and safeguards. The six domains and weight ranges are unchanged. Most questions cover GA features; commonly used previews can also appear.
 
 ## Use GitHub Copilot responsibly (15-20%)
 
@@ -23,8 +23,8 @@ Retrieved: 2026-06-23 (live pull via Microsoft Learn MCP)
 ### Use GitHub Copilot in the IDE
 
 - Enable Copilot in the IDE
-- Trigger Copilot through inline suggestions, chat, CLI, and Plan Mode
-- Exclude specific files or repositories (app knowledge)
+- Trigger Copilot through inline suggestions, chat, CLI, and agent mode
+- Configure content exclusions for specific files or repositories (app knowledge)
 
 ### Use GitHub Copilot CLI
 
@@ -36,7 +36,7 @@ Retrieved: 2026-06-23 (live pull via Microsoft Learn MCP)
 
 ### Use GitHub Copilot features and capabilities
 
-- Use Agent Mode, Edit Mode, and MCP for enhanced development and workflows; manage Agent Sessions and delegate tasks to Sub-Agents for optimized context usage
+- Use Agent Mode, Copilot Edits, and MCP for enhanced development and workflows; manage Agent Sessions and delegate tasks to Sub-Agents for optimized context usage
 - Use Copilot for code review and coding assistance
 - Utilize Spaces, Spark, pull request summaries, and customizable review standards via instructions files
 - Understand the limits, options, feedback, and commands of GitHub Copilot Chat; include prompt file reuse for consistent responses
@@ -97,5 +97,5 @@ Retrieved: 2026-06-23 (live pull via Microsoft Learn MCP)
 
 ### Apply safeguards and troubleshoot
 
-- Enable duplication detection and security warnings
-- Resolve issues with suggestions and exclusions
+- Enable suggestions matching public code filtering
+- Resolve issues with suggestions and content exclusions

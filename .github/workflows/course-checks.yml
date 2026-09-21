@@ -1,0 +1,25 @@
+name: Course checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  classroom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+      # Exercise the same commands learners use so CI protects the classroom route.
+      - run: npm ci
+      - run: npm test -- --runInBand
+      - run: npm run check:content
+      - run: node src/test-app.js
+      - run: node copilot-metrics-tour/index.js --demo

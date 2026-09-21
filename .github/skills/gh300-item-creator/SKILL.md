@@ -11,8 +11,10 @@ description: Generate GH-300 practice questions that feel like the real exam wit
 
 **Required sources:**
 
-- Microsoft Learn (primary truth source for objectives and capabilities; access via the **Microsoft Learn MCP server** using `microsoft_docs_search` and `microsoft_docs_fetch`)
+- Microsoft Learn (primary truth source for exam objectives; access via the **Microsoft Learn MCP server** using `microsoft_docs_search` and `microsoft_docs_fetch`)
 - Microsoft Learn samples (for syntax or command accuracy; access via `microsoft_code_sample_search`)
+
+- GitHub Docs for current Copilot behavior, policies, and REST APIs; VS Code Docs for client features and configuration. Use available web tools when Learn retrieval does not cover a product detail. If retrieval is unavailable, disclose that the detail is unverified.
 
 **Study guide:**
 
@@ -69,8 +71,8 @@ Use fictional company names from `references/fictional-companies.md` for scenari
 ## Workflow
 
 1. Pull current GH-300 skill areas from `references/gh300-objectives.md` and choose a target objective.
-2. Ground the intended correct behavior in Microsoft Learn using `microsoft_docs_search` first, then `microsoft_docs_fetch` if you need full page detail.
-3. If the item touches command or settings specifics, invoke `microsoft_code_sample_search` where relevant.
+2. Ground the exam objective in Microsoft Learn using `microsoft_docs_search` first, then `microsoft_docs_fetch` if you need full page detail.
+3. Verify product-specific behavior in current GitHub Docs or VS Code Docs. For command or settings specifics, use primary reference pages or `microsoft_code_sample_search` where relevant.
 4. Pick a random fictional company from `references/fictional-companies.md` and draft a workplace scenario stem.
 5. Randomly assign the correct answer to A, B, C, or D. Write 1 correct answer and 3 plausible distractors.
 6. Run a mutual exclusivity check on answer choices.
@@ -115,7 +117,7 @@ Microsoft and GitHub frame responsible AI around six principles. Test recognitio
 ### RAI item requirements
 
 - The stem must present a workplace scenario where a responsible AI principle is at stake, then ask which principle applies OR which action upholds responsible use.
-- At least one distractor must be a real responsible-AI control from a DIFFERENT Microsoft product (the wrong-exam trap above), so the item rewards knowing the GH-300 boundary.
+- Use plausible distractors at the same level of specificity. Do not force an unrelated product into every item; an obvious wrong-product choice can give away the answer.
 - Rationale must name the specific principle and tie it back to a developer action with GitHub Copilot, not abstract ethics.
 
 ## Delivery rules (non-negotiable)
@@ -149,8 +151,7 @@ If multiple questions were requested, repeat this Phase 1 / Phase 2 cycle for ea
   - bloom: "`<Remember|Understand|Apply|Analyze>`"
   - difficulty: "`<easy|medium|hard>`"
 - **question**
-  - stem:
-    - `<Scenario + question. One decision.>`
+  - stem: <Scenario + question. One decision.>
   - choices:
     - A: "`<choice>`"
     - B: "`<choice>`"
@@ -168,5 +169,5 @@ _(Stop here. Wait for the user to answer.)_
   - C: "<2-sentence explanation>"
   - D: "<2-sentence explanation>"
 - **references:**
-  - "<Microsoft Learn URL 1>"
-  - "<Microsoft Learn URL 2 if needed>"
+  - "<Primary source URL 1>"
+  - "<Primary source URL 2 if needed>"

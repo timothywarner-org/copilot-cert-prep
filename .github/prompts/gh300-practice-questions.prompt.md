@@ -1,9 +1,13 @@
 ---
-name: gh300-practice-question
+name: gh300-practice-questions
 description: "Quiz me on GH-300 topics with exam-realistic questions."
 argument-hint: "skillArea='Copilot features' bloom='Apply' difficulty='medium'"
 agent: gh300-cert-buddy-agent
 tools:
+  - read
+  - search
+  - web
+  - execute
   - gh300buddy-mslearn/*
 ---
 
@@ -26,7 +30,7 @@ You must follow the workspace skill **gh300-item-creator** for item structure, g
 
 1. Ground the correct behavior in **Microsoft Learn** using the **Microsoft Learn MCP** server (`microsoft_docs_search`, then `microsoft_docs_fetch` for detail).
 2. If the item includes command examples or settings paths, confirm with `microsoft_code_sample_search` when relevant.
-3. Provide **Microsoft Learn URLs** in the Phase 2 References section.
+3. Provide primary-source URLs in Phase 2. Use Learn for exam scope and current GitHub or VS Code documentation for product behavior.
 
 ## Key rules
 
@@ -36,41 +40,8 @@ You must follow the workspace skill **gh300-item-creator** for item structure, g
 - All product names must use current terminology.
 - No contractions. No trick wording. No fake features.
 
-## Output format (exact) -- two-phase delivery
+## Output contract
 
-### Phase 1 (send first, then STOP and wait for user reply)
+Use the exact Markdown Phase 1 and Phase 2 formats in `.github/skills/gh300-item-creator/SKILL.md`; do not maintain a second schema here. Phase 1 uses `metadata`, `question`, a single-line `stem:`, and `A:` through `D:` choices.
 
-#### Metadata
-
-- Exam: GH-300
-- Skill area:
-- Objective:
-- Bloom:
-- Difficulty:
-
-#### Question
-
-`<scenario-first stem>`
-
-A. `<choice>`
-B. `<choice>`
-C. `<choice>`
-D. `<choice>`
-
-_(Do NOT reveal the answer. Wait for the user to reply.)_
-
-### Phase 2 (send after the user replies with their choice)
-
-**Result:** <Correct! / Incorrect.> The correct answer is **<A|B|C|D>**.
-
-#### Rationale
-
-- A: <2 sentences>
-- B: <2 sentences>
-- C: <2 sentences>
-- D: <2 sentences>
-
-#### References
-
-- <Microsoft Learn URL 1>
-- <Microsoft Learn URL 2 if needed>
+Deliver one question, then wait. Reveal the answer, two-sentence rationale for every choice, and primary-source references only after the learner responds. The item validator checks structure, not factual truth.

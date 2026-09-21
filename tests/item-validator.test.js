@@ -25,6 +25,13 @@ test("rejects empty and duplicate choices", () => {
 test("rejects accidental answer disclosure", () => {
   expect(validateItem(`${question}\n- **result:** The correct answer is A.`).errors.join(" ")).toMatch(/Phase 1/);
 });
+test("rejects a fifth choice", () => {
+  expect(validateItem(`${question}\n    - E: Approve without review.`).errors.join(" ")).toMatch(/Unexpected answer choice E/);
+});
+test("recognizes a bold correct-answer label in an internal draft", () => {
+  const long = question.replace(/A: .+/, 'A: "Review the proposed change, verify the API against official documentation, and run boundary-condition tests before accepting it."');
+  expect(validateItem(`${long}\n- result: The correct answer is **A**.`, { draft: true }).warnings.join(" ")).toMatch(/correct answer/);
+});
 test("internal rationale does not become additional choices", () => {
   const draft = `${question}\n- **result:** The correct answer is A.\n- **rationale:**\n  - A: Correct. Validate code.\n  - B: Incorrect. Layout is not correctness.`;
   expect(validateItem(draft, { draft: true }).errors).toEqual([]);

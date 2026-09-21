@@ -4,6 +4,10 @@ description: "Build a hands-on GH-300 exercise with validation and rollback."
 argument-hint: "skillArea='Copilot CLI' toolPreference='VS Code' timebox='15'"
 agent: gh300-cert-buddy-agent
 tools:
+  - read
+  - search
+  - web
+  - execute
   - gh300buddy-mslearn/*
 ---
 
