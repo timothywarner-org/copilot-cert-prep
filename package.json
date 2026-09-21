@@ -10,6 +10,6 @@
     "test:app": "node src/test-app.js"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^30.5.1"
   }
 }
