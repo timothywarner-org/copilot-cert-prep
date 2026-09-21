@@ -6,7 +6,9 @@ Tim Warner's four-hour O'Reilly class is **September 24, 2026, 9 a.m.-1 p.m. Cen
 
 Use Microsoft Learn for exam objectives, GitHub Docs for product/policy/API behavior, and VS Code documentation for that client's configuration and previews. Verify volatile claims before teaching them. Distinguish named exam objectives from current-product enrichment such as hooks and enterprise managed settings. Do not memorize model rosters or invent settings, UI labels, or slash commands.
 
-Keep the teaching arc: responsible habits, core tools, data/context/agents, then safeguards and practice. Follow the published four-hour schedule, including breaks.
+Keep exactly four numbered segments: **1. Foundations and responsible operation; 2. Core features: IDE, Chat, CLI; 3. Data, agents, MCP, and context; 4. Privacy, governance, productivity, and exam practice**. Follow `COURSE-PLAN.md`: Segments 1-3 include five-minute breaks, and Segment 4 includes the mini mock and final five-minute study-plan wrap-up.
+
+This is **O'Reilly training**. Use the approved O'Reilly PowerPoint template, including native masters/layouts, and consistent branding in slide text, footers, notes, and supporting materials. Writing-style references do not change the course's publisher identity.
 
 ## Work areas and validation
 
@@ -36,8 +38,9 @@ Follow `references/style-guide.md` and vary fictional companies using `reference
 - A repository hook is executable, editable code, not centrally enforced governance.
 - Ordinary tool calls must retain the client's approval checks; hooks should abstain unless deliberately vetoing.
 - Use current usage-report endpoints and distinguish adoption/activity from measured business outcomes.
+- When a file or heading moves, repair all incoming references, including prompt/skill files and presentation notes. Keep current entry points stable; June-named Markdown files only redirect old bookmarks.
 - Keep secrets in environment variables; never print credentials or signed report URLs.
 - No em dashes. Use blank lines around headings, lists, and code fences.
 - End learner-facing teaching responses with a practice task, a deeper study topic, and a workplace application.
 
-Do not recreate the removed `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` trees. Historical files stay clearly labeled; current entry points must link to current materials.
+Do not recreate the removed `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` trees. Superseded decks and exam PDFs are preserved in Git history; current entry points must link to current materials.

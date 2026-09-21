@@ -2,6 +2,8 @@
 
 **Instructor: Tim Warner** | **GH-300** | **Four-hour O'Reilly Live Learning course**
 
+**Thursday, September 24, 2026 | 9 a.m.-1 p.m. Central / 7-11 a.m. Pacific**
+
 Welcome! This is the public learner repository for the September 24, 2026 class and for independent study afterward. Our route is simple: validate AI output, choose the right Copilot surface, improve the context, and apply the right safeguards.
 
 **Exam baseline:** [skills measured August 7, 2026](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300). Product behavior and links reviewed September 20, 2026. The August update is a minor refinement of the six-domain blueprint, not a new exam.
@@ -13,9 +15,22 @@ Welcome! This is the public learner repository for the September 24, 2026 class 
 3. Use [Cert Buddy](#study-with-cert-buddy) for original practice, then finish the [mini mock](docs/MINI-MOCK.md).
 4. Follow the [study guide](docs/GH-300-STUDY-GUIDE.md) and [official exam links](docs/exam-notes-and-links.md) for your remaining study.
 
+## Four class segments
+
+| Segment | Central time | What you will do |
+|---|---|---|
+| **1. Foundations and responsible operation** | 9-10 a.m. | Review flawed generated code and decide what evidence makes a change trustworthy |
+| **2. Core features: IDE, Chat, CLI** | 10-11 a.m. | Compare two Copilot surfaces and reuse a prompt for two tasks |
+| **3. Data, agents, MCP, and context** | 11 a.m.-noon | Improve a prompt, retrieve documentation, and explain session/context choices |
+| **4. Privacy, governance, productivity, and exam practice** | Noon-1 p.m. | Match safeguards to risks, interpret metrics, take the mini mock, and plan further study |
+
+The first three segments include a five-minute break. The last five minutes of Segment 4 are the wrap-up and tonight's study plan. See the [course plan](COURSE-PLAN.md) for demo entry points and fallbacks.
+
+## Course resources
+
 | Resource | Purpose |
 |---|---|
-| [Current course plan](COURSE-PLAN.md) | Four teaching blocks, demo entry points, timings, and rehearsal gates |
+| [Current course plan](COURSE-PLAN.md) | Four teaching segments, demo entry points, timings, and rehearsal gates |
 | [Class activities](docs/CLASS-ACTIVITIES.md) | Responsible AI, Chat/CLI, context, testing, and policy practice |
 | [GH-300 objectives](references/gh300-objectives.md) | Six domains and the current skills measured |
 | [Study guide](docs/GH-300-STUDY-GUIDE.md) | What to understand and what evidence to produce |
@@ -93,4 +108,4 @@ Cert Buddy must show the question first, wait for your answer, and then explain 
 
 **Study decisions, not a model roster.** Model availability, billing, previews, and UI details change faster than the exam objectives. Hooks and server-managed settings are useful governance enrichment; the blueprint does not name them as separate objectives.
 
-The June deck, June-named compatibility pages, and older PDF remain for historical continuity. Use the linked current Markdown sources and September deck for this class. This repository contains original teaching material, not real exam questions or a guarantee of passing.
+Use the linked current Markdown sources and September deck for this class. June-named Markdown pages redirect older bookmarks to their current equivalents; superseded materials remain available in Git history. This repository contains original teaching material, not real exam questions or a guarantee of passing.

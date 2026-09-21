@@ -1,6 +1,7 @@
 # September 2026 refresh
 
-**Class:** September 24, 2026, four hours.  
+**Class:** O'Reilly Live Learning, September 24, 2026, 9 a.m.-1 p.m. Central, four segments.
+
 **Source review:** September 20, 2026.  
 **Exam baseline:** [skills measured August 7, 2026](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300).
 
@@ -9,21 +10,23 @@
 | Area | Result |
 |---|---|
 | Cert Buddy improvement | Accepted the choice-quality guidance from PR #29. Corrected validation so structural checks are separate from editorial length warnings and questions are delivered before answers. |
-| Exam guidance | Updated objective wording, Pearson VUE scheduling, 100-minute duration, scaled-score explanation, and current official links. |
-| Course schedule | Replaced the five-hour plan with the published four-hour course, including breaks, activities, mini mock, and study plan. |
+| Exam guidance | Updated objective wording, official scheduling links, 100-minute duration, scaled-score explanation, and current source links. |
+| Course schedule | Aligned the plan to four numbered one-hour segments. Breaks are inside Segments 1-3; the mini mock and final study-plan wrap-up are inside Segment 4. |
 | Learning materials | Added four bounded activities, six original practice questions with rationales, and explicit no-account routes. |
 | Current product behavior | Clarified sessions/handoffs, CLI installation, surface-specific exclusions, model availability, and billing transitions. |
 | Hooks | Replaced timer-based stdin reads; ordinary calls now preserve client approvals. Added an optional PowerShell metadata logger and a governance walkthrough. |
 | Metrics | Replaced the old daily endpoint and assumed ROI with current aggregate-report parsing, a synthetic fixture, and explicit measurement limits. |
 | Tips app | Reviewed all 50 tips and repaired the interactive smoke harness. |
-| Presentation | Added a 24-slide September deck with O'Reilly cover, current course flow, and presenter notes. Preserved the original June deck. |
-| CI | Added classroom checks and repaired obsolete CodeQL/custom-query scaffolding. |
+| Presentation | Rebuilt the 28-slide September deck using the approved O'Reilly template and its native masters/layouts, with four-segment course flow and presenter notes. Superseded slides are preserved in Git history. |
+| Repository guidance | Updated `CLAUDE.md` and shared/scoped Copilot instructions with the current exam baseline, O'Reilly identity, source hierarchy, cross-reference checks, and rehearsal boundaries. |
+| Source cleanup | Retired raw authoring imports with broken internal references and pointed the teaching skills to maintained style guidance. Replaced the optional Azure appendix's placeholder links and unsupported instructions with a sourced review activity. |
+| CI | Added classroom checks and retired obsolete CodeQL/custom-query scaffolding. |
 
 ## Validation and limits
 
-Local verification passed: **32 tests**, the interactive app smoke test, local-file link checks, **35 current source URLs**, and a direct PowerShell logger check. Tests cover the item validator, hook decisions and delayed input, usage-report parsing/arithmetic/authentication separation, interactive app behavior, and local links.
+Local verification covers the item validator, hook decisions and delayed input, usage-report parsing/arithmetic/authentication separation, interactive app behavior, local links, current source URLs, and a direct PowerShell logger check. Run the commands in [repository guidance](../CLAUDE.md#verification) after changing the course materials; earlier results do not validate subsequent edits.
 
-The September deck was rendered and visually inspected. Package, slide geometry, expected dimensions, and re-import checks passed. Its course text is editable; source illustrations remain images. This is a focused teaching deck, not a claim that every June appendix slide was refreshed.
+The presentation verification includes rendered-slide inspection, package and slide-geometry checks, expected dimensions, and re-import checks. Course text remains editable; source illustrations remain images.
 
 **Live rehearsal remains necessary** for custom-agent discovery, Learn MCP retrieval, actual VS Code hook delivery, CLI sign-in/model availability, enterprise settings reception, PowerPoint Presenter View, and timed delivery. Follow the [rehearsal gates](../COURSE-PLAN.md#instructor-rehearsal-gates). Synthetic or mocked tests do not establish those outcomes.
 
@@ -36,4 +39,4 @@ The September deck was rendered and visually inspected. Package, slide geometry,
 - [Hooks and managed-settings sources](HOOKS-AND-GOVERNANCE.md)
 - [Current metrics API and schema](../copilot-metrics-tour/README.md)
 
-Current entry points use stable filenames. June-named Markdown pages redirect learners, while Git history preserves the earlier content. The old PDF and June presentation are historical resources.
+Current entry points use stable filenames. June-named Markdown pages redirect learners to current materials. Git history preserves the superseded exam PDF and June presentation.

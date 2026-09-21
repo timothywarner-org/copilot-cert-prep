@@ -4,7 +4,7 @@
 **Thursday, September 24, 2026 | 9 a.m.-1 p.m. Central / 7-11 a.m. Pacific**  
 Instructor: Tim Warner
 
-This plan follows the [published O'Reilly course](https://www.oreilly.com/live-events/pass-your-github-copilot-certification-exam/0642572414696/0642572414689/). Breaks are included in the first three hour blocks. The [August 7 skills measured](references/gh300-objectives.md) govern exam coverage.
+This plan follows the [published O'Reilly course](https://www.oreilly.com/live-events/pass-your-github-copilot-certification-exam/0642572414696/0642572414689/). Teach **four one-hour segments**, with breaks included in Segments 1-3 and the closing study plan included in Segment 4. The [August 7 skills measured](references/gh300-objectives.md) govern exam coverage.
 
 ## Learner outcomes
 
@@ -12,13 +12,12 @@ By the end, learners can validate a generated change, choose between inline sugg
 
 ## Run of show
 
-| Central time | Block | Teaching and demo | Learner evidence |
+| Central time | Segment | Teaching and demo | Learner evidence |
 |---|---|---|---|
-| 9:00-10:00 | Foundations and responsible operation | 10 min orientation/blueprint; 15 min risks and human accountability; 10 min flawed export demo; 15 min activity 1; 5 min Q&A; 5 min break | Identify a fabricated API and repair an unsafe input path |
-| 10:00-11:00 | Core features: IDE, Chat, CLI | 10 min configuration and inline suggestions; 15 min same-task Chat/CLI comparison; 10 min prompt-file demo; 15 min activity 2; 5 min Q&A; 5 min break | Run a reusable prompt against two tasks and compare results |
-| 11:00-12:00 | Data, agents, MCP, and context | 15 min data flow/context lifecycle; 15 min plan-to-agent and Learn MCP demo; 10 min sessions, subagents, Spaces/Spark; 10 min activity 3/model comparison; 5 min Q&A; 5 min break | Explain a context improvement and justify a surface/model choice |
-| 12:00-12:55 | Privacy, governance, productivity, exam practice | 10 min policy/exclusion/public-code distinctions; 10 min tests and metrics; 10 min hooks and enterprise governance walkthrough; 15 min mini mock; 10 min debrief/Q&A | Defend a safeguard choice and identify two weak objectives |
-| 12:55-1:00 | Wrap and tonight's study | Study plan, official links, final questions | A bounded study plan with an evidence check |
+| 9:00-10:00 | **1. Foundations and responsible operation** | 10 min orientation/blueprint; 15 min risks and human accountability; 10 min flawed export demo; 15 min activity 1; 5 min Q&A; 5 min break | Identify a fabricated API and repair an unsafe input path |
+| 10:00-11:00 | **2. Core features: IDE, Chat, CLI** | 10 min configuration and inline suggestions; 15 min same-task Chat/CLI comparison; 10 min prompt-file demo; 15 min activity 2; 5 min Q&A; 5 min break | Run a reusable prompt against two tasks and compare results |
+| 11:00-12:00 | **3. Data, agents, MCP, and context** | 15 min data flow/context lifecycle; 15 min plan-to-agent and Learn MCP demo; 10 min sessions, subagents, Spaces/Spark; 10 min activity 3/model comparison; 5 min Q&A; 5 min break | Explain a context improvement and justify a surface/model choice |
+| 12:00-1:00 | **4. Privacy, governance, productivity, and exam practice** | 10 min policy/exclusion/public-code distinctions; 10 min activity 4/tests and metrics; 10 min hooks and enterprise governance walkthrough; 15 min mini mock; 10 min debrief/Q&A; 5 min wrap and tonight's study plan | Defend a safeguard choice, identify two weak objectives, and leave with a bounded study plan |
 
 If discussion runs long, shorten the governance enrichment demonstration, not the six-domain coverage, mini mock, or closing study plan.
 
@@ -37,7 +36,7 @@ If discussion runs long, shorten the governance enrichment demonstration, not th
 
 ## Coverage map
 
-| Domain | Main block | Practice or evidence |
+| Domain | Main segment | Practice or evidence |
 |---|---|---|
 | Responsible use | 1, reinforced throughout | Flawed code review, accountability explanation, mock Q1 |
 | Features | 2-3 | Inline, Chat, CLI, agents, MCP, prompt reuse, review; mock Q2 |
@@ -50,7 +49,7 @@ Include brief recognition examples for **Spaces**, **Spark**, **PR summaries**, 
 
 ## Instructor rehearsal gates
 
-1. Open the September deck and test Presenter View, links, and timing on the presenting machine.
+1. Open the [September O'Reilly deck](warner-github-cert-prep-september-2026.pptx) and test Presenter View, links, and four-segment timing on the presenting machine.
 2. Start the tips app, search for `testing`, and quit with `q`. Run the synthetic metrics demo and repository checks.
 3. In a fresh Copilot session, confirm the custom agent appears, Learn MCP retrieves a source, and the answer is withheld until a learner responds.
 4. Confirm current CLI sign-in, available models, session/handoff UI, and hook event delivery. Record actual behavior rather than promising a particular picker label.

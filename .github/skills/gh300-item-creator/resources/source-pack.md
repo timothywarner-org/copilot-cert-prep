@@ -4,18 +4,17 @@ Use these sources in this order of precedence when writing GH-300 practice items
 
 ## Source precedence
 
-1. WWL exam constraints (exam safety and item psychometrics)
-2. Microsoft Writing Style Guide voice principles
-3. Microsoft Learn GH-300 objectives for scope; current GitHub Docs and VS Code Docs for product/client behavior
+1. Microsoft Learn GH-300 objectives determine exam scope; current GitHub Docs and VS Code Docs establish product/client behavior.
+2. The repository's item quality checklist governs original practice-item structure and exam-safe wording.
+3. The public Microsoft Writing Style Guide supplies voice and writing guidance; this skill's explicit no-contractions rule takes precedence for practice items.
 
 ## Local source files
 
-- `working-temp/converted/style-guide.from-pdf.md` (converted from `working-temp/style-guide.pdf` via MarkItDown)
-- `working-temp/mwsg-rules 2.md` (condensed Microsoft voice and style guidance)
-- `working-temp/wwl-exam-rules.md` (exam-writing rules for choices, wording, and question quality)
-- `working-temp/Worldwide Learning Exam Writing Style Guide_Q3FY23.docx.md` (full WWL style reference)
-- `references/gh300-objectives.md` (August 7, 2026 GH-300 domains and objectives)
-- `references/fictional-companies.md` (scenario randomization pool)
+- [Maintained writing guide](../../../../references/style-guide.md)
+- [Item quality checklist](item-quality-checklist.md)
+- [GH-300 domains and objectives](../../../../references/gh300-objectives.md), effective August 7, 2026
+- [Fictional company pool](../../../../references/fictional-companies.md)
+- [Public Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
 
 ## Non-negotiables
 

@@ -7,7 +7,7 @@
 | Exam | GH-300: GitHub Copilot |
 | Skills measured | Effective **August 7, 2026** |
 | Exam time | **100 minutes** |
-| Delivery | Proctored exam scheduled through **Pearson VUE** from the certification page |
+| Delivery | Proctored exam; begin scheduling from the [official certification page](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/) |
 | Passing score | **700** on the scaled score; do not interpret this as 70% correct |
 | Price | Region-dependent; check the scheduling page |
 | Question format | Use the official sandbox to practice interactions; do not assume a fixed question count |
@@ -31,4 +31,4 @@ The guide identifies minor adjustments in IDE usage, features/capabilities, and 
 
 Agent workflows, CLI, MCP, sessions, subagents, Spaces, and Spark are already part of the modern blueprint. Do not present the August revision as a wholly new agent exam.
 
-The older PDF in this folder is a historical resource. The live study guide and [current local objectives](../references/gh300-objectives.md) are the sources for this class.
+The live study guide and [current local objectives](../references/gh300-objectives.md) are the sources for this class. Superseded exam materials are available in Git history; they are not the current exam baseline.
