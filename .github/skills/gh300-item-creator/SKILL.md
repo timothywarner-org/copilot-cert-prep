@@ -55,6 +55,8 @@ Use the skill-local bundle so this skill is reproducible and teachable as a pack
 - Exactly 1 correct answer unless the requested item type explicitly differs.
 - No "all of the above" or "none of the above."
 - Distractors must be plausible and real.
+- Answer choices must be grammatically parallel, equally plausible, and similar in detail level.
+- Keep option lengths balanced so the correct answer is not identifiable by being longest or most detailed.
 
 ## Answer choice randomization (non-negotiable)
 
@@ -72,10 +74,11 @@ Use fictional company names from `references/fictional-companies.md` for scenari
 4. Pick a random fictional company from `references/fictional-companies.md` and draft a workplace scenario stem.
 5. Randomly assign the correct answer to A, B, C, or D. Write 1 correct answer and 3 plausible distractors.
 6. Run a mutual exclusivity check on answer choices.
-7. Run a terminology check.
-8. Run a clarity check.
-9. Run the checks in `resources/item-quality-checklist.md` and use `scripts/validate-output.js` logic as a final structure gate.
-10. Prepare rationale internally but **do not deliver it yet**.
+7. Run an answer-parallelism check (grammar pattern, detail level, and length balance) to remove giveaway signals.
+8. Run a terminology check.
+9. Run a clarity check.
+10. Run the checks in `resources/item-quality-checklist.md` and use `scripts/validate-output.js` logic as a final structure gate.
+11. Prepare rationale internally but **do not deliver it yet**.
 
 ## Recipe: responsible AI principle items
 
