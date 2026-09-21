@@ -1,8 +1,8 @@
 # Microsoft Writing Style Guide -- Key Principles
 
-Source: Microsoft Writing Style Guide (internal reference PDF, `references/style-guide.pdf`)
+Source: [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/), with the repository's original practice-item conventions.
 Purpose: Governs the voice, tone, and formatting of all generated exam questions and lab instructions.
-Last extracted: 2026-03-02
+Source reviewed: 2026-09-20. These are teaching conventions, not access to live exam items or an official exam-authoring specification.
 
 ---
 

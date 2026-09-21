@@ -1,33 +1,36 @@
 name: Check Markdown Links
-
 on:
   schedule:
-    - cron: '0 0 * * *'  # Run daily at midnight
+    - cron: '0 0 * * *'
   pull_request:
     paths:
-      - '*.md'
-      - 'README.md'
-  workflow_dispatch:  # Allow manual triggers
+      - '**/*.md'
+      - 'scripts/check-course-content.js'
+      - '.github/workflows/readme-checker.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   check-links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Link Checker
-        id: lychee
-        uses: lycheeverse/lychee-action@v1.8.0
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          args: --verbose --no-progress '*.md'
+          node-version: '22'
+      # Include hidden instruction and skill files so their source packs cannot drift.
+      - name: Check every tracked Markdown cross-reference
+        run: node scripts/check-course-content.js
+      - name: List every tracked Markdown file
+        run: git ls-files '*.md' > "$RUNNER_TEMP/course-markdown-files.txt"
+      - name: Check external links in all tracked Markdown
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --max-retries 2 --timeout 30 --scheme https --scheme http
+            --files-from ${{ runner.temp }}/course-markdown-files.txt
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Issue From File
-        if: failure()
-        uses: peter-evans/create-issue-from-file@v4
-        with:
-          title: Link Checker Report
-          content-filepath: ./lychee/out.md
-          labels: report, automated issue

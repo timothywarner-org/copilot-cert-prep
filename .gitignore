@@ -7,9 +7,6 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# Tim stuff
-# azd-scaffold-examples.sh
-
 # Microsoft Office lock/temp files (Word, PowerPoint, Excel), e.g. ~$deck.pptx
 ~$*
 

@@ -1,82 +1,46 @@
-# GitHub Copilot Certification Prep Repository
+# GitHub Copilot certification teaching repository
 
-Teaching repository for Tim Warner's O'Reilly Live Learning "GitHub Copilot Certification (GH-300) Prep" - June 23, 2026, 9:00 AM-2:00 PM CT. January 2026 GH-300 blueprint is the authoritative exam reference.
+Tim Warner's four-hour O'Reilly class is **September 24, 2026, 9 a.m.-1 p.m. Central**. The canonical plan is `COURSE-PLAN.md`; the exam baseline is the **August 7, 2026** skills measured in `references/gh300-objectives.md`.
 
-## Sub-projects (three independent Node.js apps)
+## Sources and scope
 
-| Path | Purpose |
-|---|---|
-| `/` | Jest tests for course materials |
-| `src/` | Interactive console demo app for live class |
-| `copilot-metrics-tour/` | Console tour of GitHub Copilot Metrics API |
+Use Microsoft Learn for exam objectives, GitHub Docs for product/policy/API behavior, and VS Code documentation for that client's configuration and previews. Verify volatile claims before teaching them. Distinguish named exam objectives from current-product enrichment such as hooks and enterprise managed settings. Do not memorize model rosters or invent settings, UI labels, or slash commands.
 
-Each has its own `package.json`. Install and run separately. `references/` holds agent source-of-truth inputs; `COURSE-PLAN-JUNE-2026.md` and `README.md` must stay in sync on segment names and clock times.
+Keep exactly four numbered segments: **1. Foundations and responsible operation; 2. Core features: IDE, Chat, CLI; 3. Data, agents, MCP, and context; 4. Privacy, governance, productivity, and exam practice**. Follow `COURSE-PLAN.md`: Segments 1-3 include five-minute breaks, and Segment 4 includes the mini mock and final five-minute study-plan wrap-up.
 
-## Commands
+This is **O'Reilly training**. Use the approved O'Reilly PowerPoint template, including native masters/layouts, and consistent branding in slide text, footers, notes, and supporting materials. Writing-style references do not change the course's publisher identity.
 
-```bash
-# Root
-npm test                         # all tests
-npx jest tests/sample.test.js   # single file
-npx jest -t "pattern"           # by name
-npm run test:watch
+## Work areas and validation
 
-# src/ (install first: cd src && npm install)
-npm start        # node app.js - needs readline terminal; use .vscode/launch.json
-node test-app.js # ad-hoc harness
+| Area | Purpose | Check |
+|---|---|---|
+| `src/` | Interactive tips app and teaching code | `node src/test-app.js` |
+| `copilot-metrics-tour/` | Current usage reports, synthetic offline demo | `node copilot-metrics-tour/index.js --demo` |
+| `scripts/hooks/` | Small executable hook examples | Root Jest tests and direct-input checks |
+| `.github/skills/` | Cert Buddy workflows and validators | Item-validator regression tests |
+| `docs/`, `references/` | Learner materials and grounding | `npm run check:content` |
 
-# copilot-metrics-tour/ (zero deps)
-node index.js --demo            # offline synthetic data
-node index.js timothywarner-org # live (GITHUB_TOKEN / GH_TOKEN / GITHUB_PERSONAL_ACCESS_TOKEN)
-npm run tour:roi
-```
+The two demos use Node built-ins. Root tests require `npm ci`, then `npm test -- --runInBand`. Use PowerShell 7 and Node.js 22+. Keep changes small, explain why in code comments, handle errors, and preserve existing data formats.
 
-No coverage threshold at root - `jest.config.js` was intentionally removed. `.vscode/launch.json` is intentionally committed for learners.
+## Cert Buddy
 
-## Cert Buddy Agent System
+Select **gh300-cert-buddy-agent** from the Chat agent picker. Its skills are `gh300-item-creator`, `gh300-lab-creator`, and `gh300-study-planner`.
 
-Layered Copilot Chat workspace agent grounding exam-prep content in Microsoft Learn:
+Use `gh300buddy-mslearn` for Learn retrieval, with current GitHub/VS Code primary sources for product details. If retrieval fails, disclose that the claim is unverified. Questions must be original and delivered one at a time: metadata/stem/choices, wait, then answer, two-sentence rationale per choice, and references.
 
-- **Agent** - `.github/agents/gh300-cert-buddy-agent.agent.md` - invoke as `@gh300-cert-buddy-agent`
-- **Skills** (auto-discovered from `.github/skills/<skill>/SKILL.md`):
-  - `gh300-item-creator` - exam-realistic multiple-choice questions
-  - `gh300-lab-creator` - 10-20 min hands-on exercises with validation and rollback
-  - `gh300-study-planner` - confidence-rated personalized study plans
-- **Prompt templates** (`/gh300-practice-questions`, `/gh300-rai-questions`, `/gh300-practice-lab`, `/gh300-study-planner`)
-- **MCP** - `.vscode/mcp.json` server `gh300buddy-mslearn` (HTTP, `https://learn.microsoft.com/api/mcp`). Agent must call `microsoft_docs_search` first and cite Microsoft Learn URLs in every output.
+Follow `references/style-guide.md` and vary fictional companies using `references/fictional-companies.md`. Balance choice grammar/detail without mistaking length heuristics for factual validation.
 
-## Key Conventions
+## Teaching conventions
 
-**Cert-buddy content** - Follow `references/style-guide.md` (sentence-style caps, bold UI labels, Oxford commas, no contractions, no "all/none of the above", 2-sentence rationales). Pull companies from `references/fictional-companies.md` - not Contoso. No braindump paraphrasing.
+- Use real business scenarios, fictional data, and explicit success checks.
+- Preserve a no-account route for every core activity.
+- Content exclusions are surface-specific; a `.copilotignore` file is not a supported policy substitute.
+- A repository hook is executable, editable code, not centrally enforced governance.
+- Ordinary tool calls must retain the client's approval checks; hooks should abstain unless deliberately vetoing.
+- Use current usage-report endpoints and distinguish adoption/activity from measured business outcomes.
+- When a file or heading moves, repair all incoming references, including prompt/skill files and presentation notes. Keep current entry points stable; June-named Markdown files only redirect old bookmarks.
+- Keep secrets in environment variables; never print credentials or signed report URLs.
+- No em dashes. Use blank lines around headings, lists, and code fences.
+- End learner-facing teaching responses with a practice task, a deeper study topic, and a workplace application.
 
-**Domain weights** - Use ranges from `references/gh300-objectives.md`, not fixed percentages:
-
-| Domain | Weight |
-|---|---|
-| Use GitHub Copilot features | 25-30% |
-| Use GitHub Copilot responsibly | 15-20% |
-| Understand Copilot data and architecture | 10-15% |
-| Apply prompt engineering and context | 10-15% |
-| Improve developer productivity | 10-15% |
-| Configure privacy, exclusions, safeguards | 10-15% |
-
-**Critical exam distinction** - Agent Mode (IDE-based, local, multi-file) vs. Coding Agent (GitHub Actions, assigns issues, creates PRs) vs. Cloud Agent (Visual Studio preview).
-
-**Chat slash commands for demos** - `/plan` (preview changes), `/agent` (multi-file tasks), `/review` (code review with linter).
-
-**Enterprise governance topics** - BYOK, budget tracking and per-team limits, Private MCP Registry, organization-wide custom instructions.
-
-**Enterprise scenario contexts** - Use inventory management APIs, employee directory tools, automated reporting pipelines, CI/CD automation, and Azure/AWS deployment patterns when generating examples.
-
-**Markdown style** - No em dashes. Blank line between every heading, list, and code block and surrounding content.
-
-**Course segment order** - Foundations -> Core Features -> Enterprise -> Privacy & Config -> Exam Prep. Intentionally not in blueprint domain order; do not reorder.
-
-**Deleted directories** - Do not recreate `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, `exam-metadata/`.
-
-## Teaching Output Format
-
-End learner-facing responses with:
-1. Practice task
-2. Deep-dive topic
-3. Real-world application
+Do not recreate the removed `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` trees. Superseded decks and exam PDFs are preserved in Git history; current entry points must link to current materials.

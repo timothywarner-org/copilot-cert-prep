@@ -1,214 +1,62 @@
-# 🚀 Azure Developer CLI (AZD) Scaffolding Guide
+# Optional Azure scaffolding review
 
-[![AZD Version](https://img.shields.io/badge/AZD-latest-blue.svg)](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview)
-[![Azure](https://img.shields.io/badge/Azure-latest-0089D6?logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+**Enrichment, reviewed September 20, 2026.** This appendix applies Copilot review habits to an Azure project. It is outside the core four-segment GH-300 class and requires no deployment or Azure account.
 
-## 📋 Table of Contents
-- [Installation](#-installation)
-- [Authentication](#-authentication)
-- [Project Templates](#-project-templates)
-- [Helper Commands](#-helper-commands)
-- [Environment Setup](#-environment-setup)
-- [Quick Tips](#-quick-tips)
+The Azure Developer CLI (`azd`) combines project templates, application code, infrastructure definitions, and deployment configuration. Use the [official overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview) and [template guidance](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) when choosing a current example.
 
-## 💿 Installation
+## Installation
 
-### Linux/macOS
-```bash
-curl -fsSL https://aka.ms/install-azd.sh | bash
-```
+Installation is optional for this review. Follow the installation link in the [official overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview) for your operating system. If `azd` is already installed, these commands inspect its version and help:
 
-### Windows (PowerShell)
 ```powershell
-winget install Microsoft.Azure.DevCLI
+# Inspect supported commands before trusting generated instructions.
+azd version
+azd --help
+azd init --help
 ```
 
-## 🔐 Authentication
+## Authentication
 
-```bash
-# Login to Azure
-azd auth login
+Documentation review does not require sign-in. For a later, authorized deployment exercise, follow the selected template's prerequisites and use the [current authentication reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference#azd-auth). Verify the intended account and subscription before provisioning anything.
 
-# Verify authentication
-az account show
-```
+## Project templates
 
-## 🎨 Project Templates
+Select a template from the official [template guidance](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates). Inspect its README, configuration, infrastructure, scripts, and license before copying it. A familiar sample name or an AI-generated repository URL does not prove that the template exists or fits your needs.
 
-### 1. Node.js Express API with Cosmos DB 🌟
-```bash
-mkdir express-cosmos-api && cd express-cosmos-api
-azd init --template Azure-Samples/todo-nodejs-mongo
-azd up
-```
-**Features:**
-- Express.js backend
-- MongoDB API
-- Azure Cosmos DB integration
-- REST API endpoints
-- Swagger documentation
+Use the real repository URL of the template you selected when providing Copilot context. Do not paste a placeholder account or repository name into a command.
 
-### 2. Simple Node.js Express Web App 💻
-```bash
-mkdir express-webapp && cd express-webapp
-azd init --template Azure-Samples/todo-nodejs-mongo-aca
-azd up
-```
-**Features:**
-- Container Apps deployment
-- Express.js server
-- Static file serving
-- Environment configuration
+## Helper commands
 
-### 3. Python FastAPI with Cosmos DB 🐍
-```bash
-mkdir python-fastapi-cosmos && cd python-fastapi-cosmos
-azd init --template Azure-Samples/todo-python-mongo
-azd up
-```
-**Features:**
-- FastAPI framework
-- Async MongoDB support
-- OpenAPI documentation
-- Python best practices
+Use the [command reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference) to distinguish inspection from changes:
 
-### 4. Node.js Static Web App with API ⚡
-```bash
-mkdir static-web-api && cd static-web-api
-azd init --template Azure-Samples/todo-nodejs-staticwebapp
-azd up
-```
-**Features:**
-- Static Web Apps hosting
-- Serverless API
-- GitHub Actions integration
-- Global CDN
+| Command | Purpose | Effect to understand |
+|---|---|---|
+| `azd version` | Show the installed version | Helps match guidance to the local tool |
+| `azd --help` | Show supported commands | Reveals what the installed version actually supports |
+| `azd init` | Initialize an application | Changes local project configuration |
+| `azd up` | Provision and deploy | Can create or change billable Azure resources |
+| `azd down` | Remove a project's Azure resources | Deletes resources; review scope before use |
 
-### 5. DevOps CI/CD Pipeline Example 🔄
-```bash
-mkdir devops-cicd && cd devops-cicd
-azd init --template Azure-Samples/azure-devops-demo
-azd up
-```
-**Features:**
-- Azure DevOps pipelines
-- Infrastructure as Code
-- Automated testing
-- Release management
+These are reference examples. This appendix does not instruct you to provision or delete resources.
 
-### 6. Minimal Node.js API (Teaching Focus) 📚
-```bash
-mkdir minimal-node-api && cd minimal-node-api
-azd init --template Azure-Samples/todo-nodejs-mongo-aca-minimal
-azd up
-```
-**Features:**
-- Simplified architecture
-- Basic CRUD operations
-- Clear code structure
-- Learning-focused setup
+## Environment setup
 
-### 7. Full Stack JavaScript App 🎯
-```bash
-mkdir fullstack-js && cd fullstack-js
-azd init --template Azure-Samples/todo-nodejs-mongo-aca-fullstack
-azd up
-```
-**Features:**
-- React frontend
-- Node.js backend
-- MongoDB database
-- Complete architecture
+For the review activity, use the template's public documentation. If you later create a local copy, keep it separate from this training repository. Derive required variables from that template instead of assuming every application uses the same service, region, or resource names. Keep credentials out of prompts, source files, and screenshots.
 
-## 🛠️ Helper Commands
+## Quick tips: a ten-minute review activity
 
-### AZD Core Commands
-| Command | Description |
-|---------|-------------|
-| `azd init` | Initialize new project |
-| `azd up` | Provision and deploy |
-| `azd down` | Delete resources |
-| `azd monitor` | View logs/metrics |
-| `azd pipeline config` | Setup CI/CD |
+**Scenario:** Tailwind Traders is evaluating a template for an internal learning application.
 
-### Azure Authentication
-| Command | Description |
-|---------|-------------|
-| `az login` | Interactive login |
-| `az account list` | List subscriptions |
-| `az account set` | Set subscription |
-| `az account show` | Show current sub |
+1. Select a current public template and identify the files that define its services and infrastructure.
+2. Give Copilot those files and the template README. Request an explanation of the application, its Azure resources, required configuration, and unresolved assumptions.
+3. Require a file reference for each claim. Verify a proposed command against the official reference before accepting it.
+4. Identify one test you would require before deployment and one question that only the application owner can answer.
+5. Produce a short review stating what you verified, what remains unknown, and what would authorize deployment.
 
-## 🌍 Environment Setup
+**Success:** distinguish documented behavior, Copilot inference, and decisions requiring human input. A confident summary alone is insufficient evidence.
 
-### Required Variables
-```bash
-# Create new environment
-azd env new development
+**No-account route:** perform the same review from the public template files and command reference without running Copilot or `azd`.
 
-# Set required variables
-azd env set AZURE_LOCATION eastus
-azd env set AZURE_SUBSCRIPTION_ID <your-subscription-id>
-azd env set AZURE_TENANT_ID <your-tenant-id>
-```
+**Cleanup:** no resources are created by this activity. If you made a classroom copy, review its diff and retain only intended changes.
 
-### Optional Variables
-```bash
-# Application specific
-azd env set AZURE_RESOURCE_GROUP rg-myapp
-azd env set AZURE_APP_NAME myapp
-```
-
-## 💡 Quick Tips
-
-1. **Project Management**
-   - Use `azd status` to check project state
-   - Run `azd clean` to reset local state
-   - Execute `azd env list` to view environments
-
-2. **Cost Management**
-   - Monitor with `az cost management`
-   - Use `azd down` to delete unused resources
-   - Set budget alerts in Azure Portal
-
-3. **Development Flow**
-   - Start with `azd init`
-   - Test locally with `azd local`
-   - Deploy with `azd up`
-   - Monitor with `azd monitor`
-
-4. **Troubleshooting**
-   - Check logs with `azd monitor`
-   - Use `azd env show` for configuration
-   - Enable debug with `--debug` flag
-
-## 🔍 Additional Resources
-
-- [AZD Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure Samples Gallery](https://github.com/Azure-Samples)
-- [AZD GitHub Repository](https://github.com/Azure/azure-dev)
-- [Azure Architecture Center](https://learn.microsoft.com/azure/architecture/)
-
-## 🤝 Contributing
-
-Feel free to:
-- Submit issues
-- Fork the repository
-- Submit pull requests
-- Share your experiences
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<div align="center">
-
-[![Star this repo](https://img.shields.io/github/stars/your-username/your-repo?style=social)](https://github.com/your-username/your-repo)
-[![Follow on Twitter](https://img.shields.io/twitter/follow/your-twitter?style=social)](https://twitter.com/your-twitter)
-
-**Made with ❤️ for the Azure Developer Community**
-
-</div> 
+Return to the [core class activities](CLASS-ACTIVITIES.md) or the [four-segment course plan](../COURSE-PLAN.md). Report corrections through the [training repository](https://github.com/timothywarner-org/copilot-cert-prep).

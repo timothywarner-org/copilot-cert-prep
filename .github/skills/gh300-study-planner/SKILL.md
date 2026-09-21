@@ -11,7 +11,7 @@ description: Generates a personalized GH-300 study plan based on the user's self
 
 **Required sources:**
 
-- `references/gh300-objectives.md` (GH-300 skills measured, January 2026)
+- `references/gh300-objectives.md` (GH-300 skills measured, August 7, 2026)
 - Microsoft Learn (access via the **Microsoft Learn MCP server** using `microsoft_docs_search` for current links)
 
 ## Bundled assets
@@ -36,13 +36,13 @@ Use the skill-local bundle for consistent plan quality.
    | Improve developer productivity with GitHub Copilot    | 10-15%      |
    | Configure privacy, content exclusions, and safeguards | 10-15%      |
 
-2. **Ask for confidence ratings.** Ask the user to rate confidence in each area as Strong, Moderate, Weak, or Unknown.
+2. **Collect confidence and time budget.** Ask for Strong, Moderate, Weak, or Unknown ratings, available study time, and the exam date if known. Reuse information already supplied.
 
 3. **Generate a prioritized study plan.**
    - Order areas from weakest to strongest.
    - Within equal confidence levels, prioritize areas with higher exam weight.
    - For each area, provide:
-     - Estimated study hours (weak: 8-12 hours, moderate: 4-6 hours, strong: 1-2 hours).
+     - Estimated study time that fits the learner's actual budget, with an observable practice check. Label estimates as planning guidance, not a readiness guarantee.
      - Two to three specific Microsoft Learn links.
      - Key objectives to focus on (from `references/gh300-objectives.md`).
    - Include a total estimated hours range.

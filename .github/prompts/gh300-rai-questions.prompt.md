@@ -4,6 +4,10 @@ description: "Quiz me on responsible AI principles for the GH-300 exam."
 argument-hint: "bloom='Apply' difficulty='medium' principle='fairness'"
 agent: gh300-cert-buddy-agent
 tools:
+  - read
+  - search
+  - web
+  - execute
   - gh300buddy-mslearn/*
 ---
 
@@ -39,44 +43,9 @@ You must follow the workspace skill **gh300-item-creator**, and in particular it
 - Randomize the correct answer position across A, B, C, D.
 - Randomize the fictional company name from `references/fictional-companies.md`.
 - Follow all style rules from `references/style-guide.md`.
-- Include at least one distractor that is a real responsible-AI control from a DIFFERENT Microsoft product, to test the GH-300 boundary.
+- Use plausible, parallel distractors. Do not force an obvious unrelated-product choice.
 - No contractions. No trick wording. No fake features.
 
-## Output format (exact) -- two-phase delivery
+## Output contract
 
-### Phase 1 (send first, then STOP and wait for user reply)
-
-#### Metadata
-
-- Exam: GH-300
-- Skill area: Use GitHub Copilot responsibly
-- Objective:
-- Principle:
-- Bloom:
-- Difficulty:
-
-#### Question
-
-`<scenario-first stem>`
-
-A. `<choice>`
-B. `<choice>`
-C. `<choice>`
-D. `<choice>`
-
-_(Do NOT reveal the answer. Wait for the user to reply.)_
-
-### Phase 2 (send after the user replies with their choice)
-
-**Result:** <Correct! / Incorrect.> The correct answer is **<A|B|C|D>**.
-
-#### Rationale
-
-- A: <2 sentences>
-- B: <2 sentences>
-- C: <2 sentences>
-- D: <2 sentences>
-
-#### References
-
-- <Microsoft Learn unit URL>
+Follow the Phase 1 and Phase 2 Markdown formats in the gh300-item-creator skill. Use a single-line stem and A: through D: choices. Add principle to metadata when useful. Deliver the question first, then wait before revealing the answer, rationale, or primary-source references.

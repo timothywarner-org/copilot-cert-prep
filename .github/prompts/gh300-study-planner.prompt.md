@@ -4,6 +4,10 @@ description: "Create a personalized GH-300 study plan based on your confidence r
 argument-hint: "Rate confidence by domain, for example: features=Weak, privacy=Moderate"
 agent: gh300-cert-buddy-agent
 tools:
+  - read
+  - search
+  - web
+  - execute
   - gh300buddy-mslearn/*
 ---
 

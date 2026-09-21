@@ -1,7 +1,7 @@
 # GH-300 Study Plan Quality Checklist
 
 - All six GH-300 areas are present.
-- Weight ranges match January 2026 blueprint.
+- Weight ranges match August 7, 2026 blueprint.
 - Unknown confidence is treated as weak.
 - Prioritization order is explicit and justified.
 - Each area has estimated hours.

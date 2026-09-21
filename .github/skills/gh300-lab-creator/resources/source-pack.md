@@ -4,11 +4,11 @@ This lab skill uses both style and exam-reference artifacts so labs are clear, s
 
 ## Local source files
 
-- `working-temp/converted/style-guide.from-pdf.md` (converted from PDF with MarkItDown)
-- `working-temp/mwsg-rules 2.md` (voice and writing conventions)
-- `working-temp/wwl-exam-rules.md` (question/instruction wording discipline)
-- `references/gh300-objectives.md` (scope and objective grounding)
-- `references/fictional-companies.md` (scenario randomization)
+- [Maintained writing guide](../../../../references/style-guide.md)
+- [Lab quality checklist](lab-quality-checklist.md)
+- [GH-300 domains and objectives](../../../../references/gh300-objectives.md), effective August 7, 2026
+- [Fictional company pool](../../../../references/fictional-companies.md)
+- [Public Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
 
 ## Lab voice and structure defaults
 

@@ -1,102 +1,53 @@
-# CLAUDE.md
+# Repository guidance
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This public teaching repository supports Tim Warner's **Pass Your GitHub Copilot Certification Exam** O'Reilly Live Learning class. Current delivery: **Thursday, September 24, 2026, 9 a.m.-1 p.m. Central / 7-11 a.m. Pacific**. Content baseline reviewed **September 20, 2026**. Follow [the canonical course plan](COURSE-PLAN.md) and [shared repository instructions](.github/copilot-instructions.md).
 
-## Repository Overview
+## Authority
 
-This is the teaching repository for Tim Warner's O'Reilly Live Learning class **"GitHub Copilot Certification (GH-300) Prep"** (live delivery **June 23, 2026**, 9:00 AM–2:00 PM CT) against the **January 2026 GH-300 blueprint**. The repo has been significantly slimmed: prior `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, and `exam-metadata/` directories were removed. The remaining content centers on (1) a single Node.js terminal demo app, (2) the course plan, and (3) a Copilot-powered "GH-300 Cert Buddy" agent built from skills, prompts, and instruction files.
+- Exam scope: [August 7, 2026 objectives](references/gh300-objectives.md), checked against the [official GH-300 study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300).
+- Product behavior: current GitHub Docs; client behavior: current VS Code documentation.
+- Learner route: [README](README.md), [activities](docs/CLASS-ACTIVITIES.md), [study guide](docs/GH-300-STUDY-GUIDE.md).
+- Delivery: [published O'Reilly course](https://www.oreilly.com/live-events/pass-your-github-copilot-certification-exam/0642572414696/0642572414689/), [course plan](COURSE-PLAN.md), and [September deck](warner-github-cert-prep-september-2026.pptx).
+- Question style: [style guide](references/style-guide.md) and [fictional companies](references/fictional-companies.md).
 
-## Common Commands
+Microsoft writing guidance governs item style; **O'Reilly is the training identity**. Keep learner-facing branding, title slides, masters, footers, and speaker notes consistent with that identity. Superseded decks and exam PDFs belong in Git history, not the current learning route. June-named Markdown files are compatibility redirects, not alternate sources of truth.
 
-### Root (Jest)
+## Four-segment delivery
 
-```bash
-npm test                # all tests
-npm run test:watch      # watch mode
-npm run test:coverage   # coverage report (no enforced threshold at root)
-```
+| Segment | Central time | Instructional purpose |
+|---|---|---|
+| **1. Foundations and responsible operation** | 9-10 a.m. | Validate generated output and establish human accountability |
+| **2. Core features: IDE, Chat, CLI** | 10-11 a.m. | Choose a surface, inspect evidence, and reuse a prompt |
+| **3. Data, agents, MCP, and context** | 11 a.m.-noon | Explain data flow and improve the context for a bounded task |
+| **4. Privacy, governance, productivity, and exam practice** | Noon-1 p.m. | Apply safeguards, test changes, interpret metrics, and plan study |
 
-There is currently one test at `tests/sample.test.js`. Run a single test with:
+Include five-minute breaks in Segments 1-3. Segment 4 includes the mini mock and the final five-minute wrap-up. Keep the six-domain exam coverage and learning evidence intact when tightening a demo. Hooks and enterprise managed settings are enrichment, not newly invented exam objectives.
 
-```bash
-npx jest tests/sample.test.js
-npx jest -t "<test name pattern>"
-```
+## Currency and cross-references
 
-### Terminal Demo App (`src/`)
-
-`src/` is a self-contained Node.js console app ("GitHub Copilot Tips of the Day") used as live-demo material for debugging, testing, and Copilot prompting. It has its own `package.json` and dependencies (boxen, chalk, inquirer, ora).
-
-```bash
-cd src
-npm install
-npm start               # runs node app.js
-npm test                # jest (uses src-local jest)
-node test-app.js        # ad-hoc test harness
-```
-
-There is no lint script and no build step — this is a plain Node app.
+- Verify volatile product claims against primary sources before changing teaching content. Record the review date and link the supporting page. Do not infer the current UI from an old screenshot or conversation.
+- Keep exam scope separate from product availability. Do not hard-code model rosters, prices, preview status, or policy support without current evidence.
+- Distinguish content-exclusion support by surface, instructions from enforced controls, and repository hooks from enterprise governance.
+- Update links and heading anchors when moving a file or renaming a section. Check README, the course plan, the deck's speaker notes, agent/skill instructions, and compatibility redirects together.
+- Use the approved **O'Reilly PowerPoint template** and its native masters/layouts for the current deck. Preserve editable text, useful source content, and speaker notes. Render and visually inspect the exported deck; a valid PPTX package alone does not prove slide quality.
 
 ## Architecture
 
-### Layout that matters
+The interactive Node.js tips application is in `src/`. The zero-dependency report demonstration is in `copilot-metrics-tour/`. Executable teaching hooks are in `scripts/hooks/` and declared in `.github/hooks/`. Root Jest tests cover validation, hook decisions, and metrics behavior. Use **Node.js 22+** and **PowerShell 7** for documented classroom commands.
 
-- `src/` — interactive console app. `app.js` reads from `tips.json` (the tip database). Treat `tips.json` as data, not config; the app validates and gracefully degrades when it is missing or malformed. This is the only "code" in the repo and is the canonical example surface for live demos.
-- `tests/sample.test.js` — root-level Jest sample. Root `package.json` defines only `jest` as a dev dep; the project does **not** enforce the 80% coverage thresholds the old `jest.config.js` used to set (that config file is gone).
-- `docs/` — student-facing reference: `GH-300-Study-Guide-June-2026.md`, `QUICK-REFERENCE.md`, `exam-notes-and-links.md`, `github-copilot-cert-exam-objectives.md`, plus the official Microsoft study guide PDF. These are deliverables, not code.
-- `references/` — load-bearing inputs for the Cert Buddy agent. Do not treat these as throwaway notes:
-  - `gh300-objectives.md` — the January 2026 skills-measured list with weighted ranges (see below).
-  - `style-guide.md` — Microsoft Writing Style Guide rules the agent must follow when authoring exam items.
-  - `fictional-companies.md` — randomization pool for scenario stems (avoid Contoso defaulting).
-- `scripts/` — one-off PowerShell helpers (e.g., `create-tworg-api-key.ps1`).
-- `copilot-metrics-tour/` — a zero-dependency Node console app (`index.js`, run `node index.js --demo` or `npm run demo`) that tours the GitHub Copilot Metrics API across adoption, acceptance rate, time-saved/ROI, and governance use cases. Has an offline `--demo` mode with synthetic data so it runs without a populated Copilot Business org. Live mode resolves a token from `GITHUB_TOKEN`/`GH_TOKEN`/`GITHUB_PERSONAL_ACCESS_TOKEN`.
-- `.vscode/launch.json` — debug config for the `src/` app; runs through the integrated PowerShell terminal (required because the app uses readline prompts). It is intentionally un-ignored in `.gitignore` (overriding the global `.vscode/` ignore) so learners get it on clone.
-- `COURSE-PLAN-JUNE-2026.md` — the canonical course outline. Five segments delivered on the clock **09:00 am Foundations, 10:00 am Core Features, 11:00 am Enterprise Features (60 min), 12:00 pm Privacy & Config, 01:00 pm Exam Prep, finish 02:00 pm CT** (segment names match `README.md`). The teaching arc (habits → tools → internals → policy → integrative practice) is *intentionally not* in blueprint domain order — do not reorder it to match domain numbering. Keep segment names and clock times in sync with `README.md`.
+Cert Buddy consists of the agent definition, three skills, prompt files, and the configured Microsoft Learn MCP server. Select it from the agent picker. Preserve question-first delivery and the distinction between automated structure checks and factual review.
 
-### The Cert Buddy Agent System
+## Verification
 
-This is the architecturally significant piece. Three layers compose a Copilot Chat workspace agent that generates exam-prep material grounded in Microsoft Learn:
+```powershell
+# Install only the root test dependencies.
+npm ci
+npm test -- --runInBand
+npm run check:content
+node src/test-app.js
+node copilot-metrics-tour/index.js --demo
+```
 
-1. **Agent definition** — `.github/agents/gh300-cert-buddy-agent.agent.md` declares the agent (`@gh300-cert-buddy-agent` in Copilot Chat), its tools, and routing rules between skills.
-2. **Skills** — `.github/skills/<skill>/SKILL.md`, auto-discovered by Copilot:
-   - `gh300-item-creator` — exam-realistic multiple-choice items.
-   - `gh300-lab-creator` — 10–20 minute hands-on exercises with validation + rollback steps.
-   - `gh300-study-planner` — confidence-rated personalized study plans.
-3. **Prompt templates** — `.github/prompts/*.prompt.md` expose skills as slash commands: `/gh300-practice-questions`, `/gh300-rai-questions` (responsible AI items, backed by a dedicated recipe in `gh300-item-creator/SKILL.md`), `/gh300-practice-lab`, `/gh300-study-planner`.
+No root build or enforced coverage threshold is required. The application can run directly with `node src/app.js`. Keep `.vscode/launch.json` committed for learners. Give each core activity a no-account route, an observable success check, and cleanup instructions.
 
-Grounding flows through the **Microsoft Learn MCP server** declared in `.vscode/mcp.json` under the server name `gh300buddy-mslearn` (HTTP transport, `https://learn.microsoft.com/api/mcp`). The agent is required to call `microsoft_docs_search` first, `microsoft_docs_fetch` for full-page detail, and `microsoft_code_sample_search` to verify command/settings syntax. Every generated item must cite Microsoft Learn URLs.
-
-When asked to generate, edit, or critique cert-prep content, follow the rules in `references/style-guide.md` (Microsoft sentence-style capitalization, bold UI labels, Oxford commas, no contractions, no "all/none of the above", 2-sentence rationales) and pull scenario companies from `references/fictional-companies.md` rather than defaulting to Contoso.
-
-### Repository-level Copilot configuration
-
-- `.github/copilot-instructions.md` — repo-wide Copilot Chat instructions. Frames the project as enterprise-focused and references the agent/skills system above.
-- `.github/instructions/gh300-teaching-content.instructions.md` — applies to all paths (`applyTo: "**"`); demands learner-clarity, enterprise scenarios, modern Copilot features (Agent Mode, Plan Mode, multi-model), and a "Next Steps" tail (Practice / Deep-dive / Real-world) on teaching outputs.
-- `.copilotignore` — files Copilot should not ingest as context.
-
-## Course Domain Weights (GH-300, January 2026)
-
-Weights are **ranges**, not point values — this changed from prior blueprints. Source of truth: `references/gh300-objectives.md`.
-
-| Domain                                     | Weight  |
-| ------------------------------------------ | ------- |
-| Use GitHub Copilot responsibly             | 15–20%  |
-| Use GitHub Copilot features                | 25–30%  |
-| Understand Copilot data and architecture   | 10–15%  |
-| Apply prompt engineering and context       | 10–15%  |
-| Improve developer productivity             | 10–15%  |
-| Configure privacy, exclusions, safeguards  | 10–15%  |
-
-Older fixed-percentage tables (for example 7% / 31% / 9% / 14%) are obsolete — do not reintroduce them as current weights. The single retired-percentage callouts that survive in the docs (e.g. "Responsible AI grew from 7% to 15–20%") are intentional migration notes, not drift.
-
-## Markdown conventions
-
-Per the prior Cursor-rules carryover: blank line between every heading and its content, between every list and surrounding content, and between every code block and surrounding content. Authored markdown should pass these rules without hand-fixing.
-
-## What not to do
-
-- Do not recreate the deleted `demos/`, `copilot/`, `examples/`, `course-materials/`, `new-resources/`, or `exam-metadata/` directories — they were removed deliberately during the repo slim-down. Content that survived moved to `docs/` or `references/`.
-- Do not paraphrase real GH-300 exam questions or reference braindumps when working through the Cert Buddy skills — the agent definition prohibits it.
-- Do not assume the root project enforces 80% coverage — `jest.config.js` is gone. If coverage gates are needed for a new demo, add them locally to that demo, not at the root.
-- Do not let `COURSE-PLAN-JUNE-2026.md` and `README.md` drift apart on segment names, clock times, or durations — they describe the same 09:00 am–02:00 pm delivery and must agree. The README "Course Structure" table is the quick view; the course plan is the detailed build.
-- Do not use em dashes in authored docs — Tim's style rule. Use hyphens with spaces, commas, or periods.
+Use small changes, error handling, why comments, public-safe fictional data, and explicit validation boundaries. Do not expose private presenter links, correspondence, real usage reports, or credentials. Record completed checks accurately in [refresh notes](docs/SEPTEMBER-2026-REFRESH.md). Do not infer live Copilot integration, enterprise enforcement, Presenter View behavior, or timed delivery from local tests. Follow the [instructor rehearsal gates](COURSE-PLAN.md#instructor-rehearsal-gates) before class.
