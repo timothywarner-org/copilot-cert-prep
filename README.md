@@ -1,5 +1,7 @@
 # Pass Your GitHub Copilot Certification Exam
 
+![Course title card: O'Reilly Live Learning, "Pass Your GitHub Copilot Certification Exam", presented by Tim Warner on September 24, 2026, over a photograph of an instructor teaching a room of students at workstations.](images/copilot-cover-image.png)
+
 **Instructor: Tim Warner** | **GH-300** | **Four-hour O'Reilly Live Learning course**
 
 **Thursday, September 24, 2026 | 9 a.m.-1 p.m. Central / 7-11 a.m. Pacific**
@@ -13,7 +15,7 @@ Welcome! This is the public learner repository for the September 24, 2026 class 
 1. Read the [course plan](COURSE-PLAN.md) and [quick reference](docs/QUICK-REFERENCE.md).
 2. Work through the [class activities](docs/CLASS-ACTIVITIES.md). Each has an observable outcome and a no-account route.
 3. Use [Cert Buddy](#study-with-cert-buddy) for original practice, then finish the [mini mock](docs/MINI-MOCK.md).
-4. Follow the [study guide](docs/GH-300-STUDY-GUIDE.md) and [official exam links](docs/exam-notes-and-links.md) for your remaining study.
+4. Follow the [study guide](docs/GH-300-STUDY-GUIDE.md), the [objective-mapped resource links](docs/GH-300-RESOURCE-LINKS.md), and [official exam links](docs/exam-notes-and-links.md) for your remaining study.
 
 ## Four class segments
 
@@ -34,6 +36,7 @@ The first three segments include a five-minute break. The last five minutes of S
 | [Class activities](docs/CLASS-ACTIVITIES.md) | Responsible AI, Chat/CLI, context, testing, and policy practice |
 | [GH-300 objectives](references/gh300-objectives.md) | Six domains and the current skills measured |
 | [Study guide](docs/GH-300-STUDY-GUIDE.md) | What to understand and what evidence to produce |
+| [Resource links](docs/GH-300-RESOURCE-LINKS.md) | Every objective mapped to verified Microsoft Learn and GitHub Docs sources |
 | [Hooks and governance lab](docs/HOOKS-AND-GOVERNANCE.md) | A tool-use logger, approval boundaries, and enterprise policy walkthrough |
 | [Metrics tour](copilot-metrics-tour/README.md) | Current report format; synthetic demo needs no credentials |
 | [Tips app](src/GH-Copilot-Tips-App-README.md) | Small Node.js application to inspect, test, and improve |
@@ -109,3 +112,7 @@ Cert Buddy must show the question first, wait for your answer, and then explain 
 **Study decisions, not a model roster.** Model availability, billing, previews, and UI details change faster than the exam objectives. Hooks and server-managed settings are useful governance enrichment; the blueprint does not name them as separate objectives.
 
 Use the linked current Markdown sources and September deck for this class. June-named Markdown pages redirect older bookmarks to their current equivalents; superseded materials remain available in Git history. This repository contains original teaching material, not real exam questions or a guarantee of passing.
+
+## License
+
+Code and course materials in this repository are released under the [MIT License](LICENSE). The O'Reilly name and logo, the GitHub Copilot product interface shown in screenshots, and the GH-300 objectives quoted from Microsoft Learn belong to their respective owners and are used here for instruction.

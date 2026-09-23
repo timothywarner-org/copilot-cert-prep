@@ -90,9 +90,9 @@ Use this recipe when the user asks for **responsible AI**, **RAI**, **ethical AI
 
 Ground every RAI item in the GitHub-Copilot-specific responsible AI content, not generic Azure AI or Copilot Studio responsible AI pages:
 
-- Primary module: **Responsible AI with GitHub Copilot** (`https://learn.microsoft.com/training/modules/responsible-ai-with-github-copilot/`).
-- The **six principles** unit: `https://learn.microsoft.com/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai`.
-- The **mitigate AI risks** unit: `https://learn.microsoft.com/training/modules/responsible-ai-with-github-copilot/2-manage-ai-risks`.
+- Primary module: **Responsible AI with GitHub Copilot** (`https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/`).
+- The **six principles** unit: `https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai`.
+- The **mitigate AI risks** unit: `https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/2-manage-ai-risks`.
 
 Use `microsoft_docs_fetch` on these URLs before writing, then cite the matching unit URL in Phase 2 references.
 

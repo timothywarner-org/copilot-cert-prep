@@ -4,6 +4,8 @@
 
 Use [the official study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300) for scope and [the full local objectives](../references/gh300-objectives.md) for a checklist. The [exam notes](exam-notes-and-links.md) cover scheduling.
 
+**When a domain below comes up weak, go to [the objective-mapped resource links](GH-300-RESOURCE-LINKS.md).** Every objective bullet there points at a verified Microsoft Learn or GitHub Docs page, so a weak rating turns straight into a reading list.
+
 ## Study for decisions
 
 | Domain | Weight | Explain or demonstrate before calling yourself ready |

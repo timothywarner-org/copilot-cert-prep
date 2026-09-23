@@ -2,14 +2,18 @@
   "name": "copilot-cert-prep-3",
   "version": "1.0.0",
   "description": "GitHub Copilot certification prep materials",
+  "license": "MIT",
+  "author": "Tim Warner",
+  "private": true,
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "check:content": "node scripts/check-course-content.js",
+    "check:links": "node scripts/check-external-links.js",
     "test:app": "node src/test-app.js"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^30.5.2"
   }
 }

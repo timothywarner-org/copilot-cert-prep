@@ -10,7 +10,7 @@ This public teaching repository supports Tim Warner's **Pass Your GitHub Copilot
 - Delivery: [published O'Reilly course](https://www.oreilly.com/live-events/pass-your-github-copilot-certification-exam/0642572414696/0642572414689/), [course plan](COURSE-PLAN.md), and [September deck](warner-github-cert-prep-september-2026.pptx).
 - Question style: [style guide](references/style-guide.md) and [fictional companies](references/fictional-companies.md).
 
-Microsoft writing guidance governs item style; **O'Reilly is the training identity**. Keep learner-facing branding, title slides, masters, footers, and speaker notes consistent with that identity. Superseded decks and exam PDFs belong in Git history, not the current learning route. June-named Markdown files are compatibility redirects, not alternate sources of truth.
+Microsoft writing guidance governs item style; **O'Reilly is the training identity**. Keep learner-facing branding, title slides, masters, footers, and speaker notes consistent with that identity. Superseded decks and exam PDFs belong in Git history, not the current learning route. [COURSE-PLAN.md](COURSE-PLAN.md) is the **only** course plan; do not add a dated or alternate one. The remaining June-named Markdown file is a compatibility redirect, not an alternate source of truth.
 
 ## Four-segment delivery
 
@@ -33,7 +33,9 @@ Include five-minute breaks in Segments 1-3. Segment 4 includes the mini mock and
 
 ## Architecture
 
-The interactive Node.js tips application is in `src/`. The zero-dependency report demonstration is in `copilot-metrics-tour/`. Executable teaching hooks are in `scripts/hooks/` and declared in `.github/hooks/`. Root Jest tests cover validation, hook decisions, and metrics behavior. Use **Node.js 22+** and **PowerShell 7** for documented classroom commands.
+The interactive Node.js tips application is in `src/`. The zero-dependency report demonstration is in `copilot-metrics-tour/`. Executable teaching hooks are in `scripts/hooks/` and declared in `.github/hooks/`. Root Jest tests cover validation, hook decisions, metrics behavior, and the tips application's pure helpers. Use **Node.js 22+** and **PowerShell 7** for documented classroom commands.
+
+All sample code is zero-dependency and uses `node:`-prefixed built-ins, `"use strict"`, a JSDoc header naming its usage, and comments that justify a decision rather than restate the code. `fizzBuzz.js` and `src/app.js` are the reference examples. Keep the tips application in one file: class activity 2 asks learners to attach `src/app.js` and `src/tips.json` to Chat, and splitting it breaks that comparison.
 
 Cert Buddy consists of the agent definition, three skills, prompt files, and the configured Microsoft Learn MCP server. Select it from the agent picker. Preserve question-first delivery and the distinction between automated structure checks and factual review.
 
