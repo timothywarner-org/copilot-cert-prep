@@ -1,30 +1,23 @@
 {
   "name": "copilot-tips-app",
-  "version": "1.0.0",
-  "description": "GitHub Copilot Tips of the Day - Teaching example for debugging and testing",
+  "version": "2.0.0",
+  "description": "WoodGrove Bank learning catalog: the interactive tips app used in class activity 2",
   "main": "app.js",
+  "type": "commonjs",
+  "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "smoke": "node test-app.js"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "keywords": [
     "github-copilot",
-    "tips",
+    "gh-300",
     "teaching",
     "console-app"
   ],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "jest": "^29.0.0"
-  },
-  "dependencies": {
-    "boxen": "^8.0.1",
-    "chalk": "^5.6.0",
-    "cli-width": "^4.1.0",
-    "inquirer": "^12.9.4",
-    "ora": "^8.2.0"
-  }
+  "author": "Tim Warner",
+  "license": "MIT"
 }

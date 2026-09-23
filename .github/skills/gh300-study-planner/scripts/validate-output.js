@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
+const fs = require("node:fs");
 
 const input = fs.readFileSync(0, "utf8");
 const issues = [];
