@@ -266,6 +266,18 @@ function main() {
     console.log("Structure only. Factual accuracy and one defensible answer still need human review.");
   } else {
     console.error(`\nFAIL: ${failures} problem(s) across ${total} item(s).`);
+    console.error(
+      [
+        "",
+        "    These are item-quality rules, not style preferences, and none of them has an",
+        "    exemption. Fix the item rather than the gate:",
+        "      - four distinct choices A through D, with exactly one defensible answer",
+        "      - no contractions anywhere in the item, including every rationale",
+        "      - comparable option lengths, so the longest choice is not a giveaway",
+        "      - a rationale for every choice, and at least one source link",
+        "    The rules live in .github/skills/gh300-item-creator."
+      ].join("\n")
+    );
     process.exitCode = 1;
   }
 }

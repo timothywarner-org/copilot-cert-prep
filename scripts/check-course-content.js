@@ -12,23 +12,25 @@ const path = require("node:path");
 const { execFileSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 
-// These exact paths are instructions to create files elsewhere or keep folders absent.
-// Keeping the reasons next to each exemption prevents a broad ignore from hiding drift.
-const examples = new Map([
-  ["docs/HOOKS-AND-GOVERNANCE.md", new Map([
-    [".github/hooks/tool-use-logger.json", "Optional file the learner creates during Demo A"],
-    ["tool-use-logger.json", "Cleanup of the optional learner-created file"],
-    ["copilot/managed-settings.json", "Configuration created in the separate enterprise repository"],
-    [".github-private/copilot/", "Separate enterprise repository, never this public learner tree"],
-    ["managed-settings.json", "Example file under the separate enterprise repository"],
-    ["team-mappings.json", "Example file under the separate enterprise repository"],
-    ["teams/class-demo.json", "Example file under the separate enterprise repository"]
-  ])],
-  [".github/copilot-instructions.md", new Map(
-    ["demos/", "copilot/", "examples/", "course-materials/", "new-resources/", "exam-metadata/"]
-      .map((name) => [name, "Explicit instruction not to recreate a removed directory"])
-  )]
-]);
+/**
+ * A document declares its own exemptions, so adding one never means editing this script.
+ * Put this on any line of the file that needs it:
+ *
+ *   <!-- allow-missing-path: teams/class-demo.json | lives in the separate enterprise repo -->
+ *
+ * The reason is required, and an exemption that no longer matches anything is reported,
+ * so the list cannot quietly rot into a blanket ignore.
+ */
+const DIRECTIVE = /<!--\s*allow-missing-path:\s*([^|>]+?)\s*(?:\|\s*([^>]*?))?\s*-->/g;
+
+/** Printed with every failure, because a checker that cannot be satisfied gets reworded around. */
+const REMEDY = [
+  "    Fix it one of three ways:",
+  "      1. If it is a real file, write the path repository-relative, for example src/tips.json.",
+  "      2. If it is prose about a URL, put the whole URL in the backticks or drop the backticks.",
+  "      3. If it is deliberately absent, declare it in this file:",
+  "         <!-- allow-missing-path: THE/PATH | why it is absent -->"
+].join("\n");
 
 /** Include new course files during editing; dependencies and ignored scratch files stay out. */
 function trackedFiles() {
@@ -110,6 +112,93 @@ function inlineTarget(file, target, inventory) {
   return candidates.some((candidate) => publishedTarget(candidate, inventory));
 }
 
+/**
+ * Could this directory-style candidate plausibly name a location in this repository?
+ *
+ * Anything ending in a slash matches the path shape, so unqualified prose such as
+ * `concepts/context/` was reported as a broken reference. A real directory reference here
+ * starts from a directory that exists, so a first segment that names nothing in the tree is
+ * prose about somebody else's layout. A wrong path under a real directory still fails,
+ * which is the case worth catching.
+ *
+ * @param {string} candidate Backticked text, already shaped like a path.
+ * @param {Set<string>} inventory Every tracked file, repository-relative.
+ * @returns {boolean}
+ */
+function namesARepositoryLocation(candidate, inventory) {
+  if (!candidate.endsWith("/")) return true;
+  const first = candidate.split("/")[0];
+  if (!first || first === "." || first === "..") return true;
+  for (const entry of inventory) {
+    if (entry === first || entry.startsWith(first + "/")) return true;
+  }
+  return false;
+}
+
+/**
+ * Character ranges on a line that belong to a URL or a link destination.
+ *
+ * A backticked fragment of a URL is the single most common false positive: `concepts/context/`
+ * looks exactly like a directory. Anything sitting inside one of these ranges is prose about
+ * an address, not a claim that a repository file exists.
+ *
+ * @param {string} line One line of prose.
+ * @returns {Array<[number, number]>} Start and end offsets, end exclusive.
+ */
+function addressRanges(line) {
+  const ranges = [];
+  for (const match of line.matchAll(/[a-z][a-z0-9+.-]*:\/\/\S+/gi)) {
+    ranges.push([match.index, match.index + match[0].length]);
+  }
+  for (const match of line.matchAll(/\]\(\s*<?([^\s)>]+)>?/g)) {
+    ranges.push([match.index, match.index + match[0].length]);
+  }
+  return ranges;
+}
+
+/**
+ * Does a backticked candidate describe an address rather than a repository file?
+ *
+ * True when the backticks sit inside a URL, or when the text also appears inside a URL
+ * elsewhere on the same line, which is how a path fragment gets quoted in prose.
+ *
+ * @param {string} line The whole line.
+ * @param {number} at Offset of the backticked run.
+ * @param {string} candidate The text between the backticks.
+ * @returns {boolean}
+ */
+function describesAnAddress(line, at, candidate) {
+  const ranges = addressRanges(line);
+  if (ranges.some(([start, end]) => at >= start && at < end)) return true;
+  return ranges.some(([start, end]) => line.slice(start, end).includes(candidate));
+}
+
+/**
+ * Exemptions a document declares about itself.
+ *
+ * @param {string} text Whole file contents.
+ * @returns {{allowed: Map<string, string>, errors: string[]}}
+ */
+function declaredExemptions(text) {
+  const allowed = new Map();
+  const errors = [];
+  text.split(/\r?\n/).forEach((line, index) => {
+    // Documenting the directive must not declare one, so an example shown inside inline
+    // code is not a declaration. This file's own guidance in CLAUDE.md depends on that.
+    const declarations = line.replace(/`[^`\n]*`/g, "");
+    for (const match of declarations.matchAll(DIRECTIVE)) {
+      const target = match[1].trim();
+      const reason = (match[2] || "").trim();
+      if (!reason) {
+        errors.push(`:${index + 1}: allow-missing-path for ${target} needs a reason after a | character`);
+        continue;
+      }
+      allowed.set(target, reason);
+    }
+  });
+  return { allowed, errors };
+}
+
 /** Split first so ambiguous repeated path segments cannot trigger regex backtracking. */
 function isInlinePath(candidate) {
   if (/^[a-z][a-z0-9+.-]*:|[{}<>]|^\/|^(?:node|npm|pwsh|git|npx|python|gh)\s/i.test(candidate)) return false;
@@ -133,6 +222,9 @@ function auditContent() {
   const headings = new Map();
   for (const file of files) {
     const text = fs.readFileSync(path.join(root, file), "utf8");
+    const { allowed, errors: directiveErrors } = declaredExemptions(text);
+    const usedExemptions = new Set();
+    for (const problem of directiveErrors) errors.push(file + problem);
     for (const [index, line] of proseLines(text).entries()) {
       const location = file + ":" + (index + 1);
       // Inline code may demonstrate Markdown syntax; only rendered links are navigation.
@@ -166,10 +258,26 @@ function auditContent() {
         const candidate = match[1];
         // This recognizes standalone paths, not commands, JSON, URLs, or slash commands.
         if (!isInlinePath(candidate)) continue;
+        // A fragment of an address on this line is prose about a URL, not a file claim.
+        if (describesAnAddress(line, match.index, candidate)) continue;
+        // A directory under a root this repository does not have is somebody else's layout.
+        if (!namesARepositoryLocation(candidate, inventory)) continue;
         summary.inlinePaths++;
-        const reason = examples.get(file)?.get(candidate);
-        if (reason) { skippedExamples.push({ file, path: candidate, reason }); continue; }
-        if (!inlineTarget(file, candidate, inventory)) errors.push(location + ": missing inline path " + candidate);
+        const reason = allowed.get(candidate);
+        if (reason) {
+          usedExemptions.add(candidate);
+          skippedExamples.push({ file, path: candidate, reason });
+          continue;
+        }
+        if (!inlineTarget(file, candidate, inventory)) {
+          errors.push(`${location}: missing inline path ${candidate}\n${REMEDY}`);
+        }
+      }
+    }
+    // A stale exemption is how an ignore list turns into a blanket one.
+    for (const [target] of allowed) {
+      if (!usedExemptions.has(target)) {
+        errors.push(`${file}: allow-missing-path for ${target} matches nothing; remove it`);
       }
     }
   }
@@ -195,4 +303,14 @@ if (require.main === module) {
     process.exitCode = 1;
   }
 }
-module.exports = { auditContent, checkContent, headingIds, proseLines, isInlinePath };
+module.exports = {
+  auditContent,
+  checkContent,
+  headingIds,
+  proseLines,
+  isInlinePath,
+  addressRanges,
+  describesAnAddress,
+  declaredExemptions,
+  namesARepositoryLocation
+};

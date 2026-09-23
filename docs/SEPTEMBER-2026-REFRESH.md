@@ -123,6 +123,40 @@ The bank index carries a **twelve-item diagnostic** spanning all six domains, so
 
 Two deliberate style departures from the rest of the repository, both required by the item rules: exam items use **no contractions**, and choices are kept to comparable lengths so that the longest option is not a giveaway. The validator enforces both.
 
+## September 23 scheduling and credential links
+
+[GH-300-RESOURCE-LINKS.md](GH-300-RESOURCE-LINKS.md) gained three sections: **register, schedule, and sit the exam**; **practice and assessment**; and **the rest of the GitHub certification track**. [exam-notes-and-links.md](exam-notes-and-links.md) was updated to match so the two pages cannot drift.
+
+| Finding | Detail |
+|---|---|
+| **Delivery partner confirmed** | GitHub certification exams have been delivered **exclusively through Pearson VUE** since July 1, 2025, in partnership with Microsoft Learn, with a test-center or online proctored option. An early inference that PSI delivered the exam was wrong: `starttest.com` hosts only the demo sandbox. |
+| **Free official practice assessment exists for GH-300** | Written by the team that builds the exam, with a rationale on every question and unlimited attempts. It was not previously linked anywhere in this repository, which was the largest gap on the page. |
+| **Exam facts** | 100 minutes, scaled pass at 700, credential validity 24 months, English, Portuguese, Spanish, Korean, and Japanese, scheduling capped at 90 days ahead, and an unexpired government photo ID matching the registration name. |
+| **Renewal in transition** | GitHub is moving to Microsoft's recertification process; certifications expiring before it is available are extended by six months. |
+| **MeasureUp included and labelled** | The only commercial vendor on the page. Listed because learners ask for it by name, marked clearly as optional and not Microsoft-authored, and the page header no longer claims every resource is first-party. |
+| **A defect in Microsoft's own catalog** | Their practice-assessment list points the GH-900 entry at the GH-500 path. The table links the GH-900 certification page instead and says why. |
+| **Another moved GitHub page** | The content exclusion concept page moved out of the context area and into the security, governance, and network settings area. Canonicalized across seven Markdown files and one deck slide. |
+
+`scripts/check-external-links.js` now retries a refused request once with a browser user agent and reports **CHALLENGED** rather than **DEAD**. MeasureUp answered the checker's honest agent with an nginx 444, which would otherwise have failed the build on a page that works perfectly for a learner.
+
+Sweep after the change: **131 external URLs across the Markdown, 0 dead**; **31 URLs in the deck's speaker notes, 0 dead**. The two remaining redirects are correct as written: a `.git` clone URL and the Microsoft Learn profile path that personalizes to `/users/me/`.
+
+## September 23 gate repair
+
+`npm run check:content` produced the same false positive four times in one week: a backticked string in prose read as a claim that a repository file exists. Each time the response was to reword the sentence, which is the symptom of a gate that cannot be satisfied honestly. Three design flaws caused it.
+
+| Flaw | Repair |
+|---|---|
+| **No context.** Any `foo/bar/` in prose was a path claim, so a URL fragment such as a docs path segment failed the run. | The checker now ignores a candidate that sits inside a URL on the same line, or whose text appears inside one. It also ignores a directory whose first segment names nothing in this tree, because that describes somebody else's layout. |
+| **No escape hatch except editing the script.** Exemptions lived in a hard-coded map keyed by filename, so every legitimate mention required a code change. | A document declares its own exemptions with `allow-missing-path`, and a reason is required. An exemption that stops matching anything is reported as an error, so the list cannot rot into a blanket ignore. |
+| **No remedy in the message.** The failure said what was wrong and never what to do. | Every failing run now prints the three ways to resolve it. The same property was added to the link checker and the item checker. |
+
+The tightened heuristic made **7 of the 13 exemptions unnecessary**, and the stale-exemption check found them rather than leaving them to rot. Six remain, all genuine: files a learner creates during the hooks demo, or files that live in the separate enterprise repository.
+
+Two bugs surfaced while fixing it, both caught by the gate itself. Documenting the directive in [CLAUDE.md](../CLAUDE.md) declared one, so a directive shown inside inline code is no longer a declaration. And the first remedy message was written with a broken escape, which the syntax check caught before it ran.
+
+Regression cover is in `tests/course-content-checker.test.js`: every historical false positive is replayed as a test, alongside cases proving a genuinely missing file and a missing directory under a real root still fail. The principle is recorded in [CLAUDE.md](../CLAUDE.md#verification) so the next gate is built the same way: do not fire on what was never a claim, offer a local opt-out that needs no code change, and print the remedy.
+
 ## Validation and limits
 
 Local verification covers the item validator, hook decisions and delayed input, usage-report parsing/arithmetic/authentication separation, interactive app behavior, local links, current source URLs, and a direct PowerShell logger check. Run the commands in [repository guidance](../CLAUDE.md#verification) after changing the course materials; earlier results do not validate subsequent edits.

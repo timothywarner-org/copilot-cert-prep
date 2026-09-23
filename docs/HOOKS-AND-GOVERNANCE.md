@@ -1,5 +1,13 @@
 # Hooks and enterprise governance
 
+<!-- allow-missing-path: .github/hooks/tool-use-logger.json | optional file the learner creates during Demo A -->
+<!-- allow-missing-path: tool-use-logger.json | cleanup of that optional learner-created file -->
+<!-- allow-missing-path: copilot/managed-settings.json | configuration created in the separate enterprise repository -->
+<!-- allow-missing-path: managed-settings.json | example file under the separate enterprise repository -->
+<!-- allow-missing-path: team-mappings.json | example file under the separate enterprise repository -->
+<!-- allow-missing-path: teams/class-demo.json | example file under the separate enterprise repository -->
+
+
 **Current-product enrichment, reviewed September 20, 2026.** GH-300 names organization policies, safeguards, and agent workflows. It does not name every hook event or managed-settings property as an exam objective.
 
 ## The distinction to teach
