@@ -16,6 +16,7 @@ Every resource here is **first-party**: Microsoft Learn, GitHub Docs, GitHub's t
 | [GitHub Copilot Fundamentals, Part 2](https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/) | Training | Guided path covering administration, customization, and advanced workflows. |
 | [GitHub Trust Center](https://github.com/trust-center) | Reference | The study guide's named source for how Copilot handles data. |
 | [This repository's study guide](GH-300-STUDY-GUIDE.md) | Concept | The decision-level summary, with the local [objective checklist](../references/gh300-objectives.md). |
+| [This repository's practice bank](practice/README.md) | Training | 60 original items weighted to the blueprint, each with per-choice rationale and source links. |
 
 ---
 

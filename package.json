@@ -11,6 +11,7 @@
     "test:coverage": "jest --coverage",
     "check:content": "node scripts/check-course-content.js",
     "check:links": "node scripts/check-external-links.js",
+    "check:items": "node scripts/check-practice-items.js",
     "test:app": "node src/test-app.js"
   },
   "devDependencies": {

@@ -21,5 +21,6 @@ jobs:
       - run: npm ci
       - run: npm test -- --runInBand
       - run: npm run check:content
+      - run: npm run check:items
       - run: node src/test-app.js
       - run: node copilot-metrics-tour/index.js --demo

@@ -14,7 +14,7 @@ Welcome! This is the public learner repository for the September 24, 2026 class 
 
 1. Read the [course plan](COURSE-PLAN.md) and [quick reference](docs/QUICK-REFERENCE.md).
 2. Work through the [class activities](docs/CLASS-ACTIVITIES.md). Each has an observable outcome and a no-account route.
-3. Use [Cert Buddy](#study-with-cert-buddy) for original practice, then finish the [mini mock](docs/MINI-MOCK.md).
+3. Use [Cert Buddy](#study-with-cert-buddy) for original practice, finish the [mini mock](docs/MINI-MOCK.md), then work the [60-item practice bank](docs/practice/README.md).
 4. Follow the [study guide](docs/GH-300-STUDY-GUIDE.md), the [objective-mapped resource links](docs/GH-300-RESOURCE-LINKS.md), and [official exam links](docs/exam-notes-and-links.md) for your remaining study.
 
 ## Four class segments
@@ -37,6 +37,7 @@ The first three segments include a five-minute break. The last five minutes of S
 | [GH-300 objectives](references/gh300-objectives.md) | Six domains and the current skills measured |
 | [Study guide](docs/GH-300-STUDY-GUIDE.md) | What to understand and what evidence to produce |
 | [Resource links](docs/GH-300-RESOURCE-LINKS.md) | Every objective mapped to verified Microsoft Learn and GitHub Docs sources |
+| [Practice bank](docs/practice/README.md) | 60 original items weighted to the blueprint, with per-choice rationale |
 | [Hooks and governance lab](docs/HOOKS-AND-GOVERNANCE.md) | A tool-use logger, approval boundaries, and enterprise policy walkthrough |
 | [Metrics tour](copilot-metrics-tour/README.md) | Current report format; synthetic demo needs no credentials |
 | [Tips app](src/GH-Copilot-Tips-App-README.md) | Small Node.js application to inspect, test, and improve |

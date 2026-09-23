@@ -4,7 +4,7 @@
 
 Use [the official study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300) for scope and [the full local objectives](../references/gh300-objectives.md) for a checklist. The [exam notes](exam-notes-and-links.md) cover scheduling.
 
-**When a domain below comes up weak, go to [the objective-mapped resource links](GH-300-RESOURCE-LINKS.md).** Every objective bullet there points at a verified Microsoft Learn or GitHub Docs page, so a weak rating turns straight into a reading list.
+**When a domain below comes up weak, work [that domain's practice bank](practice/README.md), then read the matching rows in [the objective-mapped resource links](GH-300-RESOURCE-LINKS.md).** Every objective bullet there points at a verified Microsoft Learn or GitHub Docs page, so a weak rating turns straight into a reading list.
 
 ## Study for decisions
 
@@ -94,7 +94,7 @@ Sources: [content exclusion](https://docs.github.com/en/copilot/concepts/context
 
 1. **10 minutes:** rate all six domains strong, moderate, weak, or unknown. Name evidence behind each rating.
 2. **20 minutes:** work one practical exercise in the weakest high-weight area.
-3. **15 minutes:** answer original questions one at a time; explain why every distractor fails.
+3. **15 minutes:** answer original questions one at a time from [the practice bank](practice/README.md); explain why every distractor fails.
 4. **10 minutes:** revisit official sources for missed decisions.
 5. **5 minutes:** schedule the next practice session and define its success check.
 

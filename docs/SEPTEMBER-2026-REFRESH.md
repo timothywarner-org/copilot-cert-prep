@@ -102,6 +102,27 @@ Sweep results across the existing materials: **49 external URLs in Markdown, 0 d
 
 Neither image was referenced by any file before this pass. No images remain orphaned.
 
+## September 23 practice bank
+
+Added [docs/practice](practice/README.md): **60 original items** across the six domains, weighted to the published blueprint, each with a scenario stem, four choices, a rationale for **every** choice, and links to the primary sources it was written from.
+
+| Domain | Weight | Items |
+|---|---|---:|
+| Use GitHub Copilot responsibly | 15-20% | 10 |
+| Use GitHub Copilot features | 25-30% | 17 |
+| Understand data and architecture | 10-15% | 8 |
+| Apply prompt engineering and context crafting | 10-15% | 8 |
+| Improve developer productivity | 10-15% | 8 |
+| Configure privacy, exclusions, and safeguards | 10-15% | 9 |
+
+Added `scripts/check-practice-items.js` and `npm run check:items`, wired into CI. It converts each learner-facing item into the delivery format and runs the **existing** validator in `.github/skills/gh300-item-creator`, rather than reimplementing those rules, so the bank and the Cert Buddy agent are held to one standard. It adds three set-level checks a single-item validator cannot make: correct-answer distribution, scenario company variety, and duplicate stems. 12 tests cover the parsing and conversion, including a negative case proving the gate rejects a broken item.
+
+Results: **60 items, zero structural failures, zero review notes.** Correct answers distribute exactly 15/15/15/15 across A, B, C, and D. All 12 fictional companies appear. All 81 source links resolve with zero redirects and zero dead links.
+
+The bank index carries a **twelve-item diagnostic** spanning all six domains, so a learner who does not know where they are weak gets a route into the right bank and then into the matching resource-link rows.
+
+Two deliberate style departures from the rest of the repository, both required by the item rules: exam items use **no contractions**, and choices are kept to comparable lengths so that the longest option is not a giveaway. The validator enforces both.
+
 ## Validation and limits
 
 Local verification covers the item validator, hook decisions and delayed input, usage-report parsing/arithmetic/authentication separation, interactive app behavior, local links, current source URLs, and a direct PowerShell logger check. Run the commands in [repository guidance](../CLAUDE.md#verification) after changing the course materials; earlier results do not validate subsequent edits.
