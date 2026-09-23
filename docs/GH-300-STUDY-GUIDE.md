@@ -88,7 +88,7 @@ Current documentation excludes IDE Edit and Agent modes from content-exclusion s
 
 **Evidence:** justify mock Q6 and explain why a repository hook is not a centrally enforced security boundary.
 
-Sources: [content exclusion](https://docs.github.com/en/copilot/concepts/context/content-exclusion), [CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli), [policy support](https://docs.github.com/en/copilot/reference/supported-surfaces-for-policies).
+Sources: [content exclusion](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion), [CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli), [policy support](https://docs.github.com/en/copilot/reference/supported-surfaces-for-policies).
 
 ## Tonight's study plan: 60 minutes
 

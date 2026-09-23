@@ -3,7 +3,7 @@
 **Baseline:** [skills measured August 7, 2026](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-300).
 **Every link on this page was fetched over HTTP on September 23, 2026.** Re-check with `npm run check:links` before each delivery.
 
-Every resource here is **first-party**: Microsoft Learn, GitHub Docs, GitHub's terms and trust pages, or Visual Studio Code documentation. No third-party courses, no blogs, no exam dumps. Each row names the objective bullet it serves, so a weak domain maps straight to a reading list.
+Every study resource here is **first-party**: Microsoft Learn, GitHub Docs, GitHub's terms and trust pages, or Visual Studio Code documentation. No blogs and no exam dumps. The one commercial vendor on this page is labelled as such in **Practice and assessment**, and it is optional. Each objective row names the bullet it serves, so a weak domain maps straight to a reading list.
 
 **Type** is one of **Concept** (what it is and why), **Training** (hands-on module or path, usually with a knowledge check), or **Reference** (settings, syntax, commands, terms).
 
@@ -17,6 +17,58 @@ Every resource here is **first-party**: Microsoft Learn, GitHub Docs, GitHub's t
 | [GitHub Trust Center](https://github.com/trust-center) | Reference | The study guide's named source for how Copilot handles data. |
 | [This repository's study guide](GH-300-STUDY-GUIDE.md) | Concept | The decision-level summary, with the local [objective checklist](../references/gh300-objectives.md). |
 | [This repository's practice bank](practice/README.md) | Training | 60 original items weighted to the blueprint, each with per-choice rationale and source links. |
+
+---
+
+## Register, schedule, and sit the exam
+
+**GitHub certification exams are delivered exclusively through Pearson VUE**, in partnership with Microsoft Learn, and have been since July 1, 2025. You register through Microsoft Learn or GitHub Learn, and scheduling hands off to Pearson VUE for either a test center or an online proctored seat.
+
+| Link | What it is for |
+|---|---|
+| [GH-300 certification page](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/) | The authoritative page. Objectives, the schedule button, and the free practice assessment all start here. |
+| [GH-300 exam details on GitHub Learn](https://learn.github.com/certification/COPILOT) | GitHub's own page: testing options, languages, duration, validity, and the exam outline. |
+| [GitHub certification registration](https://learn.github.com/credentials) | The registration entry point for every GitHub credential. |
+| [Registering for a GitHub Certifications exam](https://docs.github.com/en/get-started/showcase-your-expertise-with-github-certifications/registering-for-a-github-certifications-exam) | The process in GitHub's own words, including ID rules and the 90-day scheduling window. |
+| [Pearson VUE, Microsoft and GitHub exams](https://www.pearsonvue.com/us/en/microsoft.html) | The delivery partner's landing page for these exams. |
+| [OnVUE online proctored testing](https://www.pearsonvue.com/us/en/microsoft/onvue.html) | System and environment requirements if you test from home rather than a center. |
+| [Taking an online exam](https://learn.microsoft.com/en-us/credentials/certifications/online-exams) | Microsoft's guidance for the online proctored option. |
+| [Certification exam policies](https://learn.microsoft.com/en-us/credentials/certifications/certification-exam-policies) | Retakes, rescheduling, cancellation, and conduct. |
+| [Exam duration and experience](https://learn.microsoft.com/en-us/credentials/support/exam-duration-exam-experience) | What seat time actually includes beyond the question clock. |
+| [Request accommodations](https://learn.microsoft.com/en-us/credentials/certifications/request-accommodations) | Extra time, assistive technology, or other adjustments. Request before you book. |
+| [Exam scoring and score reports](https://learn.microsoft.com/en-us/credentials/certifications/exam-scoring-reports) | Why **700** is a scaled score and not 70 percent correct. |
+
+**Exam facts as published on September 23, 2026:** 100 minutes, a scaled passing score of 700, credential validity of 24 months, and delivery in English, Portuguese, Spanish, Korean, and Japanese. Pearson VUE permits scheduling no more than 90 days ahead, and you must present an unexpired government-issued photo ID whose name matches your registration exactly. Verify price and regional rules at booking; they are not published as a single fixed figure.
+
+**Renewal is changing.** GitHub certifications currently run 24 months, and GitHub is moving to Microsoft's recertification process. Certifications expiring before that process is available are being extended by six months. See [renewal](https://learn.microsoft.com/en-us/credentials/certifications/renew-your-microsoft-certification) and the [certification FAQ](https://learn.microsoft.com/en-us/credentials/certifications/frequently-asked-questions), and check your own credential record rather than assuming the Microsoft role-based annual rule applies.
+
+## Practice and assessment
+
+| Link | Cost | What it gives you |
+|---|---|---|
+| [**Official GH-300 practice assessment**](https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/practice/assessment?assessment-type=practice&assessmentId=218035372&practice-assessment-type=certification) | **Free** | Written by the same team that builds the exam, with a rationale and further-reading links on every question, and unlimited attempts. Start here. |
+| [Exam sandbox](https://GHCertDemo.starttest.com) | Free | The actual exam interface and question types, so exam day holds no surprises about the software. |
+| [This repository's practice bank](practice/README.md) | Free | 60 original items weighted to the blueprint, with a rationale for every choice. |
+| [This repository's mini mock](MINI-MOCK.md) | Free | Six items, one per domain, for the in-class debrief. |
+
+**Paid third-party option.** Everything else on this page is first-party. MeasureUp is a commercial practice-test vendor, listed here because learners ask for it by name and because GitHub Learn links subscription-based resources from the exam page. It is not required, and it is not a Microsoft-authored assessment.
+
+- [MeasureUp GH-300 practice test](https://www.measureup.com/microsoft-gh-300-github-copilot-practice-test.html) · [assessment](https://www.measureup.com/microsoft-gh-300-github-copilot-assessment.html) · [certkit](https://www.measureup.com/microsoft-gh-300-github-copilot-certkit.html)
+
+Treat any practice score, free or paid, as evidence about your weak domains rather than as a predicted exam result.
+
+## The rest of the GitHub certification track
+
+Useful when a learner asks what to take next, or arrives at GH-300 without GitHub fundamentals.
+
+| Certification | Page | Free practice assessment |
+|---|---|---|
+| GH-900 GitHub Foundations | [Certification](https://learn.microsoft.com/en-us/credentials/certifications/github-foundations/) | Start from the certification page. Microsoft's catalog lists the GH-900 practice under the GH-500 path, which looks like a typo on their side, so use the button on the certification page rather than a direct link. |
+| GH-100 GitHub Administration | [Certification](https://learn.microsoft.com/en-us/credentials/certifications/github-administration/) | [Practice](https://learn.microsoft.com/en-us/credentials/certifications/github-administration/practice/assessment?assessment-type=practice&assessmentId=1841205577&practice-assessment-type=certification) |
+| GH-200 GitHub Actions | [Certification](https://learn.microsoft.com/en-us/credentials/certifications/github-actions/) | [Practice](https://learn.microsoft.com/en-us/credentials/certifications/github-actions/practice/assessment?assessment-type=practice&assessmentId=1001&practice-assessment-type=certification) |
+| GH-500 GitHub Advanced Security | [Certification](https://learn.microsoft.com/en-us/credentials/certifications/github-advanced-security/) | [Practice](https://learn.microsoft.com/en-us/credentials/certifications/github-advanced-security/practice/assessment?assessment-type=practice&assessmentId=590484996&practice-assessment-type=certification) |
+
+[Browse every GitHub credential](https://learn.microsoft.com/en-us/credentials/browse/?products=github&credential_types=certification) · [your Microsoft Learn profile](https://learn.microsoft.com/en-us/users/) holds your certification record and transcript.
 
 ---
 
@@ -50,7 +102,7 @@ The heaviest domain. Split by sub-group.
 | Enable Copilot in the IDE | [Set up GitHub Copilot in VS Code](https://code.visualstudio.com/docs/setup/copilot) | Concept |
 | Trigger inline, chat, CLI, and agent mode | [Asking Copilot questions in your IDE](https://docs.github.com/en/copilot/how-tos/chat-with-copilot/chat-in-ide) | Concept |
 | Trigger inline, chat, CLI, and agent mode | [Copilot across environments](https://learn.microsoft.com/en-us/training/modules/github-copilot-across-environments/) | Training |
-| Configure content exclusions | [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/context/content-exclusion) | Concept |
+| Configure content exclusions | [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion) | Concept |
 | Configure content exclusions | [Excluding content from GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot) | Reference |
 
 ### Copilot CLI
@@ -161,7 +213,7 @@ The heaviest domain. Split by sub-group.
 | Objective bullet | Resource | Type |
 |---|---|---|
 | All four bullets | [Management and customization considerations](https://learn.microsoft.com/en-us/training/modules/github-copilot-management-and-customizations/) | Training |
-| Configure content exclusions and editor settings | [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/context/content-exclusion) | Concept |
+| Configure content exclusions and editor settings | [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion) | Concept |
 | Configure content exclusions and editor settings | [Excluding content from GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot) | Reference |
 | Configure content exclusions and editor settings | [Reviewing changes to content exclusions](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/review-changes) | Reference |
 | Configure content exclusions and editor settings | [Configuring Copilot in your environment](https://docs.github.com/en/copilot/how-tos/configure-personal-settings/configure-in-ide) | Reference |

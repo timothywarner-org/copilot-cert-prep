@@ -32,6 +32,16 @@ const RETRY_STATUS = new Set([429, 500, 502, 503, 504]);
  */
 const CHALLENGE_HOSTS = new Set(["github.com", "www.oreilly.com", "oreilly.com"]);
 
+/** A browser user agent, used only to retry a host that refused the honest one. */
+const BROWSER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36";
+
+/**
+ * Statuses that mean "this client is not welcome" rather than "this page is gone".
+ * 444 is nginx closing the connection, which several commercial sites use on bots.
+ */
+const REFUSED_CLIENT = new Set([401, 403, 429, 444]);
+
 /** Skip patterns that are examples rather than destinations a learner should be able to open. */
 const SKIP = [
   /^https?:\/\/example\.(com|org|net)/i,
@@ -82,9 +92,10 @@ function extractUrls(text) {
  *
  * @param {string} url URL to check.
  * @param {string} method HTTP method.
+ * @param {string} [agent] User agent to send.
  * @returns {Promise<{status: number, finalUrl: string}>}
  */
-async function request(url, method) {
+async function request(url, method, agent) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
@@ -94,7 +105,9 @@ async function request(url, method) {
       signal: controller.signal,
       headers: {
         // Identify the checker honestly; an absent user agent is refused by several hosts.
-        "user-agent": "gh300-course-link-checker/1.0 (+https://github.com/timothywarner-org/copilot-cert-prep)",
+        "user-agent":
+          agent ||
+          "gh300-course-link-checker/1.0 (+https://github.com/timothywarner-org/copilot-cert-prep)",
         accept: "text/html,application/xhtml+xml,*/*"
       }
     });
@@ -112,11 +125,22 @@ async function request(url, method) {
  */
 async function check(url) {
   let last = null;
+  let refusedHonestAgent = false;
   for (let attempt = 0; attempt < 2; attempt += 1) {
     try {
       let result = await request(url, "HEAD");
       if (result.status >= 400) {
         result = await request(url, "GET");
+      }
+      // Some commercial sites drop a non-browser agent outright. Retrying with a browser
+      // agent distinguishes "blocks robots" from "page is gone", which is the distinction
+      // that matters when the link is a place a learner has to buy something.
+      if (REFUSED_CLIENT.has(result.status)) {
+        const retried = await request(url, "GET", BROWSER_UA);
+        if (retried.status >= 200 && retried.status < 300) {
+          refusedHonestAgent = true;
+          result = retried;
+        }
       }
       last = result;
       if (!RETRY_STATUS.has(result.status)) {
@@ -143,6 +167,15 @@ async function check(url) {
   }
   if (status >= 200 && status < 300) {
     const moved = stripTrackingAndCase(finalUrl) !== stripTrackingAndCase(url);
+    if (refusedHonestAgent) {
+      return {
+        url,
+        state: "CHALLENGED",
+        status,
+        finalUrl,
+        note: "reachable, but the host refuses non-browser clients"
+      };
+    }
     return {
       url,
       state: moved ? "REDIRECT" : "OK",
@@ -151,7 +184,7 @@ async function check(url) {
       note: moved ? "resolves to a different URL" : ""
     };
   }
-  if ((status === 403 || status === 401 || status === 429) && CHALLENGE_HOSTS.has(host)) {
+  if (REFUSED_CLIENT.has(status) && CHALLENGE_HOSTS.has(host)) {
     return { url, state: "CHALLENGED", status, finalUrl, note: "host challenges automated clients" };
   }
   return { url, state: "DEAD", status, finalUrl, note: "" };
@@ -235,6 +268,17 @@ async function main() {
 
   // Only a confirmed dead page fails the run. A challenge or a timeout needs a human look.
   if (byState("DEAD").length > 0) {
+    console.error(
+      [
+        "",
+        "    Fix each DEAD link one of three ways:",
+        "      1. Find where the page moved and record the canonical post-redirect URL.",
+        "      2. If the content is gone, replace it with the nearest current first-party page.",
+        "      3. If the host refuses robots but the page is fine in a browser, add its",
+        "         hostname to CHALLENGE_HOSTS in this script with a comment saying why.",
+        "    A REDIRECT is not a failure, but it does mean the page moved; canonicalize it."
+      ].join("\n")
+    );
     process.exitCode = 1;
   }
 }

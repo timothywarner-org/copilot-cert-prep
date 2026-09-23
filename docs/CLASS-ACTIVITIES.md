@@ -72,7 +72,7 @@ function exportOrders(fileName, orders) {
 2. Ask what defect that test catches and what it cannot establish.
 3. Run `node copilot-metrics-tour/index.js --demo`. Explain why completion acceptance does not prove a business outcome.
 4. Choose a safeguard for each concern: sensitive context, matching public code, shell execution, and a faulty generated calculation.
-5. Check [current exclusion support](https://docs.github.com/en/copilot/concepts/context/content-exclusion) for the exact surface before claiming protection.
+5. Check [current exclusion support](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion) for the exact surface before claiming protection.
 
 **Success:** match the control to the concern and state its limitation. The checks do not prove enterprise enforcement.
 

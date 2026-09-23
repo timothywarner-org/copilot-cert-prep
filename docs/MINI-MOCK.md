@@ -131,7 +131,7 @@ D. Whether the workspace has a file named .copilotignore at its root.
 - **C:** Selecting a common model does not establish policy coverage. The relevant distinction is the product surface and supported controls.
 - **D:** That filename is not a documented replacement for configured content exclusions. A local placeholder cannot establish the required protection.
 
-[Content exclusion](https://docs.github.com/en/copilot/concepts/context/content-exclusion)
+[Content exclusion](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion)
 </details>
 
 ## Review your evidence

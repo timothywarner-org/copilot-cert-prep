@@ -81,7 +81,7 @@ Sources: [install](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up
 
 **Content exclusions are surface-specific.** Current GitHub documentation says IDE Edit and Agent modes do not support them. Copilot CLI documentation now describes Business/Enterprise exclusion support. Check the exact surface before answering a scenario. A `.copilotignore` file is not a documented substitute for configured policy.
 
-Sources: [exclusions](https://docs.github.com/en/copilot/concepts/context/content-exclusion), [CLI behavior](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli), [policy coverage](https://docs.github.com/en/copilot/reference/supported-surfaces-for-policies).
+Sources: [exclusions](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion), [CLI behavior](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli), [policy coverage](https://docs.github.com/en/copilot/reference/supported-surfaces-for-policies).
 
 ### What a public code match looks like
 

@@ -108,7 +108,7 @@ Alpine Ski House configures content exclusion for a sensitive directory. A devel
 - **C**: A reload can help with propagation delay, and delay affects all modes at once. It does not explain a difference between two modes.
 - **D**: Content exclusion support is documented per surface and per interaction mode, and GitHub states that some modes do not honor it. A difference between two modes on the same machine points directly at the support matrix.
 
-**Sources:** [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/context/content-exclusion) · [Troubleshooting common issues](https://docs.github.com/en/copilot/how-tos/troubleshoot-copilot/troubleshoot-common-issues)
+**Sources:** [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion) · [Troubleshooting common issues](https://docs.github.com/en/copilot/how-tos/troubleshoot-copilot/troubleshoot-common-issues)
 
 </details>
 
@@ -162,7 +162,7 @@ A Contoso developer wants inline suggestions to stop appearing while writing Mar
 - **C**: Editor settings for Copilot include enabling or disabling inline suggestions per language, which is exactly a per-developer preference expressed at the right scope.
 - **D**: Prompt files package reusable tasks. They do not govern whether inline completions render in a file type.
 
-**Sources:** [Configuring Copilot in your environment](https://docs.github.com/en/copilot/how-tos/configure-personal-settings/configure-in-ide) · [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/context/content-exclusion)
+**Sources:** [Configuring Copilot in your environment](https://docs.github.com/en/copilot/how-tos/configure-personal-settings/configure-in-ide) · [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion)
 
 </details>
 
@@ -243,6 +243,6 @@ A WoodGrove Bank developer adds a file named .copilotignore to a repository and 
 - **C**: Committer identity does not give an unrecognized file meaning. This answer concedes the false premise.
 - **D**: Describing a scope for the file also concedes that it does something. The correct response rejects the premise rather than qualifying it.
 
-**Sources:** [Excluding content from GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot) · [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/context/content-exclusion)
+**Sources:** [Excluding content from GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot) · [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion)
 
 </details>

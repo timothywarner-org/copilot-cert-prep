@@ -81,7 +81,7 @@ Alpine Ski House configures content exclusion for a repository path that holds p
 - **C**: Exclusions are configured at repository, organization, or enterprise scope and apply to the people covered by that scope. Ownership of the repository is not the boundary.
 - **D**: Support is documented per surface and per client, and GitHub states that some interaction modes do not honor exclusions. The correct answer to a scope question is to check the current support matrix for the exact surface in use.
 
-**Sources:** [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/context/content-exclusion) · [Excluding content from GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot)
+**Sources:** [Content exclusion for GitHub Copilot](https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/content-exclusion) · [Excluding content from GitHub Copilot](https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot)
 
 </details>
 
