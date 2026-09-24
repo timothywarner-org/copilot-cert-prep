@@ -22,6 +22,38 @@ This is **O'Reilly training**. Use the approved O'Reilly PowerPoint template, in
 
 The two demos use Node built-ins. Root tests require `npm ci`, then `npm test -- --runInBand`. Use PowerShell 7 and Node.js 22+. Keep changes small, explain why in code comments, handle errors, and preserve existing data formats.
 
+## Build, test, and lint commands
+
+There is no build step; this is a zero-dependency Node.js content repository. There is no separate lint command — `npm run check:content` is the closest equivalent and validates Markdown links/anchors/paths.
+
+```powershell
+npm ci                          # install root test dependencies (Jest only)
+npm test -- --runInBand         # all Jest suites in tests/*.test.js
+npm run check:content           # local links, heading anchors, inline code paths
+npm run check:items             # every practice item, through the shared item validator
+npm run check:links             # every external URL, over real HTTP (slow; run when links change)
+node src/test-app.js            # tips app smoke test (no Jest, run directly)
+node copilot-metrics-tour/index.js --demo   # synthetic metrics demo
+```
+
+Run a single test file or a single test by name (both work with plain `npx jest` too):
+
+```powershell
+npx jest tests/tips-app.test.js --runInBand
+npm test -- -t "rejects an ambiguous fragment"
+```
+
+Test files live only in `tests/` at the repo root (Jest's default `**/*.test.js` discovery, no `jest.config.js`). Each maps to one gate or app: `course-content-checker.test.js`, `external-links.test.js`, `practice-items.test.js`, `item-validator.test.js`, `hooks.test.js`, `fizzbuzz-contract.test.js`, `metrics-tour.test.js`, `tips-app.test.js`, `sample.test.js`.
+
+## Architecture
+
+- **Three independent Node CLI gates** in `scripts/check-*.js`, each backed by a same-named test in `tests/`: `check-course-content.js` (links/anchors/paths), `check-external-links.js` (live HTTP), `check-practice-items.js` (delegates to the item validator below). Each must fail with an actionable remedy printed in its own output — if you find yourself rewording content to satisfy a gate, fix the gate instead.
+- **`docs/practice/`** holds the 60-item practice bank; `npm run check:items` converts each item into the delivery format and reuses the **same validator** in `.github/skills/gh300-item-creator/scripts` that Cert Buddy uses live, so the static bank and the live agent share one standard.
+- **Cert Buddy** (`.github/agents/gh300-cert-buddy-agent.agent.md`) is a Copilot Chat agent selected from the agent picker, not a script. It composes three skills — `gh300-item-creator`, `gh300-lab-creator`, `gh300-study-planner` (all under `.github/skills/`) — and retrieves grounding via the `gh300buddy-mslearn` MCP server declared in `.vscode/mcp.json` (public Learn endpoint, no API key).
+- **Hooks** are two layers, not one: `.github/hooks/gh300-guardrails.json` declares `PreToolUse`/`PostToolUse` hooks; the executable logic lives in `scripts/hooks/` (`prevent-destructive-commands.js`, `validate-gh300-content.js`, `Log-CopilotToolUse.ps1`). Treat these as editable teaching code, not centrally enforced governance — see `docs/HOOKS-AND-GOVERNANCE.md`.
+- **`src/`** is intentionally a single-file app (`app.js` + `tips.json`): class activity 2 has learners attach both files to Chat for comparison, so do not split it into modules.
+- **`copilot-metrics-tour/`** is a separate zero-dependency demo (own `README.md`) using a synthetic fixture; it never calls a real usage-report endpoint.
+
 ## Cert Buddy
 
 Select **gh300-cert-buddy-agent** from the Chat agent picker. Its skills are `gh300-item-creator`, `gh300-lab-creator`, and `gh300-study-planner`.
